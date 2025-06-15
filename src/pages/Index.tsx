@@ -1,3 +1,4 @@
+
 import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
@@ -5,12 +6,13 @@ import LogoCloud from "@/components/LogoCloud";
 import PathModal from "@/components/PathModal";
 import AIGrid from "@/components/AIGrid";
 import CryptoArbitrageSection from "@/components/CryptoArbitrageSection";
+import FeatureHighlights from "@/components/FeatureHighlights";
 
 const Index = () => {
   const [modalOpen, setModalOpen] = React.useState(false);
 
   return (
-    <div className="relative min-h-screen bg-bg bg-realistic-pattern">
+    <div className="relative min-h-screen bg-bg">
       <Navbar />
       
       <main className="pt-32 pb-20 flex flex-col items-center w-full">
@@ -40,6 +42,11 @@ const Index = () => {
 
         {/* AI Agents Showcase */}
         <AIGrid />
+
+        {/* Feature Highlights Section */}
+        <section className="w-full max-w-6xl mx-auto px-6">
+          <FeatureHighlights />
+        </section>
 
         {/* CTA Section */}
         <section className="w-full max-w-4xl mx-auto flex flex-col items-center text-center px-6 pt-20">
