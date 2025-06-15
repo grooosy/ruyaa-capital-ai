@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Wallet } from 'lucide-react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { useWalletModal } from '@solana/wallet-adapter-react-ui';
+import { useToast } from '@/hooks/use-toast';
 
 interface AuthProps {
     onSuccess?: () => void;
@@ -17,6 +18,7 @@ export const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
     const { t } = useTranslation();
     const { setVisible: setWalletModalVisible } = useWalletModal();
     const { connected, publicKey, disconnect, connecting } = useWallet();
+    const { toast } = useToast();
 
     useEffect(() => {
         if (!onSuccess) return;
@@ -31,6 +33,67 @@ export const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
             subscription?.unsubscribe();
         };
     }, [onSuccess]);
+
+    const handleWalletAuth = async () => {
+        if (!connected || !publicKey) {
+            setWalletModalVisible(true);
+            return;
+        }
+
+        try {
+            const walletAddress = publicKey.toBase58();
+
+            // Check if user exists with this wallet
+            const { data: existingProfile } = await supabase
+                .from('profiles')
+                .select('*')
+                .eq('wallet_address', walletAddress)
+                .maybeSingle();
+
+            if (existingProfile) {
+                // Sign in existing user
+                const { error } = await supabase.auth.signInWithPassword({
+                    email: existingProfile.email || `${walletAddress}@wallet.local`,
+                    password: walletAddress
+                });
+
+                if (error) throw error;
+            } else {
+                // Create new user
+                const { error } = await supabase.auth.signUp({
+                    email: `${walletAddress}@wallet.local`,
+                    password: walletAddress,
+                    options: {
+                        data: {
+                            full_name: `Wallet User`,
+                            wallet_address: walletAddress,
+                        },
+                    },
+                });
+
+                if (error) throw error;
+            }
+
+            toast({
+                title: "Wallet connected!",
+                description: "Successfully authenticated with wallet",
+            });
+        } catch (error: any) {
+            console.error("Wallet auth error:", error);
+            toast({
+                title: "Authentication failed",
+                description: error.message || "Failed to authenticate with wallet",
+                variant: "destructive",
+            });
+        }
+    };
+
+    // Auto-authenticate when wallet connects
+    useEffect(() => {
+        if (connected && publicKey) {
+            handleWalletAuth();
+        }
+    }, [connected, publicKey]);
 
     return (
         <div className="w-full max-w-sm">
@@ -77,7 +140,7 @@ export const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
                  <div className="flex flex-col items-center gap-4 w-full">
                     <p className="text-xs text-zinc-400 text-center">
                         Connected with wallet: <br/>
-                        <span className="font-mono text-zinc-300">{publicKey.toBase58()}</span>
+                        <span className="font-mono text-zinc-300">{publicKey.toBase58().slice(0, 8)}...{publicKey.toBase58().slice(-8)}</span>
                     </p>
                     <Button
                         variant="outline"
