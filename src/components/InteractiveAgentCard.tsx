@@ -1,5 +1,6 @@
+
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import ProcessTimeline from './ProcessTimeline';
 import { Button } from './ui/button';
 import { ArrowRight } from 'lucide-react';
@@ -11,7 +12,7 @@ interface InteractiveAgentCardProps {
   type: AgentType;
 }
 
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: { 
     opacity: 1, 
@@ -33,7 +34,7 @@ const cardVariants = {
   },
 };
 
-const contentVariants = {
+const contentVariants: Variants = {
   hidden: { opacity: 0, y: 10 },
   visible: { opacity: 1, y: 0 },
 };
