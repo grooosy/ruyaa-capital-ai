@@ -32,7 +32,7 @@ const contentVariants: Variants = {
 
 const AgentDetailModal: React.FC<AgentDetailModalProps> = ({ type, onClose }) => {
     const data = agentData[type];
-    const buttonBg = type === 'mt' ? 'bg-green hover:bg-green/90' : 'bg-gold hover:bg-gold/90';
+    const buttonBg = type === 'mt' ? 'bg-gold hover:bg-gold/90' : 'bg-green hover:bg-green/90';
     const buttonTextColor = 'text-dark-charcoal';
 
     return (
@@ -47,7 +47,7 @@ const AgentDetailModal: React.FC<AgentDetailModalProps> = ({ type, onClose }) =>
         >
             <motion.div
                 variants={contentVariants}
-                className={`bg-card rounded-2xl border ${data.theme === 'green' ? 'border-green/20' : 'border-gold/20'} p-8 w-full max-w-4xl relative shadow-lg shadow-black/50`}
+                className={`bg-card rounded-2xl border ${type === 'mt' ? 'border-gold/20' : 'border-green/20'} p-8 w-full max-w-4xl relative shadow-lg shadow-black/50`}
                 onClick={(e) => e.stopPropagation()}
             >
                 <button 
@@ -83,7 +83,7 @@ const AgentDetailModal: React.FC<AgentDetailModalProps> = ({ type, onClose }) =>
                 
                 <p className="text-gray-300 mb-8 max-w-3xl">{data.description}</p>
                 
-                <ProcessTimeline timeline={data.timeline} theme={data.theme as 'green' | 'gold'} />
+                <ProcessTimeline timeline={data.timeline} theme={type === 'mt' ? 'gold' : 'green'} />
                 
                 <div className="mt-8 text-center">
                     <Button className={`${buttonBg} ${buttonTextColor} font-bold px-8 py-3 text-lg`}>

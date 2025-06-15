@@ -15,16 +15,16 @@ interface InteractiveAgentCardProps {
 const InteractiveAgentCard: React.FC<InteractiveAgentCardProps> = ({ type, onOpenDetails }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const data = agentData[type];
-  const cardBorderColor = type === 'mt' ? 'border-green/20' : 'border-gold/20';
-  const themeColor = type === 'mt' ? '#16C784' : '#E6C419';
+  const cardBorderColor = type === 'mt' ? 'border-gold/20' : 'border-green/20';
+  const themeColor = type === 'mt' ? '#CFA100' : '#10A169';
 
   const mtPatternStyle = {
-    backgroundImage: `linear-gradient(rgba(22, 199, 132, 0.04) 1px, transparent 1px), linear-gradient(to right, rgba(22, 199, 132, 0.04) 1px, transparent 1px)`,
+    backgroundImage: `linear-gradient(rgba(207, 161, 0, 0.04) 1px, transparent 1px), linear-gradient(to right, rgba(207, 161, 0, 0.04) 1px, transparent 1px)`,
     backgroundSize: '2rem 2rem',
   };
 
   const cryptoPatternStyle = {
-    backgroundImage: `radial-gradient(circle, rgba(230, 196, 25, 0.05) 1px, transparent 1px)`,
+    backgroundImage: `radial-gradient(circle, rgba(16, 161, 105, 0.05) 1px, transparent 1px)`,
     backgroundSize: '1.5rem 1.5rem',
   };
   
@@ -122,7 +122,7 @@ const InteractiveAgentCard: React.FC<InteractiveAgentCardProps> = ({ type, onOpe
                         <motion.span
                             className="absolute inset-0 transition-all duration-500"
                             style={{
-                                background: `linear-gradient(45deg, ${themeColor}90 0%, ${type === 'mt' ? '#22c55e' : '#f59e0b'} 100%)`,
+                                background: `linear-gradient(45deg, ${themeColor}90 0%, ${type === 'mt' ? '#f59e0b' : '#22c55e'} 100%)`,
                             }}
                             initial={{ backgroundSize: '200% 200%', backgroundPosition: '0% 50%' }}
                             whileHover={{ backgroundPosition: '100% 50%' }}

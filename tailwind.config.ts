@@ -24,8 +24,8 @@ export default {
     extend: {
       colors: {
         bg: "#181711",
-        green: "#16C784",
-        gold: "#E6C419",
+        green: "#10A169",
+        gold: "#CFA100",
         "dark-charcoal": "#181711",
         background: "#181711",
         card: "#23221c",
