@@ -1,10 +1,9 @@
+
 import React from 'react';
-import { Play, CheckCircle } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import VideoPlayer from '@/components/VideoPlayer';
+import { Play } from 'lucide-react';
 import InteractiveLessonCard from './InteractiveLessonCard';
 import { useTranslation } from 'react-i18next';
+
 interface VideoPlayerSectionProps {
   selectedLesson: any;
   completedLessons: string[];
@@ -12,6 +11,7 @@ interface VideoPlayerSectionProps {
   onVideoEnd: () => void;
   onManualComplete: () => void;
 }
+
 const VideoPlayerSection: React.FC<VideoPlayerSectionProps> = ({
   selectedLesson,
   completedLessons,
@@ -19,12 +19,12 @@ const VideoPlayerSection: React.FC<VideoPlayerSectionProps> = ({
   onVideoEnd,
   onManualComplete
 }) => {
-  const {
-    i18n
-  } = useTranslation();
+  const { i18n } = useTranslation();
   const isArabic = i18n.language === 'ar';
+
   if (!selectedLesson) {
-    return <div className="mb-6">
+    return (
+      <div className="mb-6">
         <div className="aspect-video bg-gradient-to-br from-green/10 to-gold/10 rounded-lg border border-green/20 flex items-center justify-center">
           <div className="text-center text-white">
             <Play className="w-16 h-16 mx-auto mb-4 text-green" />
@@ -33,18 +33,22 @@ const VideoPlayerSection: React.FC<VideoPlayerSectionProps> = ({
             </p>
           </div>
         </div>
-      </div>;
+      </div>
+    );
   }
+
   const isCompleted = completedLessons.includes(selectedLesson.id);
 
-  // Handle interactive lessons
-  if (selectedLesson.content_type === 'interactive') {
-    return <div className="mb-6">
-        <InteractiveLessonCard lesson={selectedLesson} isCompleted={isCompleted} onComplete={onManualComplete} />
-      </div>;
-  }
-
-  // Handle video lessons
-  return;
+  // All lessons are now interactive - show the interactive lesson card
+  return (
+    <div className="mb-6">
+      <InteractiveLessonCard 
+        lesson={selectedLesson} 
+        isCompleted={isCompleted} 
+        onComplete={onManualComplete} 
+      />
+    </div>
+  );
 };
+
 export default VideoPlayerSection;
