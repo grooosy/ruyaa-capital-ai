@@ -1,7 +1,8 @@
+
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Bar, BarChart as RechartsBarChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from 'recharts';
-import LiveMarketTable from './LiveMarketTable';
+import AIMarketTable from './AIMarketTable';
 
 const performanceData = [
   { name: 'W1', value: 100 },
@@ -47,7 +48,7 @@ const PerformanceChart = () => (
 const HeroDashboard: React.FC = () => {
   return (
     <div className="flex flex-col gap-4 p-4 rounded-2xl bg-black/20 backdrop-blur-md border border-white/5">
-      <LiveMarketTable />
+      <AIMarketTable />
       <div>
         <PerformanceChart />
       </div>

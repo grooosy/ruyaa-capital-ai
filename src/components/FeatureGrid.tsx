@@ -12,21 +12,25 @@ const getFeatures = (t: TFunction) => [
     icon: <AiBrainIcon />,
     title: t('feature_1'),
     subtitle: "Always available to help",
+    color: "from-green/20 to-emerald-500/20"
   },
   {
     icon: <ConvergingArrowsIcon />,
     title: t('feature_2'),
     subtitle: "Execute trades precisely",
+    color: "from-blue-500/20 to-cyan-500/20"
   },
   {
     icon: <OneClickIcon />,
     title: t('feature_3'),
     subtitle: "Instant access to funds",
+    color: "from-gold/20 to-yellow-500/20"
   },
   {
     icon: <VerifiedShieldIcon />,
     title: t('feature_4'),
     subtitle: "Partnered with the best",
+    color: "from-purple-500/20 to-violet-500/20"
   },
 ];
 
@@ -40,16 +44,38 @@ const FeatureGrid: React.FC = () => {
         {features.map((feature, index) => (
           <div 
             key={index} 
-            className="group relative flex flex-col items-center justify-center text-center w-40 h-40 bg-white/5 backdrop-blur-md rounded-2xl border border-gold/30 p-4 transition-transform duration-300 hover:scale-105 hover:shadow-[0_0_12px_rgba(207,161,0,0.6)]"
+            className="group relative flex flex-col items-center justify-center text-center w-40 h-40 bg-black/40 backdrop-blur-md rounded-2xl border border-white/10 p-4 transition-all duration-500 hover:scale-105 hover:border-green/40 hover:shadow-green-glow"
           >
-            <div className="absolute bg-[#00FF9D]/20 w-32 h-32 rounded-full -z-10 blur-[60px] animate-pulse-slow" />
-
-            <div className="mb-2 transition-transform duration-300 group-hover:drop-shadow-[0_0_8px_#00FF9D] animate-rotate-subtle">
-              {React.cloneElement(feature.icon, { className: 'w-12 h-12 text-gold' })}
-            </div>
+            {/* Dynamic AI Background Gradient */}
+            <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
             
-            <h3 className="text-base font-bold text-white mb-1 transition-transform duration-300 group-hover:-translate-y-0.5">{feature.title}</h3>
-            <p className="text-xs text-neutral-300">{feature.subtitle}</p>
+            {/* Neural Network Pattern */}
+            <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] rounded-2xl" />
+
+            {/* Animated Border */}
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-green/0 via-green/50 to-green/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-beam-flow" 
+                 style={{
+                   background: 'linear-gradient(90deg, transparent, rgba(16, 161, 105, 0.3), transparent)',
+                   backgroundSize: '200% 100%'
+                 }} />
+
+            <div className="relative z-10 flex flex-col items-center">
+              <div className="mb-3 p-3 rounded-xl bg-black/30 backdrop-blur-sm border border-white/20 transition-transform duration-300 group-hover:scale-110 group-hover:border-green/40">
+                {React.cloneElement(feature.icon, { 
+                  className: 'w-8 h-8 text-white group-hover:text-green transition-colors duration-300' 
+                })}
+              </div>
+              
+              <h3 className="text-sm font-bold text-white mb-1 transition-all duration-300 group-hover:text-green font-spacegrotesk">
+                {feature.title}
+              </h3>
+              <p className="text-xs text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+                {feature.subtitle}
+              </p>
+            </div>
+
+            {/* AI Pulse Effect */}
+            <div className="absolute inset-0 rounded-2xl border border-green/0 group-hover:border-green/30 group-hover:animate-pulse-subtle transition-all duration-500" />
           </div>
         ))}
       </div>
