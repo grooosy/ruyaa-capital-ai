@@ -1,5 +1,4 @@
 
-```ts
 export interface PathIcon {
   type: 'img' | 'placeholder';
   src?: string;
@@ -46,4 +45,3 @@ export const PATHS: PathData[] = [
     steps: ["Register", "Connect", "Exchange", "Deposit", "AI On"]
   },
 ];
-```

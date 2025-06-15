@@ -1,5 +1,4 @@
 
-```tsx
 import React from "react";
 import { AnimatePresence } from "framer-motion";
 import InteractiveAgentCard from "@/components/InteractiveAgentCard";
@@ -48,4 +47,3 @@ const AIGrid: React.FC = () => {
 };
 
 export default AIGrid;
-```
