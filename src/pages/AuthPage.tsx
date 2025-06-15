@@ -1,44 +1,17 @@
 
-import { Auth } from "@/components/Auth";
-import { supabase } from "@/integrations/supabase/client";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import ParticleBackground from "@/components/ParticleBackground";
 import Navbar from "@/components/Navbar";
+import AuthCard from "@/components/AuthCard";
 
-const AuthPage = () => {
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        const checkSession = async () => {
-            const { data: { session } } = await supabase.auth.getSession();
-            if (session) {
-                navigate('/');
-            }
-        };
-
-        checkSession();
-
-        const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-            if (session) {
-                navigate('/');
-            }
-        });
-
-        return () => {
-            subscription.unsubscribe();
-        };
-    }, [navigate]);
-
-    return (
-        <div className="relative min-h-screen">
-            <ParticleBackground />
-            <Navbar />
-            <div className="w-full h-screen flex items-center justify-center">
-                <Auth />
-            </div>
-        </div>
-    );
-};
+const AuthPage = () => (
+  <div className="relative min-h-screen bg-[#0A0A0A] font-spacegrotesk">
+    <ParticleBackground />
+    <Navbar />
+    <div className="absolute inset-0 flex items-center justify-center z-20">
+      <AuthCard />
+    </div>
+  </div>
+);
 
 export default AuthPage;
