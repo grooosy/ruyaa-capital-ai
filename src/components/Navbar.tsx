@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import {
@@ -72,7 +71,7 @@ const Navbar: React.FC = () => {
           </Dialog>
           <span className="text-lg font-playfair italic text-gold/90 hidden lg:block">It works while you sleep</span>
         </div>
-        <div className="hidden md:flex items-center space-x-8">
+        <div className="hidden md:flex items-center space-x-8 rtl:space-x-reverse">
             <Link to="/#ai" className="hover:text-green transition-colors font-semibold">{t('how_it_works')}</Link>
             <Link to="/agents" className="hover:text-gold transition-colors font-semibold">{t('ai_agents')}</Link>
             <Link to="/#deposit" className="hover:text-green transition-colors font-semibold">{t('deposit')}</Link>

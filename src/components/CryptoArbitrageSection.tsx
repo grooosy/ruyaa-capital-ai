@@ -39,7 +39,7 @@ const CryptoArbitrageSection = () => {
             
             <ArbitrageTicker />
 
-            <div className="w-full flex flex-col lg:flex-row items-center lg:items-start justify-center gap-8 mt-8">
+            <div className="w-full flex flex-col lg:flex-row lg:rtl:flex-row-reverse items-center lg:items-start justify-center gap-8 mt-8">
                 <ArbitrageVisual />
                 <ArbitrageAlertCard
                     show={showAlert}

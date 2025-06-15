@@ -59,7 +59,7 @@ const PathModal: React.FC<PathModalProps> = ({ open, onClose }) => {
         >
           <button
             onClick={handleClose}
-            className="absolute top-6 right-6 text-green hover:scale-110 transition-transform z-50"
+            className="absolute top-6 end-6 text-green hover:scale-110 transition-transform z-50"
             aria-label="Close modal"
           >
             <X size={32} />
@@ -68,9 +68,9 @@ const PathModal: React.FC<PathModalProps> = ({ open, onClose }) => {
           {(flipped || showSteps) && (
             <button
               onClick={handleBack}
-              className="absolute top-6 left-6 text-green hover:scale-110 transition-transform z-50 flex items-center gap-2"
+              className="absolute top-6 start-6 text-green hover:scale-110 transition-transform z-50 flex items-center gap-2"
             >
-              <ArrowLeft size={24} />
+              <ArrowLeft size={24} className="rtl:rotate-180" />
               <span className="text-sm">Back</span>
             </button>
           )}
@@ -80,7 +80,7 @@ const PathModal: React.FC<PathModalProps> = ({ open, onClose }) => {
               {!showSteps ? (
                 <motion.div
                   key="cards"
-                  className="flex gap-8 justify-center items-center flex-col sm:flex-row"
+                  className="flex gap-8 justify-center items-center flex-col sm:flex-row sm:rtl:flex-row-reverse"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}

@@ -1,3 +1,4 @@
+
 import React from "react";
 import { motion } from "framer-motion";
 import Tilt from "react-parallax-tilt";
@@ -51,7 +52,7 @@ const PathCard: React.FC<PathCardProps> = ({
             <div className="text-sm opacity-70 flex items-center gap-2" style={{
             color: path.color
           }}>
-              Click to explore <ChevronRight size={16} />
+              Click to explore <ChevronRight size={16} className="rtl:rotate-180" />
             </div>
           </div>
 

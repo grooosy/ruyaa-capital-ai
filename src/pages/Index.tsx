@@ -1,3 +1,4 @@
+
 import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
@@ -35,9 +36,9 @@ const Index = () => {
       
       <main className="pt-32 pb-20 w-full">
         {/* Hero Section */}
-        <section className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between px-6 gap-12">
+        <section className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row lg:rtl:flex-row-reverse items-center justify-between px-6 gap-12">
           {/* Left Side: Text content */}
-          <div className="lg:w-1/2 text-center lg:text-left">
+          <div className="lg:w-1/2 text-center lg:text-start">
             <h1 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
               Your 24/7 AI-driven{' '}
               <span className="text-gold">
@@ -56,7 +57,7 @@ const Index = () => {
               whileTap={{ scale: 0.98 }}
             >
               Open Account • Start Now
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-5 h-5 rtl:rotate-180" />
             </motion.button>
           </div>
 
