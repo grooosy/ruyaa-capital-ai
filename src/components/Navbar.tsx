@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
   Dialog,
@@ -46,7 +45,7 @@ const Navbar: React.FC = () => {
               />
             </DialogContent>
           </Dialog>
-          <span className="text-lg font-playfair italic bg-gradient-to-r from-gold to-green bg-clip-text text-transparent hidden lg:block">It works while you sleep</span>
+          <span className="text-lg font-playfair italic text-gold/90 hidden lg:block">It works while you sleep</span>
         </div>
         <div className="hidden md:flex items-center space-x-8">
             <a href="#ai" className="hover:text-green transition-colors font-semibold">How it works</a>
