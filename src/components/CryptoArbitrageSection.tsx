@@ -7,7 +7,7 @@ import ArbitrageVisual from './ArbitrageVisual';
 const CryptoArbitrageSection = () => {
     return (
         <motion.section 
-            className="w-full max-w-6xl mx-auto flex flex-col items-center text-center px-6 mt-24"
+            className="w-full max-w-6xl mx-auto flex flex-col items-center text-center px-6 mt-16"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
