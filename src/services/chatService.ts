@@ -1,40 +1,63 @@
+
 import { supabase } from '@/integrations/supabase/client';
 import { AgentId } from '@/context/ChatContext';
 import { Message } from '@/types/chat';
 
-export const getThread = async (userId: string, agentId: AgentId) => {
+/**
+ * Ensures a single chat thread per user/agent.
+ * Will fetch if it exists, or create if not (safe with SQL uniqueness constraint).
+ */
+export const getOrCreateThread = async (userId: string, agentId: AgentId) => {
     if (!agentId || !userId) return null;
 
-    const { data, error } = await supabase
+    // Try to fetch
+    let { data, error } = await supabase
         .from('chat_threads')
         .select('*')
         .eq('user_id', userId)
         .eq('agent', agentId)
         .maybeSingle();
 
-    if (error) {
-        console.error("Error getting thread:", error);
-        throw error;
-    }
-    return data;
-};
+    // If exists, return it
+    if (data) return data;
 
-export const createThread = async (userId: string, agentId: AgentId) => {
-    if (!agentId || !userId) {
-        throw new Error("A valid user ID and agent ID are required to create a thread.");
-    }
-    const { data, error } = await supabase
+    // Try to create (if hitting uniqueness error, fetch again)
+    const { data: created, error: insertError } = await supabase
         .from('chat_threads')
         .insert({ user_id: userId, agent: agentId })
         .select()
         .single();
 
-    if (error) {
-        console.error("Error creating thread:", error);
-        throw error;
+    // On successful insert, return
+    if (created) return created;
+
+    // If failed to create (maybe because of race), fetch again just in case
+    if (insertError && insertError.code === '23505') {
+        // Unique violation: fetch the row that was created by another request
+        const { data: fallback } = await supabase
+            .from('chat_threads')
+            .select('*')
+            .eq('user_id', userId)
+            .eq('agent', agentId)
+            .maybeSingle();
+        return fallback;
+    }
+    if (insertError) {
+        console.error("Error creating thread:", insertError);
+        throw insertError;
     }
 
-    return data;
+    return null;
+};
+
+export const getThread = async (userId: string, agentId: AgentId) => {
+    // For backward compatibility; this function can be removed if always using getOrCreateThread
+    return getOrCreateThread(userId, agentId);
+};
+
+export const createThread = async (userId: string, agentId: AgentId) => {
+    // Deprecated: use getOrCreateThread instead.
+    return getOrCreateThread(userId, agentId);
 };
 
 export const getMessages = async (threadId: string): Promise<Message[]> => {

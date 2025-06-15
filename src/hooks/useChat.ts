@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { useChatContext, AgentId } from '@/context/ChatContext';
 import OpenAI from 'openai';
@@ -7,7 +8,7 @@ import { fetchAiResponse, getFallbackResponse } from '@/services/aiService';
 import { supabase } from '@/integrations/supabase/client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Session } from '@supabase/supabase-js';
-import { getThread, createThread, getMessages, addMessage, logAgentUsage } from '@/services/chatService';
+import { getOrCreateThread, getMessages, addMessage, logAgentUsage } from '@/services/chatService';
 
 const openRouterApiKey = import.meta.env.VITE_OPENROUTER_API_KEY;
 
@@ -16,7 +17,6 @@ export const useChat = (agentIdOverride?: AgentId) => {
   const queryClient = useQueryClient();
   
   const selectedAgent = agentIdOverride !== undefined ? agentIdOverride : agentFromContext;
-
 
   const [session, setSession] = useState<Session | null>(null);
   const [authRequired, setAuthRequired] = useState(false);
@@ -42,15 +42,13 @@ export const useChat = (agentIdOverride?: AgentId) => {
 
   const userId = session?.user?.id;
 
+  // CASCADE: get/create the thread
   const { data: thread, isLoading: isLoadingThread } = useQuery({
       queryKey: ['thread', userId, selectedAgent],
       queryFn: async () => {
           if (!userId || !selectedAgent) return null;
-          let thr = await getThread(userId, selectedAgent);
-          if (!thr) {
-              thr = await createThread(userId, selectedAgent);
-              queryClient.invalidateQueries({queryKey: ['messages', thr.id]});
-          }
+          // Use fetch-or-create to guarantee uniqueness
+          const thr = await getOrCreateThread(userId, selectedAgent);
           return thr;
       },
       enabled: !!userId && !!selectedAgent,
@@ -94,7 +92,6 @@ export const useChat = (agentIdOverride?: AgentId) => {
     
     if (!threadId) {
         console.error("Thread not ready or supported for this agent.");
-        // Maybe show a toast to the user
         return;
     }
 
@@ -168,6 +165,29 @@ export const useChat = (agentIdOverride?: AgentId) => {
       alert(`File "${file.name}" attached (upload functionality not implemented).`);
     }
   };
+
+  // Example: Listen for real-time message inserts (optional)
+  useEffect(() => {
+    if (!threadId) return;
+    const channel = supabase
+      .channel('chat-messages-' + threadId)
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'chat_messages',
+          filter: `thread_id=eq.${threadId}`,
+        },
+        (payload) => {
+          queryClient.invalidateQueries({queryKey: ['messages', threadId]});
+        }
+      )
+      .subscribe();
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [threadId, queryClient]);
 
   return {
     messages,
