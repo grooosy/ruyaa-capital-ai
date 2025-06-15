@@ -37,7 +37,12 @@ interface PathModalProps {
 }
 const cardVariants = {
   initial: { opacity: 0, scale: 0.9, y: 60 },
-  animate: { opacity: 1, scale: 1, y: 0, transition: { delay: .18, type: "spring", stiffness: 70 } },
+  animate: { 
+    opacity: 1, 
+    scale: 1, 
+    y: 0, 
+    transition: { delay: 0.18, type: "spring" as "spring", stiffness: 70 } 
+  },
   exit: { opacity: 0, scale: 0.95, y: 40 },
 };
 
@@ -144,3 +149,4 @@ const PathModal: React.FC<PathModalProps> = ({ open, onClose }) => {
 };
 
 export default PathModal;
+
