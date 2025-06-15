@@ -1,20 +1,26 @@
+
 import { useState, useEffect, useContext } from 'react';
 import { useChatContext, AgentId } from '@/context/ChatContext';
 import OpenAI from 'openai';
 
 // ==================================================================
-// IMPORTANT: SECURITY WARNING
+// IMPORTANT: SECURITY & SETUP
 // ==================================================================
-// The OpenAI API key is included directly in the client-side code.
-// This is INSECURE and should NOT be used in a production environment.
-// An attacker could easily find and use your API key, leading to
-// unexpected charges on your OpenAI account.
+// To use the OpenAI API, you need to set your API key as an
+// environment variable in your Lovable project settings.
 //
-// For production, you should use a backend proxy to securely handle
-// the API key.
+// 1. Go to Project Settings > Environment Variables.
+// 2. Create a new variable with the name VITE_OPENAI_API_KEY
+//    and your OpenAI API key as the value.
+//
+// NOTE: This key is still exposed on the client-side because this is
+// a frontend-only application. For a production environment, it is
+// strongly recommended to use a backend proxy to protect your key.
 // ==================================================================
+const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
+
 const openai = new OpenAI({
-  apiKey: "YOUR_OPENAI_API_KEY_HERE", // <-- 🚨 PASTE YOUR OPENAI API KEY HERE
+  apiKey: apiKey || "dummy-key", // The check in handleSubmit prevents usage of this dummy key.
   dangerouslyAllowBrowser: true,
 });
 
@@ -66,6 +72,16 @@ export const useChat = (agentIdOverride?: AgentId) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
+
+    if (!apiKey && selectedAgent === 'mt4') {
+        const errorMessage: Message = {
+            id: Date.now().toString(),
+            role: 'assistant',
+            content: "The OpenAI API key is not configured. Please set the VITE_OPENAI_API_KEY in your project's environment variables."
+        };
+        setMessages(prev => [...prev, errorMessage]);
+        return;
+    }
 
     const userMessage: Message = { id: Date.now().toString(), role: 'user', content: input };
     const newMessages = [...messages, userMessage];
