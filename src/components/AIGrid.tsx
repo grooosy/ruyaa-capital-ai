@@ -3,6 +3,7 @@ import React from "react";
 import { AnimatePresence } from "framer-motion";
 import InteractiveAgentCard from "@/components/InteractiveAgentCard";
 import AgentDetailModal from "@/components/AgentDetailModal";
+import FeatureHighlights from "@/components/FeatureHighlights";
 
 type ActiveView = 'mt' | 'crypto' | null;
 
@@ -31,6 +32,13 @@ const AIGrid: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
         <InteractiveAgentCard type="mt" onOpenDetails={() => handleOpenDetails('mt')} />
         <InteractiveAgentCard type="crypto" onOpenDetails={() => handleOpenDetails('crypto')} />
+      </div>
+
+      <div className="mt-20">
+        <h3 className="text-3xl font-bold text-center mb-8 text-white">
+          Key Advantages for <span className="text-gradient-green">MT4/MT5</span>
+        </h3>
+        <FeatureHighlights />
       </div>
       
       <AnimatePresence>
