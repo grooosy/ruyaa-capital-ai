@@ -1,17 +1,21 @@
+
 import React, { useRef, useEffect } from 'react';
 import { Send, Mic, Paperclip } from 'lucide-react';
 import { useChat } from '@/hooks/useChat';
-import ChatMessage from './ChatMessage';
-import LoadingBubble from './LoadingBubble';
-import { Bot } from 'lucide-react';
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import ChatMessage from './chat/ChatMessage';
+import LoadingBubble from './chat/LoadingBubble';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { AgentId } from '@/context/ChatContext';
 
-const ChatPane = () => {
-    const { messages, input, isLoading, handleInputChange, handleSubmit, handleVoiceRecording, handleFileUpload } = useChat();
+interface AgentChatProps {
+    agentId: AgentId;
+}
+
+const AgentChat: React.FC<AgentChatProps> = ({ agentId }) => {
+    const { messages, input, isLoading, handleInputChange, handleSubmit, handleVoiceRecording, handleFileUpload } = useChat(agentId);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -24,20 +28,7 @@ const ChatPane = () => {
     };
 
     return (
-        <div className="w-full h-full bg-card/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden">
-            <div className="p-4 border-b border-white/10 flex items-center gap-3 shrink-0">
-                <div className="relative">
-                  <Avatar>
-                      <AvatarFallback className="bg-gold text-dark-charcoal font-bold">AI</AvatarFallback>
-                  </Avatar>
-                  <span className="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-green ring-2 ring-card" />
-                </div>
-                <div>
-                    <h3 className="font-bold text-white">AI Assistant</h3>
-                    <p className="text-xs text-green">Online</p>
-                </div>
-            </div>
-
+        <div className="w-full h-[600px] bg-card/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden">
             <ScrollArea className="flex-1">
               <div className="p-4 space-y-4">
                 {messages.map((message) => (
@@ -92,4 +83,4 @@ const ChatPane = () => {
     );
 };
 
-export default ChatPane;
+export default AgentChat;

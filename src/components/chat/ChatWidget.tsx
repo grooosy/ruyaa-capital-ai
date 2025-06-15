@@ -4,9 +4,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Bot, X } from 'lucide-react';
 import ChatPane from './ChatPane';
 import { useChatContext } from '@/context/ChatContext';
+import { useLocation } from 'react-router-dom';
 
 const ChatWidget = () => {
   const { isChatOpen, openChat, closeChat } = useChatContext();
+  const location = useLocation();
 
   const toggleChat = () => {
     if (isChatOpen) {
@@ -15,6 +17,10 @@ const ChatWidget = () => {
       openChat(null); // Open generic chat if opened from widget button
     }
   };
+
+  if (location.pathname.startsWith('/agents/')) {
+    return null;
+  }
 
   return (
     <>

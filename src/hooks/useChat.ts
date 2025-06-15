@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useContext } from 'react';
 import { useChatContext, AgentId } from '@/context/ChatContext';
 
@@ -30,8 +29,10 @@ const getInitialMessage = (agentId: AgentId): Message => {
   };
 };
 
-export const useChat = () => {
-  const { selectedAgent } = useChatContext();
+export const useChat = (agentIdOverride?: AgentId) => {
+  const { selectedAgent: agentFromContext } = useChatContext();
+  const selectedAgent = agentIdOverride !== undefined ? agentIdOverride : agentFromContext;
+
   const [messages, setMessages] = useState<Message[]>([getInitialMessage(selectedAgent)]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
