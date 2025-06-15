@@ -1,10 +1,28 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import ArbitrageTicker from './ArbitrageTicker';
 import ArbitrageVisual from './ArbitrageVisual';
+import TradeNotification from './TradeNotification';
 
 const CryptoArbitrageSection = () => {
+    const [showNotification, setShowNotification] = useState(false);
+
+    useEffect(() => {
+        const showTimer = setTimeout(() => {
+            setShowNotification(true);
+        }, 5000);
+
+        const hideTimer = setTimeout(() => {
+            setShowNotification(false);
+        }, 10000);
+
+        return () => {
+            clearTimeout(showTimer);
+            clearTimeout(hideTimer);
+        };
+    }, []);
+
     return (
         <motion.section 
             className="w-full max-w-6xl mx-auto flex flex-col items-center text-center px-6 mt-16"
@@ -22,14 +40,9 @@ const CryptoArbitrageSection = () => {
             
             <ArbitrageTicker />
 
-            <h3 className="text-3xl font-bold text-white mt-20 mb-4 text-center">
-                See Our AI in Action
-            </h3>
-            <p className="text-lg text-gray-400 mb-8 max-w-2xl text-center">
-                Watch a real-time visualization of our AI identifying and executing a profitable arbitrage trade between exchanges.
-            </p>
-
             <ArbitrageVisual />
+            
+            <TradeNotification show={showNotification} profit="$7.55" />
         </motion.section>
     );
 };
