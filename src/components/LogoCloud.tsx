@@ -3,7 +3,7 @@ import React from "react";
 import { mt4mt5Logo, cryptoLogos } from "@/data/logos";
 
 const LogoCloud: React.FC = () => (
-  <div className="flex items-center justify-center gap-16 mt-12 w-full max-w-2xl mx-auto">
+  <div className="flex items-center justify-center gap-16 w-full max-w-2xl mx-auto">
     {/* Trading Platforms */}
     <div className="flex items-center">
       <img
