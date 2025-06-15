@@ -1,8 +1,8 @@
-
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { useTranslation } from 'react-i18next';
 import { Tables } from '@/integrations/supabase/types';
+import { getEducationalVideoUrl } from '@/utils/videoUtils';
 
 type Course = Tables<'video_courses'>;
 type Lesson = Tables<'video_lessons'>;
@@ -50,7 +50,21 @@ export const useLessonsData = (courseId: string) => {
         .order('lesson_number', { ascending: true });
       
       if (error) throw error;
-      return data as Lesson[];
+      
+      // Update lessons with proper video URLs if they're using placeholder
+      const updatedLessons = data?.map((lesson, index) => ({
+        ...lesson,
+        video_url: lesson.video_url === 'https://www.youtube.com/embed/dQw4w9WgXcQ' 
+          ? getEducationalVideoUrl(index)
+          : lesson.video_url
+      })) || [];
+      
+      console.log('Updated lessons with proper video URLs:', updatedLessons.map(l => ({ 
+        title: l.title, 
+        videoUrl: l.video_url 
+      })));
+      
+      return updatedLessons as Lesson[];
     },
     enabled: !!courseId,
   });

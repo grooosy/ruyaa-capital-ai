@@ -2,6 +2,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { getYouTubeVideoId } from '@/utils/videoUtils';
+import { AlertCircle, Play } from 'lucide-react';
 
 interface YouTubePlayerProps {
   videoUrl: string;
@@ -13,19 +14,24 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({ videoUrl, title, onVideoE
   const playerRef = useRef<any>(null);
   const [isReady, setIsReady] = useState(false);
   const [hasEnded, setHasEnded] = useState(false);
+  const [hasError, setHasError] = useState(false);
   const videoId = getYouTubeVideoId(videoUrl);
 
   useEffect(() => {
     setHasEnded(false);
     setIsReady(false);
+    setHasError(false);
   }, [videoUrl]);
 
   useEffect(() => {
-    if (!videoId) return;
+    if (!videoId) {
+      setHasError(true);
+      return;
+    }
 
     const initializePlayer = () => {
       if (window.YT && window.YT.Player) {
-        console.log('Initializing YouTube player for:', title);
+        console.log('Initializing YouTube player for:', title, 'with video ID:', videoId);
         
         // Destroy existing player if it exists
         if (playerRef.current) {
@@ -46,15 +52,17 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({ videoUrl, title, onVideoE
             fs: 1,
             cc_load_policy: 0,
             iv_load_policy: 3,
-            autohide: 0
+            autohide: 0,
+            origin: window.location.origin
           },
           events: {
             onReady: (event: any) => {
-              console.log('YouTube player ready');
+              console.log('YouTube player ready for:', title);
               setIsReady(true);
+              setHasError(false);
             },
             onStateChange: (event: any) => {
-              console.log('YouTube player state changed:', event.data);
+              console.log('YouTube player state changed:', event.data, 'for:', title);
               
               if (event.data === window.YT.PlayerState.ENDED && !hasEnded) {
                 console.log('YouTube video ended:', title);
@@ -65,7 +73,9 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({ videoUrl, title, onVideoE
               }
             },
             onError: (event: any) => {
-              console.error('YouTube player error:', event.data);
+              console.error('YouTube player error:', event.data, 'for:', title);
+              setHasError(true);
+              setIsReady(false);
             }
           }
         });
@@ -98,7 +108,23 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({ videoUrl, title, onVideoE
     };
   }, [videoId, onVideoEnd, hasEnded, title]);
 
-  if (!videoId) return null;
+  if (!videoId || hasError) {
+    return (
+      <Card className="bg-card border-green/20 overflow-hidden">
+        <CardContent className="p-0">
+          <div className="relative aspect-video bg-gradient-to-br from-red/10 to-orange/10 flex items-center justify-center">
+            <div className="text-center text-white">
+              <AlertCircle className="w-16 h-16 mx-auto mb-4 text-red-400" />
+              <p className="text-lg font-semibold mb-2">Video Not Available</p>
+              <p className="text-sm text-gray-400">
+                {!videoId ? 'Invalid video URL' : 'Unable to load video'}
+              </p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
 
   return (
     <Card className="bg-card border-green/20 overflow-hidden">
@@ -110,7 +136,7 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({ videoUrl, title, onVideoE
           />
           
           {/* Loading overlay */}
-          {!isReady && (
+          {!isReady && !hasError && (
             <div className="absolute inset-0 flex items-center justify-center bg-black/50">
               <div className="text-white text-center">
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green mx-auto mb-2"></div>
