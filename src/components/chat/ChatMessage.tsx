@@ -3,7 +3,7 @@ import React from 'react';
 import { Bot, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import type { Message } from '@/hooks/useChat';
+import type { Message } from '@/types/chat';
 
 const ChatMessage = ({ message }: { message: Message }) => {
     const isUser = message.role === 'user';
