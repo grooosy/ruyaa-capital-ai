@@ -2,18 +2,21 @@
 import { useQuery } from '@tanstack/react-query';
 
 const fetchBtcData = async () => {
-  // Switched to CoinGecko API for better reliability and to fix fetch errors
-  const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true');
+  // Switched to CoinCap API for better reliability
+  const response = await fetch('https://api.coincap.io/v2/assets/bitcoin');
   if (!response.ok) {
-    throw new Error('Network response was not ok for BTC data');
+    throw new Error('Network response was not ok for BTC data from CoinCap');
   }
-  const data = await response.json();
-  if (!data.bitcoin) {
-    throw new Error('Invalid data format from CoinGecko API for BTC');
+  const result = await response.json();
+  const data = result.data;
+
+  if (!data || !data.priceUsd || !data.changePercent24Hr) {
+    throw new Error('Invalid data format from CoinCap API for BTC');
   }
+
   return {
-    price: data.bitcoin.usd,
-    change: data.bitcoin.usd_24h_change,
+    price: parseFloat(data.priceUsd),
+    change: parseFloat(data.changePercent24Hr),
   };
 };
 
