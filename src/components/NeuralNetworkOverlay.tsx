@@ -1,5 +1,5 @@
+
 import React from "react";
-import ParticleBackground from "@/components/ParticleBackground";
 
 const NeuralNetworkOverlay = () => (
   <svg
@@ -11,6 +11,8 @@ const NeuralNetworkOverlay = () => (
       opacity: 0.5,
       filter: "blur(0.5px)",
     }}
+    aria-hidden="true"
+    focusable="false"
   >
     <defs>
       <linearGradient id="neonStroke" x1="0" y1="0" x2="1" y2="1">
@@ -18,7 +20,6 @@ const NeuralNetworkOverlay = () => (
         <stop offset="100%" stopColor="#D4AF37" />
       </linearGradient>
     </defs>
-    {/* Neural net lines: stylized, subtle */}
     <path d="M50 50 Q200 400 500 300 Q650 200 750 750" stroke="url(#neonStroke)" strokeWidth="1.5" fill="none" />
     <path d="M0 400 Q250 200 600 400 Q700 600 800 200" stroke="#00FF9D" strokeWidth="1" fill="none" opacity="0.6"/>
     <circle cx="250" cy="400" r="6" fill="#00FF9D" opacity="0.4" />
@@ -27,12 +28,4 @@ const NeuralNetworkOverlay = () => (
   </svg>
 );
 
-const DashboardLayout = ({ children }: { children: React.ReactNode }) => (
-  <div className="relative min-h-screen w-full font-spacegrotesk overflow-x-hidden z-0">
-    <div className="relative z-10 w-full max-w-7xl mx-auto px-4 py-16">
-      {children}
-    </div>
-  </div>
-);
-
-export default DashboardLayout;
+export default NeuralNetworkOverlay;
