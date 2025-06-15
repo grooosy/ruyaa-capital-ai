@@ -1,44 +1,81 @@
-import { useState, useEffect, useContext } from 'react';
+
+import { useState, useEffect } from 'react';
 import { useChatContext, AgentId } from '@/context/ChatContext';
 import OpenAI from 'openai';
 import { Message } from '@/types/chat';
 import { getInitialMessage } from '@/config/agentConfig';
 import { fetchAiResponse, getFallbackResponse } from '@/services/aiService';
+import { supabase } from '@/integrations/supabase/client';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { Session } from '@supabase/supabase-js';
+import { getConversation, createConversation, getMessages, addMessage } from '@/services/chatService';
 
-// ==================================================================
-// IMPORTANT: SECURITY & SETUP
-// ==================================================================
-// To use the OpenRouter API, you need to set your API key as an
-// environment variable in your Lovable project settings.
-//
-// 1. Go to Project Settings > Environment Variables.
-// 2. Create a new variable with the name VITE_OPENROUTER_API_KEY
-//    and your OpenRouter API key as the value.
-//
-// NOTE: This key is still exposed on the client-side because this is
-// a frontend-only application. For a production environment, it is
-// strongly recommended to use a backend proxy to protect your key.
-// ==================================================================
 const openRouterApiKey = import.meta.env.VITE_OPENROUTER_API_KEY;
-
-const openrouter = new OpenAI({
-  apiKey: openRouterApiKey || "dummy-key", // The check in handleSubmit prevents usage of this dummy key.
-  baseURL: "https://openrouter.ai/api/v1",
-  dangerouslyAllowBrowser: true,
-});
 
 export const useChat = (agentIdOverride?: AgentId) => {
   const { selectedAgent: agentFromContext } = useChatContext();
   const selectedAgent = agentIdOverride !== undefined ? agentIdOverride : agentFromContext;
+  const queryClient = useQueryClient();
 
-  const [messages, setMessages] = useState<Message[]>([getInitialMessage(selectedAgent)]);
+  const [session, setSession] = useState<Session | null>(null);
+  const [authRequired, setAuthRequired] = useState(false);
   const [input, setInput] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [isAiLoading, setIsAiLoading] = useState(false);
 
   useEffect(() => {
-    setMessages([getInitialMessage(selectedAgent)]);
-    setInput('');
-  }, [selectedAgent]);
+    supabase.auth.getSession().then(({ data: { session } }) => {
+        setSession(session);
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+        const newUserId = session?.user?.id;
+        const oldUserId = session?.user?.id;
+        if (newUserId !== oldUserId) {
+             queryClient.invalidateQueries({queryKey: ['conversation']});
+        }
+        setSession(session);
+        if(session) setAuthRequired(false);
+    });
+    return () => subscription.unsubscribe();
+  }, [queryClient]);
+
+  const userId = session?.user?.id;
+
+  const { data: conversation, isLoading: isLoadingConversation } = useQuery({
+      queryKey: ['conversation', userId, selectedAgent],
+      queryFn: async () => {
+          if (!userId || !selectedAgent) return null;
+          let conv = await getConversation(userId, selectedAgent);
+          if (!conv) {
+              conv = await createConversation(userId, selectedAgent);
+              queryClient.invalidateQueries({queryKey: ['messages', conv.id]});
+          }
+          return conv;
+      },
+      enabled: !!userId && !!selectedAgent && (selectedAgent === 'mt4' || selectedAgent === 'crypto'),
+      staleTime: Infinity,
+  });
+
+  const conversationId = conversation?.id;
+
+  const { data: messages = [], isLoading: isLoadingMessages } = useQuery<Message[]>({
+      queryKey: ['messages', conversationId],
+      queryFn: () => getMessages(conversationId!),
+      enabled: !!conversationId,
+      select: (data) => {
+          if (!data || data.length === 0) {
+              return [getInitialMessage(selectedAgent)];
+          }
+          return data;
+      }
+  });
+  
+  const addMessageMutation = useMutation({
+    mutationFn: addMessage,
+    onSuccess: () => {
+        queryClient.invalidateQueries({queryKey: ['messages', conversationId]});
+    },
+  });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
@@ -46,7 +83,18 @@ export const useChat = (agentIdOverride?: AgentId) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!input.trim() || isLoading) return;
+    if (!input.trim() || isAiLoading || addMessageMutation.isPending) return;
+
+    if (!session) {
+        setAuthRequired(true);
+        return;
+    }
+    
+    if (!conversationId) {
+        console.error("Conversation not ready or supported for this agent.");
+        // Maybe show a toast to the user
+        return;
+    }
 
     if (!openRouterApiKey) {
         const errorMessage: Message = {
@@ -54,38 +102,36 @@ export const useChat = (agentIdOverride?: AgentId) => {
             role: 'assistant',
             content: "The OpenRouter API key is not configured. Please set the VITE_OPENROUTER_API_KEY in your project's environment variables."
         };
-        setMessages(prev => [...prev, errorMessage]);
+        addMessageMutation.mutate({ ...errorMessage, conversation_id: conversationId });
         return;
     }
 
-    const userMessage: Message = { id: Date.now().toString(), role: 'user', content: input };
-    const newMessages = [...messages, userMessage];
-    setMessages(newMessages);
-    const currentInput = input;
+    const userMessageContent = input;
     setInput('');
-    setIsLoading(true);
+
+    await addMessageMutation.mutateAsync({ conversation_id: conversationId, role: 'user', content: userMessageContent });
+    setIsAiLoading(true);
 
     try {
+      const currentMessages = await queryClient.fetchQuery<Message[]>({queryKey: ['messages', conversationId]});
       let botResponseContent: string;
 
       if (selectedAgent) {
-        botResponseContent = await fetchAiResponse(newMessages, selectedAgent);
+        botResponseContent = await fetchAiResponse(currentMessages, selectedAgent);
       } else {
-        botResponseContent = await getFallbackResponse(currentInput);
+        botResponseContent = await getFallbackResponse(userMessageContent);
       }
       
-      const botMessage: Message = { id: (Date.now() + 1).toString(), role: 'assistant', content: botResponseContent };
-      setMessages(prev => [...prev, botMessage]);
+      await addMessageMutation.mutateAsync({ conversation_id: conversationId, role: 'assistant', content: botResponseContent });
     } catch (error) {
       console.error("Error fetching bot response:", error);
       let errorMessageContent = "Sorry, I'm having trouble connecting. Please try again later.";
       if (error instanceof OpenAI.APIError) {
         errorMessageContent = `OpenRouter API Error: ${error.status} ${error.type} - ${error.message}`;
       }
-      const errorMessage: Message = { id: (Date.now() + 1).toString(), role: 'assistant', content: errorMessageContent };
-      setMessages(prev => [...prev, errorMessage]);
+      addMessageMutation.mutate({ conversation_id: conversationId, role: 'assistant', content: errorMessageContent });
     } finally {
-      setIsLoading(false);
+      setIsAiLoading(false);
     }
   };
 
@@ -100,11 +146,6 @@ export const useChat = (agentIdOverride?: AgentId) => {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
       console.log("File selected:", file.name);
-      setMessages(prev => [...prev, {
-        id: Date.now().toString(),
-        role: 'user',
-        content: `File attached: ${file.name}`
-      }]);
       // In a real app, you would upload the file here.
       alert(`File "${file.name}" attached (upload functionality not implemented).`);
     }
@@ -113,10 +154,13 @@ export const useChat = (agentIdOverride?: AgentId) => {
   return {
     messages,
     input,
-    isLoading,
+    isLoading: isLoadingConversation || isLoadingMessages || isAiLoading || addMessageMutation.isPending,
     handleInputChange,
     handleSubmit,
     handleVoiceRecording,
     handleFileUpload,
+    authRequired,
+    clearAuthRequired: () => setAuthRequired(false),
+    session,
   };
 };

@@ -1,17 +1,19 @@
+
 import React, { useRef, useEffect } from 'react';
 import { Send, Mic, Paperclip } from 'lucide-react';
 import { useChat } from '@/hooks/useChat';
 import ChatMessage from './ChatMessage';
 import LoadingBubble from './LoadingBubble';
-import { Bot } from 'lucide-react';
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { Auth } from '../Auth';
+import { Toaster } from '../ui/toaster';
 
 const ChatPane = () => {
-    const { messages, input, isLoading, handleInputChange, handleSubmit, handleVoiceRecording, handleFileUpload } = useChat();
+    const { messages, input, isLoading, handleInputChange, handleSubmit, handleVoiceRecording, handleFileUpload, authRequired, clearAuthRequired } = useChat();
     const fileInputRef = useRef<HTMLInputElement>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -22,6 +24,15 @@ const ChatPane = () => {
     const triggerFileUpload = () => {
       fileInputRef.current?.click();
     };
+
+    if (authRequired) {
+        return (
+            <div className="w-full h-full bg-card/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+                <Auth onSuccess={clearAuthRequired} />
+                <Toaster />
+            </div>
+        );
+    }
 
     return (
         <div className="w-full h-full bg-card/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden">
@@ -88,6 +99,7 @@ const ChatPane = () => {
                     <input type="file" ref={fileInputRef} onChange={handleFileUpload} className="hidden" accept="image/*, .pdf, .doc, .docx" />
                 </div>
             </div>
+            <Toaster />
         </div>
     );
 };

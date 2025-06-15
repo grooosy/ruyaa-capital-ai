@@ -10,13 +10,16 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { AgentId } from '@/context/ChatContext';
+import { Auth } from './Auth';
+import { Toaster } from './ui/toaster';
+
 
 interface AgentChatProps {
     agentId: AgentId;
 }
 
 const AgentChat: React.FC<AgentChatProps> = ({ agentId }) => {
-    const { messages, input, isLoading, handleInputChange, handleSubmit, handleVoiceRecording, handleFileUpload } = useChat(agentId);
+    const { messages, input, isLoading, handleInputChange, handleSubmit, handleVoiceRecording, handleFileUpload, authRequired, clearAuthRequired } = useChat(agentId);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -33,6 +36,15 @@ const AgentChat: React.FC<AgentChatProps> = ({ agentId }) => {
       rel: 'noopener noreferrer',
       className: isUser ? 'underline' : 'text-gold underline hover:text-gold/80',
     });
+
+    if (authRequired) {
+        return (
+            <div className="w-full h-[600px] bg-card/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+                <Auth onSuccess={clearAuthRequired} />
+                <Toaster />
+            </div>
+        )
+    }
 
     return (
         <div className="w-full h-[600px] bg-card/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden">
@@ -116,6 +128,7 @@ const AgentChat: React.FC<AgentChatProps> = ({ agentId }) => {
                     <input type="file" ref={fileInputRef} onChange={handleFileUpload} className="hidden" accept="image/*, .pdf, .doc, .docx" />
                 </div>
             </div>
+            <Toaster />
         </div>
     );
 };
