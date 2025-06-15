@@ -32,6 +32,11 @@ const CourseCurriculum: React.FC<CourseCurriculumProps> = ({
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
   };
 
+  const handleLessonClick = (lesson: Lesson) => {
+    console.log('Lesson clicked:', lesson.title);
+    onLessonSelect(lesson);
+  };
+
   if (isLoading) {
     return (
       <Card className="bg-card border-green/20">
@@ -61,7 +66,7 @@ const CourseCurriculum: React.FC<CourseCurriculumProps> = ({
           {isArabic ? 'منهج الدورة' : 'Course Curriculum'}
         </CardTitle>
         <CardDescription>
-          {isArabic ? 'أكمل جميع الدروس بالترتيب' : 'Complete all lessons in order'}
+          {isArabic ? 'اضغط على أي درس لتشغيله' : 'Click on any lesson to play it'}
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-3">
@@ -81,7 +86,7 @@ const CourseCurriculum: React.FC<CourseCurriculumProps> = ({
                   ? 'border-green/50 bg-green/5 hover:border-green/70'
                   : 'border-gray-700 hover:border-gold/50 hover:bg-gold/5'
               }`}
-              onClick={() => onLessonSelect(lesson)}
+              onClick={() => handleLessonClick(lesson)}
             >
               <div className="flex items-start gap-3">
                 <div className="flex-shrink-0 mt-1">
@@ -111,7 +116,12 @@ const CourseCurriculum: React.FC<CourseCurriculumProps> = ({
                         {formatDuration(lesson.duration_seconds)}
                       </span>
                     </div>
-                    {isCompleted && (
+                    {isSelected && (
+                      <span className="text-xs text-green font-medium">
+                        {isArabic ? '▶ يتم التشغيل' : '▶ Now Playing'}
+                      </span>
+                    )}
+                    {isCompleted && !isSelected && (
                       <span className="text-xs text-green font-medium">
                         {isArabic ? '✓ مكتمل' : '✓ Done'}
                       </span>

@@ -1,6 +1,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Play, Pause, Volume2, VolumeX, Maximize } from 'lucide-react';
+import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -17,6 +17,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoUrl, title, onVideoEnd }
   const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
   const [hasEnded, setHasEnded] = useState(false);
   
   // Extract YouTube video ID from URL
@@ -28,6 +29,14 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoUrl, title, onVideoEnd }
 
   const isYouTubeVideo = getYouTubeVideoId(videoUrl) !== null;
   const videoId = getYouTubeVideoId(videoUrl);
+
+  // Reset state when video changes
+  useEffect(() => {
+    setIsPlaying(false);
+    setCurrentTime(0);
+    setDuration(0);
+    setHasEnded(false);
+  }, [videoUrl]);
 
   // Handle video events for regular video files
   useEffect(() => {
@@ -68,32 +77,46 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoUrl, title, onVideoEnd }
     };
   }, [onVideoEnd, hasEnded, isYouTubeVideo]);
 
-  // YouTube iframe API handling
+  // YouTube iframe API handling with enhanced functionality
   useEffect(() => {
     if (!isYouTubeVideo) return;
 
-    const handleMessage = (event: MessageEvent) => {
-      if (event.origin !== 'https://www.youtube.com') return;
-      
-      try {
-        const data = JSON.parse(event.data);
-        if (data.event === 'video-progress') {
-          const info = data.info;
-          if (info && info.playerState === 0 && !hasEnded) { // 0 = ended
-            setHasEnded(true);
-            if (onVideoEnd) {
-              onVideoEnd();
+    // Load YouTube API if not already loaded
+    if (!window.YT) {
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+    }
+
+    const initializePlayer = () => {
+      if (window.YT && window.YT.Player && iframeRef.current) {
+        const player = new window.YT.Player(iframeRef.current, {
+          events: {
+            onStateChange: (event: any) => {
+              if (event.data === window.YT.PlayerState.ENDED && !hasEnded) {
+                setHasEnded(true);
+                setIsPlaying(false);
+                if (onVideoEnd) {
+                  onVideoEnd();
+                }
+              } else if (event.data === window.YT.PlayerState.PLAYING) {
+                setIsPlaying(true);
+              } else if (event.data === window.YT.PlayerState.PAUSED) {
+                setIsPlaying(false);
+              }
             }
           }
-        }
-      } catch (e) {
-        // Ignore parsing errors
+        });
       }
     };
 
-    window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
-  }, [onVideoEnd, hasEnded, isYouTubeVideo]);
+    if (window.YT && window.YT.Player) {
+      initializePlayer();
+    } else {
+      window.onYouTubeIframeAPIReady = initializePlayer;
+    }
+  }, [videoId, onVideoEnd, hasEnded]);
 
   const togglePlay = () => {
     const video = videoRef.current;
@@ -141,19 +164,21 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoUrl, title, onVideoEnd }
   };
 
   if (isYouTubeVideo) {
-    const embedUrl = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&origin=${window.location.origin}`;
+    const embedUrl = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&origin=${window.location.origin}&autoplay=0&controls=1`;
     
     return (
       <Card className="bg-card border-green/20 overflow-hidden">
         <CardContent className="p-0">
           <div className="relative aspect-video bg-gradient-to-br from-green/10 to-gold/10">
             <iframe
+              ref={iframeRef}
               src={embedUrl}
               title={title}
               className="w-full h-full"
               frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
+              id={`youtube-player-${videoId}`}
             />
           </div>
         </CardContent>
@@ -242,5 +267,13 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoUrl, title, onVideoEnd }
     </Card>
   );
 };
+
+// Add YouTube API types to window
+declare global {
+  interface Window {
+    YT: any;
+    onYouTubeIframeAPIReady: () => void;
+  }
+}
 
 export default VideoPlayer;

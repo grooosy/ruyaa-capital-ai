@@ -32,6 +32,7 @@ const AcademyPage = () => {
   
   const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null);
   const [completedLessons, setCompletedLessons] = useState<string[]>([]);
+  const [videoKey, setVideoKey] = useState(0); // Key to force video player re-render
 
   // Set initial lesson and completed lessons from progress
   useEffect(() => {
@@ -42,6 +43,13 @@ const AcademyPage = () => {
       setCompletedLessons(progress.completed_lessons);
     }
   }, [lessons, progress, selectedLesson]);
+
+  const handleLessonSelect = (lesson: Lesson) => {
+    console.log('Selecting lesson:', lesson.title);
+    setSelectedLesson(lesson);
+    // Force video player to re-render with new content
+    setVideoKey(prev => prev + 1);
+  };
 
   const markLessonComplete = async (lessonId: string, showToast = true) => {
     if (!completedLessons.includes(lessonId) && lessons) {
@@ -89,6 +97,7 @@ const AcademyPage = () => {
   };
 
   const handleVideoEnd = () => {
+    console.log('Video ended for lesson:', selectedLesson?.title);
     if (selectedLesson && !completedLessons.includes(selectedLesson.id)) {
       markLessonComplete(selectedLesson.id, true);
     }
@@ -116,7 +125,7 @@ const AcademyPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A]">
+    <div className="min-h-screen bg-[#0A0A0A]" dir={isArabic ? 'rtl' : 'ltr'}>
       <Navbar />
       
       <main className="pt-32 pb-20">
@@ -132,7 +141,7 @@ const AcademyPage = () => {
                 {isArabic ? 'دورة تداول مجانية' : 'Free Trading Course'}
               </Badge>
               <h1 className="text-5xl lg:text-6xl font-bold text-white mb-6">
-                RuyaaCapital <span className="text-gold">{isArabic ? 'أكاديمية' : 'Academy'}</span>
+                {isArabic ? 'أكاديمية' : 'RuyaaCapital'} <span className="text-gold">{isArabic ? 'رؤيا كابيتال' : 'Academy'}</span>
               </h1>
               <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
                 {currentCourse ? (isArabic ? currentCourse.description_ar : currentCourse.description) : 
@@ -180,6 +189,7 @@ const AcademyPage = () => {
               {selectedLesson && (
                 <div className="mb-6">
                   <VideoPlayer
+                    key={`${selectedLesson.id}-${videoKey}`}
                     videoUrl={selectedLesson.video_url}
                     title={isArabic ? selectedLesson.title_ar : selectedLesson.title}
                     onVideoEnd={handleVideoEnd}
@@ -243,7 +253,7 @@ const AcademyPage = () => {
                       <Link to="/agents/mt4mt5">
                         <Button className="bg-gold hover:bg-gold/90 text-dark-charcoal font-semibold">
                           {isArabic ? 'ابدأ التداول مع رؤيا AI' : 'Start Trading with Ruyaa AI'}
-                          <ArrowRight className="w-4 h-4 ml-2" />
+                          <ArrowRight className={`w-4 h-4 ${isArabic ? 'mr-2' : 'ml-2'}`} />
                         </Button>
                       </Link>
                     </CardContent>
@@ -259,7 +269,7 @@ const AcademyPage = () => {
                   lessons={lessons}
                   selectedLesson={selectedLesson}
                   completedLessons={completedLessons}
-                  onLessonSelect={setSelectedLesson}
+                  onLessonSelect={handleLessonSelect}
                   isLoading={lessonsLoading}
                 />
               )}
@@ -280,7 +290,7 @@ const AcademyPage = () => {
                   <Link to="/agents/mt4mt5">
                     <Button className="w-full bg-gold hover:bg-gold/90 text-dark-charcoal font-semibold">
                       {isArabic ? 'افتح حساب تداول' : 'Open Trading Account'}
-                      <ArrowRight className="w-4 h-4 ml-2" />
+                      <ArrowRight className={`w-4 h-4 ${isArabic ? 'mr-2' : 'ml-2'}`} />
                     </Button>
                   </Link>
                 </CardContent>
