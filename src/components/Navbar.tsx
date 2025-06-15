@@ -32,7 +32,7 @@ const Navbar: React.FC = () => {
                 className="p-0 bg-transparent border-none appearance-none cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-green rounded-sm"
               >
                 <img
-                  src="/lovable-uploads/1344e471-1643-4f75-ae5c-9b0e36b02a0d.png"
+                  src="/lovable-uploads/4fc94ce9-7009-46fc-ad4b-ed3edffc3240.png"
                   alt="RuyaaCapital-AI Logo"
                   className="h-12 w-auto"
                 />
@@ -40,13 +40,13 @@ const Navbar: React.FC = () => {
             </DialogTrigger>
             <DialogContent className="w-auto max-w-2xl p-0 bg-transparent border-none shadow-none">
               <img
-                src="/lovable-uploads/1344e471-1643-4f75-ae5c-9b0e36b02a0d.png"
+                src="/lovable-uploads/4fc94ce9-7009-46fc-ad4b-ed3edffc3240.png"
                 alt="RuyaaCapital-AI Logo - enlarged"
                 className="w-full h-auto rounded-lg"
               />
             </DialogContent>
           </Dialog>
-          <span className="text-base font-semibold text-gold/90 hidden lg:block">It works while you sleep</span>
+          <span className="text-lg font-playfair italic bg-gradient-to-r from-gold to-green bg-clip-text text-transparent hidden lg:block">It works while you sleep</span>
         </div>
         <div className="hidden md:flex items-center space-x-8">
             <a href="#ai" className="hover:text-green transition-colors font-semibold">How it works</a>
