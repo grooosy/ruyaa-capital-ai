@@ -19,6 +19,10 @@ const InteractiveAgentCard: React.FC<InteractiveAgentCardProps> = ({ type, onOpe
   const cardBorderColor = type === 'mt' ? 'border-green/20' : 'border-gold/20';
   const themeColor = type === 'mt' ? '#16C784' : '#E6C419';
   
+  const logosToDisplay = type === 'mt'
+    ? data.logos.filter(logo => !['Visa', 'Mastercard', 'Phantom'].includes(logo.alt))
+    : data.logos;
+
   const handleFlip = () => {
       setIsFlipped(!isFlipped);
   }
@@ -51,7 +55,7 @@ const InteractiveAgentCard: React.FC<InteractiveAgentCardProps> = ({ type, onOpe
                     <div className="flex items-start justify-between gap-4 mb-3">
                         <h3 className="text-3xl font-bold text-white flex-grow">{data.title}</h3>
                         <div className="flex items-center gap-2 flex-wrap justify-end" style={{maxWidth: '45%'}}>
-                            {data.logos.map(logo => {
+                            {logosToDisplay.map(logo => {
                                 if (logo.src.includes('placeholder')) {
                                     return <div key={logo.alt} className="text-white text-xs bg-white/10 rounded px-2 py-1">{logo.alt}</div>;
                                 }
