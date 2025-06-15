@@ -31,7 +31,7 @@ export const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
 
     const handleSolanaSignIn = async () => {
         const { error } = await supabase.auth.signInWithOAuth({
-            provider: 'solana',
+            provider: 'solana' as any,
             options: {
                 redirectTo: `${window.location.origin}/`,
             },
