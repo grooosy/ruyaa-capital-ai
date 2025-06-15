@@ -13,5 +13,8 @@
   "deposit": "Deposit",
   "contact": "Contact",
   "login": "Login",
-  "logout": "Logout"
+  "logout": "Logout",
+  "name": "Name",
+  "country": "Country",
+  "welcome": "Welcome to Ruyaa"
 }

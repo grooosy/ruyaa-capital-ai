@@ -10,10 +10,11 @@ import { useTranslation } from "react-i18next";
 import { Button } from "./ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { Session } from "@supabase/supabase-js";
+import LangToggle from "./LangToggle";
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = React.useState(false);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [session, setSession] = React.useState<Session | null>(null);
 
   React.useEffect(() => {
@@ -32,27 +33,11 @@ const Navbar: React.FC = () => {
       await supabase.auth.signOut();
   };
 
-  const toggleLanguage = () => {
-    const newLang = i18n.language === 'ar' ? 'en' : 'ar';
-    i18n.changeLanguage(newLang);
-    if (document.documentElement) {
-      document.documentElement.dir = newLang === 'ar' ? 'rtl' : 'ltr';
-      document.documentElement.lang = newLang;
-    }
-  };
-
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  React.useEffect(() => {
-    if (document.documentElement) {
-      document.documentElement.dir = i18n.language === 'ar' ? 'rtl' : 'ltr';
-      document.documentElement.lang = i18n.language;
-    }
-  }, [i18n.language]);
 
   return (
     <header
@@ -97,9 +82,7 @@ const Navbar: React.FC = () => {
             ) : (
               <Link to="/auth" className="hover:text-gold transition-colors font-semibold">{t('login')}</Link>
             )}
-            <Button onClick={toggleLanguage} variant="ghost" size="sm" className="hover:bg-transparent hover:text-gold transition-colors font-semibold p-0">
-               {i18n.language === "ar" ? "EN" : "ع"}
-            </Button>
+            <LangToggle />
         </div>
       </nav>
     </header>
