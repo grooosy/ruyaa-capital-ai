@@ -2,6 +2,7 @@
 import React from "react";
 import ProcessTimeline from "@/components/ProcessTimeline";
 import ArbitrageTicker from "@/components/ArbitrageTicker";
+import { agentData } from "@/data/agentFlows";
 
 const CryptoArbitrageSection: React.FC = () => {
   return (
@@ -14,7 +15,7 @@ const CryptoArbitrageSection: React.FC = () => {
         <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-1">
           Crypto Arbitrage Flow
         </h2>
-        <span className="text-green text-lg uppercase font-semibold tracking-widest">
+        <span className="text-gold text-lg uppercase font-semibold tracking-widest">
           Institutional Process, Automated
         </span>
       </div>
@@ -24,7 +25,7 @@ const CryptoArbitrageSection: React.FC = () => {
       
       {/* TIMELINE */}
       <div className="w-full max-w-4xl mx-auto px-4">
-        <ProcessTimeline />
+        <ProcessTimeline timeline={agentData.crypto.timeline} theme={agentData.crypto.theme as 'green' | 'gold'} />
       </div>
     </section>
   );

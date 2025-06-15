@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import ProcessTimeline from './ProcessTimeline';
@@ -13,11 +12,10 @@ interface InteractiveAgentCardProps {
 }
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 20, height: 0 },
+  hidden: { opacity: 0, y: 20 },
   visible: { 
     opacity: 1, 
-    y: 0, 
-    height: 'auto',
+    y: 0,
     transition: {
       type: "spring",
       stiffness: 100,
@@ -28,8 +26,7 @@ const cardVariants = {
   },
   exit: { 
     opacity: 0, 
-    y: -20, 
-    height: 0,
+    y: -20,
     transition: {
       duration: 0.2
     }
