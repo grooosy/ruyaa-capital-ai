@@ -9,6 +9,7 @@ import CryptoArbitrageSection from "@/components/CryptoArbitrageSection";
 import FeatureHighlights from "@/components/FeatureHighlights";
 import HeroDashboard from "@/components/HeroDashboard";
 import { ArrowRight } from "lucide-react";
+import ChatWidget from "@/components/chat/ChatWidget";
 
 const Index = () => {
   const [modalOpen, setModalOpen] = React.useState(false);
@@ -83,6 +84,9 @@ const Index = () => {
 
       {/* Path Selection Modal */}
       <PathModal open={modalOpen} onClose={() => setModalOpen(false)} />
+
+      {/* AI Chat Widget */}
+      <ChatWidget />
     </div>
   );
 };
