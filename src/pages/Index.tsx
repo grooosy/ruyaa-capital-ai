@@ -74,7 +74,7 @@ const Index = () => {
           <div className="absolute inset-0 bg-grid-pattern opacity-50 -z-10" />
           <div className="w-full max-w-5xl mx-auto flex flex-col items-center px-6">
             <div className="mb-12">
-              <h2 className="text-3xl font-extrabold text-gold text-center mb-4">Why Ruyaa AI Outperforms</h2>
+              <h2 className="font-manrope text-4xl font-extrabold tracking-tight text-center mb-4 text-gradient-ai">Why Ruyaa AI Outperforms</h2>
               <p className="text-neutral-300">Our intelligent features work while you sleep.</p>
             </div>
             <div className="mb-16">
