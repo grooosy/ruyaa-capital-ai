@@ -61,21 +61,9 @@ export const useChat = (agentIdOverride?: AgentId) => {
       let botResponseContent: string;
 
       if (selectedAgent === 'mt4') {
-        const response = await fetch('/api/chat-gpt', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            agentId: selectedAgent,
-            messages: newMessages,
-          }),
-        });
-
-        if (!response.ok) {
-          throw new Error(`API error: ${response.status} ${response.statusText}`);
-        }
-        
-        const data = await response.json();
-        botResponseContent = data.content;
+        // Mocking the API response for MT4 agent for UI testing
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate network delay
+        botResponseContent = "Hello! Let’s test the MT4/MT5 Agent flow. What’s your full name?";
       } else {
         botResponseContent = await getBotResponse(currentInput);
       }
