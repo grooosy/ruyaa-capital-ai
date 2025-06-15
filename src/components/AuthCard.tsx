@@ -6,6 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Loader2, Wallet, LogIn, UserPlus } from "lucide-react";
 import { Toaster } from "@/components/ui/toaster";
+import { useWallet, useWalletContext } from "@solana/wallet-adapter-react";
+import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 
 const GOOGLE_ICON = (
   <svg width="20" height="20" viewBox="0 0 20 20" className="mr-2" aria-hidden="true">
@@ -28,13 +30,14 @@ const AuthCard: React.FC = () => {
   const [err, setErr] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  // Use Supabase onAuthStateChange subscription only
+  // Wallet-related hooks
+  const { connected, publicKey, connect, disconnect, wallet, connecting } = useWallet();
+  const { setVisible: setWalletModalVisible } = useWalletModal();
+  const [walletLoginLoading, setWalletLoginLoading] = useState(false);
+
   useEffect(() => {
-    // Set up listener to redirect when we have a valid session
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_, session) => {
-      if (session) {
-        navigate("/dashboard");
-      }
+      if (session) navigate("/dashboard");
     });
     return () => { subscription.unsubscribe(); };
   }, [navigate]);
@@ -52,7 +55,6 @@ const AuthCard: React.FC = () => {
       if (activeTab === "signIn") {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) setErr(error.message);
-        // redirect is handled by authState
       } else {
         const redirectTo = `${window.location.origin}/dashboard`;
         const { error } = await supabase.auth.signUp({
@@ -83,20 +85,42 @@ const AuthCard: React.FC = () => {
     }
   }
 
-  // Solana: Disabled for now -- Supabase Auth does not support "solana" as OAuth provider
-  // async function handleWalletAuth() {
-  //   setErr(null);
-  //   setLoading(true);
-  //   try {
-  //     await supabase.auth.signInWithOAuth({
-  //       provider: "solana" as any, // Not officially supported
-  //       options: { redirectTo: `${window.location.origin}/dashboard` },
-  //     });
-  //   } catch (err: any) {
-  //     setErr(err?.message || "Solana wallet sign-in failed");
-  //     setLoading(false);
-  //   }
-  // }
+  // NEW: Solana wallet sign in handler and registration with Supabase
+  async function handleWalletAuth() {
+    setErr(null);
+    setWalletLoginLoading(true);
+    try {
+      if (!connected) {
+        setWalletModalVisible(true);
+        setWalletLoginLoading(false);
+        return;
+      }
+      if (publicKey) {
+        // Simulate "sign in" by treating publicKey as a unique identifier.
+        // Upsert user to wallets table with chain = 'SOL'
+        // Note: This just lets user "proceed" to dashboard, but does NOT create a Supabase auth session.
+        const { error } = await supabase.from("wallets").upsert({
+          user_id: publicKey.toBase58(),
+          address: publicKey.toBase58(),
+          chain: "SOL"
+        }, { onConflict: ['address'] });
+        if (error) throw error;
+        // Store session locally (simulate) and proceed
+        sessionStorage.setItem("wallet_login", publicKey.toBase58());
+        navigate("/dashboard");
+      } else {
+        setErr("No wallet detected");
+      }
+    } catch (err: any) {
+      setErr(err?.message || "Wallet sign-in failed");
+    }
+    setWalletLoginLoading(false);
+  }
+
+  // Support showing wallet error (no longer "not supported")
+  // Show wallet as "signed in" if sessionStorage has wallet_login
+
+  const sessionWallet = sessionStorage.getItem("wallet_login");
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen w-full bg-[#0A0A0A] font-spacegrotesk">
@@ -167,24 +191,28 @@ const AuthCard: React.FC = () => {
             {activeTab === "signIn" ? "Sign In" : "Sign Up"}
           </Button>
         </form>
-
         {/* Or connect with */}
         <div className="relative flex pt-8 pb-4 items-center">
           <div className="flex-grow border-t border-neutral-700"></div>
           <span className="mx-4 text-neutral-500 text-xs uppercase tracking-widest">OR CONNECT WALLET</span>
           <div className="flex-grow border-t border-neutral-700"></div>
         </div>
-        {/* Solana wallet connect is not supported via Supabase Auth. Placeholder only: */}
-        <Button
-          variant="outline"
-          className="w-full py-3 rounded-full border-2 border-green-400 text-green-400 font-semibold text-lg hover:bg-green-400/10 hover:text-white transition flex items-center justify-center"
-          // onClick={handleWalletAuth}
-          title="Solana wallet auth is not supported in Supabase Auth (yet)."
-          disabled={true}
-        >
-          <Wallet className="w-5 h-5 mr-2" />
-          Connect Wallet (Not Supported)
-        </Button>
+        {sessionWallet ? (
+          <div className="text-green-400 bg-green-400/10 rounded-lg p-3 mb-2 text-center break-all">
+            Signed in as wallet: <span className="font-mono">{sessionWallet}</span>
+            <Button onClick={() => { sessionStorage.removeItem("wallet_login"); window.location.reload(); }} variant="outline" className="ml-4">Sign out</Button>
+          </div>
+        ) : (
+          <Button
+            variant="outline"
+            className="w-full py-3 rounded-full border-2 border-green-400 text-green-400 font-semibold text-lg hover:bg-green-400/10 hover:text-white transition flex items-center justify-center"
+            onClick={handleWalletAuth}
+            disabled={walletLoginLoading}
+          >
+            <Wallet className="w-5 h-5 mr-2" />
+            {walletLoginLoading ? "Connecting..." : "Connect Wallet"}
+          </Button>
+        )}
         <Toaster />
       </div>
     </div>
@@ -192,4 +220,3 @@ const AuthCard: React.FC = () => {
 };
 
 export default AuthCard;
-
