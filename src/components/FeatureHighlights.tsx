@@ -1,7 +1,8 @@
 
 import React from 'react';
 import { ShieldCheck, Zap, MessageSquare, Wallet } from 'lucide-react';
-import { useTranslation, TFunction } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
+import { TFunction } from 'i18next';
 
 const getFeatures = (t: TFunction) => [
   {
