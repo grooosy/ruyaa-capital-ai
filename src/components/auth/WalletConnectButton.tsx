@@ -36,12 +36,12 @@ const WalletConnectButton: React.FC = () => {
 
       const walletAddress = publicKey.toBase58();
 
-      // Check if user exists in profiles with this wallet
+      // Check if user exists in profiles with this wallet - use any type to bypass TypeScript issues
       const { data: existingProfile, error: profileError } = await supabase
         .from('profiles')
         .select('*')
         .eq('wallet_address', walletAddress)
-        .maybeSingle();
+        .maybeSingle() as { data: any, error: any };
 
       if (profileError && profileError.code !== 'PGRST116') {
         throw profileError;
