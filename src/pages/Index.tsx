@@ -12,6 +12,20 @@ import { ArrowRight } from "lucide-react";
 
 const Index = () => {
   const [modalOpen, setModalOpen] = React.useState(false);
+  const [startAiFlowAnimation, setStartAiFlowAnimation] = React.useState(false);
+
+  const handleStartNowClick = () => {
+    const aiSection = document.getElementById('ai');
+    if (aiSection) {
+      aiSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    if (!startAiFlowAnimation) {
+      setTimeout(() => {
+        setStartAiFlowAnimation(true);
+      }, 300);
+    }
+  };
 
   return (
     <div className="relative min-h-screen bg-bg">
@@ -34,7 +48,7 @@ const Index = () => {
             </p>
 
             <motion.button
-              onClick={() => setModalOpen(true)}
+              onClick={handleStartNowClick}
               className="bg-gold text-dark-charcoal px-8 py-4 rounded-xl text-lg font-bold shadow-gold-glow hover:bg-gold/90 transition-all duration-300 tracking-wide inline-flex items-center gap-2"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -60,7 +74,7 @@ const Index = () => {
 
 
         {/* AI Agents Showcase */}
-        <AIGrid />
+        <AIGrid startAnimation={startAiFlowAnimation} />
 
         {/* Crypto Arbitrage Section */}
         <CryptoArbitrageSection />

@@ -3,10 +3,11 @@ import React from "react";
 import { AnimatePresence } from "framer-motion";
 import InteractiveAgentCard from "@/components/InteractiveAgentCard";
 import AgentDetailModal from "@/components/AgentDetailModal";
+import AnimatedFlow from "@/components/AnimatedFlow";
 
 type ActiveView = 'mt' | 'crypto' | null;
 
-const AIGrid: React.FC = () => {
+const AIGrid: React.FC<{ startAnimation?: boolean }> = ({ startAnimation = false }) => {
   const [detailView, setDetailView] = React.useState<ActiveView>(null);
 
   const handleOpenDetails = (view: 'mt' | 'crypto') => {
@@ -27,6 +28,8 @@ const AIGrid: React.FC = () => {
           Our AI ecosystem operates through specialized agents. Click on a card to explore the step-by-step process for each.
         </p>
       </div>
+
+      <AnimatedFlow isVisible={startAnimation} />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
         <InteractiveAgentCard type="mt" onOpenDetails={() => handleOpenDetails('mt')} />
