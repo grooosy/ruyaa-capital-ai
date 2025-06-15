@@ -1,3 +1,4 @@
+
 import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
@@ -10,7 +11,6 @@ import HeroDashboard from "@/components/HeroDashboard";
 import { ArrowRight } from "lucide-react";
 import ChatWidget from "@/components/chat/ChatWidget";
 import ParticleBackground from "@/components/ParticleBackground";
-import MarketGrid from "@/components/MarketGrid";
 import { useTranslation } from "react-i18next";
 
 const Index = () => {
@@ -63,23 +63,19 @@ const Index = () => {
             </motion.button>
           </div>
 
-          {/* Right Side: Market Grid */}
-          <div className="lg:w-1/2 w-full mt-12 lg:mt-0 flex items-center justify-center">
-            <MarketGrid />
+          {/* Right Side: Dashboard */}
+          <div className="lg:w-1/2 w-full mt-12 lg:mt-0">
+            <HeroDashboard />
           </div>
         </section>
 
         {/* Feature Grid & Logo Cloud */}
-        <section className="w-full items-center text-center py-20 mt-12 relative border-y border-green-400/10 bg-[#171713]">
-          <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-transparent via-[#191c150A] to-transparent" />
+        <section className="w-full items-center text-center py-16 mt-12 bg-gradient-to-tr from-black/20 via-transparent to-black/20 relative">
+          <div className="absolute inset-0 bg-grid-pattern opacity-50 -z-10" />
           <div className="w-full max-w-5xl mx-auto flex flex-col items-center px-6">
             <div className="mb-12">
-              <h2 className="font-playfair text-5xl font-bold mb-4 tracking-tighter drop-shadow-md bg-gradient-to-r from-[#CFA100] via-[#665C32] to-[#ADFFCE] bg-clip-text text-transparent">
-                <span className="font-extrabold text-[#D9B23B]">Performance by AI</span>
-                <br />
-                <span className="text-[#00FF9D]">Why Ruyaa Outperforms</span>
-              </h2>
-              <p className="text-lg text-neutral-300 opacity-95 font-medium">Intelligent features that work while you sleep, consistently delivering professional outcomes.</p>
+              <h2 className="font-manrope text-4xl font-extrabold tracking-tight text-center mb-4 text-gradient-ai">Why Ruyaa AI Outperforms</h2>
+              <p className="text-neutral-300">Our intelligent features work while you sleep.</p>
             </div>
             <div className="mb-16">
               <FeatureGrid />
@@ -87,6 +83,7 @@ const Index = () => {
             <LogoCloud />
           </div>
         </section>
+
 
         {/* AI Agents Showcase */}
         <AIGrid startAnimation={startAiFlowAnimation} />

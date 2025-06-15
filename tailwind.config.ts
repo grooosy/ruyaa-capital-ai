@@ -1,6 +1,5 @@
 
 import type { Config } from "tailwindcss";
-import colors from "tailwindcss/colors";
 
 export default {
   darkMode: ["class"],
@@ -25,17 +24,15 @@ export default {
     },
     extend: {
       colors: {
-        // DO NOT SPREAD ...colors HERE! This would overwrite the root.
-        // Instead, just add your custom colors.
-        // Custom greens do not overwrite Tailwind's green scale.
-        'brand-green': "#10A169",
+        bg: "#181711",
+        green: "#10A169",
         gold: "#CFA100",
         "dark-charcoal": "#181711",
         background: "#181711",
         card: "#23221c",
         "primary-accent": "#16C784",
         "secondary-accent": "#E6C419",
-        // shadcn base
+        // retain shadcn base;
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
@@ -80,4 +77,3 @@ export default {
   },
   plugins: [require("tailwindcss-animate"), require("tailwindcss-rtl"), require("@tailwindcss/typography")],
 } satisfies Config;
-
