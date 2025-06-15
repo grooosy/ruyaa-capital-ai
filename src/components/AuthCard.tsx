@@ -31,7 +31,7 @@ const AuthCard: React.FC = () => {
   // Use Supabase onAuthStateChange subscription only
   useEffect(() => {
     // Set up listener to redirect when we have a valid session
-    const { subscription } = supabase.auth.onAuthStateChange((_, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_, session) => {
       if (session) {
         navigate("/dashboard");
       }
@@ -192,3 +192,4 @@ const AuthCard: React.FC = () => {
 };
 
 export default AuthCard;
+
