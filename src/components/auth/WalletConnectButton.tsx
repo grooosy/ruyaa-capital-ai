@@ -20,7 +20,6 @@ const WalletConnectButton: React.FC = () => {
   const { connected, publicKey, connect, disconnect, connecting } = useWallet();
   const { setVisible: setWalletModalVisible } = useWalletModal();
   const [isLoading, setIsLoading] = useState(false);
-  const [hasProcessedConnection, setHasProcessedConnection] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -49,14 +48,15 @@ const WalletConnectButton: React.FC = () => {
       }
 
       if (existingProfile && existingProfile.email) {
-        // User exists, sign them in
+        // User exists with a real email, sign them in normally
         const { error: signInError } = await supabase.auth.signInWithPassword({
           email: existingProfile.email,
           password: walletAddress // Use wallet address as password for wallet users
         });
 
         if (signInError) {
-          // If sign in fails, create the auth user
+          console.error("Sign in error:", signInError);
+          // If sign in fails, try creating the user
           await createWalletUser(walletAddress);
         } else {
           toast({
@@ -66,7 +66,7 @@ const WalletConnectButton: React.FC = () => {
           navigate("/dashboard");
         }
       } else {
-        // New user, create account
+        // New user or existing user without proper email, create/update account
         await createWalletUser(walletAddress);
       }
     } catch (error: any) {
@@ -78,19 +78,20 @@ const WalletConnectButton: React.FC = () => {
       });
     } finally {
       setIsLoading(false);
-      setHasProcessedConnection(true);
     }
   };
 
   const createWalletUser = async (walletAddress: string) => {
     try {
-      const email = `${walletAddress}@wallet.local`;
+      // Create a proper email format for wallet users
+      const email = `wallet-${walletAddress.slice(0, 8)}@ruyaa.local`;
       
-      // Create auth user
+      // First, try to sign up with the wallet address
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email,
         password: walletAddress,
         options: {
+          emailRedirectTo: `${window.location.origin}/dashboard`,
           data: {
             full_name: `Wallet User ${truncateMiddle(walletAddress)}`,
             wallet_address: walletAddress,
@@ -98,15 +99,31 @@ const WalletConnectButton: React.FC = () => {
         },
       });
 
-      if (authError) throw authError;
+      if (authError) {
+        // If signup fails because user exists, try to sign in
+        if (authError.message.includes('already registered')) {
+          const { error: signInError } = await supabase.auth.signInWithPassword({
+            email,
+            password: walletAddress
+          });
+          
+          if (signInError) {
+            throw signInError;
+          }
+        } else {
+          throw authError;
+        }
+      }
 
-      if (authData.user) {
-        // The handle_new_user trigger will create the profile automatically
+      // Get the current session to ensure we have a user
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (session?.user) {
         // Add wallet to wallets table
         const { error: walletError } = await supabase
           .from('wallets')
           .upsert({
-            user_id: authData.user.id,
+            user_id: session.user.id,
             address: walletAddress,
             chain: 'SOL',
           }, {
@@ -130,22 +147,10 @@ const WalletConnectButton: React.FC = () => {
     }
   };
 
-  // Effect to handle wallet connection changes
-  useEffect(() => {
-    if (connected && publicKey && !isLoading && !hasProcessedConnection) {
-      // Auto-authenticate when wallet connects
-      handleWalletAuth();
-    } else if (!connected) {
-      // Reset processed state when wallet disconnects
-      setHasProcessedConnection(false);
-    }
-  }, [connected, publicKey, isLoading, hasProcessedConnection]);
-
   const handleDisconnect = async () => {
     try {
       await disconnect();
       await supabase.auth.signOut();
-      setHasProcessedConnection(false);
       toast({
         title: "Disconnected",
         description: "Wallet disconnected successfully",

@@ -22,8 +22,8 @@ BEGIN
     new.raw_user_meta_data ->> 'wallet_address'
   )
   ON CONFLICT (id) DO UPDATE SET
-    email = EXCLUDED.email,
-    wallet_address = EXCLUDED.wallet_address,
+    email = COALESCE(EXCLUDED.email, profiles.email),
+    wallet_address = COALESCE(EXCLUDED.wallet_address, profiles.wallet_address),
     full_name = COALESCE(EXCLUDED.full_name, profiles.full_name);
   RETURN new;
 END;
