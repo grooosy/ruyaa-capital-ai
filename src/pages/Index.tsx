@@ -10,6 +10,7 @@ import FeatureHighlights from "@/components/FeatureHighlights";
 import HeroDashboard from "@/components/HeroDashboard";
 import { ArrowRight } from "lucide-react";
 import ChatWidget from "@/components/chat/ChatWidget";
+import ParticleBackground from "@/components/ParticleBackground";
 
 const Index = () => {
   const [modalOpen, setModalOpen] = React.useState(false);
@@ -30,6 +31,7 @@ const Index = () => {
 
   return (
     <div className="relative min-h-screen bg-bg">
+      <ParticleBackground />
       <Navbar />
       
       <main className="pt-32 pb-20 w-full">
