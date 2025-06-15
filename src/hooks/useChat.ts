@@ -100,7 +100,8 @@ export const useChat = (agentIdOverride?: AgentId) => {
             arbitrage: "openai/gpt-4o-mini",
         };
         
-        const systemPrompt = `You are Ruyaa’s ${selectedAgent.toUpperCase()} Agent. You are an expert in your field. Provide helpful and accurate information.`;
+        const systemPrompt = `You are Ruyaa’s ${selectedAgent.toUpperCase()} Agent.
+[Paste your full system instructions here: language rules, registration flow, cash path, etc.]`;
         
         // OpenAI API expects messages without the 'id' field
         const apiMessages = newMessages.map(({ id, ...rest }) => rest);
