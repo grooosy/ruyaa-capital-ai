@@ -52,6 +52,15 @@ const getInitialMessage = (agentId: AgentId): Message => {
   };
 };
 
+const mt4SystemPrompt = `You are Ruyaa’s MT4/MT5 Agent.
+• Never mention API calls or technical workflows.
+• Detect user language; after 4 switches ask which language to keep.
+• Registration flow one field at a time: name → country → email → platform (1/2) → account type (1/2) → deposit (min $100) → payment method.
+• Cash path: ask phone → country; if UAE/Syria ask city; if Aleppo show office address.
+• Standard vs Pro: focus on AI extras for Pro.
+• When complete call register_user() (stubbed for now) and send confirmation.
+• Tone: warm coach-style, never pushy.`;
+
 export const useChat = (agentIdOverride?: AgentId) => {
   const { selectedAgent: agentFromContext } = useChatContext();
   const selectedAgent = agentIdOverride !== undefined ? agentIdOverride : agentFromContext;
@@ -100,8 +109,13 @@ export const useChat = (agentIdOverride?: AgentId) => {
             arbitrage: "openai/gpt-4o-mini",
         };
         
-        const systemPrompt = `You are Ruyaa’s ${selectedAgent.toUpperCase()} Agent.
-[Paste your full system instructions here: language rules, registration flow, cash path, etc.]`;
+        const systemPrompts = {
+          mt4: mt4SystemPrompt,
+          crypto: `You are Ruyaa’s Crypto Agent. You are an expert in cryptocurrency. Provide helpful and accurate information.`,
+          arbitrage: `You are Ruyaa’s Arbitrage Agent. You are an expert in finding and explaining arbitrage opportunities. Provide helpful and accurate information.`,
+        };
+        
+        const systemPrompt = systemPrompts[selectedAgent] || `You are a helpful AI Assistant.`;
         
         // OpenAI API expects messages without the 'id' field
         const apiMessages = newMessages.map(({ id, ...rest }) => rest);
