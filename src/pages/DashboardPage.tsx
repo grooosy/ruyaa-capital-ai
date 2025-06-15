@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { Session } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
@@ -14,9 +13,6 @@ import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "@/hooks/use-toast";
 import { WalletProvider, useWallet } from "@solana/wallet-adapter-react";
 import { motion } from "framer-motion";
-import "@fontsource/space-grotesk/400.css";
-import "@fontsource/space-grotesk/500.css";
-import "@fontsource/space-grotesk/700.css";
 
 // Helper for framer motion cascade
 const cardStagger = {
