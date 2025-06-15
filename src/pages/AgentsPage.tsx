@@ -30,6 +30,7 @@ const AgentsPage: React.FC = () => {
       title: t('agent_arbitrage_title'),
       description: t('agent_arbitrage_desc'),
       logoSrc: '/icons/arb.svg',
+      href: '/agents/arbitrage',
     },
   ];
 

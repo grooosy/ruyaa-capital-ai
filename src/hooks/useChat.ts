@@ -52,7 +52,7 @@ export const useChat = (agentIdOverride?: AgentId) => {
           }
           return conv;
       },
-      enabled: !!userId && !!selectedAgent && (selectedAgent === 'mt4' || selectedAgent === 'crypto'),
+      enabled: !!userId && !!selectedAgent && (selectedAgent === 'mt4' || selectedAgent === 'crypto' || selectedAgent === 'arbitrage'),
       staleTime: Infinity,
   });
 
