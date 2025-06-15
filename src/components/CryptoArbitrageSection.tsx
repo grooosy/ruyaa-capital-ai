@@ -28,16 +28,16 @@ const CryptoArbitrageSection = () => {
 
     return (
         <motion.section 
-            className="w-full max-w-6xl mx-auto flex flex-col items-center text-center mt-20 px-4 sm:px-10 py-12 relative rounded-2xl bg-gradient-to-tr from-black/40 via-card/60 to-black/30 border border-green-400/10 shadow-neon"
+            className="w-full max-w-6xl mx-auto flex flex-col items-center text-center mt-20 px-4 sm:px-10 py-12 relative rounded-2xl bg-gradient-to-tr from-black/85 via-[#21221b] to-[#161612] border border-green-400/10 shadow-neon"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5 }}
         >
-            <h2 className="text-4xl lg:text-5xl font-extrabold mb-4 bg-gradient-to-r from-green-400 to-gold bg-clip-text text-transparent">
-                {t('arbitrage_title')} <span className="text-gradient-gold">{t('arbitrage_subtitle')}</span>
+            <h2 className="text-4xl lg:text-5xl font-extrabold mb-4 bg-gradient-to-r from-[#CFA100] to-[#00FF9D] bg-clip-text text-transparent">
+                {t('arbitrage_title')} <span className="text-[#CFA100]">{t('arbitrage_subtitle')}</span>
             </h2>
-            <p className="text-lg text-gray-300 mb-10 max-w-3xl mx-auto">
+            <p className="text-lg text-neutral-300 mb-10 max-w-3xl mx-auto">
                 {t('arbitrage_desc')}
             </p>
             
@@ -65,7 +65,7 @@ const CryptoArbitrageSection = () => {
             >
               <Link
                   to="/agents/arbitrage"
-                  className="bg-gradient-to-r from-[#00FF9D] to-gold text-dark-charcoal px-8 py-4 rounded-xl text-lg font-bold shadow-green-glow hover:from-green-300 hover:to-gold/70 transition-all duration-300 tracking-wide inline-flex items-center gap-2"
+                  className="bg-gradient-to-r from-[#00FF9D] to-[#23221c] text-[#181711] px-8 py-4 rounded-xl text-lg font-bold shadow-green-glow hover:from-green-300 hover:to-[#23221c]/80 transition-all duration-300 tracking-wide inline-flex items-center gap-2 border-2 border-[#00FF9D] shadow-[0_0_22px_#00FF9D44]"
               >
                   {t('try_now_arbitrage')}
                   <ArrowRight className="w-5 h-5 rtl:rotate-180" />

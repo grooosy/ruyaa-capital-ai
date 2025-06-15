@@ -1,4 +1,3 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
@@ -71,16 +70,16 @@ const Index = () => {
         </section>
 
         {/* Feature Grid & Logo Cloud */}
-        <section className="w-full items-center text-center py-20 mt-12 bg-gradient-to-tr from-[#181711] via-[#212115] to-[#181711] relative border-y border-green-400/10">
-          <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-transparent via-[#00FF9D0C] to-transparent" />
+        <section className="w-full items-center text-center py-20 mt-12 relative border-y border-green-400/10 bg-[#171713]">
+          <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-transparent via-[#191c150A] to-transparent" />
           <div className="w-full max-w-5xl mx-auto flex flex-col items-center px-6">
             <div className="mb-12">
-              <h2 className="font-playfair text-5xl font-bold mb-4 bg-gradient-to-r from-gold via-[#00FF9D] to-white bg-clip-text text-transparent tracking-tighter drop-shadow-md">
-                <span className="text-gold font-extrabold">Performance by AI</span>
+              <h2 className="font-playfair text-5xl font-bold mb-4 tracking-tighter drop-shadow-md bg-gradient-to-r from-[#CFA100] via-[#665C32] to-[#ADFFCE] bg-clip-text text-transparent">
+                <span className="font-extrabold text-[#D9B23B]">Performance by AI</span>
                 <br />
                 <span className="text-[#00FF9D]">Why Ruyaa Outperforms</span>
               </h2>
-              <p className="text-lg text-gray-300 opacity-95 font-medium">Intelligent features that work while you sleep, consistently delivering professional outcomes.</p>
+              <p className="text-lg text-neutral-300 opacity-95 font-medium">Intelligent features that work while you sleep, consistently delivering professional outcomes.</p>
             </div>
             <div className="mb-16">
               <FeatureGrid />
