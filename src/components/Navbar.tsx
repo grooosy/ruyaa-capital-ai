@@ -6,15 +6,53 @@ import {
   DialogContent,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useTranslation } from "react-i18next";
+import { Button } from "./ui/button";
+import { supabase } from "@/integrations/supabase/client";
+import { Session } from "@supabase/supabase-js";
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = React.useState(false);
+  const { t, i18n } = useTranslation();
+  const [session, setSession] = React.useState<Session | null>(null);
+
+  React.useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+        setSession(session);
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+        setSession(session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleLogout = async () => {
+      await supabase.auth.signOut();
+  };
+
+  const toggleLanguage = () => {
+    const newLang = i18n.language === 'ar' ? 'en' : 'ar';
+    i18n.changeLanguage(newLang);
+    if (document.documentElement) {
+      document.documentElement.dir = newLang === 'ar' ? 'rtl' : 'ltr';
+      document.documentElement.lang = newLang;
+    }
+  };
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  React.useEffect(() => {
+    if (document.documentElement) {
+      document.documentElement.dir = i18n.language === 'ar' ? 'rtl' : 'ltr';
+      document.documentElement.lang = i18n.language;
+    }
+  }, [i18n.language]);
 
   return (
     <header
@@ -50,10 +88,18 @@ const Navbar: React.FC = () => {
           <span className="text-lg font-playfair italic text-gold/90 hidden lg:block">It works while you sleep</span>
         </div>
         <div className="hidden md:flex items-center space-x-8">
-            <Link to="/#ai" className="hover:text-green transition-colors font-semibold">How it works</Link>
-            <Link to="/agents" className="hover:text-gold transition-colors font-semibold">AI Agents</Link>
-            <Link to="/#deposit" className="hover:text-green transition-colors font-semibold">Deposit</Link>
-            <Link to="/#footer" className="hover:text-gold transition-colors font-semibold">Contact</Link>
+            <Link to="/#ai" className="hover:text-green transition-colors font-semibold">{t('how_it_works')}</Link>
+            <Link to="/agents" className="hover:text-gold transition-colors font-semibold">{t('ai_agents')}</Link>
+            <Link to="/#deposit" className="hover:text-green transition-colors font-semibold">{t('deposit')}</Link>
+            <Link to="/#footer" className="hover:text-gold transition-colors font-semibold">{t('contact')}</Link>
+            {session ? (
+              <Button onClick={handleLogout} variant="ghost" className="hover:bg-transparent hover:text-gold transition-colors font-semibold p-0">{t('logout')}</Button>
+            ) : (
+              <Link to="/auth" className="hover:text-gold transition-colors font-semibold">{t('login')}</Link>
+            )}
+            <Button onClick={toggleLanguage} variant="ghost" size="sm" className="hover:bg-transparent hover:text-gold transition-colors font-semibold p-0">
+               {i18n.language === "ar" ? "EN" : "ع"}
+            </Button>
         </div>
       </nav>
     </header>

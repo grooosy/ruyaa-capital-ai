@@ -10,6 +10,7 @@ import MT4Page from "./pages/MT4Page";
 import CryptoPage from "./pages/CryptoPage";
 import NotFound from "./pages/NotFound";
 import { ChatProvider } from "./context/ChatContext";
+import AuthPage from "./pages/AuthPage";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/auth" element={<AuthPage />} />
             <Route path="/agents" element={<AgentsPage />} />
             <Route path="/agents/mt4" element={<MT4Page />} />
             <Route path="/agents/crypto" element={<CryptoPage />} />

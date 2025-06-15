@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect } from 'react';
 import { Send, Mic, Paperclip, Bot, User } from 'lucide-react';
 import { useChat } from '@/hooks/useChat';
@@ -19,7 +18,7 @@ interface AgentChatProps {
 }
 
 const AgentChat: React.FC<AgentChatProps> = ({ agentId }) => {
-    const { messages, input, isLoading, handleInputChange, handleSubmit, handleVoiceRecording, handleFileUpload, authRequired, clearAuthRequired } = useChat(agentId);
+    const { messages, input, isLoading, handleInputChange, handleSubmit, handleVoiceRecording, handleFileUpload, authRequired } = useChat(agentId);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -39,8 +38,8 @@ const AgentChat: React.FC<AgentChatProps> = ({ agentId }) => {
 
     if (authRequired) {
         return (
-            <div className="w-full h-[600px] bg-card/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden">
-                <Auth onSuccess={clearAuthRequired} />
+            <div className="w-full h-[600px] bg-card/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl flex flex-col items-center justify-center overflow-hidden">
+                <Auth />
                 <Toaster />
             </div>
         )
