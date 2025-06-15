@@ -1,15 +1,13 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Twitter, Linkedin, Facebook } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-
 const Footer = () => {
-  const { t } = useTranslation();
+  const {
+    t
+  } = useTranslation();
   const currentYear = new Date().getFullYear();
-
-  return (
-    <footer className="relative bg-gradient-to-b from-dark-charcoal to-black border-t border-white/10">
+  return <footer className="relative bg-gradient-to-b from-dark-charcoal to-black border-t border-white/10">
       {/* Neural Network Pattern */}
       <div className="absolute inset-0 opacity-[0.02]">
         <svg viewBox="0 0 1200 400" className="w-full h-full">
@@ -27,99 +25,91 @@ const Footer = () => {
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Company Info */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="space-y-4"
-          >
-            <div className="flex items-center gap-3">
-              <div className="relative">
-                <div className="w-12 h-12 bg-gradient-to-br from-green via-gold to-green rounded-xl flex items-center justify-center shadow-lg">
-                  <span className="text-dark-charcoal font-bold text-xl">R</span>
-                </div>
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-gold rounded-full flex items-center justify-center">
-                  <div className="w-2 h-2 bg-dark-charcoal rounded-full"></div>
-                </div>
-              </div>
-              <div>
-                <span className="text-white font-bold text-xl">Ruyaa</span>
-                <span className="text-gold font-bold text-xl">Capital</span>
-              </div>
-            </div>
+          <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.6
+        }} className="space-y-4">
+            
             <p className="text-gray-400 text-sm leading-relaxed">
               Empowering traders with intelligent AI-driven solutions for forex, crypto, and arbitrage trading.
             </p>
             <div className="flex space-x-4">
-              <motion.a
-                href="#"
-                whileHover={{ scale: 1.1 }}
-                className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-gold/20 transition-colors"
-              >
+              <motion.a href="#" whileHover={{
+              scale: 1.1
+            }} className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-gold/20 transition-colors">
                 <Twitter className="w-4 h-4 text-gray-400 hover:text-gold" />
               </motion.a>
-              <motion.a
-                href="#"
-                whileHover={{ scale: 1.1 }}
-                className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-gold/20 transition-colors"
-              >
+              <motion.a href="#" whileHover={{
+              scale: 1.1
+            }} className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-gold/20 transition-colors">
                 <Linkedin className="w-4 h-4 text-gray-400 hover:text-gold" />
               </motion.a>
-              <motion.a
-                href="#"
-                whileHover={{ scale: 1.1 }}
-                className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-gold/20 transition-colors"
-              >
+              <motion.a href="#" whileHover={{
+              scale: 1.1
+            }} className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-gold/20 transition-colors">
                 <Facebook className="w-4 h-4 text-gray-400 hover:text-gold" />
               </motion.a>
             </div>
           </motion.div>
 
           {/* Quick Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="space-y-4"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.6,
+          delay: 0.1
+        }} className="space-y-4">
             <h3 className="text-white font-semibold text-lg">Quick Links</h3>
             <ul className="space-y-2">
-              {['Home', 'AI Agents', 'Features', 'Pricing', 'Support'].map((link) => (
-                <li key={link}>
+              {['Home', 'AI Agents', 'Features', 'Pricing', 'Support'].map(link => <li key={link}>
                   <a href="#" className="text-gray-400 hover:text-gold transition-colors text-sm">
                     {link}
                   </a>
-                </li>
-              ))}
+                </li>)}
             </ul>
           </motion.div>
 
           {/* Trading Services */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-4"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.6,
+          delay: 0.2
+        }} className="space-y-4">
             <h3 className="text-white font-semibold text-lg">Trading Services</h3>
             <ul className="space-y-2">
-              {['MT4/MT5 Signals', 'Crypto Trading', 'Arbitrage Bots', 'Market Analysis', 'Risk Management'].map((service) => (
-                <li key={service}>
+              {['MT4/MT5 Signals', 'Crypto Trading', 'Arbitrage Bots', 'Market Analysis', 'Risk Management'].map(service => <li key={service}>
                   <a href="#" className="text-gray-400 hover:text-gold transition-colors text-sm">
                     {service}
                   </a>
-                </li>
-              ))}
+                </li>)}
             </ul>
           </motion.div>
 
           {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="space-y-4"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.6,
+          delay: 0.3
+        }} className="space-y-4">
             <h3 className="text-white font-semibold text-lg">Contact</h3>
             <div className="space-y-3">
               <div className="flex items-center gap-3">
@@ -166,8 +156,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
