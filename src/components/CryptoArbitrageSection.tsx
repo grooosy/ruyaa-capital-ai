@@ -2,8 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import ArbitrageTicker from './ArbitrageTicker';
-import { cryptoArbitrageTimeline } from '@/data/agentFlows';
-import CryptoProcess from './CryptoProcess';
+import ArbitrageVisual from './ArbitrageVisual';
 
 const CryptoArbitrageSection = () => {
     return (
@@ -23,11 +22,14 @@ const CryptoArbitrageSection = () => {
             
             <ArbitrageTicker />
 
-            <h3 className="text-2xl font-semibold text-white mt-16 mb-8">
-                The Arbitrage Process, Step-by-Step
+            <h3 className="text-3xl font-bold text-white mt-20 mb-4 text-center">
+                See Our AI in Action
             </h3>
+            <p className="text-lg text-gray-400 mb-8 max-w-2xl text-center">
+                Watch a real-time visualization of our AI identifying and executing a profitable arbitrage trade between exchanges.
+            </p>
 
-            <CryptoProcess timeline={cryptoArbitrageTimeline} />
+            <ArbitrageVisual />
         </motion.section>
     );
 };
