@@ -9,8 +9,8 @@ const fetchDashboardData = async (session: Session | null) => {
     }
     const userId = session.user.id;
 
-    const profilePromise = supabase.from('profiles').select('full_name, avatar_url').eq('id', userId).single();
-    const featuresPromise = supabase.from('user_features').select('feature, activated_at').eq('user_id', userId);
+    const profilePromise = supabase.from('profiles').select('*').eq('id', userId).single();
+    const featuresPromise = supabase.from('user_features').select('*').eq('user_id', userId);
     const sessionsPromise = supabase.from('arbitrage_sessions').select('*').eq('user_id', userId).order('created_at', { ascending: false });
     const walletsPromise = supabase.from('wallets').select('*').eq('user_id', userId);
     
