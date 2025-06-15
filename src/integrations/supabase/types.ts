@@ -179,6 +179,47 @@ export type Database = {
         }
         Relationships: []
       }
+      user_course_progress: {
+        Row: {
+          completed_at: string | null
+          completed_lessons: string[] | null
+          course_id: string
+          id: string
+          last_accessed_at: string
+          progress_percentage: number
+          started_at: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          completed_lessons?: string[] | null
+          course_id: string
+          id?: string
+          last_accessed_at?: string
+          progress_percentage?: number
+          started_at?: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          completed_lessons?: string[] | null
+          course_id?: string
+          id?: string
+          last_accessed_at?: string
+          progress_percentage?: number
+          started_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_course_progress_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "video_courses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_features: {
         Row: {
           activated_at: string | null
@@ -196,6 +237,110 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      video_courses: {
+        Row: {
+          created_at: string
+          description: string
+          description_ar: string
+          difficulty_level: string
+          id: string
+          is_active: boolean
+          thumbnail_url: string | null
+          title: string
+          title_ar: string
+          total_duration_minutes: number
+          total_lessons: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          description_ar: string
+          difficulty_level?: string
+          id?: string
+          is_active?: boolean
+          thumbnail_url?: string | null
+          title: string
+          title_ar: string
+          total_duration_minutes?: number
+          total_lessons?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          description_ar?: string
+          difficulty_level?: string
+          id?: string
+          is_active?: boolean
+          thumbnail_url?: string | null
+          title?: string
+          title_ar?: string
+          total_duration_minutes?: number
+          total_lessons?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      video_lessons: {
+        Row: {
+          course_id: string
+          created_at: string
+          description: string
+          description_ar: string
+          duration_seconds: number
+          id: string
+          is_active: boolean
+          lesson_number: number
+          thumbnail_url: string | null
+          title: string
+          title_ar: string
+          topics: string[] | null
+          topics_ar: string[] | null
+          video_url: string
+        }
+        Insert: {
+          course_id: string
+          created_at?: string
+          description: string
+          description_ar: string
+          duration_seconds: number
+          id?: string
+          is_active?: boolean
+          lesson_number: number
+          thumbnail_url?: string | null
+          title: string
+          title_ar: string
+          topics?: string[] | null
+          topics_ar?: string[] | null
+          video_url: string
+        }
+        Update: {
+          course_id?: string
+          created_at?: string
+          description?: string
+          description_ar?: string
+          duration_seconds?: number
+          id?: string
+          is_active?: boolean
+          lesson_number?: number
+          thumbnail_url?: string | null
+          title?: string
+          title_ar?: string
+          topics?: string[] | null
+          topics_ar?: string[] | null
+          video_url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "video_lessons_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "video_courses"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       wallets: {
         Row: {

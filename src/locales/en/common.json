@@ -46,5 +46,20 @@
   "setup_process_title": "Setup Process",
   "setup_proceed_button": "Proceed to Checkout",
   "back_button": "Back",
-  "try_now_arbitrage": "Try Now"
+  "try_now_arbitrage": "Try Now",
+  "academy": "Academy",
+  "academy_title": "RuyaaCapital Academy",
+  "academy_desc": "Master MT4/MT5 trading with our comprehensive video course.",
+  "free_course": "Free Trading Course",
+  "course_progress": "Course Progress",
+  "course_curriculum": "Course Curriculum",
+  "complete_lessons": "Complete all lessons in order",
+  "mark_complete": "Mark as Complete",
+  "completed": "Completed",
+  "congratulations": "Congratulations!",
+  "course_completed": "You've completed the MT4/MT5 Trading Course",
+  "start_trading": "Start Trading with Ruyaa AI",
+  "ready_to_trade": "Ready to Start Trading?",
+  "open_account_desc": "Open your MT4/MT5 account with Ruyaa AI and get access to professional trading signals.",
+  "open_trading_account": "Open Trading Account"
 }

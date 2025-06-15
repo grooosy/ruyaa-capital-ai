@@ -46,5 +46,20 @@
   "setup_process_title": "عملية الإعداد",
   "setup_proceed_button": "المتابعة إلى الدفع",
   "back_button": "رجوع",
-  "try_now_arbitrage": "جرب الآن"
+  "try_now_arbitrage": "جرب الآن",
+  "academy": "أكاديمية",
+  "academy_title": "أكاديمية رؤيا كابيتال",
+  "academy_desc": "أتقن تداول MT4/MT5 مع دورتنا الشاملة المصورة.",
+  "free_course": "دورة تداول مجانية",
+  "course_progress": "تقدم الدورة",
+  "course_curriculum": "منهج الدورة",
+  "complete_lessons": "أكمل جميع الدروس بالترتيب",
+  "mark_complete": "تسجيل كمكتمل",
+  "completed": "مكتمل",
+  "congratulations": "تهانينا!",
+  "course_completed": "لقد أكملت دورة تداول MT4/MT5",
+  "start_trading": "ابدأ التداول مع رؤيا AI",
+  "ready_to_trade": "مستعد لبدء التداول؟",
+  "open_account_desc": "افتح حساب MT4/MT5 مع رؤيا AI واحصل على إشارات تداول احترافية.",
+  "open_trading_account": "افتح حساب تداول"
 }

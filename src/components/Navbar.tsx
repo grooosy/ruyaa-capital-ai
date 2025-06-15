@@ -15,7 +15,8 @@ import UserMenu from "./UserMenu";
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = React.useState(false);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isArabic = i18n.language === 'ar';
   const [session, setSession] = React.useState<Session | null>(null);
   const { data: profile } = useProfile(session);
 
@@ -68,12 +69,16 @@ const Navbar: React.FC = () => {
               />
             </DialogContent>
           </Dialog>
-          <span className="text-lg font-playfair italic text-gold/90 hidden lg:block">It works while you sleep</span>
+          <span className="text-lg font-playfair italic text-gold/90 hidden lg:block">
+            {isArabic ? 'يعمل بينما تنام' : 'It works while you sleep'}
+          </span>
         </div>
         <div className="hidden md:flex items-center space-x-8 rtl:space-x-reverse">
             <Link to="/#ai" className="hover:text-green transition-colors font-semibold">{t('how_it_works')}</Link>
             <Link to="/agents" className="hover:text-gold transition-colors font-semibold">{t('ai_agents')}</Link>
-            <Link to="/academy" className="hover:text-green transition-colors font-semibold">Academy</Link>
+            <Link to="/academy" className="hover:text-green transition-colors font-semibold">
+              {isArabic ? 'أكاديمية' : 'Academy'}
+            </Link>
             <Link to="/#deposit" className="hover:text-gold transition-colors font-semibold">{t('deposit')}</Link>
             <Link to="/#footer" className="hover:text-green transition-colors font-semibold">{t('contact')}</Link>
             {session ? (
