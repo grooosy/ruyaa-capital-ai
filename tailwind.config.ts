@@ -20,6 +20,7 @@ export default {
     fontFamily: {
       manrope: ['Manrope', 'Noto Sans', 'sans-serif'],
       playfair: ['"Playfair Display"', 'serif'],
+      jakarta: ['"Plus Jakarta Sans"', 'sans-serif'],
     },
     extend: {
       colors: {
