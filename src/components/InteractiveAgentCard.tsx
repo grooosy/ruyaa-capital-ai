@@ -13,10 +13,10 @@ interface InteractiveAgentCardProps {
 }
 
 const metrics = [
-    { Icon: Clock, text: "24/7 Monitoring" },
-    { Icon: CheckCheck, text: "99.8% Uptime" },
-    { Icon: Zap, text: "Real-Time Sync" },
-    { Icon: Check, text: "Verified Execution Speed" },
+    { Icon: Clock, text: "24/7", highlight: "Monitoring" },
+    { Icon: CheckCheck, text: "99.8%", highlight: "Uptime" },
+    { Icon: Zap, text: "Real-Time", highlight: "Sync" },
+    { Icon: Check, text: "Verified", highlight: "Execution Speed" },
 ];
 
 const InteractiveAgentCard: React.FC<InteractiveAgentCardProps> = ({ type, onOpenDetails }) => {
@@ -93,17 +93,30 @@ const InteractiveAgentCard: React.FC<InteractiveAgentCardProps> = ({ type, onOpe
                     </div>
                     <div className="border-t border-white/10 pt-4">
                         <div className="grid grid-cols-2 gap-x-4 gap-y-3">
-                            {metrics.map(({ Icon, text }, index) => (
+                            {metrics.map(({ Icon, text, highlight }, index) => (
                                 <div key={index} className="flex items-center gap-2">
                                     <Icon className="w-4 h-4 flex-shrink-0" style={{ color: themeColor }} />
-                                    <span className="text-xs text-gray-400 font-medium">{text}</span>
+                                    <span className="text-xs text-gray-300 font-medium">
+                                        {text}{' '}
+                                        <span className="text-white font-semibold">{highlight}</span>
+                                    </span>
                                 </div>
                             ))}
                         </div>
                     </div>
                 </div>
-                <div className="relative text-sm font-semibold flex items-center gap-2 mt-4" style={{ color: themeColor }}>
-                    Click to flip
+                <motion.div
+                    className="relative text-sm font-medium flex items-center gap-2 mt-4 self-start py-1.5 px-4 rounded-full border border-dashed transition-all duration-300"
+                    style={{
+                        color: themeColor,
+                        borderColor: `${themeColor}40`,
+                    }}
+                    whileHover={{
+                        borderColor: `${themeColor}80`,
+                        backgroundColor: `${themeColor}10`,
+                    }}
+                >
+                    <span>Click to flip</span>
                     <motion.div
                         animate={{ x: [0, 4, 0] }}
                         transition={{
@@ -114,7 +127,7 @@ const InteractiveAgentCard: React.FC<InteractiveAgentCardProps> = ({ type, onOpe
                     >
                         <ArrowRight size={16} />
                     </motion.div>
-                </div>
+                </motion.div>
             </div>
 
             {/* Back Face */}
