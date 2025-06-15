@@ -79,3 +79,25 @@ export const addMessage = async (message: {
     };
     return result;
 };
+
+export const logAgentUsage = async (log: {
+    user_id: string;
+    agent: AgentId;
+    msg_role: 'user' | 'assistant';
+    content: string;
+}) => {
+    if (!log.agent || !log.user_id) return;
+
+    const { error } = await supabase
+        .from('agent_usage')
+        .insert({
+            user_id: log.user_id,
+            agent: log.agent,
+            msg_role: log.msg_role,
+            content: log.content,
+        });
+
+    if (error) {
+        console.error("Error logging agent usage:", error);
+    }
+};

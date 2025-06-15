@@ -9,6 +9,63 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      agent_usage: {
+        Row: {
+          agent: string | null
+          content: string | null
+          id: number
+          msg_role: string | null
+          ts: string | null
+          user_id: string | null
+        }
+        Insert: {
+          agent?: string | null
+          content?: string | null
+          id?: never
+          msg_role?: string | null
+          ts?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          agent?: string | null
+          content?: string | null
+          id?: never
+          msg_role?: string | null
+          ts?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      arbitrage_sessions: {
+        Row: {
+          amount_usd: number | null
+          created_at: string | null
+          duration_days: number | null
+          id: string
+          mode: string | null
+          status: string | null
+          user_id: string | null
+        }
+        Insert: {
+          amount_usd?: number | null
+          created_at?: string | null
+          duration_days?: number | null
+          id?: string
+          mode?: string | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          amount_usd?: number | null
+          created_at?: string | null
+          duration_days?: number | null
+          id?: string
+          mode?: string | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       chat_messages: {
         Row: {
           content: string | null
@@ -62,24 +119,75 @@ export type Database = {
         }
         Relationships: []
       }
+      deposits: {
+        Row: {
+          amount_usd: number | null
+          chain: string | null
+          created_at: string | null
+          id: string
+          status: string | null
+          tx_hash: string | null
+          user_id: string | null
+        }
+        Insert: {
+          amount_usd?: number | null
+          chain?: string | null
+          created_at?: string | null
+          id?: string
+          status?: string | null
+          tx_hash?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          amount_usd?: number | null
+          chain?: string | null
+          created_at?: string | null
+          id?: string
+          status?: string | null
+          tx_hash?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
           full_name: string | null
           id: string
+          phone: string | null
           updated_at: string | null
         }
         Insert: {
           avatar_url?: string | null
           full_name?: string | null
           id: string
+          phone?: string | null
           updated_at?: string | null
         }
         Update: {
           avatar_url?: string | null
           full_name?: string | null
           id?: string
+          phone?: string | null
           updated_at?: string | null
+        }
+        Relationships: []
+      }
+      user_features: {
+        Row: {
+          activated_at: string | null
+          feature: string
+          user_id: string
+        }
+        Insert: {
+          activated_at?: string | null
+          feature: string
+          user_id: string
+        }
+        Update: {
+          activated_at?: string | null
+          feature?: string
+          user_id?: string
         }
         Relationships: []
       }

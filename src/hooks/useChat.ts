@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useChatContext, AgentId } from '@/context/ChatContext';
 import OpenAI from 'openai';
@@ -8,7 +7,7 @@ import { fetchAiResponse, getFallbackResponse } from '@/services/aiService';
 import { supabase } from '@/integrations/supabase/client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Session } from '@supabase/supabase-js';
-import { getThread, createThread, getMessages, addMessage } from '@/services/chatService';
+import { getThread, createThread, getMessages, addMessage, logAgentUsage } from '@/services/chatService';
 
 const openRouterApiKey = import.meta.env.VITE_OPENROUTER_API_KEY;
 
@@ -88,7 +87,7 @@ export const useChat = (agentIdOverride?: AgentId) => {
     e.preventDefault();
     if (!input.trim() || isAiLoading || addMessageMutation.isPending) return;
 
-    if (!session) {
+    if (!session || !userId) {
         setAuthRequired(true);
         return;
     }
@@ -113,6 +112,14 @@ export const useChat = (agentIdOverride?: AgentId) => {
     setInput('');
 
     await addMessageMutation.mutateAsync({ thread_id: threadId, role: 'user', content: userMessageContent });
+    if (selectedAgent) {
+        logAgentUsage({
+            user_id: userId,
+            agent: selectedAgent,
+            msg_role: 'user',
+            content: userMessageContent,
+        });
+    }
     setIsAiLoading(true);
 
     try {
@@ -126,6 +133,14 @@ export const useChat = (agentIdOverride?: AgentId) => {
       }
       
       await addMessageMutation.mutateAsync({ thread_id: threadId, role: 'assistant', content: botResponseContent });
+      if (selectedAgent) {
+          logAgentUsage({
+              user_id: userId,
+              agent: selectedAgent,
+              msg_role: 'assistant',
+              content: botResponseContent,
+          });
+      }
     } catch (error) {
       console.error("Error fetching bot response:", error);
       let errorMessageContent = "Sorry, I'm having trouble connecting. Please try again later.";
