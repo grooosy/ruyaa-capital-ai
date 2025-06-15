@@ -1,4 +1,5 @@
 
+```tsx
 import React from "react";
 import { AnimatePresence } from "framer-motion";
 import InteractiveAgentCard from "@/components/InteractiveAgentCard";
@@ -20,8 +21,8 @@ const AIGrid: React.FC = () => {
   return (
     <section id="ai" className="w-full max-w-6xl mx-auto py-20 scroll-mt-20">
       <div className="text-center mb-12">
-        <h2 className="text-4xl font-bold text-white mb-4">
-          How It Works
+        <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4">
+          <span className="text-gradient-green">How It Works</span>
         </h2>
         <p className="text-xl text-gray-300 max-w-3xl mx-auto">
           Our AI ecosystem operates through specialized agents. Click on a card to explore the step-by-step process for each.
@@ -47,3 +48,4 @@ const AIGrid: React.FC = () => {
 };
 
 export default AIGrid;
+```

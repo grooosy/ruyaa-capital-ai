@@ -1,4 +1,5 @@
 
+```tsx
 import React from "react";
 
 const Navbar: React.FC = () => {
@@ -26,7 +27,7 @@ const Navbar: React.FC = () => {
           </span>
         </div>
         <div className="hidden md:flex items-center space-x-8">
-          <a href="#how" className="hover:text-green transition-colors font-semibold">How it works</a>
+          <a href="#ai" className="hover:text-green transition-colors font-semibold">How it works</a>
           <a href="#ai" className="hover:text-gold transition-colors font-semibold">AI Agents</a>
           <a href="#deposit" className="hover:text-green transition-colors font-semibold">Deposit</a>
           <a href="#footer" className="hover:text-gold transition-colors font-semibold">Contact</a>
@@ -37,3 +38,4 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
+```
