@@ -55,9 +55,9 @@ const CryptoArbitrageSection = () => {
                 <span className="text-neutral-200 font-black">{t('arbitrage_subtitle')}</span>
             </h2>
 
-            {/* Extended, real-time price line */}
-            <div className="w-full flex justify-center items-center mt-2 mb-8">
-                <div className="w-full max-w-2xl bg-[#191A1D] py-2 sm:py-3 px-4 rounded-lg border border-[#222221]/40 shadow-inner-green flex flex-col sm:flex-row items-center gap-2 sm:gap-6">
+            {/* Price line (BTC + Gold) */}
+            <div className="w-full flex justify-center items-center mt-2 mb-6">
+                <div className="w-full max-w-2xl bg-[#191A1D] py-2 sm:py-3 px-4 rounded-lg border border-[#222221]/40 shadow-inner-green flex flex-row items-center gap-6">
                     <div className="flex items-center gap-2">
                         <img src="/public/logos/btc-official.svg" alt="BTC" className="w-5 h-5" />
                         <span className="text-base sm:text-lg font-semibold text-white">BTC</span>
@@ -66,7 +66,7 @@ const CryptoArbitrageSection = () => {
                             {btcChangeFormatted}
                         </span>
                     </div>
-                    <span className="hidden sm:block h-5 w-[2px] bg-[#232332] rounded mx-4" />
+                    <span className="h-5 w-[2px] bg-[#232332] rounded mx-4" />
                     <div className="flex items-center gap-2">
                         <img src="/public/logos/gold-bars.svg" alt="Gold" className="w-5 h-5" />
                         <span className="text-base sm:text-lg font-semibold text-white">Gold</span>
@@ -75,15 +75,15 @@ const CryptoArbitrageSection = () => {
                             {goldChangeFormatted}
                         </span>
                     </div>
-                    {/* Decorative line extends background visually underneath... */}
                 </div>
             </div>
 
-            <p className="text-lg text-neutral-300 mb-10 max-w-3xl mx-auto">
+            <p className="text-lg text-neutral-300 mb-8 max-w-3xl mx-auto">
                 {t('arbitrage_desc')}
             </p>
             
-            <div className="w-full max-w-2xl mx-auto mb-8">
+            {/* Single, modern ticker below */}
+            <div className="w-full max-w-2xl mx-auto mb-8 px-0">
                 <ArbitrageTicker />
             </div>
 
