@@ -22,6 +22,15 @@ const DUMMY_DATA: TickerItem[] = [
 
 const TickerItemComponent: React.FC<{ item: TickerItem }> = ({ item }) => {
   const isPositive = item.change >= 0;
+  // Determine max/min fraction digits (patch for RangeError)
+  let maximumFractionDigits = (item.pair.includes('BTC') || item.pair.includes('ETH')) ? 5 : 2;
+  let minimumFractionDigits = item.price < 1 ? 5 : 2;
+
+  // Ensure valid range required by toLocaleString (maximum >= minimum)
+  if (maximumFractionDigits < minimumFractionDigits) {
+    maximumFractionDigits = minimumFractionDigits;
+  }
+
   return (
     <div className="flex items-center gap-4 min-w-[160px] px-4 py-1 text-base">
       {/* Pair */}
@@ -29,8 +38,8 @@ const TickerItemComponent: React.FC<{ item: TickerItem }> = ({ item }) => {
       {/* Price */}
       <span className="font-semibold text-white">
         {item.price.toLocaleString(undefined, {
-          maximumFractionDigits: item.pair.includes('BTC') || item.pair.includes('ETH') ? 5 : 2,
-          minimumFractionDigits: item.price < 1 ? 5 : 2,
+          maximumFractionDigits,
+          minimumFractionDigits,
         })}
       </span>
       {/* Change */}
@@ -92,3 +101,4 @@ const ArbitrageTicker: React.FC = () => {
 };
 
 export default ArbitrageTicker;
+
