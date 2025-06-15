@@ -53,7 +53,7 @@ const mt4mt5Timeline: TimelineStepData[] = [
   },
 ];
 
-const cryptoTimeline: TimelineStepData[] = [
+export const cryptoArbitrageTimeline: TimelineStepData[] = [
   {
     icon: Layers,
     title: "Cross-Exchange Scan",
@@ -86,6 +86,39 @@ const cryptoTimeline: TimelineStepData[] = [
   },
 ];
 
+const cryptoTimeline: TimelineStepData[] = [
+  {
+    icon: ScanSearch,
+    title: "On-Chain Analysis",
+    desc: "AI analyzes blockchain data for signals."
+  },
+  {
+    icon: Send,
+    title: "Signal Generation",
+    desc: "Identifies a high-potential token or trend."
+  },
+  {
+    icon: CircleDollarSign,
+    title: "Smart Entry",
+    desc: "Executes trade via decentralized exchanges."
+  },
+  {
+    icon: Clock,
+    title: "Portfolio Monitoring",
+    desc: "Tracks assets across wallets and protocols."
+  },
+  {
+    icon: TrendingUp,
+    title: "Dynamic Exit",
+    desc: "Sells based on profit targets or reversals."
+  },
+  {
+    icon: ShieldCheck,
+    title: "Secure Settlement",
+    desc: "Funds secured in your non-custodial wallet."
+  }
+];
+
 export const agentData = {
   mt: {
     title: "For MT4 / MT5",
@@ -94,8 +127,8 @@ export const agentData = {
     theme: "green"
   },
   crypto: {
-    title: "For Crypto Arbitrage",
-    description: "Capitalize on market inefficiencies. Our crypto arbitrage bot scans hundreds of pairs across multiple exchanges to find and execute profitable trades.",
+    title: "For Crypto Trading",
+    description: "Capitalize on market movements. Our crypto agents analyze on-chain data and market trends to execute trades on decentralized exchanges.",
     timeline: cryptoTimeline,
     theme: "gold"
   }

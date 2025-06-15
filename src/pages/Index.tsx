@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import LogoCloud from "@/components/LogoCloud";
 import PathModal from "@/components/PathModal";
 import AIGrid from "@/components/AIGrid";
+import CryptoArbitrageSection from "@/components/CryptoArbitrageSection";
 
 const Index = () => {
   const [modalOpen, setModalOpen] = React.useState(false);
@@ -55,6 +56,9 @@ const Index = () => {
 
         {/* AI Agents Showcase */}
         <AIGrid />
+
+        {/* Crypto Arbitrage Section */}
+        <CryptoArbitrageSection />
 
       </main>
 
