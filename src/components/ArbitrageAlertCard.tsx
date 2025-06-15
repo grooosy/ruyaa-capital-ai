@@ -29,9 +29,9 @@ const ArbitrageAlertCard: React.FC<ArbitrageAlertCardProps> = ({ show, onClose, 
           exit={{ opacity: 0, y: 50, scale: 0.95, transition: { duration: 0.2 } }}
           className="w-full max-w-sm"
         >
-          <Card className="bg-gradient-to-b from-[#191B17] via-[#222116] to-[#1B1C19] border border-[#3C461C]/40 shadow-neon-bright shadow-lg text-white h-full flex flex-col !rounded-2xl overflow-hidden">
+          <Card className="bg-gradient-to-b from-[#16181a] via-[#191B17] to-[#19191B] border border-[#23261b]/60 shadow-neon-bright shadow-lg text-white h-full flex flex-col !rounded-2xl overflow-hidden">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-base font-semibold text-[#EED584]">
+              <CardTitle className="flex items-center gap-2 text-base font-semibold text-yellow-200">
                 <Zap className="text-green h-5 w-5" />
                 <span>New Arbitrage Opportunity</span>
               </CardTitle>
@@ -44,17 +44,47 @@ const ArbitrageAlertCard: React.FC<ArbitrageAlertCardProps> = ({ show, onClose, 
                   <p className="text-lg font-bold text-green">{data.potential}</p>
                 </div>
               </div>
-              <div className="flex items-center justify-between gap-2 p-3 rounded-md bg-[#181a14] border border-[#212413]/70">
+              <div className="flex items-center justify-between gap-2 p-3 rounded-md bg-[#181a14] border border-[#22251d]/70">
                 <div className="text-center">
                   <p className="text-xs text-[#C9C6A6]">BUY ON</p>
-                  <p className="font-semibold text-[#D1BD4D]">{data.buyExchange}</p>
-                  <p className="font-bold text-lg text-neutral-100">{data.buyPrice}</p>
+                  {/* Now: Kraken appears green, Binance yellow below */}
+                  {data.buyExchange === 'Kraken' ? (
+                    <>
+                      <p className="font-semibold text-[#00FF9D]">Kraken</p>
+                      <p className="font-bold text-lg text-neutral-100">{data.buyPrice}</p>
+                    </>
+                  ) : data.buyExchange === 'Binance' ? (
+                    <>
+                      <p className="font-semibold text-[#EED584]">Binance</p>
+                      <p className="font-bold text-lg text-neutral-100">{data.buyPrice}</p>
+                    </>
+                  ) : (
+                    <>
+                      <p className="font-semibold text-neutral-200">{data.buyExchange}</p>
+                      <p className="font-bold text-lg text-neutral-100">{data.buyPrice}</p>
+                    </>
+                  )}
                 </div>
                 <ArrowRight className="text-gray-500 shrink-0" />
                 <div className="text-center">
                   <p className="text-xs text-[#C9C6A6]">SELL ON</p>
-                  <p className="font-semibold text-[#86F6B8]">{data.sellExchange}</p>
-                  <p className="font-bold text-lg text-neutral-100">{data.sellPrice}</p>
+                  {/* Now: Binance appears yellow, Kraken green below */}
+                  {data.sellExchange === 'Binance' ? (
+                    <>
+                      <p className="font-semibold text-[#EED584]">Binance</p>
+                      <p className="font-bold text-lg text-neutral-100">{data.sellPrice}</p>
+                    </>
+                  ) : data.sellExchange === 'Kraken' ? (
+                    <>
+                      <p className="font-semibold text-[#00FF9D]">Kraken</p>
+                      <p className="font-bold text-lg text-neutral-100">{data.sellPrice}</p>
+                    </>
+                  ) : (
+                    <>
+                      <p className="font-semibold text-neutral-200">{data.sellExchange}</p>
+                      <p className="font-bold text-lg text-neutral-100">{data.sellPrice}</p>
+                    </>
+                  )}
                 </div>
               </div>
               <div className="flex items-center gap-2 text-sm text-neutral-300">
@@ -64,7 +94,7 @@ const ArbitrageAlertCard: React.FC<ArbitrageAlertCardProps> = ({ show, onClose, 
             </CardContent>
             <CardFooter className="flex justify-end gap-2">
               <Button variant="ghost" onClick={onClose} className="text-gray-400 hover:text-white hover:bg-white/10">Dismiss</Button>
-              <Button className="bg-gradient-to-r from-[#00FF9D] to-[#CFA100] text-black font-bold hover:from-green-400 hover:to-gold/90 transition-all">
+              <Button className="bg-gradient-to-r from-[#00FF9D] to-[#EED584] text-black font-bold hover:from-green-400 hover:to-gold/90 transition-all">
                 <Zap className="mr-2 h-4 w-4" /> Execute
               </Button>
             </CardFooter>
