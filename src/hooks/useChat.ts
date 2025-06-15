@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useContext } from 'react';
 import { useChatContext, AgentId } from '@/context/ChatContext';
 import OpenAI from 'openai';
@@ -6,21 +5,22 @@ import OpenAI from 'openai';
 // ==================================================================
 // IMPORTANT: SECURITY & SETUP
 // ==================================================================
-// To use the OpenAI API, you need to set your API key as an
+// To use the OpenRouter API, you need to set your API key as an
 // environment variable in your Lovable project settings.
 //
 // 1. Go to Project Settings > Environment Variables.
-// 2. Create a new variable with the name VITE_OPENAI_API_KEY
-//    and your OpenAI API key as the value.
+// 2. Create a new variable with the name VITE_OPENROUTER_API_KEY
+//    and your OpenRouter API key as the value.
 //
 // NOTE: This key is still exposed on the client-side because this is
 // a frontend-only application. For a production environment, it is
 // strongly recommended to use a backend proxy to protect your key.
 // ==================================================================
-const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
+const openRouterApiKey = import.meta.env.VITE_OPENROUTER_API_KEY;
 
-const openai = new OpenAI({
-  apiKey: apiKey || "dummy-key", // The check in handleSubmit prevents usage of this dummy key.
+const openrouter = new OpenAI({
+  apiKey: openRouterApiKey || "dummy-key", // The check in handleSubmit prevents usage of this dummy key.
+  baseURL: "https://openrouter.ai/api/v1",
   dangerouslyAllowBrowser: true,
 });
 
@@ -73,11 +73,11 @@ export const useChat = (agentIdOverride?: AgentId) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
 
-    if (!apiKey && selectedAgent === 'mt4') {
+    if (!openRouterApiKey) {
         const errorMessage: Message = {
             id: Date.now().toString(),
             role: 'assistant',
-            content: "The OpenAI API key is not configured. Please set the VITE_OPENAI_API_KEY in your project's environment variables."
+            content: "The OpenRouter API key is not configured. Please set the VITE_OPENROUTER_API_KEY in your project's environment variables."
         };
         setMessages(prev => [...prev, errorMessage]);
         return;
@@ -93,19 +93,24 @@ export const useChat = (agentIdOverride?: AgentId) => {
     try {
       let botResponseContent: string;
 
-      if (selectedAgent === 'mt4') {
+      if (selectedAgent) {
         const modelMap = {
-            mt4: "g-684ea3edaa9081919a8dbd9ac4b450ad-ruyaa-mt4-mt5-agent",
-            crypto: "gpt-4-turbo-preview", // Placeholder
-            arbitrage: "gpt-4-turbo-preview", // Placeholder
+            mt4: "openai/gpt-4o-mini",
+            crypto: "openai/gpt-4o-mini",
+            arbitrage: "openai/gpt-4o-mini",
         };
+        
+        const systemPrompt = `You are Ruyaa’s ${selectedAgent.toUpperCase()} Agent. You are an expert in your field. Provide helpful and accurate information.`;
         
         // OpenAI API expects messages without the 'id' field
         const apiMessages = newMessages.map(({ id, ...rest }) => rest);
 
-        const completion = await openai.chat.completions.create({
-          model: modelMap[selectedAgent] || 'g-684ea3edaa9081919a8dbd9ac4b450ad-ruyaa-mt4-mt5-agent',
-          messages: apiMessages,
+        const completion = await openrouter.chat.completions.create({
+          model: modelMap[selectedAgent] || 'openai/gpt-4o-mini',
+          messages: [
+            { role: "system", content: systemPrompt },
+            ...apiMessages
+          ],
           // I've commented out the function calling for now as the schema wasn't provided.
           // functions: [ /* your register_user schema */ ],
           // function_call: "auto",
@@ -129,7 +134,7 @@ export const useChat = (agentIdOverride?: AgentId) => {
       console.error("Error fetching bot response:", error);
       let errorMessageContent = "Sorry, I'm having trouble connecting. Please try again later.";
       if (error instanceof OpenAI.APIError) {
-        errorMessageContent = `OpenAI API Error: ${error.status} ${error.type} - ${error.message}`;
+        errorMessageContent = `OpenRouter API Error: ${error.status} ${error.type} - ${error.message}`;
       }
       const errorMessage: Message = { id: (Date.now() + 1).toString(), role: 'assistant', content: errorMessageContent };
       setMessages(prev => [...prev, errorMessage]);
