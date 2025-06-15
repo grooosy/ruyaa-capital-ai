@@ -6,8 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Loader2, Wallet, LogIn, UserPlus } from "lucide-react";
 import { Toaster } from "@/components/ui/toaster";
-import { useWallet, useWalletContext } from "@solana/wallet-adapter-react";
+import { useWallet } from "@solana/wallet-adapter-react";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
+// Removed: import { useWalletContext } from "@solana/wallet-adapter-react";
 
 const GOOGLE_ICON = (
   <svg width="20" height="20" viewBox="0 0 20 20" className="mr-2" aria-hidden="true">
@@ -99,11 +100,14 @@ const AuthCard: React.FC = () => {
         // Simulate "sign in" by treating publicKey as a unique identifier.
         // Upsert user to wallets table with chain = 'SOL'
         // Note: This just lets user "proceed" to dashboard, but does NOT create a Supabase auth session.
-        const { error } = await supabase.from("wallets").upsert({
-          user_id: publicKey.toBase58(),
-          address: publicKey.toBase58(),
-          chain: "SOL"
-        }, { onConflict: ['address'] });
+        const { error } = await supabase.from("wallets").upsert(
+          {
+            user_id: publicKey.toBase58(),
+            address: publicKey.toBase58(),
+            chain: "SOL"
+          },
+          { onConflict: "user_id,chain,address" }
+        );
         if (error) throw error;
         // Store session locally (simulate) and proceed
         sessionStorage.setItem("wallet_login", publicKey.toBase58());
