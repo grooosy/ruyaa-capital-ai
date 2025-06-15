@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Link } from "react-router-dom";
 import {
@@ -6,15 +7,17 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useTranslation } from "react-i18next";
-import { Button } from "./ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { Session } from "@supabase/supabase-js";
 import LangToggle from "./LangToggle";
+import { useProfile } from "@/hooks/useProfile";
+import UserMenu from "./UserMenu";
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = React.useState(false);
   const { t } = useTranslation();
   const [session, setSession] = React.useState<Session | null>(null);
+  const { data: profile } = useProfile(session);
 
   React.useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -27,10 +30,6 @@ const Navbar: React.FC = () => {
 
     return () => subscription.unsubscribe();
   }, []);
-
-  const handleLogout = async () => {
-      await supabase.auth.signOut();
-  };
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -77,7 +76,7 @@ const Navbar: React.FC = () => {
             <Link to="/#deposit" className="hover:text-green transition-colors font-semibold">{t('deposit')}</Link>
             <Link to="/#footer" className="hover:text-gold transition-colors font-semibold">{t('contact')}</Link>
             {session ? (
-              <Button onClick={handleLogout} variant="ghost" className="hover:bg-transparent hover:text-gold transition-colors font-semibold p-0">{t('logout')}</Button>
+              <UserMenu fullName={profile?.full_name} avatarUrl={profile?.avatar_url} />
             ) : (
               <Link to="/auth" className="hover:text-gold transition-colors font-semibold">{t('login')}</Link>
             )}
