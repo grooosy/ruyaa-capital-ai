@@ -5,6 +5,8 @@ import ArbitrageTicker from './ArbitrageTicker';
 import ArbitrageVisual from './ArbitrageVisual';
 import ArbitrageAlertCard from './ArbitrageAlertCard';
 import { useTranslation } from 'react-i18next';
+import { useChatContext } from '@/context/ChatContext';
+import { ArrowRight } from 'lucide-react';
 
 const DUMMY_ARBITRAGE_DATA = {
     pair: 'ETH/USDT',
@@ -19,9 +21,14 @@ const DUMMY_ARBITRAGE_DATA = {
 const CryptoArbitrageSection = () => {
     const [showAlert, setShowAlert] = useState(true);
     const { t } = useTranslation();
+    const { openChat } = useChatContext();
 
     const handleCloseAlert = () => {
         setShowAlert(false);
+    };
+
+    const handleTryNow = () => {
+        openChat('arbitrage');
     };
 
     return (
@@ -49,6 +56,16 @@ const CryptoArbitrageSection = () => {
                     data={DUMMY_ARBITRAGE_DATA}
                 />
             </div>
+            
+            <motion.button
+                onClick={handleTryNow}
+                className="mt-12 bg-green text-dark-charcoal px-8 py-4 rounded-xl text-lg font-bold shadow-green-glow hover:bg-green/90 transition-all duration-300 tracking-wide inline-flex items-center gap-2"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+            >
+                {t('try_now_arbitrage')}
+                <ArrowRight className="w-5 h-5 rtl:rotate-180" />
+            </motion.button>
         </motion.section>
     );
 };
