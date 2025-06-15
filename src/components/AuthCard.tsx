@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Loader2, Wallet, LogIn, UserPlus, Mail } from "lucide-react";
+import { Loader2, Wallet, LogIn, UserPlus } from "lucide-react";
 import { Toaster } from "@/components/ui/toaster";
 
 const GOOGLE_ICON = (
@@ -28,20 +28,17 @@ const AuthCard: React.FC = () => {
   const [err, setErr] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  // For redirect after OAuth or email flow
+  // Use Supabase onAuthStateChange subscription only
   useEffect(() => {
-    // Ensures redirect from OAuth works on page load (both sign in & up)
-    supabase.auth.getSessionFromUrl({ storeSession: true })
-      .then(({ data, error }) => {
-        if (data?.session) navigate("/dashboard");
-      });
-    const { data: sub } = supabase.auth.onAuthStateChange((_, session) => {
-      if (session) navigate("/dashboard");
+    // Set up listener to redirect when we have a valid session
+    const { subscription } = supabase.auth.onAuthStateChange((_, session) => {
+      if (session) {
+        navigate("/dashboard");
+      }
     });
-    return () => { sub?.unsubscribe(); }
+    return () => { subscription.unsubscribe(); };
   }, [navigate]);
 
-  // Handle sign in/up
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setErr(null);
@@ -55,7 +52,7 @@ const AuthCard: React.FC = () => {
       if (activeTab === "signIn") {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) setErr(error.message);
-        // redirect will be handled by authState 
+        // redirect is handled by authState
       } else {
         const redirectTo = `${window.location.origin}/dashboard`;
         const { error } = await supabase.auth.signUp({
@@ -72,7 +69,6 @@ const AuthCard: React.FC = () => {
     }
   }
 
-  // Google sign in
   async function handleGoogle() {
     setErr(null);
     setLoading(true);
@@ -87,20 +83,20 @@ const AuthCard: React.FC = () => {
     }
   }
 
-  // Solana wallet sign in via Supabase OAuth
-  async function handleWalletAuth() {
-    setErr(null);
-    setLoading(true);
-    try {
-      await supabase.auth.signInWithOAuth({
-        provider: "solana",
-        options: { redirectTo: `${window.location.origin}/dashboard` },
-      });
-    } catch (err: any) {
-      setErr(err?.message || "Solana wallet sign-in failed");
-      setLoading(false);
-    }
-  }
+  // Solana: Disabled for now -- Supabase Auth does not support "solana" as OAuth provider
+  // async function handleWalletAuth() {
+  //   setErr(null);
+  //   setLoading(true);
+  //   try {
+  //     await supabase.auth.signInWithOAuth({
+  //       provider: "solana" as any, // Not officially supported
+  //       options: { redirectTo: `${window.location.origin}/dashboard` },
+  //     });
+  //   } catch (err: any) {
+  //     setErr(err?.message || "Solana wallet sign-in failed");
+  //     setLoading(false);
+  //   }
+  // }
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen w-full bg-[#0A0A0A] font-spacegrotesk">
@@ -178,14 +174,16 @@ const AuthCard: React.FC = () => {
           <span className="mx-4 text-neutral-500 text-xs uppercase tracking-widest">OR CONNECT WALLET</span>
           <div className="flex-grow border-t border-neutral-700"></div>
         </div>
+        {/* Solana wallet connect is not supported via Supabase Auth. Placeholder only: */}
         <Button
           variant="outline"
           className="w-full py-3 rounded-full border-2 border-green-400 text-green-400 font-semibold text-lg hover:bg-green-400/10 hover:text-white transition flex items-center justify-center"
-          onClick={handleWalletAuth}
-          disabled={loading}
+          // onClick={handleWalletAuth}
+          title="Solana wallet auth is not supported in Supabase Auth (yet)."
+          disabled={true}
         >
           <Wallet className="w-5 h-5 mr-2" />
-          Connect Wallet
+          Connect Wallet (Not Supported)
         </Button>
         <Toaster />
       </div>
