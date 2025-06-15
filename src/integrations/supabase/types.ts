@@ -9,64 +9,58 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      conversations: {
+      chat_messages: {
         Row: {
-          agent: Database["public"]["Enums"]["agent_type"]
+          content: string | null
           created_at: string
-          id: string
-          title: string | null
-          updated_at: string
-          user_id: string
+          id: number
+          role: string
+          thread_id: string
         }
         Insert: {
-          agent: Database["public"]["Enums"]["agent_type"]
+          content?: string | null
           created_at?: string
-          id?: string
-          title?: string | null
-          updated_at?: string
-          user_id: string
+          id?: never
+          role: string
+          thread_id: string
         }
         Update: {
-          agent?: Database["public"]["Enums"]["agent_type"]
+          content?: string | null
           created_at?: string
-          id?: string
-          title?: string | null
-          updated_at?: string
-          user_id?: string
-        }
-        Relationships: []
-      }
-      messages: {
-        Row: {
-          content: string
-          conversation_id: string
-          created_at: string
-          id: string
-          role: Database["public"]["Enums"]["message_role"]
-        }
-        Insert: {
-          content: string
-          conversation_id: string
-          created_at?: string
-          id?: string
-          role: Database["public"]["Enums"]["message_role"]
-        }
-        Update: {
-          content?: string
-          conversation_id?: string
-          created_at?: string
-          id?: string
-          role?: Database["public"]["Enums"]["message_role"]
+          id?: never
+          role?: string
+          thread_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "messages_conversation_id_fkey"
-            columns: ["conversation_id"]
+            foreignKeyName: "chat_messages_thread_id_fkey"
+            columns: ["thread_id"]
             isOneToOne: false
-            referencedRelation: "conversations"
+            referencedRelation: "chat_threads"
             referencedColumns: ["id"]
           },
         ]
+      }
+      chat_threads: {
+        Row: {
+          agent: string
+          created_at: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          agent: string
+          created_at?: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          agent?: string
+          created_at?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: []
       }
       profiles: {
         Row: {
@@ -97,8 +91,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      agent_type: "mt4" | "crypto"
-      message_role: "user" | "assistant"
+      [_ in never]: never
     }
     CompositeTypes: {
       [_ in never]: never
@@ -213,9 +206,6 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {
-      agent_type: ["mt4", "crypto"],
-      message_role: ["user", "assistant"],
-    },
+    Enums: {},
   },
 } as const

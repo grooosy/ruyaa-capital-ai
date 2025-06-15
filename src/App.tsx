@@ -35,7 +35,7 @@ const App = () => {
               <Route path="/" element={<Index />} />
               <Route path="/auth" element={<AuthPage />} />
               <Route path="/agents" element={<AgentsPage />} />
-              <Route path="/agents/mt4" element={<MT4Page />} />
+              <Route path="/agents/mt4mt5" element={<MT4Page />} />
               <Route path="/agents/crypto" element={<CryptoPage />} />
               <Route path="/agents/arbitrage" element={<ArbitragePage />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

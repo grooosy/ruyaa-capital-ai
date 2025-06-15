@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import AgentSelectionCard from '@/components/AgentSelectionCard';
@@ -12,11 +11,11 @@ const AgentsPage: React.FC = () => {
 
   const agents: {id: AgentId, title: string, description: string, logoSrc: string, href?: string}[] = [
     {
-      id: 'mt4',
+      id: 'mt4mt5',
       title: t('agent_mt4_title'),
       description: t('agent_mt4_desc'),
       logoSrc: '/icons/gold-bars.svg',
-      href: '/agents/mt4',
+      href: '/agents/mt4mt5',
     },
     {
       id: 'crypto',

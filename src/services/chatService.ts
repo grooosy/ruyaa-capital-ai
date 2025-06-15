@@ -1,67 +1,70 @@
+
 import { supabase } from '@/integrations/supabase/client';
 import { AgentId } from '@/context/ChatContext';
-import { getInitialMessage } from '@/config/agentConfig';
 
-export const getConversation = async (userId: string, agentId: AgentId) => {
-    if (!agentId || (agentId !== 'mt4' && agentId !== 'crypto')) {
-        return null;
-    }
+export const getThread = async (userId: string, agentId: AgentId) => {
+    if (!agentId || !userId) return null;
+
     const { data, error } = await supabase
-        .from('conversations')
+        .from('chat_threads')
         .select('*')
         .eq('user_id', userId)
         .eq('agent', agentId)
         .maybeSingle();
 
-    if (error) throw error;
+    if (error) {
+        console.error("Error getting thread:", error);
+        throw error;
+    }
     return data;
 };
 
-export const createConversation = async (userId: string, agentId: AgentId) => {
-    if (!agentId || (agentId !== 'mt4' && agentId !== 'crypto')) {
-        throw new Error("A valid agent ID ('mt4' or 'crypto') is required to create a conversation");
+export const createThread = async (userId: string, agentId: AgentId) => {
+    if (!agentId || !userId) {
+        throw new Error("A valid user ID and agent ID are required to create a thread.");
     }
     const { data, error } = await supabase
-        .from('conversations')
-        .insert({ user_id: userId, agent: agentId, title: `${agentId} conversation` })
+        .from('chat_threads')
+        .insert({ user_id: userId, agent: agentId })
         .select()
         .single();
 
-    if (error) throw error;
-
-    // Also add the initial message for the new conversation
-    const initialMessage = getInitialMessage(agentId);
-    await addMessage({
-        conversation_id: data.id,
-        role: initialMessage.role,
-        content: initialMessage.content,
-    });
+    if (error) {
+        console.error("Error creating thread:", error);
+        throw error;
+    }
 
     return data;
 };
 
-export const getMessages = async (conversationId: string) => {
+export const getMessages = async (threadId: string) => {
     const { data, error } = await supabase
-        .from('messages')
+        .from('chat_messages')
         .select('*')
-        .eq('conversation_id', conversationId)
+        .eq('thread_id', threadId)
         .order('created_at', { ascending: true });
 
-    if (error) throw error;
-    return data.map(msg => ({...msg, id: msg.id.toString()}));
+    if (error) {
+        console.error("Error getting messages:", error);
+        throw error;
+    }
+    return data.map(msg => ({...msg, id: msg.id.toString(), content: msg.content ?? ''}));
 };
 
 export const addMessage = async (message: {
-    conversation_id: string;
+    thread_id: string;
     role: 'user' | 'assistant';
     content: string;
 }) => {
     const { data, error } = await supabase
-        .from('messages')
+        .from('chat_messages')
         .insert(message)
         .select()
         .single();
 
-    if (error) throw error;
-    return {...data, id: data.id.toString()};
+    if (error) {
+        console.error("Error adding message:", error);
+        throw error;
+    }
+    return {...data, id: data.id.toString(), content: data.content ?? ''};
 };

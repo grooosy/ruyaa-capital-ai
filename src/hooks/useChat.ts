@@ -8,14 +8,17 @@ import { fetchAiResponse, getFallbackResponse } from '@/services/aiService';
 import { supabase } from '@/integrations/supabase/client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Session } from '@supabase/supabase-js';
-import { getConversation, createConversation, getMessages, addMessage } from '@/services/chatService';
+import { getThread, createThread, getMessages, addMessage } from '@/services/chatService';
 
 const openRouterApiKey = import.meta.env.VITE_OPENROUTER_API_KEY;
 
 export const useChat = (agentIdOverride?: AgentId) => {
   const { selectedAgent: agentFromContext } = useChatContext();
-  const selectedAgent = agentIdOverride !== undefined ? agentIdOverride : agentFromContext;
   const queryClient = useQueryClient();
+  
+  const selectedAgentNonMapped = agentIdOverride !== undefined ? agentIdOverride : agentFromContext;
+  const selectedAgent = selectedAgentNonMapped === 'mt4' ? 'mt4mt5' : selectedAgentNonMapped;
+
 
   const [session, setSession] = useState<Session | null>(null);
   const [authRequired, setAuthRequired] = useState(false);
@@ -41,27 +44,27 @@ export const useChat = (agentIdOverride?: AgentId) => {
 
   const userId = session?.user?.id;
 
-  const { data: conversation, isLoading: isLoadingConversation } = useQuery({
-      queryKey: ['conversation', userId, selectedAgent],
+  const { data: thread, isLoading: isLoadingThread } = useQuery({
+      queryKey: ['thread', userId, selectedAgent],
       queryFn: async () => {
           if (!userId || !selectedAgent) return null;
-          let conv = await getConversation(userId, selectedAgent);
-          if (!conv) {
-              conv = await createConversation(userId, selectedAgent);
-              queryClient.invalidateQueries({queryKey: ['messages', conv.id]});
+          let thr = await getThread(userId, selectedAgent);
+          if (!thr) {
+              thr = await createThread(userId, selectedAgent);
+              queryClient.invalidateQueries({queryKey: ['messages', thr.id]});
           }
-          return conv;
+          return thr;
       },
-      enabled: !!userId && !!selectedAgent && (selectedAgent === 'mt4' || selectedAgent === 'crypto' || selectedAgent === 'arbitrage'),
+      enabled: !!userId && !!selectedAgent,
       staleTime: Infinity,
   });
 
-  const conversationId = conversation?.id;
+  const threadId = thread?.id;
 
   const { data: messages = [], isLoading: isLoadingMessages } = useQuery<Message[]>({
-      queryKey: ['messages', conversationId],
-      queryFn: () => getMessages(conversationId!),
-      enabled: !!conversationId,
+      queryKey: ['messages', threadId],
+      queryFn: () => getMessages(threadId!),
+      enabled: !!threadId,
       select: (data) => {
           if (!data || data.length === 0) {
               return [getInitialMessage(selectedAgent)];
@@ -73,7 +76,7 @@ export const useChat = (agentIdOverride?: AgentId) => {
   const addMessageMutation = useMutation({
     mutationFn: addMessage,
     onSuccess: () => {
-        queryClient.invalidateQueries({queryKey: ['messages', conversationId]});
+        queryClient.invalidateQueries({queryKey: ['messages', threadId]});
     },
   });
 
@@ -90,8 +93,8 @@ export const useChat = (agentIdOverride?: AgentId) => {
         return;
     }
     
-    if (!conversationId) {
-        console.error("Conversation not ready or supported for this agent.");
+    if (!threadId) {
+        console.error("Thread not ready or supported for this agent.");
         // Maybe show a toast to the user
         return;
     }
@@ -102,18 +105,18 @@ export const useChat = (agentIdOverride?: AgentId) => {
             role: 'assistant',
             content: "The OpenRouter API key is not configured. Please set the VITE_OPENROUTER_API_KEY in your project's environment variables."
         };
-        addMessageMutation.mutate({ ...errorMessage, conversation_id: conversationId });
+        addMessageMutation.mutate({ ...errorMessage, thread_id: threadId });
         return;
     }
 
     const userMessageContent = input;
     setInput('');
 
-    await addMessageMutation.mutateAsync({ conversation_id: conversationId, role: 'user', content: userMessageContent });
+    await addMessageMutation.mutateAsync({ thread_id: threadId, role: 'user', content: userMessageContent });
     setIsAiLoading(true);
 
     try {
-      const currentMessages = await queryClient.fetchQuery<Message[]>({queryKey: ['messages', conversationId]});
+      const currentMessages = await queryClient.fetchQuery<Message[]>({queryKey: ['messages', threadId]});
       let botResponseContent: string;
 
       if (selectedAgent) {
@@ -122,14 +125,14 @@ export const useChat = (agentIdOverride?: AgentId) => {
         botResponseContent = await getFallbackResponse(userMessageContent);
       }
       
-      await addMessageMutation.mutateAsync({ conversation_id: conversationId, role: 'assistant', content: botResponseContent });
+      await addMessageMutation.mutateAsync({ thread_id: threadId, role: 'assistant', content: botResponseContent });
     } catch (error) {
       console.error("Error fetching bot response:", error);
       let errorMessageContent = "Sorry, I'm having trouble connecting. Please try again later.";
       if (error instanceof OpenAI.APIError) {
         errorMessageContent = `OpenRouter API Error: ${error.status} ${error.type} - ${error.message}`;
       }
-      addMessageMutation.mutate({ conversation_id: conversationId, role: 'assistant', content: errorMessageContent });
+      addMessageMutation.mutate({ thread_id: threadId, role: 'assistant', content: errorMessageContent });
     } finally {
       setIsAiLoading(false);
     }
@@ -154,7 +157,7 @@ export const useChat = (agentIdOverride?: AgentId) => {
   return {
     messages,
     input,
-    isLoading: isLoadingConversation || isLoadingMessages || isAiLoading || addMessageMutation.isPending,
+    isLoading: isLoadingThread || isLoadingMessages || isAiLoading || addMessageMutation.isPending,
     handleInputChange,
     handleSubmit,
     handleVoiceRecording,
