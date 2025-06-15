@@ -73,8 +73,9 @@ const Navbar: React.FC = () => {
         <div className="hidden md:flex items-center space-x-8 rtl:space-x-reverse">
             <Link to="/#ai" className="hover:text-green transition-colors font-semibold">{t('how_it_works')}</Link>
             <Link to="/agents" className="hover:text-gold transition-colors font-semibold">{t('ai_agents')}</Link>
-            <Link to="/#deposit" className="hover:text-green transition-colors font-semibold">{t('deposit')}</Link>
-            <Link to="/#footer" className="hover:text-gold transition-colors font-semibold">{t('contact')}</Link>
+            <Link to="/academy" className="hover:text-green transition-colors font-semibold">Academy</Link>
+            <Link to="/#deposit" className="hover:text-gold transition-colors font-semibold">{t('deposit')}</Link>
+            <Link to="/#footer" className="hover:text-green transition-colors font-semibold">{t('contact')}</Link>
             {session ? (
               <UserMenu fullName={profile?.full_name} avatarUrl={profile?.avatar_url} />
             ) : (
