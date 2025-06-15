@@ -16,7 +16,7 @@ const agents: {id: AgentId, title: string, description: string, logoSrc: string,
   {
     id: 'crypto',
     title: 'Crypto Trading Agent',
-    description: 'BingX • MEXC • WEEX',
+    description: 'WEEX Exchange',
     logoSrc: '/logos/btc-official.svg',
     href: '/agents/crypto',
   },

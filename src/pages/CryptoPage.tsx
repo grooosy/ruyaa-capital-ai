@@ -16,7 +16,7 @@ const CryptoPage: React.FC = () => {
               Crypto Trading AI Agent
             </h1>
             <p className="text-xl text-gray-300">
-              Guided setup on BingX, MEXC, or WEEX and unlock Ruyaa AI signals.
+              Guided setup on WEEX and unlock Ruyaa AI signals.
             </p>
           </div>
           <AgentChat agentId="crypto" />
