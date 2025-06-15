@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Zap, DollarSign } from 'lucide-react';
@@ -38,7 +39,7 @@ const ArbitrageVisual = () => {
     const reversePath = "M 420 250 Q 250 400 80 250";
 
     return (
-        <div className="w-full max-w-xl aspect-square relative bg-gray-950/20 border border-green/10 rounded-2xl p-4 sm:p-8 overflow-hidden bg-grid-pattern">
+        <div className="w-full max-w-xl aspect-square relative p-4 sm:p-8">
             <div className="w-full h-full relative">
                 {/* Exchanges */}
                 <ExchangeNode name="Kraken" position="left-0 top-1/2 -translate-y-1/2" isBuy />
