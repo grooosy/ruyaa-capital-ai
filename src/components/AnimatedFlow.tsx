@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Key, Scale, Download, Bot } from 'lucide-react';
@@ -28,7 +27,7 @@ const itemVariants = {
     scale: 1,
     transition: {
       duration: 0.5,
-      ease: [0.4, 0.0, 0.2, 1],
+      ease: "easeInOut",
     },
   },
 };
