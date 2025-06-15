@@ -15,6 +15,7 @@ import CourseProgress from "@/components/CourseProgress";
 import { useCourseData, useLessonsData, useUserProgress } from "@/hooks/useCourseData";
 import { useAuthState } from "@/hooks/chat/useAuthState";
 import { Tables } from "@/integrations/supabase/types";
+import { toast } from "sonner";
 
 type Lesson = Tables<'video_lessons'>;
 
@@ -42,7 +43,7 @@ const AcademyPage = () => {
     }
   }, [lessons, progress, selectedLesson]);
 
-  const markLessonComplete = async (lessonId: string) => {
+  const markLessonComplete = async (lessonId: string, showToast = true) => {
     if (!completedLessons.includes(lessonId) && lessons) {
       const newCompletedLessons = [...completedLessons, lessonId];
       const progressPercentage = (newCompletedLessons.length / lessons.length) * 100;
@@ -50,11 +51,52 @@ const AcademyPage = () => {
       setCompletedLessons(newCompletedLessons);
       
       if (userId) {
-        updateProgress.mutate({
-          completedLessons: newCompletedLessons,
-          progressPercentage: Math.round(progressPercentage),
-        });
+        try {
+          await updateProgress.mutateAsync({
+            completedLessons: newCompletedLessons,
+            progressPercentage: Math.round(progressPercentage),
+          });
+          
+          if (showToast) {
+            const lessonTitle = isArabic ? selectedLesson?.title_ar : selectedLesson?.title;
+            toast.success(
+              isArabic 
+                ? `تم إكمال الدرس: ${lessonTitle}` 
+                : `Lesson completed: ${lessonTitle}`
+            );
+          }
+
+          // If course is completed, show celebration
+          if (progressPercentage === 100) {
+            toast.success(
+              isArabic 
+                ? '🎉 تهانينا! لقد أكملت الدورة!' 
+                : '🎉 Congratulations! You completed the course!'
+            );
+          }
+        } catch (error) {
+          console.error('Error updating progress:', error);
+          toast.error(
+            isArabic 
+              ? 'خطأ في حفظ التقدم' 
+              : 'Error saving progress'
+          );
+          // Revert the state change
+          setCompletedLessons(completedLessons);
+        }
       }
+    }
+  };
+
+  const handleVideoEnd = () => {
+    if (selectedLesson && !completedLessons.includes(selectedLesson.id)) {
+      markLessonComplete(selectedLesson.id, true);
+    }
+  };
+
+  const handleManualComplete = () => {
+    if (selectedLesson) {
+      markLessonComplete(selectedLesson.id, true);
     }
   };
 
@@ -65,7 +107,9 @@ const AcademyPage = () => {
       <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-green mx-auto mb-4"></div>
-          <p className="text-white text-lg">Loading Academy...</p>
+          <p className="text-white text-lg">
+            {isArabic ? 'جاري تحميل الأكاديمية...' : 'Loading Academy...'}
+          </p>
         </div>
       </div>
     );
@@ -103,7 +147,7 @@ const AcademyPage = () => {
                   <Clock className="w-4 h-4" />
                   <span>
                     {lessons ? `${lessons.length} ${isArabic ? 'دروس' : 'Lessons'}` : '5 Lessons'} • 
-                    {currentCourse ? ` ${Math.round(currentCourse.total_duration_minutes / 60)} ${isArabic ? 'ساعات' : 'Hours'}` : ' 20 Min Total'}
+                    {currentCourse ? ` ${Math.round(currentCourse.total_duration_minutes / 60)} ${isArabic ? 'ساعات' : 'Hours'}` : ' 2 Hours Total'}
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
@@ -138,7 +182,7 @@ const AcademyPage = () => {
                   <VideoPlayer
                     videoUrl={selectedLesson.video_url}
                     title={isArabic ? selectedLesson.title_ar : selectedLesson.title}
-                    onVideoEnd={() => markLessonComplete(selectedLesson.id)}
+                    onVideoEnd={handleVideoEnd}
                   />
                   <div className="mt-6 p-6 bg-card border border-green/20 rounded-lg">
                     <h3 className="text-xl font-bold text-white mb-2">
@@ -155,7 +199,7 @@ const AcademyPage = () => {
                       ))}
                     </div>
                     <Button 
-                      onClick={() => markLessonComplete(selectedLesson.id)}
+                      onClick={handleManualComplete}
                       className="w-full bg-green hover:bg-green/90"
                       disabled={completedLessons.includes(selectedLesson.id)}
                     >

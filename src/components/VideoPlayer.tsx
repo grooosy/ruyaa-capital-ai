@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Play, Pause, Volume2, VolumeX, Maximize } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -12,6 +12,12 @@ interface VideoPlayerProps {
 
 const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoUrl, title, onVideoEnd }) => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [volume, setVolume] = useState(1);
+  const [isMuted, setIsMuted] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [hasEnded, setHasEnded] = useState(false);
   
   // Extract YouTube video ID from URL
   const getYouTubeVideoId = (url: string) => {
@@ -20,14 +26,127 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoUrl, title, onVideoEnd }
     return (match && match[2].length === 11) ? match[2] : null;
   };
 
+  const isYouTubeVideo = getYouTubeVideoId(videoUrl) !== null;
   const videoId = getYouTubeVideoId(videoUrl);
-  const embedUrl = videoId ? `https://www.youtube.com/embed/${videoId}?autoplay=${isPlaying ? 1 : 0}&enablejsapi=1` : videoUrl;
 
-  return (
-    <Card className="bg-card border-green/20 overflow-hidden">
-      <CardContent className="p-0">
-        <div className="relative aspect-video bg-gradient-to-br from-green/10 to-gold/10">
-          {videoId ? (
+  // Handle video events for regular video files
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || isYouTubeVideo) return;
+
+    const handleTimeUpdate = () => {
+      setCurrentTime(video.currentTime);
+    };
+
+    const handleLoadedMetadata = () => {
+      setDuration(video.duration);
+    };
+
+    const handleEnded = () => {
+      setIsPlaying(false);
+      setHasEnded(true);
+      if (onVideoEnd && !hasEnded) {
+        onVideoEnd();
+      }
+    };
+
+    const handlePlay = () => setIsPlaying(true);
+    const handlePause = () => setIsPlaying(false);
+
+    video.addEventListener('timeupdate', handleTimeUpdate);
+    video.addEventListener('loadedmetadata', handleLoadedMetadata);
+    video.addEventListener('ended', handleEnded);
+    video.addEventListener('play', handlePlay);
+    video.addEventListener('pause', handlePause);
+
+    return () => {
+      video.removeEventListener('timeupdate', handleTimeUpdate);
+      video.removeEventListener('loadedmetadata', handleLoadedMetadata);
+      video.removeEventListener('ended', handleEnded);
+      video.removeEventListener('play', handlePlay);
+      video.removeEventListener('pause', handlePause);
+    };
+  }, [onVideoEnd, hasEnded, isYouTubeVideo]);
+
+  // YouTube iframe API handling
+  useEffect(() => {
+    if (!isYouTubeVideo) return;
+
+    const handleMessage = (event: MessageEvent) => {
+      if (event.origin !== 'https://www.youtube.com') return;
+      
+      try {
+        const data = JSON.parse(event.data);
+        if (data.event === 'video-progress') {
+          const info = data.info;
+          if (info && info.playerState === 0 && !hasEnded) { // 0 = ended
+            setHasEnded(true);
+            if (onVideoEnd) {
+              onVideoEnd();
+            }
+          }
+        }
+      } catch (e) {
+        // Ignore parsing errors
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, [onVideoEnd, hasEnded, isYouTubeVideo]);
+
+  const togglePlay = () => {
+    const video = videoRef.current;
+    if (!video || isYouTubeVideo) return;
+
+    if (isPlaying) {
+      video.pause();
+    } else {
+      video.play();
+    }
+  };
+
+  const toggleMute = () => {
+    const video = videoRef.current;
+    if (!video || isYouTubeVideo) return;
+
+    setIsMuted(!isMuted);
+    video.muted = !isMuted;
+  };
+
+  const handleVolumeChange = (newVolume: number) => {
+    const video = videoRef.current;
+    if (!video || isYouTubeVideo) return;
+
+    setVolume(newVolume);
+    video.volume = newVolume;
+    setIsMuted(newVolume === 0);
+  };
+
+  const formatTime = (time: number) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+  };
+
+  const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
+    const video = videoRef.current;
+    if (!video || isYouTubeVideo) return;
+
+    const rect = e.currentTarget.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const newTime = (clickX / rect.width) * duration;
+    video.currentTime = newTime;
+    setCurrentTime(newTime);
+  };
+
+  if (isYouTubeVideo) {
+    const embedUrl = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&origin=${window.location.origin}`;
+    
+    return (
+      <Card className="bg-card border-green/20 overflow-hidden">
+        <CardContent className="p-0">
+          <div className="relative aspect-video bg-gradient-to-br from-green/10 to-gold/10">
             <iframe
               src={embedUrl}
               title={title}
@@ -35,14 +154,86 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoUrl, title, onVideoEnd }
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-              onLoad={() => onVideoEnd && onVideoEnd()}
             />
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  // Check if it's a valid video URL (mp4, webm, etc.)
+  const isValidVideoUrl = /\.(mp4|webm|ogg|mov|avi)(\?.*)?$/i.test(videoUrl);
+
+  return (
+    <Card className="bg-card border-green/20 overflow-hidden">
+      <CardContent className="p-0">
+        <div className="relative aspect-video bg-gradient-to-br from-green/10 to-gold/10">
+          {isValidVideoUrl ? (
+            <>
+              <video
+                ref={videoRef}
+                className="w-full h-full object-cover"
+                src={videoUrl}
+                poster=""
+              />
+              
+              {/* Custom Video Controls */}
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                <div className="flex items-center gap-3">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={togglePlay}
+                    className="text-white hover:bg-white/20"
+                  >
+                    {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+                  </Button>
+                  
+                  <div className="flex-1">
+                    <div 
+                      className="h-1 bg-gray-600 rounded-full cursor-pointer"
+                      onClick={handleSeek}
+                    >
+                      <div 
+                        className="h-full bg-green rounded-full transition-all"
+                        style={{ width: `${duration ? (currentTime / duration) * 100 : 0}%` }}
+                      />
+                    </div>
+                  </div>
+                  
+                  <span className="text-white text-xs">
+                    {formatTime(currentTime)} / {formatTime(duration)}
+                  </span>
+                  
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={toggleMute}
+                    className="text-white hover:bg-white/20"
+                  >
+                    {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+                  </Button>
+                  
+                  <input
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.1"
+                    value={isMuted ? 0 : volume}
+                    onChange={(e) => handleVolumeChange(parseFloat(e.target.value))}
+                    className="w-16"
+                  />
+                </div>
+              </div>
+            </>
           ) : (
             <div className="w-full h-full flex items-center justify-center">
               <div className="text-center">
                 <Play className="w-16 h-16 text-green mx-auto mb-4" />
                 <p className="text-white font-semibold">{title}</p>
-                <p className="text-gray-400 text-sm">Video coming soon</p>
+                <p className="text-gray-400 text-sm">
+                  {videoUrl ? 'Invalid video format. Please use MP4, WebM, or OGG.' : 'Video content coming soon'}
+                </p>
               </div>
             </div>
           )}
