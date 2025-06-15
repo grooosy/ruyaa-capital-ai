@@ -3,10 +3,10 @@ import React from "react";
 
 // Official Crypto Assets
 const cryptoLogos = [
-  { src: "/logos/btc-official.svg", alt: "BTC" },
-  { src: "/logos/eth-official.svg", alt: "ETH" },
-  { src: "/logos/usdt-official.svg", alt: "USDT" },
-  { src: "/logos/xrp-official.svg", alt: "XRP" },
+  { src: "/lovable-uploads/712cf72d-c4e5-4c72-b559-d86f289ffb65.png", alt: "BTC" },
+  { src: "/lovable-uploads/53c59e14-0cb1-4d90-b17f-1ed2e5644273.png", alt: "ETH" },
+  { src: "/lovable-uploads/895837ee-c142-4899-afc5-ff94600a2d6f.png", alt: "USDT" },
+  { src: "/lovable-uploads/9ee24206-7b17-40c4-a4ec-bc6cfd843020.png", alt: "XRP" },
 ];
 
 const LogoCloud: React.FC = () => (
@@ -31,7 +31,7 @@ const LogoCloud: React.FC = () => (
           key={logo.alt}
           src={logo.src}
           alt={logo.alt}
-          className="float-y w-12 h-12 opacity-90 drop-shadow-lg transition-transform duration-300 hover:scale-110"
+          className="float-y w-16 h-16 object-contain opacity-90 drop-shadow-lg transition-transform duration-300 hover:scale-110 mix-blend-multiply"
           draggable={false}
         />
       ))}
