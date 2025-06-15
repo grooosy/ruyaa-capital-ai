@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { X } from 'lucide-react';
 import { agentData } from '@/data/agentFlows';
 import ProcessTimeline from './ProcessTimeline';
@@ -16,7 +16,7 @@ const modalVariants = {
     visible: { opacity: 1 },
 };
 
-const contentVariants = {
+const contentVariants: Variants = {
     hidden: { scale: 0.95, opacity: 0, y: 20 },
     visible: { 
         scale: 1, 
