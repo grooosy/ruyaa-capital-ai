@@ -1,14 +1,16 @@
+
 import { useQuery } from '@tanstack/react-query';
 
 const fetchBtcData = async () => {
-  const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true');
+  // Switched to CoinCap API for better reliability
+  const response = await fetch('https://api.coincap.io/v2/assets/bitcoin');
   if (!response.ok) {
     throw new Error('Network response was not ok for BTC data');
   }
   const data = await response.json();
   return {
-    price: data.bitcoin.usd,
-    change: data.bitcoin.usd_24h_change,
+    price: parseFloat(data.data.priceUsd),
+    change: parseFloat(data.data.changePercent24Hr),
   };
 };
 
@@ -29,13 +31,13 @@ export const useMarketData = () => {
   const { data: btcData, isLoading: isBtcLoading, error: btcError } = useQuery({
     queryKey: ['btcPrice'],
     queryFn: fetchBtcData,
-    refetchInterval: 5000, // Refetch every 5 seconds
+    refetchInterval: 7000, // Refetch every 7 seconds
   });
 
   const { data: goldData, isLoading: isGoldLoading, error: goldError } = useQuery({
     queryKey: ['goldPrice'],
     queryFn: fetchGoldData,
-    refetchInterval: 5000, // Refetch every 5 seconds
+    refetchInterval: 7000, // Refetch every 7 seconds
   });
 
   if (btcError) console.error("Error fetching BTC data:", btcError);
