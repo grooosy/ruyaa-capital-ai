@@ -27,16 +27,16 @@ const ArbitrageAlertCard: React.FC<ArbitrageAlertCardProps> = ({ show, onClose, 
           initial={{ opacity: 0, y: 50, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 50, scale: 0.95, transition: { duration: 0.2 } }}
-          className="fixed bottom-5 right-5 z-50 w-full max-w-sm"
+          className="w-full max-w-sm"
         >
-          <Card className="bg-gray-900/80 backdrop-blur-md border-green/30 shadow-lg shadow-green/20 text-white">
+          <Card className="bg-gray-900/80 backdrop-blur-md border-green/30 shadow-lg shadow-green/20 text-white h-full flex flex-col">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-lg">
                 <Zap className="text-green h-5 w-5" />
                 <span>New Arbitrage Opportunity</span>
               </CardTitle>
             </CardHeader>
-            <CardContent className="grid gap-4 pt-0">
+            <CardContent className="grid gap-4 pt-0 flex-grow">
               <div className="flex justify-between items-center">
                 <span className="text-2xl font-bold">{data.pair}</span>
                 <div className="text-right">

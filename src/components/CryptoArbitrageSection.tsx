@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import ArbitrageTicker from './ArbitrageTicker';
 import ArbitrageVisual from './ArbitrageVisual';
@@ -15,17 +16,7 @@ const DUMMY_ARBITRAGE_DATA = {
 };
 
 const CryptoArbitrageSection = () => {
-    const [showAlert, setShowAlert] = useState(false);
-
-    useEffect(() => {
-        const showTimer = setTimeout(() => {
-            setShowAlert(true);
-        }, 5000);
-
-        return () => {
-            clearTimeout(showTimer);
-        };
-    }, []);
+    const [showAlert, setShowAlert] = useState(true);
 
     const handleCloseAlert = () => {
         setShowAlert(false);
@@ -48,13 +39,14 @@ const CryptoArbitrageSection = () => {
             
             <ArbitrageTicker />
 
-            <ArbitrageVisual />
-            
-            <ArbitrageAlertCard
-                show={showAlert}
-                onClose={handleCloseAlert}
-                data={DUMMY_ARBITRAGE_DATA}
-            />
+            <div className="w-full flex flex-col lg:flex-row items-center lg:items-start justify-center gap-8 mt-8">
+                <ArbitrageVisual />
+                <ArbitrageAlertCard
+                    show={showAlert}
+                    onClose={handleCloseAlert}
+                    data={DUMMY_ARBITRAGE_DATA}
+                />
+            </div>
         </motion.section>
     );
 };
