@@ -2,8 +2,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import ArbitrageTicker from './ArbitrageTicker';
-import ProcessTimeline from './ProcessTimeline';
 import { cryptoArbitrageTimeline } from '@/data/agentFlows';
+import CryptoProcess from './CryptoProcess';
 
 const CryptoArbitrageSection = () => {
     return (
@@ -27,7 +27,7 @@ const CryptoArbitrageSection = () => {
                 The Arbitrage Process, Step-by-Step
             </h3>
 
-            <ProcessTimeline timeline={cryptoArbitrageTimeline} theme="gold" />
+            <CryptoProcess timeline={cryptoArbitrageTimeline} />
         </motion.section>
     );
 };
