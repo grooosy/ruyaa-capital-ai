@@ -4,6 +4,11 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
+/* Space Grotesk: Used for dashboard modern look */
+@import "@fontsource/space-grotesk/400.css";
+@import "@fontsource/space-grotesk/500.css";
+@import "@fontsource/space-grotesk/700.css";
+
 @layer base {
   * {
     box-sizing: border-box;
@@ -11,7 +16,7 @@
   
   body {
     @apply text-white font-jakarta;
-    background-color: #181711; /* Fallback */
+    background-color: #181711;
     background-image: radial-gradient(ellipse at top, #23221c, #181711);
     min-height: 100vh;
     line-height: 1.6;
@@ -20,13 +25,18 @@
   }
   
   html {
-    font-family: "Plus Jakarta Sans", "Manrope", "Inter", "Playfair Display", sans-serif;
+    font-family: "Plus Jakarta Sans", "Manrope", "Inter", "Playfair Display", "Space Grotesk", sans-serif;
     scroll-behavior: smooth;
   }
-  
+
+  .font-spacegrotesk {
+    font-family: "Space Grotesk", "Manrope", "Inter", "Plus Jakarta Sans", sans-serif !important;
+    letter-spacing: 0.01em;
+  }
+
   ::selection {
-    background: rgba(22, 199, 132, 0.2);
-    color: #16C784;
+    background: rgba(0, 255, 157, 0.15);
+    color: #00FF9D;
   }
   
   ::-webkit-scrollbar {
@@ -38,100 +48,39 @@
   }
   
   ::-webkit-scrollbar-thumb {
-    background: #16C784;
+    background: #00FF9D;
     border-radius: 4px;
   }
   
   ::-webkit-scrollbar-thumb:hover {
-    background: #14B574;
+    background: #00cc7a;
   }
 }
 
-/* Custom styles for Solana Wallet Adapter Modal */
 @layer components {
-  .wallet-adapter-modal-wrapper {
-    @apply bg-background/50 backdrop-blur-md;
-  }
-  .wallet-adapter-modal-card {
-    @apply bg-card shadow-lg shadow-gold/10 !important;
-  }
-  .wallet-adapter-modal-title {
-    @apply font-bold text-gold;
-  }
-  .wallet-adapter-button {
-    @apply !bg-background !transition-all hover:!bg-gold/10 !text-white;
-  }
-  .wallet-adapter-button-trigger {
-    @apply !bg-transparent;
-  }
-  .wallet-adapter-modal-list-item {
-    @apply !text-gray-300;
+  /* Neon-Green Glow Button */
+  .btn-neongreen {
+    @apply bg-[#1A1A1A] text-green-400 border-green-400 border-2 rounded-full shadow-[0_2px_28px_#00FF9D77] hover:bg-green-500/10 hover:text-white transition-all duration-200;
   }
 }
 
+/* Neon card utilities */
 @layer utilities {
-  .shadow-green {
-    box-shadow: 0 4px 20px rgba(22, 199, 132, 0.25);
+  .neon-glow-card {
+    @apply bg-[#1A1A1A] backdrop-blur-sm rounded-xl p-6 relative overflow-hidden;
   }
-  
-  .shadow-green-glow {
-    box-shadow: 0 0 40px rgba(22, 199, 132, 0.3);
+  .shadow-neon {
+    box-shadow: 0 0 20px 0 #00FF9D33, 0 2px 15px 0 #23221c10;
   }
-  
-  .shadow-gold-glow {
-    box-shadow: 0 0 30px rgba(230, 196, 25, 0.25);
+  .shadow-neon-bright {
+    box-shadow: 0 0 32px 2px #00FF9D88;
   }
-  
-  .shadow-inner-green {
-    box-shadow: inset 0 2px 8px rgba(22, 199, 132, 0.4);
+  .text-neon-green {
+    color: #00FF9D;
+    text-shadow: 0 0 4px #00FF9D55;
   }
-  
-  .float-y {
-    animation: floatY 4s ease-in-out infinite alternate;
-  }
-  
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .text-gradient-green {
-    background: linear-gradient(135deg, #10A169 0%, #0D8F5A 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  
-  .text-gradient-gold {
-    background: linear-gradient(135deg, #CFA100 0%, #B38E00 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  
-  .text-gradient-ai {
-    background: linear-gradient(90deg, #CFA100 0%, #00FF9D 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  
-  .bg-grid-pattern {
-    background-image: linear-gradient(rgba(22, 199, 132, 0.05) 1px, transparent 1px), linear-gradient(to right, rgba(22, 199, 132, 0.05) 1px, transparent 1px);
-    background-size: 1.5rem 1.5rem;
-  }
-}
-
-@keyframes floatY {
-  0% { 
-    transform: translateY(0px);
-  }
-  100% { 
-    transform: translateY(-8px);
+  .ring-neon-green {
+    box-shadow: 0 0 12px #00FF9Dbb, 0 0 0 2px #00FF9D;
   }
 }
 
@@ -142,12 +91,75 @@
   }
   50% {
     opacity: 1;
-    transform: scale(1.05);
+    transform: scale(1.04);
   }
 }
-
 .animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
+  animation: pulse-glow 1.5s cubic-bezier(.4,0,.6,1) infinite;
+}
+
+.shadow-green {
+  box-shadow: 0 4px 20px rgba(22, 199, 132, 0.25);
+}
+
+.shadow-green-glow {
+  box-shadow: 0 0 40px rgba(22, 199, 132, 0.3);
+}
+
+.shadow-gold-glow {
+  box-shadow: 0 0 30px rgba(230, 196, 25, 0.25);
+}
+
+.shadow-inner-green {
+  box-shadow: inset 0 2px 8px rgba(22, 199, 132, 0.4);
+}
+
+.float-y {
+  animation: floatY 4s ease-in-out infinite alternate;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.text-gradient-green {
+  background: linear-gradient(135deg, #10A169 0%, #0D8F5A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, #CFA100 0%, #B38E00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-ai {
+  background: linear-gradient(90deg, #CFA100 0%, #00FF9D 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bg-grid-pattern {
+  background-image: linear-gradient(rgba(22, 199, 132, 0.05) 1px, transparent 1px), linear-gradient(to right, rgba(22, 199, 132, 0.05) 1px, transparent 1px);
+  background-size: 1.5rem 1.5rem;
+}
+
+@keyframes floatY {
+  0% { 
+    transform: translateY(0px);
+  }
+  100% { 
+    transform: translateY(-8px);
+  }
 }
 
 @keyframes marquee {
