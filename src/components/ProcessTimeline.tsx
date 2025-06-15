@@ -27,7 +27,6 @@ const ProcessTimeline: React.FC<ProcessTimelineProps> = ({ timeline, theme }) =>
           title={step.title}
           desc={step.desc}
           index={i}
-          isLast={i === timeline.length - 1}
           theme={theme}
         />
       ))}

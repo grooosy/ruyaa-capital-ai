@@ -1,13 +1,12 @@
 
 import React from "react";
-import { ArrowDown, LucideIcon } from "lucide-react";
+import { LucideIcon } from "lucide-react";
 
 interface TimelineStepProps {
   icon: LucideIcon;
   title: string;
   desc: string;
   index: number;
-  isLast: boolean;
   theme: 'green' | 'gold';
 }
 
@@ -16,7 +15,6 @@ const TimelineStep: React.FC<TimelineStepProps> = ({
   title, 
   desc, 
   index, 
-  isLast,
   theme
 }) => {
   const iconColor = theme === 'green' ? 'text-green' : 'text-gold';
@@ -36,12 +34,6 @@ const TimelineStep: React.FC<TimelineStepProps> = ({
         >
           <Icon size={28} className={iconColor} />
         </div>
-        {/* Connector arrow */}
-        {!isLast && (
-          <span className="hidden md:flex absolute left-1/2 bottom-[-32px] -translate-x-1/2 z-20">
-            <ArrowDown size={18} strokeWidth={2.2} className="text-gold" />
-          </span>
-        )}
       </div>
       {/* Caption */}
       <div className="flex flex-col items-center md:mt-2 mt-0">
@@ -52,12 +44,6 @@ const TimelineStep: React.FC<TimelineStepProps> = ({
           {desc}
         </span>
       </div>
-      {/* Horizontal arrow for mobile only */}
-      {!isLast && (
-        <span className="md:hidden flex px-2">
-          <ArrowDown size={16} strokeWidth={2.2} className="rotate-90 text-gold" />
-        </span>
-      )}
     </div>
   );
 };
