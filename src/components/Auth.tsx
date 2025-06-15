@@ -4,6 +4,9 @@ import { ThemeSupa } from '@supabase/auth-ui-shared';
 import { supabase } from '@/integrations/supabase/client';
 import { useTranslation } from 'react-i18next';
 import React, { useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
+import { Wallet } from 'lucide-react';
 
 interface AuthProps {
     onSuccess?: () => void;
@@ -25,6 +28,21 @@ export const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
             subscription?.unsubscribe();
         };
     }, [onSuccess]);
+
+    const handleSolanaSignIn = async () => {
+        const { error } = await supabase.auth.signInWithOAuth({
+            provider: 'solana',
+            options: {
+                redirectTo: `${window.location.origin}/`,
+            },
+        });
+        if (error) {
+            toast.error("Solana sign-in failed", {
+                description: error.message,
+            });
+            console.error('Solana sign-in error:', error);
+        }
+    };
 
     return (
         <div className="w-full max-w-sm">
@@ -61,6 +79,19 @@ export const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
                 }}
                 theme="dark"
             />
+            <div className="relative flex pt-6 pb-3 items-center">
+                <div className="flex-grow border-t border-zinc-700"></div>
+                <span className="flex-shrink mx-4 text-zinc-500 text-xs uppercase">Or</span>
+                <div className="flex-grow border-t border-zinc-700"></div>
+            </div>
+            <Button
+                variant="outline"
+                className="w-full bg-transparent border-gold text-gold hover:bg-gold/10 hover:text-gold"
+                onClick={handleSolanaSignIn}
+            >
+                <Wallet className="mr-2 h-4 w-4" />
+                Sign in with Solana Wallet
+            </Button>
         </div>
     );
 };
