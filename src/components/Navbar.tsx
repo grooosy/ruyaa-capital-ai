@@ -50,10 +50,10 @@ const Navbar: React.FC = () => {
           <span className="text-lg font-playfair italic text-gold/90 hidden lg:block">It works while you sleep</span>
         </div>
         <div className="hidden md:flex items-center space-x-8">
-            <a href="/#ai" className="hover:text-green transition-colors font-semibold">How it works</a>
+            <Link to="/#ai" className="hover:text-green transition-colors font-semibold">How it works</Link>
             <Link to="/agents" className="hover:text-gold transition-colors font-semibold">AI Agents</Link>
-            <a href="/#deposit" className="hover:text-green transition-colors font-semibold">Deposit</a>
-            <a href="/#footer" className="hover:text-gold transition-colors font-semibold">Contact</a>
+            <Link to="/#deposit" className="hover:text-green transition-colors font-semibold">Deposit</Link>
+            <Link to="/#footer" className="hover:text-gold transition-colors font-semibold">Contact</Link>
         </div>
       </nav>
     </header>
