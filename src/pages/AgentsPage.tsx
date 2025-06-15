@@ -32,7 +32,7 @@ const AgentsPage: React.FC = () => {
   const { openChat } = useChatContext();
 
   return (
-    <div className="relative min-h-screen bg-bg">
+    <div className="relative min-h-screen">
       <ParticleBackground />
       <Navbar />
       <main className="pt-32 pb-20 w-full">

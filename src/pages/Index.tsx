@@ -1,4 +1,3 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
@@ -30,7 +29,7 @@ const Index = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-bg">
+    <div className="relative min-h-screen">
       <ParticleBackground />
       <Navbar />
       

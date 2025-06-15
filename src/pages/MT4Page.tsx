@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import ParticleBackground from '@/components/ParticleBackground';
@@ -6,7 +5,7 @@ import AgentChat from '@/components/AgentChat';
 
 const MT4Page: React.FC = () => {
   return (
-    <div className="relative min-h-screen bg-bg">
+    <div className="relative min-h-screen">
       <ParticleBackground />
       <Navbar />
       <main className="pt-32 pb-20 w-full flex justify-center">
