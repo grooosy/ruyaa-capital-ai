@@ -1,5 +1,22 @@
 import { useState, useEffect, useContext } from 'react';
 import { useChatContext, AgentId } from '@/context/ChatContext';
+import OpenAI from 'openai';
+
+// ==================================================================
+// IMPORTANT: SECURITY WARNING
+// ==================================================================
+// The OpenAI API key is included directly in the client-side code.
+// This is INSECURE and should NOT be used in a production environment.
+// An attacker could easily find and use your API key, leading to
+// unexpected charges on your OpenAI account.
+//
+// For production, you should use a backend proxy to securely handle
+// the API key.
+// ==================================================================
+const openai = new OpenAI({
+  apiKey: "YOUR_OPENAI_API_KEY_HERE", // <-- 🚨 PASTE YOUR OPENAI API KEY HERE
+  dangerouslyAllowBrowser: true,
+});
 
 export type Message = {
   id: string;
@@ -61,9 +78,31 @@ export const useChat = (agentIdOverride?: AgentId) => {
       let botResponseContent: string;
 
       if (selectedAgent === 'mt4') {
-        // Mocking the API response for MT4 agent for UI testing
-        await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate network delay
-        botResponseContent = "Hello! Let’s test the MT4/MT5 Agent flow. What’s your full name?";
+        const modelMap = {
+            mt4: "g-684ea3edaa9081919a8dbd9ac4b450ad-ruyaa-mt4-mt5-agent",
+            crypto: "gpt-4-turbo-preview", // Placeholder
+            arbitrage: "gpt-4-turbo-preview", // Placeholder
+        };
+        
+        // OpenAI API expects messages without the 'id' field
+        const apiMessages = newMessages.map(({ id, ...rest }) => rest);
+
+        const completion = await openai.chat.completions.create({
+          model: modelMap[selectedAgent] || 'g-684ea3edaa9081919a8dbd9ac4b450ad-ruyaa-mt4-mt5-agent',
+          messages: apiMessages,
+          // I've commented out the function calling for now as the schema wasn't provided.
+          // functions: [ /* your register_user schema */ ],
+          // function_call: "auto",
+        });
+
+        const botResponse = completion.choices[0].message;
+
+        if (botResponse.function_call) {
+            console.log("Function call requested:", botResponse.function_call);
+            botResponseContent = `I need to perform an action: ${botResponse.function_call.name}. Function calling is not fully implemented yet.`;
+        } else {
+            botResponseContent = botResponse.content || "Sorry, I received an empty response.";
+        }
       } else {
         botResponseContent = await getBotResponse(currentInput);
       }
@@ -72,7 +111,11 @@ export const useChat = (agentIdOverride?: AgentId) => {
       setMessages(prev => [...prev, botMessage]);
     } catch (error) {
       console.error("Error fetching bot response:", error);
-      const errorMessage: Message = { id: (Date.now() + 1).toString(), role: 'assistant', content: "Sorry, I'm having trouble connecting. Please try again later." };
+      let errorMessageContent = "Sorry, I'm having trouble connecting. Please try again later.";
+      if (error instanceof OpenAI.APIError) {
+        errorMessageContent = `OpenAI API Error: ${error.status} ${error.type} - ${error.message}`;
+      }
+      const errorMessage: Message = { id: (Date.now() + 1).toString(), role: 'assistant', content: errorMessageContent };
       setMessages(prev => [...prev, errorMessage]);
     } finally {
       setIsLoading(false);
