@@ -3,7 +3,6 @@ import React from "react";
 import { AnimatePresence } from "framer-motion";
 import InteractiveAgentCard from "@/components/InteractiveAgentCard";
 import AgentDetailModal from "@/components/AgentDetailModal";
-import PaymentMethods from "./PaymentMethods";
 
 type ActiveView = 'mt' | 'crypto' | null;
 
@@ -30,14 +29,8 @@ const AIGrid: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-        <div className="flex flex-col items-center gap-4">
-          <InteractiveAgentCard type="mt" onOpenDetails={() => handleOpenDetails('mt')} />
-          <PaymentMethods methods={['Visa', 'Mastercard', 'Phantom']} />
-        </div>
-        <div className="flex flex-col items-center gap-4">
-          <InteractiveAgentCard type="crypto" onOpenDetails={() => handleOpenDetails('crypto')} />
-          <PaymentMethods methods={['Visa', 'Mastercard', 'Phantom']} />
-        </div>
+        <InteractiveAgentCard type="mt" onOpenDetails={() => handleOpenDetails('mt')} />
+        <InteractiveAgentCard type="crypto" onOpenDetails={() => handleOpenDetails('crypto')} />
       </div>
       
       <AnimatePresence>
