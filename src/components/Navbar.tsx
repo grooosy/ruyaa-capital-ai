@@ -1,4 +1,6 @@
+
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   Dialog,
   DialogContent,
@@ -48,10 +50,10 @@ const Navbar: React.FC = () => {
           <span className="text-lg font-playfair italic text-gold/90 hidden lg:block">It works while you sleep</span>
         </div>
         <div className="hidden md:flex items-center space-x-8">
-            <a href="#ai" className="hover:text-green transition-colors font-semibold">How it works</a>
-            <a href="#ai" className="hover:text-gold transition-colors font-semibold">AI Agents</a>
-            <a href="#deposit" className="hover:text-green transition-colors font-semibold">Deposit</a>
-            <a href="#footer" className="hover:text-gold transition-colors font-semibold">Contact</a>
+            <a href="/#ai" className="hover:text-green transition-colors font-semibold">How it works</a>
+            <Link to="/agents" className="hover:text-gold transition-colors font-semibold">AI Agents</Link>
+            <a href="/#deposit" className="hover:text-green transition-colors font-semibold">Deposit</a>
+            <a href="/#footer" className="hover:text-gold transition-colors font-semibold">Contact</a>
         </div>
       </nav>
     </header>
