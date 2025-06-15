@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Tilt from 'react-parallax-tilt';
-import { ArrowRight, Eye } from 'lucide-react';
+import { ArrowRight, Eye, Clock, Zap, ClockCheck, Check } from 'lucide-react';
 import { agentData } from '@/data/agentFlows';
 
 type AgentType = 'mt' | 'crypto';
@@ -11,6 +11,13 @@ interface InteractiveAgentCardProps {
   type: AgentType;
   onOpenDetails: () => void;
 }
+
+const metrics = [
+    { Icon: Clock, text: "24/7 Monitoring" },
+    { Icon: ClockCheck, text: "99.8% Uptime" },
+    { Icon: Zap, text: "Real-Time Sync" },
+    { Icon: Check, text: "Verified Execution Speed" },
+];
 
 const InteractiveAgentCard: React.FC<InteractiveAgentCardProps> = ({ type, onOpenDetails }) => {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -84,7 +91,17 @@ const InteractiveAgentCard: React.FC<InteractiveAgentCardProps> = ({ type, onOpe
                             })}
                         </div>
                     </div>
-                    <p className="text-gray-300">{data.description}</p>
+                    <p className="text-gray-300 mb-6">{data.description}</p>
+                    <div className="border-t border-white/10 pt-4">
+                        <div className="grid grid-cols-2 gap-x-4 gap-y-3">
+                            {metrics.map(({ Icon, text }, index) => (
+                                <div key={index} className="flex items-center gap-2">
+                                    <Icon className="w-4 h-4 flex-shrink-0" style={{ color: themeColor }} />
+                                    <span className="text-xs text-gray-400 font-medium">{text}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
                 <div className="relative text-sm font-semibold flex items-center gap-2 mt-4" style={{ color: themeColor }}>
                     Click to flip
