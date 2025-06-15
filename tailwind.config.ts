@@ -25,15 +25,17 @@ export default {
     },
     extend: {
       colors: {
-        ...colors,
-        green: "#10A169",
+        // DO NOT SPREAD ...colors HERE! This would overwrite the root.
+        // Instead, just add your custom colors.
+        // Custom greens do not overwrite Tailwind's green scale.
+        'brand-green': "#10A169",
         gold: "#CFA100",
         "dark-charcoal": "#181711",
         background: "#181711",
         card: "#23221c",
         "primary-accent": "#16C784",
         "secondary-accent": "#E6C419",
-        // retain shadcn base;
+        // shadcn base
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
