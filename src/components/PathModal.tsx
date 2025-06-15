@@ -2,32 +2,26 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Tilt from "react-parallax-tilt";
-import { X, ArrowLeft } from "lucide-react";
+import { X, ArrowLeft, ChevronRight } from "lucide-react";
 
-const CARDS = [
+const PATHS = [
   {
-    id: "mt",
-    title: "MetaTrader",
-    subtitle: "Trade FX, Indices, Commodities",
-    icon: "/logos/mt4.svg",
-    accent: "#16C784",
-    bg: "#23221c",
-    snapshot: {
-      img: "/logos/mt4.svg",
-      label: "Verified MT Account Ready",
-    },
+    id: "trading",
+    title: "MT4 / MT5 Trading",
+    subtitle: "Professional forex & CFD trading",
+    icons: ["/logos/mt4-official.svg", "/logos/mt5-official.svg"],
+    color: "#16C784",
+    benefit: "1-click withdraw & institutional spreads",
+    steps: ["Create", "Deposit", "Pay", "AI On", "Trade"]
   },
   {
     id: "crypto",
-    title: "Crypto",
-    subtitle: "Trade BTC, ETH, USDT & more",
-    icon: "/logos/btc.svg",
-    accent: "#E6C419",
-    bg: "#23221c",
-    snapshot: {
-      img: "/logos/btc.svg",
-      label: "Your Wallet, Your Coins",
-    },
+    title: "Crypto Exchange",
+    subtitle: "Trade Bitcoin, Ethereum & more", 
+    icons: ["/logos/btc-official.svg", "/logos/eth-official.svg", "/logos/usdt-official.svg", "/logos/xrp-official.svg"],
+    color: "#E6C419",
+    benefit: "On-chain custody & instant arbitrage",
+    steps: ["Register", "Connect", "Exchange", "Deposit", "AI On"]
   },
 ];
 
@@ -35,112 +29,212 @@ interface PathModalProps {
   open: boolean;
   onClose: () => void;
 }
-const cardVariants = {
-  initial: { opacity: 0, scale: 0.9, y: 60 },
-  animate: { 
-    opacity: 1, 
-    scale: 1, 
-    y: 0, 
-    transition: { delay: 0.18, type: "spring" as "spring", stiffness: 70 } 
-  },
-  exit: { opacity: 0, scale: 0.95, y: 40 },
-};
-
-const flipVariants = {
-  front: { rotateY: 0 },
-  back: { rotateY: 180 },
-};
-
-const snapshotStyle = {
-  transformStyle: "preserve-3d" as React.CSSProperties["transformStyle"]
-};
 
 const PathModal: React.FC<PathModalProps> = ({ open, onClose }) => {
-  const [flipped, setFlipped] = useState<null | "mt" | "crypto">(null);
+  const [selectedPath, setSelectedPath] = useState<string | null>(null);
+  const [flipped, setFlipped] = useState<string | null>(null);
+  const [showSteps, setShowSteps] = useState(false);
 
-  // Modal content
+  const handleCardClick = (pathId: string) => {
+    if (!flipped) {
+      setFlipped(pathId);
+    }
+  };
+
+  const handleContinue = (pathId: string) => {
+    setSelectedPath(pathId);
+    setShowSteps(true);
+  };
+
+  const handleBack = () => {
+    if (showSteps) {
+      setShowSteps(false);
+      setSelectedPath(null);
+    } else {
+      setFlipped(null);
+    }
+  };
+
+  const reset = () => {
+    setFlipped(null);
+    setSelectedPath(null);
+    setShowSteps(false);
+  };
+
+  const handleClose = () => {
+    reset();
+    onClose();
+  };
+
   return (
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-50 bg-[#181711ee] flex items-center justify-center"
+          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: .23 }}
+          transition={{ duration: 0.3 }}
         >
           <button
+            onClick={handleClose}
+            className="absolute top-6 right-6 text-green hover:scale-110 transition-transform z-50"
             aria-label="Close modal"
-            onClick={onClose}
-            className="absolute top-6 right-7 text-green hover:scale-110 focus:outline-none"
           >
             <X size={32} />
           </button>
-          {/* Cards container */}
-          <div className="flex gap-10 flex-col sm:flex-row w-full max-w-3xl items-center justify-center z-10">
-            {CARDS.map(card => (
-              <motion.div
-                key={card.id}
-                variants={cardVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                className="relative"
-              >
-                <Tilt glareEnable glareMaxOpacity={0.16} scale={1.04} tiltMaxAngleX={9} tiltMaxAngleY={9}>
-                  {/* Flip card structure */}
-                  <div
-                    style={{
-                      perspective: "1000px",
-                      width: 320, height: 260,
-                    }}
-                  >
-                    <motion.div
-                      className="w-80 h-64 rounded-2xl bg-[#23221c] relative shadow-green"
-                      animate={flipped === card.id ? "back" : "front"}
-                      variants={flipVariants}
-                      style={{
-                        ...snapshotStyle,
-                        transition: "transform 0.58s cubic-bezier(.68,-0.55,.27,1.55)",
-                        boxShadow: `0 2px 22px 0 ${card.accent}26`,
-                        cursor: flipped === card.id ? "default" : "pointer"
-                      }}
-                      onClick={() => !flipped && setFlipped(card.id as "mt" | "crypto")}
-                    >
-                      {/* Front Face */}
-                      <div className={`absolute inset-0 flex flex-col items-center justify-center z-10`} style={{ backfaceVisibility: "hidden" }}>
-                        <img src={card.icon} alt={card.title} className="w-16 h-16 mb-5" />
-                        <h2 className="text-xl font-bold text-white">{card.title}</h2>
-                        <p className="mt-2 text-base text-gray-300">{card.subtitle}</p>
-                        <div className="mt-4 text-sm text-green opacity-60">
-                          Click to Snapshot
-                        </div>
-                      </div>
-                      {/* Back Face */}
-                      <div
-                        className="absolute inset-0 flex flex-col items-center justify-center z-20"
-                        style={{
-                          transform: "rotateY(180deg)",
-                          backfaceVisibility: "hidden"
-                        }}
+
+          {(flipped || showSteps) && (
+            <button
+              onClick={handleBack}
+              className="absolute top-6 left-6 text-green hover:scale-110 transition-transform z-50 flex items-center gap-2"
+            >
+              <ArrowLeft size={24} />
+              <span className="text-sm">Back</span>
+            </button>
+          )}
+
+          <div className="w-full max-w-4xl mx-auto">
+            <AnimatePresence mode="wait">
+              {!showSteps ? (
+                <motion.div
+                  key="cards"
+                  className="flex gap-8 justify-center items-center flex-col sm:flex-row"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  {PATHS.map((path) => (
+                    <div key={path.id} className="relative">
+                      <Tilt
+                        glareEnable
+                        glareMaxOpacity={0.2}
+                        scale={1.05}
+                        tiltMaxAngleX={10}
+                        tiltMaxAngleY={10}
+                        style={{ transformStyle: "preserve-3d" }}
                       >
-                        <img src={card.snapshot.img} alt={card.title} className="w-16 h-16 mb-5" />
-                        <div className="font-bold text-green mb-2 text-lg">{card.snapshot.label}</div>
-                        <button
-                          className="mt-5 bg-gold px-4 py-2 rounded-xl font-semibold text-[#181711] flex items-center gap-1 hover:bg-yellow-400 transition"
-                          onClick={e => {
-                            e.stopPropagation();
-                            setFlipped(null);
+                        <motion.div
+                          className="w-80 h-72 rounded-2xl relative cursor-pointer"
+                          style={{
+                            background: `linear-gradient(135deg, #23221c 0%, #1a1915 100%)`,
+                            boxShadow: `0 8px 32px ${path.color}20, 0 0 20px ${path.color}10`,
+                            border: `1px solid ${path.color}30`,
+                            perspective: "1000px"
                           }}
+                          animate={flipped === path.id ? { rotateY: 180 } : { rotateY: 0 }}
+                          transition={{ duration: 0.6, ease: "easeInOut" }}
+                          onClick={() => handleCardClick(path.id)}
                         >
-                          <ArrowLeft size={18} /> Back
-                        </button>
+                          {/* Front Face */}
+                          <div
+                            className="absolute inset-0 rounded-2xl flex flex-col items-center justify-center p-6"
+                            style={{ 
+                              backfaceVisibility: "hidden",
+                              transform: "rotateY(0deg)"
+                            }}
+                          >
+                            <div className="flex gap-3 mb-6">
+                              {path.icons.map((icon, i) => (
+                                <img key={i} src={icon} alt="" className="w-12 h-12" />
+                              ))}
+                            </div>
+                            <h3 className="text-2xl font-bold text-white mb-3 text-center">
+                              {path.title}
+                            </h3>
+                            <p className="text-gray-300 text-center mb-6">
+                              {path.subtitle}
+                            </p>
+                            <div 
+                              className="text-sm opacity-70 flex items-center gap-2"
+                              style={{ color: path.color }}
+                            >
+                              Click to explore <ChevronRight size={16} />
+                            </div>
+                          </div>
+
+                          {/* Back Face */}
+                          <div
+                            className="absolute inset-0 rounded-2xl flex flex-col items-center justify-center p-6"
+                            style={{ 
+                              backfaceVisibility: "hidden",
+                              transform: "rotateY(180deg)"
+                            }}
+                          >
+                            <div className="flex gap-3 mb-6">
+                              {path.icons.slice(0, 2).map((icon, i) => (
+                                <img key={i} src={icon} alt="" className="w-12 h-12" />
+                              ))}
+                            </div>
+                            <div 
+                              className="text-lg font-semibold mb-4 text-center"
+                              style={{ color: path.color }}
+                            >
+                              Account Ready in 60 seconds
+                            </div>
+                            <p className="text-gray-300 text-center mb-6 text-sm">
+                              {path.benefit}
+                            </p>
+                            <button
+                              className="px-6 py-3 rounded-xl font-semibold text-[#181711] transition-all duration-200 hover:scale-105"
+                              style={{ backgroundColor: path.color }}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleContinue(path.id);
+                              }}
+                            >
+                              Continue Setup
+                            </button>
+                          </div>
+                        </motion.div>
+                      </Tilt>
+                    </div>
+                  ))}
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="steps"
+                  className="text-center"
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -50 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  {selectedPath && (
+                    <>
+                      <h2 className="text-3xl font-bold text-white mb-8">
+                        Setup Process
+                      </h2>
+                      <div className="flex justify-center items-center gap-8 mb-12">
+                        {PATHS.find(p => p.id === selectedPath)?.steps.map((step, index) => (
+                          <div key={index} className="flex flex-col items-center">
+                            <div 
+                              className="w-16 h-16 rounded-full border-2 flex items-center justify-center mb-3"
+                              style={{ 
+                                borderColor: PATHS.find(p => p.id === selectedPath)?.color,
+                                backgroundColor: `${PATHS.find(p => p.id === selectedPath)?.color}20`
+                              }}
+                            >
+                              <span className="text-2xl font-bold" style={{ color: PATHS.find(p => p.id === selectedPath)?.color }}>
+                                {index + 1}
+                              </span>
+                            </div>
+                            <span className="text-white font-medium">{step}</span>
+                          </div>
+                        ))}
                       </div>
-                    </motion.div>
-                  </div>
-                </Tilt>
-              </motion.div>
-            ))}
+                      <button
+                        className="px-8 py-4 rounded-xl font-bold text-[#181711] text-lg transition-all duration-200 hover:scale-105"
+                        style={{ backgroundColor: PATHS.find(p => p.id === selectedPath)?.color }}
+                      >
+                        Proceed to Checkout
+                      </button>
+                    </>
+                  )}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </motion.div>
       )}
@@ -149,4 +243,3 @@ const PathModal: React.FC<PathModalProps> = ({ open, onClose }) => {
 };
 
 export default PathModal;
-

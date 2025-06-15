@@ -3,33 +3,111 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Noto+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 
 @layer base {
+  * {
+    box-sizing: border-box;
+  }
+  
   body {
     @apply bg-bg text-white font-manrope;
     min-height: 100vh;
-    line-height: 1.55;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
+  
   html {
-    font-family: "Manrope", "Noto Sans", sans-serif;
+    font-family: "Manrope", "Inter", sans-serif;
     background-color: #181711;
+    scroll-behavior: smooth;
   }
+  
   ::selection {
-    background: #16C78466;
+    background: rgba(22, 199, 132, 0.2);
+    color: #16C784;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #23221c;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #16C784;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #14B574;
   }
 }
 
 @layer utilities {
   .shadow-green {
-    box-shadow: 0 3px 18px 0 #16C78466;
+    box-shadow: 0 4px 20px rgba(22, 199, 132, 0.25);
   }
+  
+  .shadow-green-glow {
+    box-shadow: 0 0 40px rgba(22, 199, 132, 0.3);
+  }
+  
+  .shadow-gold-glow {
+    box-shadow: 0 0 30px rgba(230, 196, 25, 0.25);
+  }
+  
   .float-y {
-    @apply animate-[floatY_4s_ease-in-out_infinite_alternate];
+    animation: floatY 4s ease-in-out infinite alternate;
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .text-gradient-green {
+    background: linear-gradient(135deg, #16C784 0%, #14B574 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #E6C419 0%, #D4B017 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 }
 
 @keyframes floatY {
-  from { transform: translateY(0);}
-  to { transform: translateY(3px);}
+  0% { 
+    transform: translateY(0px);
+  }
+  100% { 
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
 }

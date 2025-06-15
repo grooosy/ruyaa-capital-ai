@@ -5,6 +5,7 @@ import LogoCloud from "@/components/LogoCloud";
 import PathModal from "@/components/PathModal";
 import AIGrid from "@/components/AIGrid";
 import CryptoArbitrageSection from "@/components/CryptoArbitrageSection";
+import LiveMarketTicker from "@/components/LiveMarketTicker";
 
 const Index = () => {
   const [modalOpen, setModalOpen] = React.useState(false);
@@ -12,35 +13,58 @@ const Index = () => {
   return (
     <div className="relative min-h-screen bg-bg">
       <Navbar />
-      <main className="pt-36 pb-20 flex flex-col items-center justify-center w-full">
-        <section className="w-full max-w-3xl mx-auto flex flex-col items-center text-center">
-          <h1
-            className="text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight"
-            style={{ letterSpacing: "-0.04em" }}
-          >
-            Open a Verified <span className="text-green">MT4 / MT5</span> or{" "}
-            <span className="text-gold">Crypto</span> Account in 1 Minute.
+      
+      <main className="pt-32 pb-20 flex flex-col items-center w-full">
+        {/* Hero Section */}
+        <section className="w-full max-w-4xl mx-auto flex flex-col items-center text-center px-6">
+          {/* Live Market Ticker */}
+          <LiveMarketTicker />
+          
+          {/* Main Headline */}
+          <h1 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight max-w-4xl">
+            Open a Verified{" "}
+            <span className="text-green bg-gradient-to-r from-green to-green/80 bg-clip-text text-transparent">
+              MT4 / MT5
+            </span>{" "}
+            or{" "}
+            <span className="text-gold bg-gradient-to-r from-gold to-gold/80 bg-clip-text text-transparent">
+              Crypto
+            </span>{" "}
+            Account in 1 Minute.
           </h1>
-          <p className="text-xl max-w-xl mx-auto text-gray-300 mb-7">
-            Trade on your own terms — Ruyaa AI scales with your deposit.
+          
+          {/* Subtitle */}
+          <p className="text-xl text-gray-300 mb-10 max-w-2xl leading-relaxed">
+            AI-powered trading platform that scales with your ambitions. 
+            Professional tools, institutional execution, retail accessibility.
           </p>
-          <button
-            id="open-path-modal"
+          
+          {/* CTA Button */}
+          <motion.button
             onClick={() => setModalOpen(true)}
-            className="mt-7 bg-green text-[#181711] px-8 py-3 rounded-xl text-lg font-bold shadow-green hover:scale-105 transition-all duration-200 tracking-wider"
+            className="bg-green text-[#181711] px-10 py-4 rounded-2xl text-xl font-bold shadow-green-glow hover:shadow-lg transition-all duration-300 tracking-wide"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            style={{
+              background: "linear-gradient(135deg, #16C784 0%, #14B574 100%)",
+              boxShadow: "0 8px 32px rgba(22, 199, 132, 0.3)"
+            }}
           >
             Open Account Now
-          </button>
+          </motion.button>
+          
+          {/* Official Logos */}
+          <LogoCloud />
         </section>
-        <LogoCloud />
-        {/* --- Add Crypto Arbitrage Section right here --- */}
+
+        {/* AI Agents Showcase */}
+        <AIGrid />
+
+        {/* Crypto Arbitrage Section */}
         <CryptoArbitrageSection />
-        {/* Replace how-it-works section with AIGrid */}
-        <section className="w-full max-w-5xl mx-auto mt-24 flex flex-col items-center">
-          <AIGrid />
-        </section>
       </main>
-      {/* Path Modal overlay */}
+
+      {/* Path Selection Modal */}
       <PathModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </div>
   );
