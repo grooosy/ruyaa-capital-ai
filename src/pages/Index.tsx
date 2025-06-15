@@ -6,7 +6,6 @@ import LogoCloud from "@/components/LogoCloud";
 import PathModal from "@/components/PathModal";
 import AIGrid from "@/components/AIGrid";
 import CryptoArbitrageSection from "@/components/CryptoArbitrageSection";
-import LiveMarketTicker from "@/components/LiveMarketTicker";
 
 const Index = () => {
   const [modalOpen, setModalOpen] = React.useState(false);
@@ -18,9 +17,6 @@ const Index = () => {
       <main className="pt-32 pb-20 flex flex-col items-center w-full">
         {/* Hero Section */}
         <section className="w-full max-w-4xl mx-auto flex flex-col items-center text-center px-6">
-          {/* Live Market Ticker */}
-          <LiveMarketTicker />
-          
           {/* Main Headline */}
           <h1 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight max-w-4xl">
             Open a Verified{" "}
