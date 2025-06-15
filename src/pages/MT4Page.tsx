@@ -21,7 +21,7 @@ const MT4Page: React.FC = () => {
               {t('mt4_page_desc')}
             </p>
           </div>
-          <AgentChat agentId="mt4" />
+          <AgentChat agentId="mt4mt5" />
         </div>
       </main>
     </div>

@@ -1,6 +1,7 @@
+
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 
-export type AgentId = 'mt4' | 'crypto' | 'arbitrage' | null;
+export type AgentId = 'mt4mt5' | 'crypto' | 'arbitrage' | null;
 
 interface ChatContextType {
   isChatOpen: boolean;

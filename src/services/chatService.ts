@@ -1,6 +1,6 @@
-
 import { supabase } from '@/integrations/supabase/client';
 import { AgentId } from '@/context/ChatContext';
+import { Message } from '@/types/chat';
 
 export const getThread = async (userId: string, agentId: AgentId) => {
     if (!agentId || !userId) return null;
@@ -37,7 +37,7 @@ export const createThread = async (userId: string, agentId: AgentId) => {
     return data;
 };
 
-export const getMessages = async (threadId: string) => {
+export const getMessages = async (threadId: string): Promise<Message[]> => {
     const { data, error } = await supabase
         .from('chat_messages')
         .select('*')
@@ -48,14 +48,19 @@ export const getMessages = async (threadId: string) => {
         console.error("Error getting messages:", error);
         throw error;
     }
-    return data.map(msg => ({...msg, id: msg.id.toString(), content: msg.content ?? ''}));
+    return data.map(msg => ({
+        ...msg,
+        id: msg.id.toString(),
+        content: msg.content ?? '',
+        role: msg.role as 'user' | 'assistant'
+    }));
 };
 
 export const addMessage = async (message: {
     thread_id: string;
     role: 'user' | 'assistant';
     content: string;
-}) => {
+}): Promise<Message> => {
     const { data, error } = await supabase
         .from('chat_messages')
         .insert(message)
@@ -66,5 +71,11 @@ export const addMessage = async (message: {
         console.error("Error adding message:", error);
         throw error;
     }
-    return {...data, id: data.id.toString(), content: data.content ?? ''};
+    const result = {
+        ...data,
+        id: data.id.toString(),
+        content: data.content ?? '',
+        role: data.role as 'user' | 'assistant'
+    };
+    return result;
 };

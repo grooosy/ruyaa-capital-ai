@@ -3,7 +3,7 @@ import { AgentId } from '@/context/ChatContext';
 import { Message } from '@/types/chat';
 
 export const getInitialMessage = (agentId: AgentId): Message => {
-  if (agentId === 'mt4' || agentId === 'mt4mt5') {
+  if (agentId === 'mt4mt5') {
     return {
       id: 'init',
       role: 'assistant',

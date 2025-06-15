@@ -16,8 +16,7 @@ export const useChat = (agentIdOverride?: AgentId) => {
   const { selectedAgent: agentFromContext } = useChatContext();
   const queryClient = useQueryClient();
   
-  const selectedAgentNonMapped = agentIdOverride !== undefined ? agentIdOverride : agentFromContext;
-  const selectedAgent = selectedAgentNonMapped === 'mt4' ? 'mt4mt5' : selectedAgentNonMapped;
+  const selectedAgent = agentIdOverride !== undefined ? agentIdOverride : agentFromContext;
 
 
   const [session, setSession] = useState<Session | null>(null);
@@ -66,6 +65,7 @@ export const useChat = (agentIdOverride?: AgentId) => {
       queryFn: () => getMessages(threadId!),
       enabled: !!threadId,
       select: (data) => {
+          if (!selectedAgent) return [];
           if (!data || data.length === 0) {
               return [getInitialMessage(selectedAgent)];
           }
