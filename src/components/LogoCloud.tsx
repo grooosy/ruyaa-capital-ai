@@ -31,7 +31,7 @@ const LogoCloud: React.FC = () => (
           key={logo.alt}
           src={logo.src}
           alt={logo.alt}
-          className="float-y w-16 h-16 object-contain opacity-90 drop-shadow-lg transition-transform duration-300 hover:scale-110 mix-blend-multiply"
+          className="float-y w-16 h-16 object-contain opacity-90 drop-shadow-lg transition-transform duration-300 hover:scale-110"
           draggable={false}
         />
       ))}
