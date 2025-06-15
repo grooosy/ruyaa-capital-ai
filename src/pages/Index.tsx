@@ -1,13 +1,12 @@
+
 import React from "react";
 import Navbar from "@/components/Navbar";
-import VariableDeposit from "@/components/VariableDeposit";
 import LogoCloud from "@/components/LogoCloud";
 import PathModal from "@/components/PathModal";
 import AIGrid from "@/components/AIGrid";
 import CryptoArbitrageSection from "@/components/CryptoArbitrageSection";
 
 const Index = () => {
-  const [deposit, setDeposit] = React.useState(3000);
   const [modalOpen, setModalOpen] = React.useState(false);
 
   return (
@@ -32,9 +31,6 @@ const Index = () => {
           >
             Open Account Now
           </button>
-          <div className="mt-10 w-full">
-            <VariableDeposit deposit={deposit} setDeposit={setDeposit} />
-          </div>
         </section>
         <LogoCloud />
         {/* --- Add Crypto Arbitrage Section right here --- */}
