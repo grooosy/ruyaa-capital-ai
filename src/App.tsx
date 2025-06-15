@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -11,6 +12,7 @@ import ArbitragePage from "./pages/ArbitragePage";
 import NotFound from "./pages/NotFound";
 import { ChatProvider } from "./context/ChatContext";
 import AuthPage from "./pages/AuthPage";
+import DashboardPage from "./pages/DashboardPage";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 
@@ -34,6 +36,7 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/auth" element={<AuthPage />} />
+              <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/agents" element={<AgentsPage />} />
               <Route path="/agents/mt4mt5" element={<MT4Page />} />
               <Route path="/agents/crypto" element={<CryptoPage />} />
