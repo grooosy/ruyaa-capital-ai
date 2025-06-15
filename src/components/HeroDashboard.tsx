@@ -1,21 +1,42 @@
 
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { TrendingUp } from 'lucide-react';
+import { TrendingUp, TrendingDown } from 'lucide-react';
 import { Bar, BarChart as RechartsBarChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from 'recharts';
+import { useMarketData } from '@/hooks/useMarketData';
+import { Skeleton } from '@/components/ui/skeleton';
 
-const TickerCard = ({ name, price, change }: { name: string, price: string, change: string }) => (
-  <Card className="bg-card/50 backdrop-blur-sm border-white/10 shadow-lg w-full">
-    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-      <CardTitle className="text-sm font-medium text-gray-400">{name}</CardTitle>
-      <TrendingUp className="h-4 w-4 text-green" />
-    </CardHeader>
-    <CardContent>
-      <div className="text-2xl font-bold text-white">{price}</div>
-      <p className="text-xs text-green">{change}</p>
-    </CardContent>
-  </Card>
-);
+const TickerCard = ({ name, price, change, isLoading }: { name: string, price: string, change: string, isLoading?: boolean }) => {
+  if (isLoading) {
+    return (
+      <Card className="bg-card/50 backdrop-blur-sm border-white/10 shadow-lg w-full">
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle className="text-sm font-medium text-gray-400">{name}</CardTitle>
+          <Skeleton className="h-4 w-4" />
+        </CardHeader>
+        <CardContent>
+          <Skeleton className="h-8 w-3/4 mb-2" />
+          <Skeleton className="h-4 w-1/4" />
+        </CardContent>
+      </Card>
+    );
+  }
+  
+  const isPositive = !change.startsWith('-');
+
+  return (
+    <Card className="bg-card/50 backdrop-blur-sm border-white/10 shadow-lg w-full">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <CardTitle className="text-sm font-medium text-gray-400">{name}</CardTitle>
+        {isPositive ? <TrendingUp className="h-4 w-4 text-green" /> : <TrendingDown className="h-4 w-4 text-red-500" />}
+      </CardHeader>
+      <CardContent>
+        <div className="text-2xl font-bold text-white">{price}</div>
+        <p className={`text-xs ${isPositive ? 'text-green' : 'text-red-500'}`}>{change}</p>
+      </CardContent>
+    </Card>
+  );
+};
 
 const performanceData = [
   { name: 'W1', value: 100 },
@@ -59,11 +80,37 @@ const PerformanceChart = () => (
 );
 
 const HeroDashboard: React.FC = () => {
+  const { btc, gold } = useMarketData();
+
+  const formatPrice = (price: number | undefined, currency: 'GOLD' | 'BTC') => {
+    if (price === undefined) return '$--';
+    const options: Intl.NumberFormatOptions = currency === 'GOLD' 
+      ? { minimumFractionDigits: 2, maximumFractionDigits: 2 }
+      : { maximumFractionDigits: 0 };
+    return `$${price.toLocaleString('en-US', options)}`;
+  };
+  
+  const formatChange = (change: number | undefined) => {
+    if (change === undefined) return '-.-%';
+    const sign = change >= 0 ? '+' : '';
+    return `${sign}${change.toFixed(2)}%`;
+  };
+
   return (
     <div className="flex flex-col gap-4 p-4 rounded-2xl bg-black/20 backdrop-blur-md border border-white/5">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <TickerCard name="GOLD" price="$2,345.67" change="+0.45%" />
-        <TickerCard name="BTC" price="$63,245" change="+2.34%" />
+        <TickerCard 
+          name="GOLD" 
+          price={formatPrice(gold.data?.price, 'GOLD')} 
+          change={formatChange(gold.data?.change)}
+          isLoading={gold.isLoading} 
+        />
+        <TickerCard 
+          name="BTC" 
+          price={formatPrice(btc.data?.price, 'BTC')} 
+          change={formatChange(btc.data?.change)}
+          isLoading={btc.isLoading}
+        />
       </div>
       <div>
         <PerformanceChart />
