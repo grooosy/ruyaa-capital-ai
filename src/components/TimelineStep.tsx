@@ -7,7 +7,7 @@ interface TimelineStepProps {
   title: string;
   desc: string;
   index: number;
-  theme: 'green' | 'gold';
+  theme: 'green' | 'gold' | 'blue';
 }
 
 const TimelineStep: React.FC<TimelineStepProps> = ({ 
@@ -17,9 +17,9 @@ const TimelineStep: React.FC<TimelineStepProps> = ({
   index, 
   theme
 }) => {
-  const iconColor = theme === 'green' ? 'text-green' : 'text-gold';
-  const ringColor = theme === 'green' ? 'bg-green/10' : 'bg-gold/10';
-  const borderColor = theme === 'green' ? 'border-green/50' : 'border-gold/50';
+  const iconColor = theme === 'green' ? 'text-green' : theme === 'gold' ? 'text-gold' : 'text-blue-500';
+  const ringColor = theme === 'green' ? 'bg-green/10' : theme === 'gold' ? 'bg-gold/10' : 'bg-blue-500/10';
+  const borderColor = theme === 'green' ? 'border-green/50' : theme === 'gold' ? 'border-gold/50' : 'border-blue-500/50';
 
   return (
     <div
