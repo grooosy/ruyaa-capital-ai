@@ -1,4 +1,3 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
@@ -11,6 +10,7 @@ import HeroDashboard from "@/components/HeroDashboard";
 import { ArrowRight } from "lucide-react";
 import ChatWidget from "@/components/chat/ChatWidget";
 import ParticleBackground from "@/components/ParticleBackground";
+import MarketGrid from "@/components/MarketGrid";
 import { useTranslation } from "react-i18next";
 
 const Index = () => {
@@ -63,9 +63,9 @@ const Index = () => {
             </motion.button>
           </div>
 
-          {/* Right Side: Dashboard */}
-          <div className="lg:w-1/2 w-full mt-12 lg:mt-0">
-            <HeroDashboard />
+          {/* Right Side: Market Grid */}
+          <div className="lg:w-1/2 w-full mt-12 lg:mt-0 flex items-center justify-center">
+            <MarketGrid />
           </div>
         </section>
 
