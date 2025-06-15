@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -45,6 +44,7 @@ export default {
       boxShadow: {
         'green-glow': '0 0 20px 0 rgba(22,199,132,0.40)',
         'gold-glow': '0 0 20px 0 rgba(230,196,25,0.25)',
+        'red-glow': '0 0 20px 0 rgba(239, 68, 68, 0.40)',
       },
       keyframes: {
         floating: {
