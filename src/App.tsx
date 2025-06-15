@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -8,6 +9,7 @@ import AgentsPage from "./pages/AgentsPage";
 import MT4Page from "./pages/MT4Page";
 import CryptoPage from "./pages/CryptoPage";
 import ArbitragePage from "./pages/ArbitragePage";
+import AcademyPage from "./pages/AcademyPage";
 import NotFound from "./pages/NotFound";
 import { ChatProvider } from "./context/ChatContext";
 import AuthPage from "./pages/AuthPage";
@@ -52,6 +54,7 @@ const App = () => {
                     <Route path="/agents/mt4mt5" element={<MT4Page />} />
                     <Route path="/agents/crypto" element={<CryptoPage />} />
                     <Route path="/agents/arbitrage" element={<ArbitragePage />} />
+                    <Route path="/academy" element={<AcademyPage />} />
                     {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                     <Route path="*" element={<NotFound />} />
                   </Routes>
