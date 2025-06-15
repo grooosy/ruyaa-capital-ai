@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useChatContext, AgentId } from '@/context/ChatContext';
 import OpenAI from 'openai';
@@ -42,6 +41,21 @@ export const useChat = (agentIdOverride?: AgentId) => {
 
   const userId = session?.user?.id;
 
+  // Fetch user profile for personalized greetings
+  const { data: userProfile } = useQuery({
+    queryKey: ['profile', userId],
+    queryFn: async () => {
+      if (!userId) return null;
+      const { data } = await supabase
+        .from('profiles')
+        .select('full_name')
+        .eq('id', userId)
+        .single();
+      return data;
+    },
+    enabled: !!userId,
+  });
+
   // CASCADE: get/create the thread
   const { data: thread, isLoading: isLoadingThread } = useQuery({
       queryKey: ['thread', userId, selectedAgent],
@@ -64,7 +78,9 @@ export const useChat = (agentIdOverride?: AgentId) => {
       select: (data) => {
           if (!selectedAgent) return [];
           if (!data || data.length === 0) {
-              return [getInitialMessage(selectedAgent)];
+              // Pass user's first name to the initial message
+              const userName = userProfile?.full_name?.split(' ')[0];
+              return [getInitialMessage(selectedAgent, userName)];
           }
           return data;
       }
