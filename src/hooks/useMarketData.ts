@@ -1,4 +1,3 @@
-
 import { useQuery } from '@tanstack/react-query';
 
 const fetchBtcData = async () => {
@@ -30,13 +29,13 @@ export const useMarketData = () => {
   const { data: btcData, isLoading: isBtcLoading, error: btcError } = useQuery({
     queryKey: ['btcPrice'],
     queryFn: fetchBtcData,
-    refetchInterval: 30000, // Refetch every 30 seconds
+    refetchInterval: 5000, // Refetch every 5 seconds
   });
 
   const { data: goldData, isLoading: isGoldLoading, error: goldError } = useQuery({
     queryKey: ['goldPrice'],
     queryFn: fetchGoldData,
-    refetchInterval: 30000, // Refetch every 30 seconds
+    refetchInterval: 5000, // Refetch every 5 seconds
   });
 
   if (btcError) console.error("Error fetching BTC data:", btcError);

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { TrendingUp, TrendingDown } from 'lucide-react';
@@ -22,6 +21,19 @@ const TickerCard = ({ name, price, change, isLoading }: { name: string, price: s
     );
   }
   
+  const [highlight, setHighlight] = React.useState(false);
+  const prevPriceRef = React.useRef(price);
+
+  React.useEffect(() => {
+    // Highlight only when price changes from a valid previous price
+    if (prevPriceRef.current !== price && !prevPriceRef.current.includes('--')) {
+      setHighlight(true);
+      const timer = setTimeout(() => setHighlight(false), 500);
+      return () => clearTimeout(timer);
+    }
+    prevPriceRef.current = price;
+  }, [price]);
+
   const isPositive = !change.startsWith('-');
 
   return (
@@ -31,7 +43,7 @@ const TickerCard = ({ name, price, change, isLoading }: { name: string, price: s
         {isPositive ? <TrendingUp className="h-4 w-4 text-green" /> : <TrendingDown className="h-4 w-4 text-red-500" />}
       </CardHeader>
       <CardContent>
-        <div className="text-2xl font-bold text-white">{price}</div>
+        <div className={`text-2xl font-bold text-white transition-colors duration-300 ${highlight ? 'text-gold' : ''}`}>{price}</div>
         <p className={`text-xs ${isPositive ? 'text-green' : 'text-red-500'}`}>{change}</p>
       </CardContent>
     </Card>
