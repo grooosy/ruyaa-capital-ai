@@ -15,9 +15,10 @@ const agents: {id: AgentId, title: string, description: string, logoSrc: string,
   },
   {
     id: 'crypto',
-    title: 'Crypto Agent',
-    description: 'Leverage our AI for intelligent cryptocurrency trading strategies.',
+    title: 'Crypto Trading Agent',
+    description: 'BingX • MEXC • WEEX',
     logoSrc: '/logos/btc-official.svg',
+    href: '/agents/crypto',
   },
   {
     id: 'arbitrage',
