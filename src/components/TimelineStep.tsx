@@ -24,13 +24,11 @@ const TimelineStep: React.FC<TimelineStepProps> = ({
     >
       {/* Icon in ring */}
       <div className="relative flex items-center justify-center md:mb-3 mb-0">
+        <div className="absolute w-16 h-16 rounded-full bg-green/10 animate-pulse-glow" style={{ animationDelay: `${index * 150}ms` }} />
         <div
-          className="rounded-full border-2 border-green bg-[#23221c] shadow-green-glow w-14 h-14 flex items-center justify-center"
-          style={{
-            boxShadow: "0 0 18px #16C78433",
-          }}
+          className="relative rounded-full border border-green/50 bg-[#1a1913] w-14 h-14 flex items-center justify-center"
         >
-          <Icon size={28} color="#16C784" />
+          <Icon size={28} className="text-green" />
         </div>
         {/* Connector arrow */}
         {!isLast && (

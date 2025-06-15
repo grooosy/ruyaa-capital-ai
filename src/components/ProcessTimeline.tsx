@@ -48,7 +48,7 @@ const ProcessTimeline: React.FC = () => {
     <div className="relative flex flex-col md:flex-row md:items-start md:gap-0 gap-8 md:justify-between mt-4">
       {/* Vertical line for timeline */}
       <div 
-        className="hidden md:block absolute left-1/2 top-10 bottom-3 w-1 -translate-x-1/2 bg-gradient-to-b from-green/60 via-gold/60 to-gold/0 opacity-70 rounded-xl pointer-events-none" 
+        className="hidden md:block absolute left-1/2 top-10 bottom-3 w-0.5 -translate-x-1/2 bg-gradient-to-b from-green/50 via-green/20 to-transparent rounded-full" 
         style={{ 
           height: "calc(100% - 54px)", 
           minHeight: 210, 
