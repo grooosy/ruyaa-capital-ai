@@ -67,7 +67,7 @@ const cardVariants = {
     filter: "blur(0px)",
     transition: {
       delay: 0.2 + custom.i * 0.1,
-      type: "spring",
+      type: "spring" as const,
       stiffness: 120,
       damping: 15,
     },

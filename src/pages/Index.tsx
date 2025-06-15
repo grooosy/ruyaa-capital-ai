@@ -1,5 +1,6 @@
 
 import React from "react";
+import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import LogoCloud from "@/components/LogoCloud";
 import PathModal from "@/components/PathModal";
