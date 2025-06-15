@@ -19,11 +19,8 @@ const Navbar: React.FC = () => {
       }`}
     >
       <nav className="flex items-center justify-between max-w-7xl mx-auto px-6 py-4">
-        <div className="flex items-center space-x-3">
-          <img src="/logos/mt5.svg" alt="Ruyaa Logo" className="w-10 h-10 rounded-full border border-green" />
-          <span className="text-xl font-bold tracking-tight text-green" style={{ letterSpacing: '0.04em' }}>
-            RuyaaCapital-AI
-          </span>
+        <div className="flex items-center">
+          <img src="/lovable-uploads/1344e471-1643-4f75-ae5c-9b0e36b02a0d.png" alt="RuyaaCapital-AI Logo" className="h-12 w-auto" />
         </div>
         <div className="hidden md:flex items-center space-x-8">
           <a href="#ai" className="hover:text-green transition-colors font-semibold">How it works</a>
