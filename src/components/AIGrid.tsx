@@ -60,7 +60,7 @@ const ORBIT_RADIUS = 180; // px
 
 const cardPopVariants = {
   hidden: { opacity: 0, scale: 0.7, x: 0, y: 0, filter: "blur(8px)" },
-  visible: (orbit: { x: number, y: number, i: number }) => ({
+  visible: (orbit: { x: number; y: number; i: number }) => ({
     x: orbit.x,
     y: orbit.y,
     opacity: 1,
@@ -68,12 +68,12 @@ const cardPopVariants = {
     filter: "blur(0)",
     transition: {
       delay: 0.16 + orbit.i * 0.08,
-      type: "spring",
+      // type: "spring",
       stiffness: 110,
-      damping: 13
-    }
+      damping: 13,
+    },
   }),
-  exit: { opacity: 0, scale: 0.77, x: 0, y: 0, transition: { duration: 0.18 } }
+  exit: { opacity: 0, scale: 0.77, x: 0, y: 0, transition: { duration: 0.18 } },
 };
 
 const AIGrid: React.FC = () => {
@@ -89,12 +89,14 @@ const AIGrid: React.FC = () => {
           zIndex: 30,
         }}
         whileTap={{ scale: 0.97 }}
-        onClick={() => setActive(v => !v)}
+        onClick={() => setActive((v) => !v)}
         aria-label="Toggle AI Core"
       >
         {/* Glow/Halo */}
-        <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-             style={{ filter: 'blur(22px)', width: 230, height: 230, zIndex: 0 }}>
+        <div
+          className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+          style={{ filter: "blur(22px)", width: 230, height: 230, zIndex: 0 }}
+        >
           <motion.div
             animate={active ? { opacity: 0.58, scale: 1.12 } : { opacity: 0.22, scale: 0.95 }}
             className="rounded-full bg-green/30 w-full h-full"
@@ -112,7 +114,9 @@ const AIGrid: React.FC = () => {
           <motion.div
             className="absolute inset-0 rounded-full pointer-events-none"
             animate={active ? { opacity: 0.7, scale: 1.15 } : { opacity: 0.36, scale: 1 }}
-            style={{ background: "radial-gradient(ellipse at 60% 40%, #16C78444 70%, transparent 100%)" }}
+            style={{
+              background: "radial-gradient(ellipse at 60% 40%, #16C78444 70%, transparent 100%)",
+            }}
             transition={{ duration: 0.52 }}
           />
           <span
@@ -121,7 +125,7 @@ const AIGrid: React.FC = () => {
               letterSpacing: ".07em",
               textShadow: active
                 ? "0 4px 32px #16c784aa, 0 2px 18px #e6c41966"
-                : "0 2px 14px #16c78455"
+                : "0 2px 14px #16c78455",
             }}
           >
             AI CORE
@@ -133,14 +137,44 @@ const AIGrid: React.FC = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1.06 }}
               exit={{ opacity: 0, scale: 0.77 }}
-              transition={{ duration: .31 }}
+              transition={{ duration: 0.31 }}
             >
               <svg width="170" height="170" viewBox="0 0 170 170" fill="none">
-                <circle cx="85" cy="85" r="81" stroke="#16C784" strokeWidth="2" strokeDasharray="15,14" opacity="0.7">
-                  <animateTransform attributeName="transform" type="rotate" from="0 85 85" to="360 85 85" dur="5s" repeatCount="indefinite" />
+                <circle
+                  cx="85"
+                  cy="85"
+                  r="81"
+                  stroke="#16C784"
+                  strokeWidth="2"
+                  strokeDasharray="15,14"
+                  opacity="0.7"
+                >
+                  <animateTransform
+                    attributeName="transform"
+                    type="rotate"
+                    from="0 85 85"
+                    to="360 85 85"
+                    dur="5s"
+                    repeatCount="indefinite"
+                  />
                 </circle>
-                <circle cx="85" cy="85" r="70" stroke="#E6C419" strokeWidth="2" strokeDasharray="8,12" opacity="0.43">
-                  <animateTransform attributeName="transform" type="rotate" from="360 85 85" to="0 85 85" dur="6s" repeatCount="indefinite" />
+                <circle
+                  cx="85"
+                  cy="85"
+                  r="70"
+                  stroke="#E6C419"
+                  strokeWidth="2"
+                  strokeDasharray="8,12"
+                  opacity="0.43"
+                >
+                  <animateTransform
+                    attributeName="transform"
+                    type="rotate"
+                    from="360 85 85"
+                    to="0 85 85"
+                    dur="6s"
+                    repeatCount="indefinite"
+                  />
                 </circle>
               </svg>
             </motion.div>
@@ -159,37 +193,36 @@ const AIGrid: React.FC = () => {
       </motion.button>
       {/* POP OUT AGENT CARDS */}
       <AnimatePresence>
-        {active && AGENTS.map((agent, i) => {
-          const rad = (agent.angle * Math.PI) / 180;
-          const x = Math.cos(rad) * ORBIT_RADIUS;
-          const y = Math.sin(rad) * ORBIT_RADIUS * 0.85; // oval for visual
-          return (
-            <motion.div
-              key={agent.label}
-              className="absolute w-64 h-40 bg-[#1d1c17] rounded-2xl shadow-lg shadow-green/30 flex flex-col items-center justify-center p-4 border border-green hover:scale-105 transition transform-gpu"
-              variants={cardPopVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              custom={{ x, y, i }}
-              style={{
-                left: "50%",
-                top: "50%",
-                zIndex: 2,
-                originX: 0.5,
-                originY: 0.5,
-              }}
-            >
-              <div className="flex items-center gap-3 mb-2">
-                <agent.icon size={26} color={agent.color} />
-                <span className="font-semibold text-lg text-white">{agent.label}</span>
-              </div>
-              <div className="text-sm text-gray-300 text-center opacity-80">
-                {agent.desc}
-              </div>
-            </motion.div>
-          );
-        })}
+        {active &&
+          AGENTS.map((agent, i) => {
+            const rad = (agent.angle * Math.PI) / 180;
+            const x = Math.cos(rad) * ORBIT_RADIUS;
+            const y = Math.sin(rad) * ORBIT_RADIUS * 0.85; // oval for visual
+            return (
+              <motion.div
+                key={agent.label}
+                className="absolute w-64 h-40 bg-[#1d1c17] rounded-2xl shadow-lg shadow-green/30 flex flex-col items-center justify-center p-4 border border-green hover:scale-105 transition transform-gpu"
+                variants={cardPopVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                custom={{ x, y, i }}
+                style={{
+                  left: "50%",
+                  top: "50%",
+                  zIndex: 2,
+                  originX: 0.5,
+                  originY: 0.5,
+                }}
+              >
+                <div className="flex items-center gap-3 mb-2">
+                  <agent.icon size={26} color={agent.color} />
+                  <span className="font-semibold text-lg text-white">{agent.label}</span>
+                </div>
+                <div className="text-sm text-gray-300 text-center opacity-80">{agent.desc}</div>
+              </motion.div>
+            );
+          })}
       </AnimatePresence>
     </div>
   );
