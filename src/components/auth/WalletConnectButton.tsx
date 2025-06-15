@@ -47,10 +47,10 @@ const WalletConnectButton: React.FC = () => {
         throw profileError;
       }
 
-      if (existingProfile) {
+      if (existingProfile && existingProfile.email) {
         // User exists, sign them in
         const { error: signInError } = await supabase.auth.signInWithPassword({
-          email: existingProfile.email || `${walletAddress}@wallet.local`,
+          email: existingProfile.email,
           password: walletAddress // Use wallet address as password for wallet users
         });
 
@@ -82,9 +82,11 @@ const WalletConnectButton: React.FC = () => {
 
   const createWalletUser = async (walletAddress: string) => {
     try {
+      const email = `${walletAddress}@wallet.local`;
+      
       // Create auth user
       const { data: authData, error: authError } = await supabase.auth.signUp({
-        email: `${walletAddress}@wallet.local`,
+        email,
         password: walletAddress,
         options: {
           data: {
@@ -97,20 +99,7 @@ const WalletConnectButton: React.FC = () => {
       if (authError) throw authError;
 
       if (authData.user) {
-        // Update profile with wallet address
-        const { error: profileError } = await supabase
-          .from('profiles')
-          .upsert({
-            id: authData.user.id,
-            full_name: `Wallet User ${truncateMiddle(walletAddress)}`,
-            wallet_address: walletAddress,
-            email: `${walletAddress}@wallet.local`,
-          });
-
-        if (profileError) {
-          console.error("Profile creation error:", profileError);
-        }
-
+        // The handle_new_user trigger will create the profile automatically
         // Add wallet to wallets table
         const { error: walletError } = await supabase
           .from('wallets')

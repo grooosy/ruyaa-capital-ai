@@ -50,10 +50,10 @@ export const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
                 .eq('wallet_address', walletAddress)
                 .maybeSingle();
 
-            if (existingProfile) {
+            if (existingProfile && existingProfile.email) {
                 // Sign in existing user
                 const { error } = await supabase.auth.signInWithPassword({
-                    email: existingProfile.email || `${walletAddress}@wallet.local`,
+                    email: existingProfile.email,
                     password: walletAddress
                 });
 
