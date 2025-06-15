@@ -6,6 +6,7 @@ import LogoCloud from "@/components/LogoCloud";
 import PathModal from "@/components/PathModal";
 import AIGrid from "@/components/AIGrid";
 import CryptoArbitrageSection from "@/components/CryptoArbitrageSection";
+import FeatureHighlights from "@/components/FeatureHighlights";
 
 const Index = () => {
   const [modalOpen, setModalOpen] = React.useState(false);
@@ -31,9 +32,8 @@ const Index = () => {
           </h1>
           
           {/* Subtitle */}
-          <p className="text-xl text-gray-300 mb-10 max-w-2xl leading-relaxed">
-            AI-powered trading platform that scales with your ambitions. 
-            Professional tools, institutional execution, retail accessibility.
+          <p className="text-xl text-gray-300 mb-10 max-w-3xl leading-relaxed">
+            Trade Gold & Forex with institutional-grade execution. Experience minimal slippage, top-tier security, and instant withdrawals on our AI-powered platform.
           </p>
           
           {/* Official Logos */}
@@ -42,6 +42,11 @@ const Index = () => {
 
         {/* AI Agents Showcase */}
         <AIGrid />
+
+        {/* Feature Highlights Section */}
+        <section className="w-full max-w-6xl mx-auto px-6">
+          <FeatureHighlights />
+        </section>
 
         {/* CTA Section */}
         <section className="w-full max-w-4xl mx-auto flex flex-col items-center text-center px-6 pt-20">
