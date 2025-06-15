@@ -1,8 +1,7 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Tilt from 'react-parallax-tilt';
-import { ArrowRight, Eye, Clock, Zap, ClockCheck, Check } from 'lucide-react';
+import { ArrowRight, Eye, Clock, Zap, CheckCheck, Check } from 'lucide-react';
 import { agentData } from '@/data/agentFlows';
 
 type AgentType = 'mt' | 'crypto';
@@ -14,7 +13,7 @@ interface InteractiveAgentCardProps {
 
 const metrics = [
     { Icon: Clock, text: "24/7 Monitoring" },
-    { Icon: ClockCheck, text: "99.8% Uptime" },
+    { Icon: CheckCheck, text: "99.8% Uptime" },
     { Icon: Zap, text: "Real-Time Sync" },
     { Icon: Check, text: "Verified Execution Speed" },
 ];
