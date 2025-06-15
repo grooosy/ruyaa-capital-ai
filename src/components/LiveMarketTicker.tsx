@@ -25,13 +25,13 @@ const LiveMarketTicker: React.FC = () => {
         change: (Math.random() - 0.5) * (item.price * 0.002),
         changePercent: (Math.random() - 0.5) * 3
       })));
-    }, 2000);
+    }, 1000);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="w-full bg-[#0f0f0f] border border-green/20 rounded-xl p-4 mb-8">
+    <div className="w-full bg-[#111111] border border-green/30 rounded-xl p-4 mb-8 shadow-lg shadow-green/10">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 bg-green rounded-full animate-pulse"></div>
@@ -45,7 +45,7 @@ const LiveMarketTicker: React.FC = () => {
           <div key={index} className="flex items-center gap-3 min-w-fit">
             <span className="text-white font-medium text-sm">{item.symbol}</span>
             <span className="text-gold font-bold">${item.price.toFixed(item.symbol.includes('USD') && !item.symbol.includes('BTC') && !item.symbol.includes('ETH') ? 4 : 2)}</span>
-            <div className={`flex items-center gap-1 ${item.changePercent >= 0 ? 'text-green' : 'text-red-400'}`}>
+            <div className={`flex items-center gap-1 ${item.changePercent >= 0 ? 'text-green' : 'text-red-500'}`}>
               {item.changePercent >= 0 ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
               <span className="text-xs font-medium">{item.changePercent >= 0 ? '+' : ''}{item.changePercent.toFixed(2)}%</span>
             </div>

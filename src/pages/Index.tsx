@@ -36,7 +36,15 @@ const Index = () => {
             Professional tools, institutional execution, retail accessibility.
           </p>
           
-          {/* CTA Button */}
+          {/* Official Logos */}
+          <LogoCloud />
+        </section>
+
+        {/* AI Agents Showcase */}
+        <AIGrid />
+
+        {/* CTA Section */}
+        <section className="w-full max-w-4xl mx-auto flex flex-col items-center text-center px-6 pt-20">
           <motion.button
             onClick={() => setModalOpen(true)}
             className="bg-green text-[#181711] px-10 py-4 rounded-2xl text-xl font-bold shadow-green-glow hover:shadow-lg transition-all duration-300 tracking-wide"
@@ -49,13 +57,7 @@ const Index = () => {
           >
             Open Account Now
           </motion.button>
-          
-          {/* Official Logos */}
-          <LogoCloud />
         </section>
-
-        {/* AI Agents Showcase */}
-        <AIGrid />
 
         {/* Crypto Arbitrage Section */}
         <CryptoArbitrageSection />

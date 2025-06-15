@@ -48,19 +48,24 @@ const InteractiveAgentCard: React.FC<InteractiveAgentCardProps> = ({ type, onOpe
                 style={{ backfaceVisibility: "hidden" }}
             >
                 <div>
-                    <div className="flex items-center justify-between gap-4 mb-3">
-                        <h3 className="text-3xl font-bold text-white">{data.title}</h3>
-                        <div className="flex items-center gap-2 flex-shrink-0">
-                            {data.logos.map(logo => (
-                                <img 
-                                    key={logo.alt}
-                                    src={logo.src}
-                                    alt={logo.alt}
-                                    className={`${
-                                        type === 'mt' ? 'w-24 h-auto' : 'w-8 h-8'
-                                    } object-contain`}
-                                />
-                            ))}
+                    <div className="flex items-start justify-between gap-4 mb-3">
+                        <h3 className="text-3xl font-bold text-white flex-grow">{data.title}</h3>
+                        <div className="flex items-center gap-2 flex-wrap justify-end" style={{maxWidth: '45%'}}>
+                            {data.logos.map(logo => {
+                                if (logo.src.includes('placeholder')) {
+                                    return <div key={logo.alt} className="text-white text-xs bg-white/10 rounded px-2 py-1">{logo.alt}</div>;
+                                }
+                                return (
+                                    <img 
+                                        key={logo.alt}
+                                        src={logo.src}
+                                        alt={logo.alt}
+                                        className={`${
+                                            logo.alt === 'MT4/MT5 Logo' ? 'w-24 h-auto' : 'w-8 h-8'
+                                        } object-contain`}
+                                    />
+                                )
+                            })}
                         </div>
                     </div>
                     <p className="text-gray-300">{data.description}</p>
@@ -78,18 +83,32 @@ const InteractiveAgentCard: React.FC<InteractiveAgentCardProps> = ({ type, onOpe
             >
                 <h4 className="text-2xl font-bold text-white mb-4">See The Full Process</h4>
                 <p className="text-gray-300 mb-6">Explore the step-by-step AI workflow, from market scanning to trade execution.</p>
-                <Button 
+                <motion.button
                     onClick={(e) => {
                         e.stopPropagation();
                         onOpenDetails();
                     }}
-                    className={`font-bold text-dark-charcoal`}
-                    style={{
-                        backgroundColor: themeColor,
-                    }}
+                    whileHover={{ scale: 1.05, boxShadow: `0px 0px 20px ${themeColor}60` }}
+                    whileTap={{ scale: 0.95 }}
+                    className="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium rounded-lg group"
                 >
-                    <Eye className="mr-2 h-4 w-4" /> View Details
-                </Button>
+                    <motion.span
+                        className="absolute inset-0 transition-all duration-500"
+                        style={{
+                            background: `linear-gradient(45deg, ${themeColor}90 0%, ${type === 'mt' ? '#22c55e' : '#f59e0b'} 100%)`,
+                        }}
+                        initial={{ backgroundSize: '200% 200%', backgroundPosition: '0% 50%' }}
+                        whileHover={{ backgroundPosition: '100% 50%' }}
+                    >
+                    </motion.span>
+                    <span 
+                        className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-card/80 rounded-md group-hover:bg-opacity-0"
+                    >
+                        <div className="flex items-center text-white">
+                            <Eye className="mr-2 h-4 w-4" /> View Details
+                        </div>
+                    </span>
+                </motion.button>
             </div>
         </motion.div>
     </Tilt>

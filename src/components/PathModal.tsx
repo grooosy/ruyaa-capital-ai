@@ -4,12 +4,32 @@ import { motion, AnimatePresence } from "framer-motion";
 import Tilt from "react-parallax-tilt";
 import { X, ArrowLeft, ChevronRight } from "lucide-react";
 
-const PATHS = [
+interface PathIcon {
+  type: 'img' | 'placeholder';
+  src?: string;
+  text?: string;
+}
+
+const PATHS: Array<{
+  id: string;
+  title: string;
+  subtitle: string;
+  icons: PathIcon[];
+  color: string;
+  benefit: string;
+  steps: string[];
+}> = [
   {
     id: "trading",
     title: "MT4 / MT5 Trading",
     subtitle: "Professional forex & CFD trading",
-    icons: ["/logos/mt4-official.svg", "/logos/mt5-official.svg"],
+    icons: [
+      { type: 'img', src: "/logos/mt4-official.svg" },
+      { type: 'img', src: "/logos/mt5-official.svg" },
+      { type: 'placeholder', text: 'Visa' },
+      { type: 'placeholder', text: 'Mastercard' },
+      { type: 'placeholder', text: 'Phantom' },
+    ],
     color: "#16C784",
     benefit: "1-click withdraw & institutional spreads",
     steps: ["Create", "Deposit", "Pay", "AI On", "Trade"]
@@ -18,7 +38,12 @@ const PATHS = [
     id: "crypto",
     title: "Crypto Exchange",
     subtitle: "Trade Bitcoin, Ethereum & more", 
-    icons: ["/logos/btc-official.svg", "/logos/eth-official.svg", "/logos/usdt-official.svg", "/logos/xrp-official.svg"],
+    icons: [
+      { type: 'img', src: "/logos/btc-official.svg" },
+      { type: 'img', src: "/logos/eth-official.svg" },
+      { type: 'img', src: "/logos/usdt-official.svg" },
+      { type: 'img', src: "/logos/xrp-official.svg" },
+    ],
     color: "#E6C419",
     benefit: "On-chain custody & instant arbitrage",
     steps: ["Register", "Connect", "Exchange", "Deposit", "AI On"]
@@ -135,10 +160,16 @@ const PathModal: React.FC<PathModalProps> = ({ open, onClose }) => {
                               transform: "rotateY(0deg)"
                             }}
                           >
-                            <div className="flex gap-3 mb-6">
-                              {path.icons.map((icon, i) => (
-                                <img key={i} src={icon} alt="" className="w-12 h-12" />
-                              ))}
+                            <div className="flex gap-3 mb-6 flex-wrap items-center justify-center">
+                              {path.icons.map((icon, i) =>
+                                icon.type === 'img' ? (
+                                  <img key={i} src={icon.src} alt="" className="w-12 h-12" />
+                                ) : (
+                                  <div key={i} className="h-10 px-3 flex items-center justify-center text-sm font-semibold text-white bg-white/10 rounded-lg">
+                                    {icon.text}
+                                  </div>
+                                )
+                              )}
                             </div>
                             <h3 className="text-2xl font-bold text-white mb-3 text-center">
                               {path.title}
@@ -164,7 +195,9 @@ const PathModal: React.FC<PathModalProps> = ({ open, onClose }) => {
                           >
                             <div className="flex gap-3 mb-6">
                               {path.icons.slice(0, 2).map((icon, i) => (
-                                <img key={i} src={icon} alt="" className="w-12 h-12" />
+                                icon.type === 'img' ? 
+                                <img key={i} src={icon.src} alt="" className="w-12 h-12" />
+                                : null
                               ))}
                             </div>
                             <div 

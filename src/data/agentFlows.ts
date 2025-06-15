@@ -126,7 +126,12 @@ export const agentData = {
     description: "Automate your strategies with our AI agents directly on the world's most popular trading platforms. Seamless integration, powerful execution.",
     timeline: mt4mt5Timeline,
     theme: "green",
-    logos: [mt4mt5Logo],
+    logos: [
+      mt4mt5Logo,
+      { src: "placeholder_visa", alt: "Visa" },
+      { src: "placeholder_mastercard", alt: "Mastercard" },
+      { src: "placeholder_phantom", alt: "Phantom" },
+    ],
   },
   crypto: {
     title: "For Crypto Trading",

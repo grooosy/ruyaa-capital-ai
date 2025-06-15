@@ -62,17 +62,22 @@ const AgentDetailModal: React.FC<AgentDetailModalProps> = ({ type, onClose }) =>
                     <h2 className="text-3xl font-bold text-white flex-grow" >
                         {data.title}
                     </h2>
-                    <div className="flex items-center gap-2 flex-shrink-0">
-                        {data.logos.map(logo => (
-                            <img 
-                                key={logo.alt}
-                                src={logo.src}
-                                alt={logo.alt}
-                                className={`${
-                                    type === 'mt' ? 'w-24 h-auto' : 'w-8 h-8'
-                                } object-contain`}
-                            />
-                        ))}
+                    <div className="flex items-center gap-2 flex-wrap justify-end flex-shrink-0">
+                        {data.logos.map(logo => {
+                            if (logo.src.includes('placeholder')) {
+                                return <div key={logo.alt} className="text-white text-sm bg-white/10 rounded px-2 py-1">{logo.alt}</div>;
+                            }
+                            return (
+                                <img 
+                                    key={logo.alt}
+                                    src={logo.src}
+                                    alt={logo.alt}
+                                    className={`${
+                                        logo.alt === 'MT4/MT5 Logo' ? 'w-24 h-auto' : 'w-8 h-8'
+                                    } object-contain`}
+                                />
+                            );
+                        })}
                     </div>
                 </div>
                 
