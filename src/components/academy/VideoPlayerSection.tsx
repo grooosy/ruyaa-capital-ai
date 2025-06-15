@@ -4,13 +4,11 @@ import { Play, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import VideoPlayer from '@/components/VideoPlayer';
+import InteractiveLessonCard from './InteractiveLessonCard';
 import { useTranslation } from 'react-i18next';
-import { Tables } from '@/integrations/supabase/types';
-
-type Lesson = Tables<'video_lessons'>;
 
 interface VideoPlayerSectionProps {
-  selectedLesson: Lesson | null;
+  selectedLesson: any;
   completedLessons: string[];
   videoKey: number;
   onVideoEnd: () => void;
@@ -34,7 +32,7 @@ const VideoPlayerSection: React.FC<VideoPlayerSectionProps> = ({
           <div className="text-center text-white">
             <Play className="w-16 h-16 mx-auto mb-4 text-green" />
             <p className="text-lg font-semibold">
-              {isArabic ? 'اختر درساً لبدء المشاهدة' : 'Select a lesson to start watching'}
+              {isArabic ? 'اختر درساً لبدء التعلم' : 'Select a lesson to start learning'}
             </p>
           </div>
         </div>
@@ -44,14 +42,20 @@ const VideoPlayerSection: React.FC<VideoPlayerSectionProps> = ({
 
   const isCompleted = completedLessons.includes(selectedLesson.id);
 
-  console.log('VideoPlayerSection rendering:', {
-    lessonId: selectedLesson.id,
-    title: selectedLesson.title,
-    videoUrl: selectedLesson.video_url,
-    isCompleted,
-    videoKey
-  });
+  // Handle interactive lessons
+  if (selectedLesson.content_type === 'interactive') {
+    return (
+      <div className="mb-6">
+        <InteractiveLessonCard
+          lesson={selectedLesson}
+          isCompleted={isCompleted}
+          onComplete={onManualComplete}
+        />
+      </div>
+    );
+  }
 
+  // Handle video lessons
   return (
     <div className="mb-6">
       <VideoPlayer
@@ -69,7 +73,7 @@ const VideoPlayerSection: React.FC<VideoPlayerSectionProps> = ({
         </p>
         {(isArabic ? selectedLesson.topics_ar : selectedLesson.topics) && (
           <div className="flex flex-wrap gap-2 mb-4">
-            {(isArabic ? selectedLesson.topics_ar : selectedLesson.topics)?.map((topic, index) => (
+            {(isArabic ? selectedLesson.topics_ar : selectedLesson.topics)?.map((topic: string, index: number) => (
               <Badge key={index} variant="outline" className="border-gold/30 text-gold">
                 {topic}
               </Badge>

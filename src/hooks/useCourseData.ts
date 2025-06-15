@@ -2,7 +2,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { useTranslation } from 'react-i18next';
 import { Tables } from '@/integrations/supabase/types';
-import { getEducationalVideoUrl } from '@/utils/videoUtils';
+import { getModernLessonContent } from '@/utils/videoUtils';
 
 type Course = Tables<'video_courses'>;
 type Lesson = Tables<'video_lessons'>;
@@ -38,33 +38,35 @@ export const useLessonsData = (courseId: string) => {
   const { i18n } = useTranslation();
   const isArabic = i18n.language === 'ar';
 
-  // Fetch lessons for a specific course
+  // Create modern interactive lessons instead of fetching from database
   const { data: lessons, isLoading: lessonsLoading } = useQuery({
-    queryKey: ['lessons', courseId],
+    queryKey: ['modern-lessons', courseId],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from('video_lessons')
-        .select('*')
-        .eq('course_id', courseId)
-        .eq('is_active', true)
-        .order('lesson_number', { ascending: true });
+      // Generate 5 modern interactive lessons
+      const modernLessons = Array.from({ length: 5 }, (_, index) => {
+        const lessonContent = getModernLessonContent(index);
+        return {
+          id: `modern-lesson-${index + 1}`,
+          course_id: courseId,
+          lesson_number: index + 1,
+          title: lessonContent.title,
+          title_ar: lessonContent.titleAr,
+          description: lessonContent.description,
+          description_ar: lessonContent.descriptionAr,
+          video_url: lessonContent.type === 'video' ? lessonContent.url : '',
+          thumbnail_url: null,
+          duration_seconds: lessonContent.type === 'video' ? 300 : 180, // 5 min for video, 3 min for interactive
+          topics: lessonContent.type === 'interactive' ? ['Interactive Learning'] : ['Video Learning'],
+          topics_ar: lessonContent.type === 'interactive' ? ['تعلم تفاعلي'] : ['تعلم بالفيديو'],
+          is_active: true,
+          created_at: new Date().toISOString(),
+          content_type: lessonContent.type,
+          interactive_content: lessonContent.type === 'interactive' ? lessonContent.content : null
+        };
+      });
       
-      if (error) throw error;
-      
-      // Update lessons with proper video URLs if they're using placeholder
-      const updatedLessons = data?.map((lesson, index) => ({
-        ...lesson,
-        video_url: lesson.video_url === 'https://www.youtube.com/embed/dQw4w9WgXcQ' 
-          ? getEducationalVideoUrl(index)
-          : lesson.video_url
-      })) || [];
-      
-      console.log('Updated lessons with proper video URLs:', updatedLessons.map(l => ({ 
-        title: l.title, 
-        videoUrl: l.video_url 
-      })));
-      
-      return updatedLessons as Lesson[];
+      console.log('Generated modern interactive lessons:', modernLessons);
+      return modernLessons as any[];
     },
     enabled: !!courseId,
   });

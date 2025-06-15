@@ -8,13 +8,11 @@ import CourseCompletionCard from "@/components/academy/CourseCompletionCard";
 import TradingCTA from "@/components/academy/TradingCTA";
 import CourseCurriculum from "@/components/CourseCurriculum";
 import CourseProgress from "@/components/CourseProgress";
+import QuizModal from "@/components/academy/QuizModal";
 import { useCourseData, useLessonsData, useUserProgress } from "@/hooks/useCourseData";
 import { useAuthState } from "@/hooks/chat/useAuthState";
-import { Tables } from "@/integrations/supabase/types";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
-
-type Lesson = Tables<'video_lessons'>;
 
 const AcademyPage = () => {
   const { i18n } = useTranslation();
@@ -27,9 +25,11 @@ const AcademyPage = () => {
   const { lessons, lessonsLoading } = useLessonsData(currentCourse?.id || '');
   const { progress, updateProgress } = useUserProgress(userId, currentCourse?.id || '');
   
-  const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null);
+  const [selectedLesson, setSelectedLesson] = useState<any>(null);
   const [completedLessons, setCompletedLessons] = useState<string[]>([]);
-  const [videoKey, setVideoKey] = useState(0); // Key to force video player re-render
+  const [videoKey, setVideoKey] = useState(0);
+  const [showQuiz, setShowQuiz] = useState(false);
+  const [currentQuizNumber, setCurrentQuizNumber] = useState(0);
 
   // Set initial lesson and completed lessons from progress
   useEffect(() => {
@@ -41,10 +41,9 @@ const AcademyPage = () => {
     }
   }, [lessons, progress, selectedLesson]);
 
-  const handleLessonSelect = (lesson: Lesson) => {
+  const handleLessonSelect = (lesson: any) => {
     console.log('Selecting lesson:', lesson.title);
     setSelectedLesson(lesson);
-    // Force video player to re-render with new content
     setVideoKey(prev => prev + 1);
   };
 
@@ -54,6 +53,12 @@ const AcademyPage = () => {
       const progressPercentage = (newCompletedLessons.length / lessons.length) * 100;
       
       setCompletedLessons(newCompletedLessons);
+      
+      // Check if we should show a quiz (after every 5 lessons)
+      if (newCompletedLessons.length % 5 === 0 && newCompletedLessons.length < lessons.length) {
+        setCurrentQuizNumber(Math.floor(newCompletedLessons.length / 5) - 1);
+        setShowQuiz(true);
+      }
       
       if (userId) {
         try {
@@ -86,7 +91,6 @@ const AcademyPage = () => {
               ? 'خطأ في حفظ التقدم' 
               : 'Error saving progress'
           );
-          // Revert the state change
           setCompletedLessons(completedLessons);
         }
       }
@@ -106,6 +110,16 @@ const AcademyPage = () => {
     }
   };
 
+  const handleQuizComplete = (score: number) => {
+    const percentage = lessons ? (score / 3) * 100 : 0; // Assuming 3 questions per quiz
+    toast.success(
+      isArabic 
+        ? `🎯 اختبار مكتمل! النتيجة: ${Math.round(percentage)}%` 
+        : `🎯 Quiz completed! Score: ${Math.round(percentage)}%`
+    );
+    setShowQuiz(false);
+  };
+
   const progressPercentage = lessons ? (completedLessons.length / lessons.length) * 100 : 0;
 
   if (coursesLoading || lessonsLoading) {
@@ -114,7 +128,7 @@ const AcademyPage = () => {
         <div className="text-center">
           <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-green mx-auto mb-4"></div>
           <p className="text-white text-lg">
-            {isArabic ? 'جاري تحميل الأكاديمية...' : 'Loading Academy...'}
+            {isArabic ? 'جاري تحميل الأكاديمية الحديثة...' : 'Loading Modern Academy...'}
           </p>
         </div>
       </div>
@@ -141,7 +155,7 @@ const AcademyPage = () => {
         {/* Main Course Content */}
         <section className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-3 gap-8">
-            {/* Video Player */}
+            {/* Video/Interactive Player */}
             <div className="lg:col-span-2">
               <VideoPlayerSection
                 selectedLesson={selectedLesson}
@@ -173,6 +187,14 @@ const AcademyPage = () => {
           </div>
         </section>
       </main>
+
+      {/* Quiz Modal */}
+      <QuizModal
+        isOpen={showQuiz}
+        onClose={() => setShowQuiz(false)}
+        onComplete={handleQuizComplete}
+        quizNumber={currentQuizNumber}
+      />
 
       <Footer />
     </div>
