@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
   Dialog,
@@ -45,11 +44,15 @@ const Navbar: React.FC = () => {
             />
           </DialogContent>
         </Dialog>
-        <div className="hidden md:flex items-center space-x-8">
-          <a href="#ai" className="hover:text-green transition-colors font-semibold">How it works</a>
-          <a href="#ai" className="hover:text-gold transition-colors font-semibold">AI Agents</a>
-          <a href="#deposit" className="hover:text-green transition-colors font-semibold">Deposit</a>
-          <a href="#footer" className="hover:text-gold transition-colors font-semibold">Contact</a>
+        <div className="hidden md:flex items-center">
+            <div className="flex items-center space-x-8">
+                <a href="#ai" className="hover:text-green transition-colors font-semibold">How it works</a>
+                <a href="#ai" className="hover:text-gold transition-colors font-semibold">AI Agents</a>
+                <a href="#deposit" className="hover:text-green transition-colors font-semibold">Deposit</a>
+                <a href="#footer" className="hover:text-gold transition-colors font-semibold">Contact</a>
+            </div>
+            <div className="w-px h-6 bg-gradient-to-b from-transparent via-gold/30 to-transparent mx-8" />
+            <span className="text-sm italic text-gold">It works while you sleep</span>
         </div>
       </nav>
     </header>

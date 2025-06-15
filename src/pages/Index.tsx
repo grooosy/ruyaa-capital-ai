@@ -1,4 +1,3 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
@@ -33,7 +32,7 @@ const Index = () => {
           
           {/* Subtitle */}
           <p className="text-xl text-gray-300 mb-12 max-w-3xl leading-relaxed">
-            Trade Gold, Nasdaq or Bitcoin with Your Personal AI.
+            1-click to start trading Gold or Bitcoin with your AI.
           </p>
           
           {/* Feature Highlights */}

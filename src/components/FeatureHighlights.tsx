@@ -1,23 +1,23 @@
 
 import React from 'react';
-import { ShieldCheck, Zap, MessageSquare, BookOpen } from 'lucide-react';
+import { ShieldCheck, Zap, MessageSquare, Wallet } from 'lucide-react';
 
 const features = [
-  {
-    icon: <ShieldCheck className="h-7 w-7 text-gold" />,
-    text: 'Verified Brokers',
-  },
-  {
-    icon: <Zap className="h-7 w-7 text-gold" />,
-    text: 'Instant Account Setup',
-  },
   {
     icon: <MessageSquare className="h-7 w-7 text-gold" />,
     text: '24/7 AI Assistant',
   },
   {
-    icon: <BookOpen className="h-7 w-7 text-gold" />,
-    text: 'Trading Academy',
+    icon: <Zap className="h-7 w-7 text-gold" />,
+    text: 'Low Slippage Connectors',
+  },
+  {
+    icon: <Wallet className="h-7 w-7 text-gold" />,
+    text: 'One-Click Withdrawals',
+  },
+  {
+    icon: <ShieldCheck className="h-7 w-7 text-gold" />,
+    text: 'Verified Brokers',
   },
 ];
 
