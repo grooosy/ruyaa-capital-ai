@@ -108,7 +108,7 @@ const Index = () => {
               {/* Enhanced Title with AI Elements */}
               <div className="flex items-center justify-center gap-3 mb-4">
                 <Brain className="w-8 h-8 text-green animate-pulse" />
-                <h2 className="font-manrope text-4xl font-extrabold tracking-tight text-center bg-gradient-to-r from-green via-gold to-green bg-clip-text text-transparent">
+                <h2 className="font-manrope text-4xl font-extrabold tracking-tight text-center text-white">
                   Why Ruyaa AI Outperforms
                 </h2>
                 <Zap className="w-8 h-8 text-gold animate-pulse" />
