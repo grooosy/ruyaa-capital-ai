@@ -1,3 +1,4 @@
+
 import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
@@ -5,7 +6,7 @@ import LogoCloud from "@/components/LogoCloud";
 import PathModal from "@/components/PathModal";
 import AIGrid from "@/components/AIGrid";
 import CryptoArbitrageSection from "@/components/CryptoArbitrageSection";
-import FeatureHighlights from "@/components/FeatureHighlights";
+import FeatureGrid from "@/components/FeatureGrid";
 import HeroDashboard from "@/components/HeroDashboard";
 import { ArrowRight } from "lucide-react";
 import ChatWidget from "@/components/chat/ChatWidget";
@@ -68,12 +69,19 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Feature Highlights & Logo Cloud moved below hero */}
-        <section className="w-full max-w-5xl mx-auto flex flex-col items-center text-center px-6 pt-24 pb-12">
-          <div className="mb-16">
-            <FeatureHighlights />
+        {/* Feature Grid & Logo Cloud */}
+        <section className="w-full items-center text-center py-16 mt-12 bg-gradient-to-tr from-black/20 via-transparent to-black/20 relative">
+          <div className="absolute inset-0 bg-grid-pattern opacity-50 -z-10" />
+          <div className="w-full max-w-5xl mx-auto flex flex-col items-center px-6">
+            <div className="mb-12">
+              <h2 className="text-3xl font-extrabold text-gold text-center mb-4">Why Ruyaa AI Outperforms</h2>
+              <p className="text-neutral-300">Our intelligent features work while you sleep.</p>
+            </div>
+            <div className="mb-16">
+              <FeatureGrid />
+            </div>
+            <LogoCloud />
           </div>
-          <LogoCloud />
         </section>
 
 

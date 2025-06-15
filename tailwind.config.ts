@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -54,12 +55,23 @@ export default {
         shimmer: {
           '100%': { transform: 'translateX(100%)' }
         },
+        'pulse-slow': {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.5' },
+        },
+        'rotate-subtle': {
+          '0%, 100%': { transform: 'rotate(0deg)' },
+          '25%': { transform: 'rotate(1.5deg)' },
+          '75%': { transform: 'rotate(-1.5deg)' },
+        },
       },
       animation: {
         floating: 'floating 3s ease-in-out infinite',
         shimmer: 'shimmer 2s linear infinite',
         'fade-in': 'fade-in 0.3s ease-in',
         'spin-slow': 'spin 15s linear infinite',
+        'pulse-slow': 'pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'rotate-subtle': 'rotate-subtle 10s ease-in-out infinite',
       }
     }
   },
