@@ -1,10 +1,11 @@
-
 import { supabase } from '@/integrations/supabase/client';
 import { AgentId } from '@/context/ChatContext';
 import { getInitialMessage } from '@/config/agentConfig';
 
 export const getConversation = async (userId: string, agentId: AgentId) => {
-    if (!agentId) return null;
+    if (!agentId || (agentId !== 'mt4' && agentId !== 'crypto')) {
+        return null;
+    }
     const { data, error } = await supabase
         .from('conversations')
         .select('*')
