@@ -4,20 +4,29 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import LogoCloud from "@/components/LogoCloud";
 import PathModal from "@/components/PathModal";
+import AIGrid from "@/components/AIGrid";
 import CryptoArbitrageSection from "@/components/CryptoArbitrageSection";
 import FeatureHighlights from "@/components/FeatureHighlights";
 import HeroDashboard from "@/components/HeroDashboard";
 import { ArrowRight } from "lucide-react";
 import ChatWidget from "@/components/chat/ChatWidget";
 import ParticleBackground from "@/components/ParticleBackground";
-import { useNavigate } from "react-router-dom";
 
 const Index = () => {
   const [modalOpen, setModalOpen] = React.useState(false);
-  const navigate = useNavigate();
+  const [startAiFlowAnimation, setStartAiFlowAnimation] = React.useState(false);
 
   const handleStartNowClick = () => {
-    navigate('/agents');
+    const aiSection = document.getElementById('ai');
+    if (aiSection) {
+      aiSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    if (!startAiFlowAnimation) {
+      setTimeout(() => {
+        setStartAiFlowAnimation(true);
+      }, 300);
+    }
   };
 
   return (
@@ -47,7 +56,7 @@ const Index = () => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              Explore AI Agents
+              Open Account • Start Now
               <ArrowRight className="w-5 h-5" />
             </motion.button>
           </div>
@@ -65,6 +74,10 @@ const Index = () => {
           </div>
           <LogoCloud />
         </section>
+
+
+        {/* AI Agents Showcase */}
+        <AIGrid startAnimation={startAiFlowAnimation} />
 
         {/* Crypto Arbitrage Section */}
         <CryptoArbitrageSection />

@@ -1,11 +1,9 @@
-
 import React from "react";
 import {
   Dialog,
   DialogContent,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Link } from "react-router-dom";
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = React.useState(false);
@@ -15,8 +13,6 @@ const Navbar: React.FC = () => {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  const navLinkClasses = "hover:text-gold transition-colors font-semibold";
 
   return (
     <header
@@ -34,13 +30,11 @@ const Navbar: React.FC = () => {
                 aria-label="Enlarge logo"
                 className="p-0 bg-transparent border-none appearance-none cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-green rounded-sm"
               >
-                <Link to="/">
-                  <img
-                    src="/lovable-uploads/4fc94ce9-7009-46fc-ad4b-ed3edffc3240.png"
-                    alt="RuyaaCapital-AI Logo"
-                    className="h-12 w-auto"
-                  />
-                </Link>
+                <img
+                  src="/lovable-uploads/4fc94ce9-7009-46fc-ad4b-ed3edffc3240.png"
+                  alt="RuyaaCapital-AI Logo"
+                  className="h-12 w-auto"
+                />
               </button>
             </DialogTrigger>
             <DialogContent className="w-auto max-w-2xl p-0 bg-transparent border-none shadow-none">
@@ -54,8 +48,8 @@ const Navbar: React.FC = () => {
           <span className="text-lg font-playfair italic text-gold/90 hidden lg:block">It works while you sleep</span>
         </div>
         <div className="hidden md:flex items-center space-x-8">
-            <Link to="/agents" className={navLinkClasses}>How it works</Link>
-            <Link to="/agents" className={navLinkClasses}>AI Agents</Link>
+            <a href="#ai" className="hover:text-green transition-colors font-semibold">How it works</a>
+            <a href="#ai" className="hover:text-gold transition-colors font-semibold">AI Agents</a>
             <a href="#deposit" className="hover:text-green transition-colors font-semibold">Deposit</a>
             <a href="#footer" className="hover:text-gold transition-colors font-semibold">Contact</a>
         </div>
