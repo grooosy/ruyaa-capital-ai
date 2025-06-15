@@ -15,6 +15,9 @@ import AuthPage from "./pages/AuthPage";
 import DashboardPage from "./pages/DashboardPage";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
+import { WalletProvider } from "./context/WalletProvider";
+
+import '@solana/wallet-adapter-react-ui/styles.css';
 
 const queryClient = new QueryClient();
 
@@ -30,21 +33,23 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <ChatProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/auth" element={<AuthPage />} />
-              <Route path="/dashboard" element={<DashboardPage />} />
-              <Route path="/agents" element={<AgentsPage />} />
-              <Route path="/agents/mt4mt5" element={<MT4Page />} />
-              <Route path="/agents/crypto" element={<CryptoPage />} />
-              <Route path="/agents/arbitrage" element={<ArbitragePage />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
+          <WalletProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/auth" element={<AuthPage />} />
+                <Route path="/dashboard" element={<DashboardPage />} />
+                <Route path="/agents" element={<AgentsPage />} />
+                <Route path="/agents/mt4mt5" element={<MT4Page />} />
+                <Route path="/agents/crypto" element={<CryptoPage />} />
+                <Route path="/agents/arbitrage" element={<ArbitragePage />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </WalletProvider>
         </ChatProvider>
       </TooltipProvider>
     </QueryClientProvider>

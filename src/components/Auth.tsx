@@ -5,8 +5,9 @@ import { supabase } from '@/integrations/supabase/client';
 import { useTranslation } from 'react-i18next';
 import React, { useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { toast } from 'sonner';
 import { Wallet } from 'lucide-react';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { useWalletModal } from '@solana/wallet-adapter-react-ui';
 
 interface AuthProps {
     onSuccess?: () => void;
@@ -14,6 +15,8 @@ interface AuthProps {
 
 export const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
     const { t } = useTranslation();
+    const { setVisible: setWalletModalVisible } = useWalletModal();
+    const { connected, publicKey, disconnect, connecting } = useWallet();
 
     useEffect(() => {
         if (!onSuccess) return;
@@ -28,21 +31,6 @@ export const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
             subscription?.unsubscribe();
         };
     }, [onSuccess]);
-
-    const handleSolanaSignIn = async () => {
-        const { error } = await supabase.auth.signInWithOAuth({
-            provider: 'solana' as any,
-            options: {
-                redirectTo: `${window.location.origin}/`,
-            },
-        });
-        if (error) {
-            toast.error("Solana sign-in failed", {
-                description: error.message,
-            });
-            console.error('Solana sign-in error:', error);
-        }
-    };
 
     return (
         <div className="w-full max-w-sm">
@@ -81,17 +69,34 @@ export const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
             />
             <div className="relative flex pt-6 pb-3 items-center">
                 <div className="flex-grow border-t border-zinc-700"></div>
-                <span className="flex-shrink mx-4 text-zinc-500 text-xs uppercase">Or</span>
+                <span className="flex-shrink mx-4 text-zinc-500 text-xs uppercase">Or connect with</span>
                 <div className="flex-grow border-t border-zinc-700"></div>
             </div>
-            <Button
-                variant="outline"
-                className="w-full bg-transparent border-gold text-gold hover:bg-gold/10 hover:text-gold"
-                onClick={handleSolanaSignIn}
-            >
-                <Wallet className="mr-2 h-4 w-4" />
-                Sign in with Solana Wallet
-            </Button>
+            
+            {connected && publicKey ? (
+                 <div className="flex flex-col items-center gap-4 w-full">
+                    <p className="text-xs text-zinc-400 text-center">
+                        Connected with wallet: <br/>
+                        <span className="font-mono text-zinc-300">{publicKey.toBase58()}</span>
+                    </p>
+                    <Button
+                        variant="outline"
+                        className="w-full"
+                        onClick={() => disconnect()}
+                    >
+                        Disconnect Wallet
+                    </Button>
+                </div>
+            ) : (
+                <Button
+                    className="w-full font-bold text-lg h-12 bg-gradient-to-br from-gold to-primary-accent text-dark-charcoal shadow-gold-glow hover:shadow-green-glow transition-all duration-300 transform hover:-translate-y-1"
+                    onClick={() => setWalletModalVisible(true)}
+                    disabled={connecting}
+                >
+                    <Wallet className="mr-3 h-5 w-5" />
+                    {connecting ? 'Connecting...' : 'Sign in with Crypto Wallet'}
+                </Button>
+            )}
         </div>
     );
 };
