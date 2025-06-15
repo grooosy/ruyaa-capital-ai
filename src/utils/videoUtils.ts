@@ -27,93 +27,150 @@ export const formatTime = (time: number): string => {
   return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 };
 
-// Modern interactive lesson content - using the working video and creating engaging short lessons
+// Modern AI-powered trading academy content
 export const getModernLessonContent = (lessonIndex: number) => {
   const lessons = [
-    // Lesson 1-5: Trading Fundamentals
-    {
-      type: 'video',
-      url: 'https://www.youtube.com/watch?v=p7HKvqRI_Bo',
-      title: 'What is Trading?',
-      titleAr: 'ما هو التداول؟',
-      description: 'Introduction to financial markets and trading basics',
-      descriptionAr: 'مقدمة في الأسواق المالية وأساسيات التداول'
-    },
+    // Lesson 1: AI-Powered Account Setup
     {
       type: 'interactive',
-      title: 'Market Types',
-      titleAr: 'أنواع الأسواق',
-      description: 'Understanding different financial markets',
-      descriptionAr: 'فهم الأسواق المالية المختلفة',
-      content: {
-        points: [
-          'Stock Markets - Buy ownership in companies',
-          'Forex Markets - Currency exchange',
-          'Crypto Markets - Digital currencies',
-          'Commodity Markets - Raw materials'
-        ],
-        pointsAr: [
-          'أسواق الأسهم - شراء ملكية في الشركات',
-          'أسواق الفوركس - تبادل العملات',
-          'أسواق العملات المشفرة - العملات الرقمية',
-          'أسواق السلع - المواد الخام'
-        ]
-      }
-    },
-    {
-      type: 'interactive',
-      title: 'Key Trading Terms',
-      titleAr: 'مصطلحات التداول الأساسية',
-      description: 'Essential vocabulary for traders',
-      descriptionAr: 'المفردات الأساسية للمتداولين',
-      content: {
-        terms: [
-          { term: 'Bull Market', definition: 'Rising market prices', definitionAr: 'أسعار السوق المرتفعة' },
-          { term: 'Bear Market', definition: 'Falling market prices', definitionAr: 'أسعار السوق المنخفضة' },
-          { term: 'Volume', definition: 'Number of shares traded', definitionAr: 'عدد الأسهم المتداولة' },
-          { term: 'Volatility', definition: 'Price movement intensity', definitionAr: 'كثافة حركة الأسعار' }
-        ]
-      }
-    },
-    {
-      type: 'interactive',
-      title: 'Risk vs Reward',
-      titleAr: 'المخاطر مقابل العائد',
-      description: 'Understanding the fundamental trading principle',
-      descriptionAr: 'فهم مبدأ التداول الأساسي',
-      content: {
-        concepts: [
-          'Higher potential returns often mean higher risk',
-          'Diversification helps manage risk',
-          'Never invest more than you can afford to lose',
-          'Risk management is key to long-term success'
-        ],
-        conceptsAr: [
-          'العوائد المحتملة الأعلى تعني عادة مخاطر أعلى',
-          'التنويع يساعد في إدارة المخاطر',
-          'لا تستثمر أكثر مما يمكنك تحمل خسارته',
-          'إدارة المخاطر هي مفتاح النجاح طويل المدى'
-        ]
-      }
-    },
-    {
-      type: 'interactive',
-      title: 'Getting Started',
-      titleAr: 'البدء',
-      description: 'Your first steps in trading',
-      descriptionAr: 'خطواتك الأولى في التداول',
+      title: '🤖 AI-Powered MT4/MT5 Setup',
+      titleAr: '🤖 إعداد MT4/MT5 بالذكاء الاصطناعي',
+      description: 'Let Ruyaa AI guide you through setting up your first trading account',
+      descriptionAr: 'دع ذكاء رؤيا الاصطناعي يوجهك لإعداد حساب التداول الأول',
       content: {
         steps: [
-          'Choose a reputable broker',
-          'Start with a demo account',
-          'Learn basic analysis',
-          'Start small with real money'
+          '🔗 Download MT4/MT5 from your broker',
+          '🎯 AI analyzes your trading goals',
+          '⚙️ Smart account configuration',
+          '✅ Ruyaa AI validates your setup'
         ],
         stepsAr: [
-          'اختر وسيطًا موثوقًا',
-          'ابدأ بحساب تجريبي',
-          'تعلم التحليل الأساسي',
-          'ابدأ بمبلغ صغير بالمال الحقيقي'
+          '🔗 تحميل MT4/MT5 من الوسيط الخاص بك',
+          '🎯 الذكاء الاصطناعي يحلل أهداف التداول',
+          '⚙️ تكوين الحساب الذكي',
+          '✅ ذكاء رؤيا يتحقق من الإعداد'
+        ],
+        aiTips: [
+          'Ruyaa AI recommends starting with demo accounts',
+          'Our AI monitors your progress and suggests improvements',
+          'Get personalized trading insights powered by AI'
+        ],
+        aiTipsAr: [
+          'ذكاء رؤيا ينصح بالبدء بالحسابات التجريبية',
+          'ذكاؤنا الاصطناعي يراقب تقدمك ويقترح التحسينات',
+          'احصل على رؤى تداول شخصية مدعومة بالذكاء الاصطناعي'
+        ]
+      }
+    },
+    // Lesson 2: Understanding Market Interface
+    {
+      type: 'interactive',
+      title: '📊 AI Market Analysis Dashboard',
+      titleAr: '📊 لوحة تحليل السوق بالذكاء الاصطناعي',
+      description: 'Master MT4/MT5 interface with AI-powered insights',
+      descriptionAr: 'إتقان واجهة MT4/MT5 مع رؤى الذكاء الاصطناعي',
+      content: {
+        concepts: [
+          '📈 Charts: Your window to market movements',
+          '🎯 Order Types: Market, Limit, Stop orders explained',
+          '💰 Account Info: Balance, Equity, Margin tracking',
+          '🤖 AI Signals: Real-time trading recommendations'
+        ],
+        conceptsAr: [
+          '📈 الرسوم البيانية: نافذتك على حركات السوق',
+          '🎯 أنواع الأوامر: أوامر السوق والحد والإيقاف',
+          '💰 معلومات الحساب: تتبع الرصيد والحقوق والهامش',
+          '🤖 إشارات الذكاء الاصطناعي: توصيات التداول الفورية'
+        ],
+        examples: [
+          'Example: EUR/USD chart showing AI-detected support at 1.0500',
+          'Real case: How Ruyaa AI spotted 150-pip opportunity in GBP/JPY',
+          'Live demo: AI analyzing news impact on gold prices'
+        ]
+      }
+    },
+    // Lesson 3: First Trade with AI
+    {
+      type: 'interactive',
+      title: '🚀 Your First AI-Guided Trade',
+      titleAr: '🚀 صفقتك الأولى بإرشاد الذكاء الاصطناعي',
+      description: 'Execute your first trade with Ruyaa AI assistance',
+      descriptionAr: 'نفذ صفقتك الأولى بمساعدة ذكاء رؤيا',
+      content: {
+        steps: [
+          '🎯 AI identifies high-probability trade setup',
+          '📊 Smart position sizing based on your risk profile',
+          '⚡ Execute trade with AI-calculated stop loss',
+          '📱 Monitor with real-time AI updates'
+        ],
+        stepsAr: [
+          '🎯 الذكاء الاصطناعي يحدد إعداد التداول عالي الاحتمال',
+          '📊 تحديد حجم المركز الذكي بناءً على ملف المخاطر',
+          '⚡ تنفيذ الصفقة مع وقف الخسارة المحسوب بالذكاء الاصطناعي',
+          '📱 المراقبة مع التحديثات الفورية للذكاء الاصطناعي'
+        ],
+        realExample: {
+          pair: 'EUR/USD',
+          entry: '1.0550',
+          stopLoss: '1.0530',
+          takeProfit: '1.0580',
+          aiConfidence: '87%',
+          reasoning: 'AI detected bullish divergence + support confluence'
+        }
+      }
+    },
+    // Lesson 4: Risk Management with AI
+    {
+      type: 'interactive',
+      title: '🛡️ AI-Powered Risk Management',
+      titleAr: '🛡️ إدارة المخاطر بالذكاء الاصطناعي',
+      description: 'Protect your capital with intelligent risk management',
+      descriptionAr: 'احم رأس مالك بإدارة المخاطر الذكية',
+      content: {
+        concepts: [
+          '💡 2% Rule: Never risk more than 2% per trade',
+          '🎯 AI calculates optimal position sizes automatically',
+          '📊 Dynamic stop-loss adjustment based on volatility',
+          '🤖 Ruyaa AI monitors correlation risk across trades'
+        ],
+        conceptsAr: [
+          '💡 قاعدة 2%: لا تخاطر بأكثر من 2% لكل صفقة',
+          '🎯 الذكاء الاصطناعي يحسب أحجام المراكز المثلى تلقائياً',
+          '📊 تعديل وقف الخسارة الديناميكي بناءً على التقلبات',
+          '🤖 ذكاء رؤيا يراقب مخاطر الارتباط عبر الصفقات'
+        ],
+        scenarios: [
+          'Scenario 1: $1000 account → Max risk $20 per trade',
+          'Scenario 2: AI detects high volatility → Reduces position size',
+          'Scenario 3: Multiple correlated trades → AI warning system'
+        ]
+      }
+    },
+    // Lesson 5: Advanced AI Strategies
+    {
+      type: 'interactive',
+      title: '🧠 Advanced AI Trading Strategies',
+      titleAr: '🧠 استراتيجيات التداول المتقدمة بالذكاء الاصطناعي',
+      description: 'Unlock professional trading with Ruyaa AI algorithms',
+      descriptionAr: 'افتح التداول المحترف بخوارزميات ذكاء رؤيا',
+      content: {
+        strategies: [
+          '🔄 AI Scalping: 1-5 minute AI-detected opportunities',
+          '📈 Trend Following: AI identifies major trend shifts',
+          '💎 Swing Trading: AI spots 3-7 day profit opportunities',
+          '🌊 Mean Reversion: AI catches oversold/overbought levels'
+        ],
+        strategiesAr: [
+          '🔄 المضاربة بالذكاء الاصطناعي: فرص 1-5 دقائق',
+          '📈 متابعة الاتجاه: الذكاء الاصطناعي يحدد تحولات الاتجاه الرئيسية',
+          '💎 التداول المتأرجح: الذكاء الاصطناعي يرصد فرص الربح 3-7 أيام',
+          '🌊 العودة للمتوسط: الذكاء الاصطناعي يلتقط مستويات الإفراط'
+        ],
+        aiFeatures: [
+          'Smart entry/exit signals with 85%+ accuracy',
+          'Real-time market sentiment analysis',
+          'Automated trade management',
+          'Personalized strategy recommendations'
         ]
       }
     }
@@ -122,32 +179,32 @@ export const getModernLessonContent = (lessonIndex: number) => {
   return lessons[lessonIndex % lessons.length];
 };
 
-// Quiz data for after every 5 lessons
+// Enhanced quiz data with AI focus
 export const getQuizData = (quizNumber: number) => {
   const quizzes = [
     {
-      title: 'Trading Fundamentals Quiz',
-      titleAr: 'اختبار أساسيات التداول',
+      title: '🤖 AI Trading Mastery Quiz',
+      titleAr: '🤖 اختبار إتقان التداول بالذكاء الاصطناعي',
       questions: [
         {
-          question: 'What is a bull market?',
-          questionAr: 'ما هو السوق الصاعد؟',
-          options: ['Rising prices', 'Falling prices', 'Stable prices', 'Volatile prices'],
-          optionsAr: ['أسعار مرتفعة', 'أسعار منخفضة', 'أسعار مستقرة', 'أسعار متقلبة'],
-          correct: 0
-        },
-        {
-          question: 'What does diversification help with?',
-          questionAr: 'ما الذي يساعد فيه التنويع؟',
-          options: ['Increasing profits', 'Managing risk', 'Faster trading', 'Lower fees'],
-          optionsAr: ['زيادة الأرباح', 'إدارة المخاطر', 'التداول السريع', 'رسوم أقل'],
+          question: 'What is the main advantage of AI-powered trading with Ruyaa?',
+          questionAr: 'ما هي الميزة الرئيسية للتداول بالذكاء الاصطناعي مع رؤيا؟',
+          options: ['Faster execution', '85%+ signal accuracy', 'Lower fees', 'Bigger profits'],
+          optionsAr: ['تنفيذ أسرع', 'دقة الإشارات 85%+', 'رسوم أقل', 'أرباح أكبر'],
           correct: 1
         },
         {
-          question: 'What should beginners start with?',
-          questionAr: 'بماذا يجب أن يبدأ المبتدئون؟',
-          options: ['Large investments', 'Demo account', 'Advanced strategies', 'Multiple markets'],
-          optionsAr: ['استثمارات كبيرة', 'حساب تجريبي', 'استراتيجيات متقدمة', 'أسواق متعددة'],
+          question: 'How does Ruyaa AI help with risk management?',
+          questionAr: 'كيف يساعد ذكاء رؤيا في إدارة المخاطر؟',
+          options: ['Eliminates all risk', 'Calculates optimal position sizes', 'Guarantees profits', 'Predicts the future'],
+          optionsAr: ['يلغي جميع المخاطر', 'يحسب أحجام المراكز المثلى', 'يضمن الأرباح', 'يتنبأ بالمستقبل'],
+          correct: 1
+        },
+        {
+          question: 'What should you do after completing this AI academy?',
+          questionAr: 'ماذا يجب أن تفعل بعد إكمال أكاديمية الذكاء الاصطناعي؟',
+          options: ['Start live trading immediately', 'Practice with demo + AI signals', 'Invest all savings', 'Ignore AI recommendations'],
+          optionsAr: ['ابدأ التداول المباشر فوراً', 'تدرب مع التجريبي + إشارات الذكاء الاصطناعي', 'استثمر جميع المدخرات', 'تجاهل توصيات الذكاء الاصطناعي'],
           correct: 1
         }
       ]

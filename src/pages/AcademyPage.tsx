@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -9,6 +8,7 @@ import TradingCTA from "@/components/academy/TradingCTA";
 import CourseCurriculum from "@/components/CourseCurriculum";
 import CourseProgress from "@/components/CourseProgress";
 import QuizModal from "@/components/academy/QuizModal";
+import AIStatsCard from "@/components/academy/AIStatsCard";
 import { useCourseData, useLessonsData, useUserProgress } from "@/hooks/useCourseData";
 import { useAuthState } from "@/hooks/chat/useAuthState";
 import { toast } from "sonner";
@@ -169,8 +169,12 @@ const AcademyPage = () => {
               <CourseCompletionCard progressPercentage={progressPercentage} />
             </div>
 
-            {/* Course Playlist */}
-            <div className="lg:col-span-1">
+            {/* Sidebar */}
+            <div className="lg:col-span-1 space-y-6">
+              {/* AI Stats Card */}
+              <AIStatsCard />
+              
+              {/* Course Playlist */}
               {lessons && (
                 <CourseCurriculum
                   lessons={lessons}
