@@ -20,6 +20,7 @@ const WalletConnectButton: React.FC = () => {
   const { connected, publicKey, connect, disconnect, connecting } = useWallet();
   const { setVisible: setWalletModalVisible } = useWalletModal();
   const [isLoading, setIsLoading] = useState(false);
+  const [hasProcessedConnection, setHasProcessedConnection] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -36,12 +37,12 @@ const WalletConnectButton: React.FC = () => {
 
       const walletAddress = publicKey.toBase58();
 
-      // Check if user exists in profiles with this wallet - use any type to bypass TypeScript issues
+      // Check if user exists in profiles with this wallet
       const { data: existingProfile, error: profileError } = await supabase
         .from('profiles')
         .select('*')
         .eq('wallet_address', walletAddress)
-        .maybeSingle() as { data: any, error: any };
+        .maybeSingle();
 
       if (profileError && profileError.code !== 'PGRST116') {
         throw profileError;
@@ -77,6 +78,7 @@ const WalletConnectButton: React.FC = () => {
       });
     } finally {
       setIsLoading(false);
+      setHasProcessedConnection(true);
     }
   };
 
@@ -130,16 +132,20 @@ const WalletConnectButton: React.FC = () => {
 
   // Effect to handle wallet connection changes
   useEffect(() => {
-    if (connected && publicKey && !isLoading) {
+    if (connected && publicKey && !isLoading && !hasProcessedConnection) {
       // Auto-authenticate when wallet connects
       handleWalletAuth();
+    } else if (!connected) {
+      // Reset processed state when wallet disconnects
+      setHasProcessedConnection(false);
     }
-  }, [connected, publicKey]);
+  }, [connected, publicKey, isLoading, hasProcessedConnection]);
 
   const handleDisconnect = async () => {
     try {
       await disconnect();
       await supabase.auth.signOut();
+      setHasProcessedConnection(false);
       toast({
         title: "Disconnected",
         description: "Wallet disconnected successfully",

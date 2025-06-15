@@ -57,7 +57,7 @@ function truncateMiddle(address: string, chars = 6) {
 }
 
 const WalletsCard: React.FC<WalletsCardProps> = ({ wallets, onAddWallet }) => {
-  const { connected, publicKey, connect } = useWallet();
+  const { connected, publicKey } = useWallet();
   const { setVisible: setWalletModalVisible } = useWalletModal();
   const { toast } = useToast();
 
@@ -83,15 +83,23 @@ const WalletsCard: React.FC<WalletsCardProps> = ({ wallets, onAddWallet }) => {
 
       const walletAddress = publicKey.toBase58();
 
+      // Check if wallet already exists
+      const existingWallet = wallets?.find(w => w.address === walletAddress && w.chain === 'SOL');
+      if (existingWallet) {
+        toast({
+          title: "Wallet already added",
+          description: `This SOL wallet is already in your collection`,
+        });
+        return;
+      }
+
       // Add wallet to wallets table
       const { error } = await supabase
         .from('wallets')
-        .upsert({
+        .insert({
           user_id: session.user.id,
           address: walletAddress,
           chain: 'SOL',
-        }, {
-          onConflict: 'user_id,chain,address'
         });
 
       if (error) {

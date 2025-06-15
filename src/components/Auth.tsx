@@ -43,12 +43,17 @@ export const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
         try {
             const walletAddress = publicKey.toBase58();
 
-            // Check if user exists with this wallet - use any type to bypass TypeScript issues
-            const { data: existingProfile } = await supabase
+            // Check if user exists with this wallet
+            const { data: existingProfile, error: profileError } = await supabase
                 .from('profiles')
                 .select('*')
                 .eq('wallet_address', walletAddress)
-                .maybeSingle() as { data: any };
+                .maybeSingle();
+
+            if (profileError) {
+                console.error('Profile lookup error:', profileError);
+                throw profileError;
+            }
 
             if (existingProfile && existingProfile.email) {
                 // Sign in existing user
