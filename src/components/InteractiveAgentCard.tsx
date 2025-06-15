@@ -23,14 +23,6 @@ const InteractiveAgentCard: React.FC<InteractiveAgentCardProps> = ({ type, onOpe
       setIsFlipped(!isFlipped);
   }
 
-  const additionalLogos = [
-    { src: 'placeholder-visa', alt: 'Visa' },
-    { src: 'placeholder-mastercard', alt: 'Mastercard' },
-    { src: 'placeholder-phantom', alt: 'Phantom' },
-  ];
-
-  const allLogos = [...data.logos, ...additionalLogos];
-
   return (
     <Tilt
         glareEnable
@@ -59,9 +51,9 @@ const InteractiveAgentCard: React.FC<InteractiveAgentCardProps> = ({ type, onOpe
                     <div className="flex items-start justify-between gap-4 mb-3">
                         <h3 className="text-3xl font-bold text-white flex-grow">{data.title}</h3>
                         <div className="flex items-center gap-2 flex-wrap justify-end" style={{maxWidth: '45%'}}>
-                            {allLogos.map(logo => {
+                            {data.logos.map(logo => {
                                 if (logo.src.includes('placeholder')) {
-                                    return <div key={logo.alt} className="text-white text-xs bg-white/10 rounded px-2 py-1 h-8 flex items-center justify-center font-semibold">{logo.alt}</div>;
+                                    return <div key={logo.alt} className="text-white text-xs bg-white/10 rounded px-2 py-1">{logo.alt}</div>;
                                 }
                                 return (
                                     <img 
