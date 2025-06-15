@@ -15,7 +15,7 @@ const VariableDeposit: React.FC<{
 }> = ({ deposit, setDeposit }) => {
   const tier = TIERS.find(t => deposit >= t.min && deposit <= t.max) || TIERS[0];
   return (
-    <div className="bg-card px-6 py-5 rounded-2xl shadow-green w-full max-w-md mx-auto mt-6 flex flex-col items-center gap-4 border border-[#26241c]">
+    <div className="bg-card px-6 py-5 rounded-2xl w-full max-w-md mx-auto flex flex-col items-center gap-4 border border-[#26241c] shadow-green">
       <div className="flex justify-between w-full mb-2 text-sm text-muted-foreground">
         <span>Min $100</span>
         <span>Max $10,000</span>
@@ -36,8 +36,8 @@ const VariableDeposit: React.FC<{
           style={{
             background: tier.badge,
             color: "#181711",
-            boxShadow: tier.color === "bg-green" ? "0 0 12px #16C78488" :
-              tier.color === "bg-gold" ? "0 0 12px #E6C41988" : "0 0 14px #8B5CF688"
+            boxShadow: tier.color === "bg-green" ? "0 0 8px #16C78466" :
+              tier.color === "bg-gold" ? "0 0 8px #E6C41966" : "0 0 10px #8B5CF666"
           }}
         >
           {tier.label}

@@ -11,16 +11,13 @@ const logos = [
 ];
 
 const LogoCloud: React.FC = () => (
-  <div className="flex items-center justify-center gap-8 mt-8 animate-floating">
+  <div className="flex items-center justify-center gap-6 mt-8">
     {logos.map(logo => (
       <img
         key={logo.alt}
         src={logo.src}
         alt={logo.alt}
-        className="w-12 h-12 lg:w-16 lg:h-16 opacity-90 drop-shadow-md z-10"
-        style={{
-          animation: "floating 4s ease-in-out infinite",
-        }}
+        className="float-y w-14 h-14 sm:w-16 sm:h-16 opacity-90 drop-shadow-md z-10 transition-transform duration-300"
       />
     ))}
   </div>

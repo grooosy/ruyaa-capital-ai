@@ -24,4 +24,12 @@
   .shadow-green {
     box-shadow: 0 3px 18px 0 #16C78466;
   }
+  .float-y {
+    @apply animate-[floatY_4s_ease-in-out_infinite_alternate];
+  }
+}
+
+@keyframes floatY {
+  from { transform: translateY(0);}
+  to { transform: translateY(3px);}
 }
