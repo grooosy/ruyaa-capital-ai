@@ -5,6 +5,7 @@ import { X } from 'lucide-react';
 import { agentData } from '@/data/agentFlows';
 import ProcessTimeline from './ProcessTimeline';
 import { Button } from './ui/button';
+import { useNavigate } from 'react-router-dom';
 
 interface AgentDetailModalProps {
     type: 'mt' | 'crypto';
@@ -34,6 +35,25 @@ const AgentDetailModal: React.FC<AgentDetailModalProps> = ({ type, onClose }) =>
     const data = agentData[type];
     const buttonBg = type === 'mt' ? 'bg-gold hover:bg-gold/90' : 'bg-green hover:bg-green/90';
     const buttonTextColor = 'text-dark-charcoal';
+    const navigate = useNavigate();
+
+    const handleStart = () => {
+        if (type === 'mt') {
+            navigate('/agents/mt4');
+        } else if (type === 'crypto') {
+            navigate('/agents/crypto');
+        }
+        onClose();
+    };
+
+    let logosToDisplay = data.logos;
+    if (type === 'mt') {
+        logosToDisplay = data.logos.filter(logo => !['Visa', 'Mastercard', 'Phantom'].includes(logo.alt));
+        logosToDisplay.push(
+            { src: '/lovable-uploads/2793e622-138a-4554-833b-e21e68dd92cf.png', alt: 'Visa & Mastercard' },
+            { src: '/logos/usdt-official.svg', alt: 'USDT' }
+        );
+    }
 
     return (
         <motion.div
@@ -63,18 +83,26 @@ const AgentDetailModal: React.FC<AgentDetailModalProps> = ({ type, onClose }) =>
                         {data.title}
                     </h2>
                     <div className="flex items-center gap-2 flex-wrap justify-end flex-shrink-0">
-                        {data.logos.map(logo => {
+                        {logosToDisplay.map(logo => {
                             if (logo.src.includes('placeholder')) {
                                 return <div key={logo.alt} className="text-white text-sm bg-white/10 rounded px-2 py-1">{logo.alt}</div>;
                             }
+                            
+                            let className = 'object-contain';
+                            if (logo.alt === 'MT4/MT5 Logo') {
+                                className += ' w-24 h-auto';
+                            } else if (logo.alt === 'Visa & Mastercard') {
+                                className += ' h-8 w-auto';
+                            } else {
+                                className += ' w-8 h-8';
+                            }
+
                             return (
                                 <img 
                                     key={logo.alt}
                                     src={logo.src}
                                     alt={logo.alt}
-                                    className={`${
-                                        logo.alt === 'MT4/MT5 Logo' ? 'w-24 h-auto' : 'w-8 h-8'
-                                    } object-contain`}
+                                    className={className}
                                 />
                             );
                         })}
@@ -86,7 +114,7 @@ const AgentDetailModal: React.FC<AgentDetailModalProps> = ({ type, onClose }) =>
                 <ProcessTimeline timeline={data.timeline} theme={type === 'mt' ? 'gold' : 'green'} />
                 
                 <div className="mt-8 text-center">
-                    <Button className={`${buttonBg} ${buttonTextColor} font-bold px-8 py-3 text-lg`}>
+                    <Button onClick={handleStart} className={`${buttonBg} ${buttonTextColor} font-bold px-8 py-3 text-lg`}>
                         Start with this Agent
                     </Button>
                 </div>
