@@ -8,6 +8,7 @@ import AIGrid from "@/components/AIGrid";
 import CryptoArbitrageSection from "@/components/CryptoArbitrageSection";
 import FeatureGrid from "@/components/FeatureGrid";
 import HeroDashboard from "@/components/HeroDashboard";
+import Footer from "@/components/Footer";
 import { ArrowRight, Brain, Zap } from "lucide-react";
 import ChatWidget from "@/components/chat/ChatWidget";
 import ParticleBackground from "@/components/ParticleBackground";
@@ -133,6 +134,9 @@ const Index = () => {
         <CryptoArbitrageSection />
 
       </main>
+
+      {/* Professional Footer */}
+      <Footer />
 
       {/* Path Selection Modal */}
       <PathModal open={modalOpen} onClose={() => setModalOpen(false)} />
