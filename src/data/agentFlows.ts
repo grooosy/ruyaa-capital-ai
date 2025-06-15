@@ -125,7 +125,7 @@ export const agentData = {
     title: "For MT4 / MT5",
     description: "Automate your strategies with our AI agents directly on the world's most popular trading platforms. Seamless integration, powerful execution.",
     timeline: mt4mt5Timeline,
-    theme: "gold",
+    theme: "green",
     logos: [
       mt4mt5Logo,
       { src: "placeholder_visa", alt: "Visa" },
@@ -137,14 +137,7 @@ export const agentData = {
     title: "For Crypto Trading",
     description: "Capitalize on market movements. Our crypto agents analyze on-chain data and market trends to execute trades on decentralized exchanges.",
     timeline: cryptoTimeline,
-    theme: "green",
-    logos: cryptoLogos,
-  },
-  arbitrage: {
-    title: "For Crypto Arbitrage",
-    description: "Capitalize on market inefficiencies. Our arbitrage agents scan across exchanges to find and execute profitable trades in milliseconds.",
-    timeline: cryptoArbitrageTimeline,
-    theme: "blue",
+    theme: "gold",
     logos: cryptoLogos,
   }
 };

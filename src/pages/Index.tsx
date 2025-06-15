@@ -1,9 +1,11 @@
+
 import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import LogoCloud from "@/components/LogoCloud";
 import PathModal from "@/components/PathModal";
 import AIGrid from "@/components/AIGrid";
+import CryptoArbitrageSection from "@/components/CryptoArbitrageSection";
 import FeatureHighlights from "@/components/FeatureHighlights";
 import HeroDashboard from "@/components/HeroDashboard";
 import { ArrowRight } from "lucide-react";
@@ -76,6 +78,9 @@ const Index = () => {
 
         {/* AI Agents Showcase */}
         <AIGrid startAnimation={startAiFlowAnimation} />
+
+        {/* Crypto Arbitrage Section */}
+        <CryptoArbitrageSection />
 
       </main>
 

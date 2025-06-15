@@ -1,16 +1,14 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Tilt from 'react-parallax-tilt';
 import { ArrowRight, Eye, Clock, Zap, CheckCheck, Check } from 'lucide-react';
 import { agentData } from '@/data/agentFlows';
 
-type AgentType = 'mt' | 'crypto' | 'arbitrage';
+type AgentType = 'mt' | 'crypto';
 
 interface InteractiveAgentCardProps {
   type: AgentType;
   onOpenDetails: () => void;
-  isSelected: boolean;
 }
 
 const metrics = [
@@ -20,11 +18,11 @@ const metrics = [
     { Icon: Check, text: "Verified Execution Speed" },
 ];
 
-const InteractiveAgentCard: React.FC<InteractiveAgentCardProps> = ({ type, onOpenDetails, isSelected }) => {
+const InteractiveAgentCard: React.FC<InteractiveAgentCardProps> = ({ type, onOpenDetails }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const data = agentData[type];
-  const cardBorderColor = type === 'mt' ? 'border-gold/20' : type === 'crypto' ? 'border-green/20' : 'border-blue-500/20';
-  const themeColor = type === 'mt' ? '#CFA100' : type === 'crypto' ? '#10A169' : '#627EEA';
+  const cardBorderColor = type === 'mt' ? 'border-gold/20' : 'border-green/20';
+  const themeColor = type === 'mt' ? '#CFA100' : '#10A169';
 
   const mtPatternStyle = {
     backgroundImage: `linear-gradient(rgba(207, 161, 0, 0.04) 1px, transparent 1px), linear-gradient(to right, rgba(207, 161, 0, 0.04) 1px, transparent 1px)`,
@@ -35,35 +33,15 @@ const InteractiveAgentCard: React.FC<InteractiveAgentCardProps> = ({ type, onOpe
     backgroundImage: `radial-gradient(circle, rgba(16, 161, 105, 0.05) 1px, transparent 1px)`,
     backgroundSize: '1.5rem 1.5rem',
   };
-
-  const arbitragePatternStyle = {
-    backgroundImage: `linear-gradient(45deg, rgba(98, 126, 234, 0.03) 25%, transparent 25%), linear-gradient(-45deg, rgba(98, 126, 234, 0.03) 25%, transparent 25%)`,
-    backgroundSize: '1rem 1rem',
-  };
   
-  const getPattern = () => {
-    switch(type) {
-      case 'mt': return mtPatternStyle;
-      case 'crypto': return cryptoPatternStyle;
-      case 'arbitrage': return arbitragePatternStyle;
-    }
-  }
-  const patternStyle = getPattern();
+  const patternStyle = type === 'mt' ? mtPatternStyle : cryptoPatternStyle;
   
   const logosToDisplay = type === 'mt'
     ? data.logos.filter(logo => !['Visa', 'Mastercard', 'Phantom'].includes(logo.alt))
     : data.logos;
 
-  const handleFlip = (e: React.MouseEvent) => {
-      e.stopPropagation();
+  const handleFlip = () => {
       setIsFlipped(!isFlipped);
-  }
-
-  const handleCardClick = () => {
-    if (isFlipped) {
-      setIsFlipped(false);
-    }
-    onOpenDetails();
   }
 
   return (
@@ -79,11 +57,11 @@ const InteractiveAgentCard: React.FC<InteractiveAgentCardProps> = ({ type, onOpe
         style={{ transformStyle: "preserve-3d" }}
     >
         <motion.div
-            className={`w-full h-[320px] rounded-2xl relative cursor-pointer ring-2 ${isSelected ? 'ring-gold' : 'ring-transparent'} transition-all duration-300`}
+            className={`w-full h-[320px] rounded-2xl relative cursor-pointer`}
             style={{ transformStyle: "preserve-3d" }}
             animate={{ rotateY: isFlipped ? 180 : 0 }}
             transition={{ duration: 0.6, ease: "easeInOut" }}
-            onClick={handleCardClick}
+            onClick={handleFlip}
         >
             {/* Front Face */}
             <div
@@ -150,7 +128,7 @@ const InteractiveAgentCard: React.FC<InteractiveAgentCardProps> = ({ type, onOpe
                     <p className="text-gray-300 mb-6">Explore the step-by-step AI workflow, from market scanning to trade execution.</p>
                     <motion.button
                         onClick={(e) => {
-                            e.stopPropagation(); // prevent card click
+                            e.stopPropagation();
                             onOpenDetails();
                         }}
                         whileHover={{ scale: 1.05, boxShadow: `0px 0px 20px ${themeColor}60` }}
@@ -160,7 +138,7 @@ const InteractiveAgentCard: React.FC<InteractiveAgentCardProps> = ({ type, onOpe
                         <motion.span
                             className="absolute inset-0 transition-all duration-500"
                             style={{
-                                background: `linear-gradient(45deg, ${themeColor}90 0%, ${type === 'mt' ? '#f59e0b' : type === 'crypto' ? '#22c55e' : '#3b82f6'} 100%)`,
+                                background: `linear-gradient(45deg, ${themeColor}90 0%, ${type === 'mt' ? '#f59e0b' : '#22c55e'} 100%)`,
                             }}
                             initial={{ backgroundSize: '200% 200%', backgroundPosition: '0% 50%' }}
                             whileHover={{ backgroundPosition: '100% 50%' }}
