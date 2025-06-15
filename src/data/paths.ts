@@ -21,10 +21,7 @@ export const PATHS: PathData[] = [
     title: "MT4 / MT5 Trading",
     subtitle: "Professional forex & CFD trading",
     icons: [
-      { type: 'img', src: "/lovable-uploads/9dd041af-f3e5-4ac9-b4d8-a8fd480ba5cd.png" },
-      { type: 'placeholder', text: 'Visa' },
-      { type: 'placeholder', text: 'Mastercard' },
-      { type: 'placeholder', text: 'Phantom' },
+      { type: 'img', src: "/lovable-uploads/9dd041af-f3e5-4ac9-b4d8-a8fd480ba5cd.png" }
     ],
     color: "#16C784",
     benefit: "1-click withdraw & institutional spreads",
