@@ -37,13 +37,13 @@ export const useMarketData = () => {
   const { data: btcData, isLoading: isBtcLoading, error: btcError } = useQuery({
     queryKey: ['btcPrice'],
     queryFn: fetchBtcData,
-    refetchInterval: 7000, // Refetch every 7 seconds
+    refetchInterval: 10000, // Refetch every 10 seconds
   });
 
   const { data: goldData, isLoading: isGoldLoading, error: goldError } = useQuery({
     queryKey: ['goldPrice'],
     queryFn: fetchGoldData,
-    refetchInterval: 7000, // Refetch every 7 seconds
+    refetchInterval: 10000, // Refetch every 10 seconds
   });
 
   if (btcError) console.error("Error fetching BTC data:", btcError);

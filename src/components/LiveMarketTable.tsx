@@ -2,7 +2,6 @@
 import React from 'react';
 import { useMarketData } from '@/hooks/useMarketData';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { motion } from 'framer-motion';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
 
@@ -48,7 +47,7 @@ const MarketTableRow: React.FC<MarketTableRowProps> = ({ isLoading, price, chang
 
   const changeData = formatChange(change);
   
-  const highlightClass = highlight === 'green' ? 'text-green shadow-green-glow' : highlight === 'red' ? 'text-red-500 shadow-red-glow' : '';
+  const highlightClass = highlight === 'green' ? 'bg-green/10' : highlight === 'red' ? 'bg-red-500/10' : '';
 
   if (isLoading) {
       return (
@@ -69,7 +68,7 @@ const MarketTableRow: React.FC<MarketTableRowProps> = ({ isLoading, price, chang
   }
 
   return (
-    <TableRow className="border-none hover:bg-white/5 transition-colors duration-200">
+    <TableRow className={cn("border-none hover:bg-white/5 transition-colors duration-300", highlightClass)}>
         <TableCell className="py-4">
             <div className="flex items-center gap-4">
                 <img src={icon} alt={name} className="h-9 w-9" />
@@ -79,7 +78,7 @@ const MarketTableRow: React.FC<MarketTableRowProps> = ({ isLoading, price, chang
                 </div>
             </div>
         </TableCell>
-        <TableCell className={cn("text-base font-medium text-white transition-all duration-500", highlightClass)}>
+        <TableCell className="text-base font-medium text-white">
             {formatPrice(price, symbol)}
         </TableCell>
         <TableCell className={cn("text-right font-medium", changeData.isPositive ? 'text-green' : 'text-red-500')}>
@@ -110,11 +109,7 @@ const LiveMarketTable: React.FC = () => {
     ];
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-        >
+        <div>
             <Table>
                 <TableHeader>
                     <TableRow className="border-b border-white/10 hover:bg-transparent">
@@ -124,27 +119,20 @@ const LiveMarketTable: React.FC = () => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {assets.map((asset, index) => (
-                        <motion.tr
+                    {assets.map((asset) => (
+                        <MarketTableRow 
                             key={asset.symbol}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.3, delay: 0.3 + index * 0.1, type: "spring", stiffness: 100 }}
-                            className="contents" // To make the div not affect table layout
-                        >
-                            <MarketTableRow 
-                                isLoading={asset.isLoading}
-                                price={asset.data?.price}
-                                change={asset.data?.change}
-                                icon={asset.icon}
-                                name={asset.name}
-                                symbol={asset.symbol as 'BTC' | 'GOLD'}
-                            />
-                        </motion.tr>
+                            isLoading={asset.isLoading}
+                            price={asset.data?.price}
+                            change={asset.data?.change}
+                            icon={asset.icon}
+                            name={asset.name}
+                            symbol={asset.symbol as 'BTC' | 'GOLD'}
+                        />
                     ))}
                 </TableBody>
             </Table>
-        </motion.div>
+        </div>
     );
 };
 
