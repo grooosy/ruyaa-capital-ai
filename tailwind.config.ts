@@ -59,6 +59,7 @@ export default {
         floating: 'floating 3s ease-in-out infinite',
         shimmer: 'shimmer 2s linear infinite',
         'fade-in': 'fade-in 0.3s ease-in',
+        'spin-slow': 'spin 15s linear infinite',
       }
     }
   },

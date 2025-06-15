@@ -8,23 +8,23 @@ import { useChatContext, AgentId } from '@/context/ChatContext';
 const agents: {id: AgentId, title: string, description: string, logoSrc: string, href?: string}[] = [
   {
     id: 'mt4',
-    title: 'Gold/Forex (MT4/MT5)',
-    description: 'Connect to MT4/MT5 and automate your forex and commodity trades.',
-    logoSrc: '/logos/mt4mt5.svg',
+    title: 'Gold / Forex AI Agent',
+    description: 'MT4 · MT5 · Low-slippage execution',
+    logoSrc: '/icons/gold-bars.svg',
     href: '/agents/mt4',
   },
   {
     id: 'crypto',
-    title: 'Crypto Trading Agent',
-    description: 'WEEX Exchange',
-    logoSrc: '/logos/btc-official.svg',
+    title: 'Crypto AI Agent',
+    description: 'WEEX onboarding · AI signals',
+    logoSrc: '/icons/crypto-coins.svg',
     href: '/agents/crypto',
   },
   {
     id: 'arbitrage',
     title: 'Arbitrage Agent',
     description: 'Automatically find and execute profitable arbitrage opportunities.',
-    logoSrc: '/logos/arbitrage.svg',
+    logoSrc: '/icons/arb.svg',
   },
 ];
 
@@ -49,6 +49,7 @@ const AgentsPage: React.FC = () => {
             {agents.map((agent) => (
               <AgentSelectionCard
                 key={agent.id}
+                id={agent.id}
                 title={agent.title}
                 description={agent.description}
                 logoSrc={agent.logoSrc}
