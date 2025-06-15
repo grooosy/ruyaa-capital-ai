@@ -1,4 +1,3 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
@@ -11,10 +10,12 @@ import HeroDashboard from "@/components/HeroDashboard";
 import { ArrowRight } from "lucide-react";
 import ChatWidget from "@/components/chat/ChatWidget";
 import ParticleBackground from "@/components/ParticleBackground";
+import { useTranslation } from "react-i18next";
 
 const Index = () => {
   const [modalOpen, setModalOpen] = React.useState(false);
   const [startAiFlowAnimation, setStartAiFlowAnimation] = React.useState(false);
+  const { t } = useTranslation();
 
   const handleStartNowClick = () => {
     const aiSection = document.getElementById('ai');
@@ -40,14 +41,14 @@ const Index = () => {
           {/* Left Side: Text content */}
           <div className="lg:w-1/2 text-center lg:text-start">
             <h1 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-              Your 24/7 AI-driven{' '}
+              {t('hero_title_1')}{' '}
               <span className="text-gold">
-                trading assistant and broker connector
+                {t('hero_title_2')}
               </span>
             </h1>
             
             <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-              We're not a trading platform. We're a broker connector, offering smart AI tools, signal systems, portfolio feedback, and education with tiered access.
+              {t('hero_description')}
             </p>
 
             <motion.button
@@ -56,7 +57,7 @@ const Index = () => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              Open Account • Start Now
+              {t('hero_button')}
               <ArrowRight className="w-5 h-5 rtl:rotate-180" />
             </motion.button>
           </div>

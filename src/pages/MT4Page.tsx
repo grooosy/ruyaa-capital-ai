@@ -1,9 +1,12 @@
+
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import ParticleBackground from '@/components/ParticleBackground';
 import AgentChat from '@/components/AgentChat';
+import { useTranslation } from 'react-i18next';
 
 const MT4Page: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <div className="relative min-h-screen">
       <ParticleBackground />
@@ -12,10 +15,10 @@ const MT4Page: React.FC = () => {
         <div className="agent-container w-full max-w-3xl px-4">
            <div className="text-center mb-8">
             <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4">
-              Gold/Forex AI Agent
+              {t('mt4_page_title')}
             </h1>
             <p className="text-lg text-gray-300">
-              Chat with our MT4/MT5 specialist to manage your trades.
+              {t('mt4_page_desc')}
             </p>
           </div>
           <AgentChat agentId="mt4" />

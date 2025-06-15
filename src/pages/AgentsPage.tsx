@@ -4,32 +4,34 @@ import Navbar from '@/components/Navbar';
 import AgentSelectionCard from '@/components/AgentSelectionCard';
 import ParticleBackground from '@/components/ParticleBackground';
 import { useChatContext, AgentId } from '@/context/ChatContext';
-
-const agents: {id: AgentId, title: string, description: string, logoSrc: string, href?: string}[] = [
-  {
-    id: 'mt4',
-    title: 'Gold / Forex AI Agent',
-    description: 'MT4 · MT5 · Low-slippage execution',
-    logoSrc: '/icons/gold-bars.svg',
-    href: '/agents/mt4',
-  },
-  {
-    id: 'crypto',
-    title: 'Crypto AI Agent',
-    description: 'WEEX onboarding · AI signals',
-    logoSrc: '/icons/crypto-coins.svg',
-    href: '/agents/crypto',
-  },
-  {
-    id: 'arbitrage',
-    title: 'Arbitrage Agent',
-    description: 'Automatically find and execute profitable arbitrage opportunities.',
-    logoSrc: '/icons/arb.svg',
-  },
-];
+import { useTranslation } from 'react-i18next';
 
 const AgentsPage: React.FC = () => {
   const { openChat } = useChatContext();
+  const { t } = useTranslation();
+
+  const agents: {id: AgentId, title: string, description: string, logoSrc: string, href?: string}[] = [
+    {
+      id: 'mt4',
+      title: t('agent_mt4_title'),
+      description: t('agent_mt4_desc'),
+      logoSrc: '/icons/gold-bars.svg',
+      href: '/agents/mt4',
+    },
+    {
+      id: 'crypto',
+      title: t('agent_crypto_title'),
+      description: t('agent_crypto_desc'),
+      logoSrc: '/icons/crypto-coins.svg',
+      href: '/agents/crypto',
+    },
+    {
+      id: 'arbitrage',
+      title: t('agent_arbitrage_title'),
+      description: t('agent_arbitrage_desc'),
+      logoSrc: '/icons/arb.svg',
+    },
+  ];
 
   return (
     <div className="relative min-h-screen">
@@ -39,10 +41,10 @@ const AgentsPage: React.FC = () => {
         <section className="w-full max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
             <h1 className="text-5xl lg:text-6xl font-bold text-white mb-4">
-              Choose Your AI Agent
+              {t('agents_title')}
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Select an agent to connect your accounts and start leveraging our AI-powered tools.
+              {t('agents_desc')}
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">

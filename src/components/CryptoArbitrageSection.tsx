@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import ArbitrageTicker from './ArbitrageTicker';
 import ArbitrageVisual from './ArbitrageVisual';
 import ArbitrageAlertCard from './ArbitrageAlertCard';
+import { useTranslation } from 'react-i18next';
 
 const DUMMY_ARBITRAGE_DATA = {
     pair: 'ETH/USDT',
@@ -17,6 +18,7 @@ const DUMMY_ARBITRAGE_DATA = {
 
 const CryptoArbitrageSection = () => {
     const [showAlert, setShowAlert] = useState(true);
+    const { t } = useTranslation();
 
     const handleCloseAlert = () => {
         setShowAlert(false);
@@ -31,10 +33,10 @@ const CryptoArbitrageSection = () => {
             transition={{ duration: 0.5 }}
         >
             <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4">
-                Explore Crypto Arbitrage <span className="text-gradient-green">With Ruyaa-Ai</span>
+                {t('arbitrage_title')} <span className="text-gradient-green">{t('arbitrage_subtitle')}</span>
             </h2>
             <p className="text-lg text-gray-400 mb-12 max-w-3xl">
-                Capitalize on market inefficiencies. Our arbitrage bot scans hundreds of pairs across multiple exchanges to find and execute profitable trades in milliseconds.
+                {t('arbitrage_desc')}
             </p>
             
             <ArbitrageTicker />

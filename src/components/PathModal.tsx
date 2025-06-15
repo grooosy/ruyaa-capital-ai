@@ -5,6 +5,7 @@ import { X, ArrowLeft } from "lucide-react";
 import { PATHS } from "@/data/paths";
 import PathCard from "./PathCard";
 import SetupSteps from "./SetupSteps";
+import { useTranslation } from "react-i18next";
 
 interface PathModalProps {
   open: boolean;
@@ -15,6 +16,7 @@ const PathModal: React.FC<PathModalProps> = ({ open, onClose }) => {
   const [selectedPath, setSelectedPath] = useState<string | null>(null);
   const [flipped, setFlipped] = useState<string | null>(null);
   const [showSteps, setShowSteps] = useState(false);
+  const { t } = useTranslation();
 
   const handleCardClick = (pathId: string) => {
     if (!flipped) {
@@ -71,7 +73,7 @@ const PathModal: React.FC<PathModalProps> = ({ open, onClose }) => {
               className="absolute top-6 start-6 text-green hover:scale-110 transition-transform z-50 flex items-center gap-2"
             >
               <ArrowLeft size={24} className="rtl:rotate-180" />
-              <span className="text-sm">Back</span>
+              <span className="text-sm">{t('back_button')}</span>
             </button>
           )}
 

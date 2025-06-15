@@ -2,6 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { PATHS } from "@/data/paths";
+import { useTranslation } from "react-i18next";
 
 interface SetupStepsProps {
   selectedPathId: string;
@@ -9,6 +10,7 @@ interface SetupStepsProps {
 
 const SetupSteps: React.FC<SetupStepsProps> = ({ selectedPathId }) => {
   const path = PATHS.find(p => p.id === selectedPathId);
+  const { t } = useTranslation();
 
   if (!path) return null;
 
@@ -22,7 +24,7 @@ const SetupSteps: React.FC<SetupStepsProps> = ({ selectedPathId }) => {
       transition={{ duration: 0.4 }}
     >
       <h2 className="text-3xl font-bold text-white mb-8">
-        Setup Process
+        {t('setup_process_title')}
       </h2>
       <div className="flex justify-center items-center gap-8 mb-12">
         {path.steps.map((step, index) => (
@@ -46,7 +48,7 @@ const SetupSteps: React.FC<SetupStepsProps> = ({ selectedPathId }) => {
         className="px-8 py-4 rounded-xl font-bold text-[#181711] text-lg transition-all duration-200 hover:scale-105"
         style={{ backgroundColor: path.color }}
       >
-        Proceed to Checkout
+        {t('setup_proceed_button')}
       </button>
     </motion.div>
   );

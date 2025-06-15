@@ -1,27 +1,30 @@
 
 import React from 'react';
 import { ShieldCheck, Zap, MessageSquare, Wallet } from 'lucide-react';
-
-const features = [
-  {
-    icon: <MessageSquare className="h-7 w-7 text-gold" />,
-    text: '24/7 AI Assistant',
-  },
-  {
-    icon: <Zap className="h-7 w-7 text-gold" />,
-    text: 'Low Slippage Connectors',
-  },
-  {
-    icon: <Wallet className="h-7 w-7 text-gold" />,
-    text: 'One-Click Withdrawals',
-  },
-  {
-    icon: <ShieldCheck className="h-7 w-7 text-gold" />,
-    text: 'Verified Brokers',
-  },
-];
+import { useTranslation } from 'react-i18next';
 
 const FeatureHighlights: React.FC = () => {
+  const { t } = useTranslation();
+  
+  const features = [
+    {
+      icon: <MessageSquare className="h-7 w-7 text-gold" />,
+      text: t('feature_1'),
+    },
+    {
+      icon: <Zap className="h-7 w-7 text-gold" />,
+      text: t('feature_2'),
+    },
+    {
+      icon: <Wallet className="h-7 w-7 text-gold" />,
+      text: t('feature_3'),
+    },
+    {
+      icon: <ShieldCheck className="h-7 w-7 text-gold" />,
+      text: t('feature_4'),
+    },
+  ];
+
   return (
     <div className="w-full max-w-4xl mx-auto">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-10 text-center">
