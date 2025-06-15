@@ -33,11 +33,19 @@ const Footer = () => {
             transition={{ duration: 0.6 }}
             className="space-y-4"
           >
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-green to-gold rounded-lg flex items-center justify-center">
-                <span className="text-dark-charcoal font-bold text-sm">R</span>
+            <div className="flex items-center gap-3">
+              <div className="relative">
+                <div className="w-12 h-12 bg-gradient-to-br from-green via-gold to-green rounded-xl flex items-center justify-center shadow-lg">
+                  <span className="text-dark-charcoal font-bold text-xl">R</span>
+                </div>
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-gold rounded-full flex items-center justify-center">
+                  <div className="w-2 h-2 bg-dark-charcoal rounded-full"></div>
+                </div>
               </div>
-              <span className="text-white font-bold text-xl">Ruyaa AI</span>
+              <div>
+                <span className="text-white font-bold text-xl">Ruyaa</span>
+                <span className="text-gold font-bold text-xl">Capital</span>
+              </div>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
               Empowering traders with intelligent AI-driven solutions for forex, crypto, and arbitrage trading.
@@ -134,7 +142,7 @@ const Footer = () => {
         <div className="border-t border-white/10 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-gray-400 text-sm">
-              © {currentYear} Ruyaa AI. All rights reserved.
+              © {currentYear} RuyaaCapital. All rights reserved.
             </div>
             <div className="flex items-center gap-6 text-sm">
               <a href="#" className="text-gray-400 hover:text-gold transition-colors">

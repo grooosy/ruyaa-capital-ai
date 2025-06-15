@@ -17,18 +17,20 @@ export const fetchAiResponse = async (
   selectedAgent: AgentId
 ): Promise<string> => {
   try {
-    const systemPrompt = systemPrompts[selectedAgent] || `You are a helpful AI Assistant.`;
+    // Use general system prompt if no specific agent is selected
+    const systemPrompt = selectedAgent ? systemPrompts[selectedAgent] : systemPrompts.general;
+    const fallbackPrompt = `You are RuyaaCapital AI Support, a helpful general assistant.`;
     
     // OpenAI API expects messages without the 'id' field
     const apiMessages = newMessages.map(({ id, ...rest }) => rest);
 
-    console.log(`Making AI request for agent: ${selectedAgent}`);
-    console.log(`Using model: ${modelMap[selectedAgent] || 'openai/gpt-4o-mini'}`);
+    console.log(`Making AI request for agent: ${selectedAgent || 'general'}`);
+    console.log(`Using model: ${modelMap[selectedAgent] || modelMap.general || 'openai/gpt-4o-mini'}`);
 
     const completion = await openrouter.chat.completions.create({
-      model: modelMap[selectedAgent] || 'openai/gpt-4o-mini',
+      model: modelMap[selectedAgent] || modelMap.general || 'openai/gpt-4o-mini',
       messages: [
-        { role: "system", content: systemPrompt },
+        { role: "system", content: systemPrompt || fallbackPrompt },
         ...apiMessages
       ],
       temperature: 0.7,
@@ -74,7 +76,7 @@ export const getFallbackResponse = async (message: string): Promise<string> => {
   
   // Provide more intelligent fallback responses
   const fallbackResponses = [
-    `Thank you for your message: "${message}". To enable full AI capabilities, please configure your OpenRouter API key.`,
+    `Thank you for your message: "${message}". I'm RuyaaCapital AI Support. To enable full AI capabilities, please configure your OpenRouter API key.`,
     `I received your request about "${message}". I'm currently in demo mode - for full AI features, an API key is required.`,
     `Your message "${message}" has been received. To unlock advanced AI responses, please set up your API credentials.`
   ];
