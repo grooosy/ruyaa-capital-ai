@@ -1,17 +1,26 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Bot, X } from 'lucide-react';
 import ChatPane from './ChatPane';
+import { useChatContext } from '@/context/ChatContext';
 
 const ChatWidget = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isChatOpen, openChat, closeChat } = useChatContext();
+
+  const toggleChat = () => {
+    if (isChatOpen) {
+      closeChat();
+    } else {
+      openChat(null); // Open generic chat if opened from widget button
+    }
+  };
 
   return (
     <>
       <div className="fixed bottom-6 right-6 z-[100]">
         <motion.button
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={toggleChat}
           className="bg-gold text-dark-charcoal p-4 rounded-full shadow-gold-glow hover:bg-gold/90 transition-all duration-300 flex items-center justify-center"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
@@ -19,20 +28,20 @@ const ChatWidget = () => {
         >
           <AnimatePresence mode="wait">
             <motion.div
-              key={isOpen ? 'x' : 'bot'}
+              key={isChatOpen ? 'x' : 'bot'}
               initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
               animate={{ opacity: 1, rotate: 0, scale: 1 }}
               exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
               transition={{ duration: 0.2 }}
             >
-              {isOpen ? <X className="w-6 h-6" /> : <Bot className="w-6 h-6" />}
+              {isChatOpen ? <X className="w-6 h-6" /> : <Bot className="w-6 h-6" />}
             </motion.div>
           </AnimatePresence>
         </motion.button>
       </div>
 
       <AnimatePresence>
-        {isOpen && (
+        {isChatOpen && (
           <motion.div
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}

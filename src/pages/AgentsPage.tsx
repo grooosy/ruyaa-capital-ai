@@ -3,21 +3,25 @@ import React from 'react';
 import Navbar from '@/components/Navbar';
 import AgentSelectionCard from '@/components/AgentSelectionCard';
 import ParticleBackground from '@/components/ParticleBackground';
+import { useChatContext } from '@/context/ChatContext';
 
 const agents = [
   {
+    id: 'mt4',
     title: 'Gold/Forex (MT4/MT5)',
     description: 'Connect to MT4/MT5 and automate your forex and commodity trades.',
     logoSrc: '/logos/mt4mt5.svg',
     href: '#',
   },
   {
+    id: 'crypto',
     title: 'Crypto Agent',
     description: 'Leverage our AI for intelligent cryptocurrency trading strategies.',
     logoSrc: '/logos/btc-official.svg',
     href: '#',
   },
   {
+    id: 'arbitrage',
     title: 'Arbitrage Agent',
     description: 'Automatically find and execute profitable arbitrage opportunities.',
     logoSrc: '/logos/arbitrage.svg',
@@ -26,6 +30,8 @@ const agents = [
 ];
 
 const AgentsPage: React.FC = () => {
+  const { openChat } = useChatContext();
+
   return (
     <div className="relative min-h-screen bg-bg">
       <ParticleBackground />
@@ -47,7 +53,8 @@ const AgentsPage: React.FC = () => {
                 title={agent.title}
                 description={agent.description}
                 logoSrc={agent.logoSrc}
-                href={agent.href}
+                onClick={agent.id === 'mt4' ? () => openChat('mt4') : undefined}
+                href={agent.id !== 'mt4' ? agent.href : undefined}
               />
             ))}
           </div>

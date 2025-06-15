@@ -1,5 +1,6 @@
 
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { useChatContext, AgentId } from '@/context/ChatContext';
 
 export type Message = {
   id: string;
@@ -7,23 +8,38 @@ export type Message = {
   content: string;
 };
 
-// Mock API call to simulate GPT backend
+// Mock API call to simulate GPT backend for generic chat
 const getBotResponse = async (message: string): Promise<string> => {
   console.log('Simulating API call for message:', message);
   await new Promise(resolve => setTimeout(resolve, 1500));
   return `This is a simulated response to: "${message}". To enable a real AI backend, you will need to provide an API key.`;
 };
 
-export const useChat = () => {
-  const [messages, setMessages] = useState<Message[]>([
-    {
+const getInitialMessage = (agentId: AgentId): Message => {
+  if (agentId === 'mt4') {
+    return {
       id: 'init',
       role: 'assistant',
-      content: "Hello! How can I help you today? I can answer questions, provide feedback, or connect you with a broker.",
-    }
-  ]);
+      content: "Hello! I am the Ruyaa MT4/MT5 AI Agent. How can I assist with your Gold and Forex trading today?"
+    };
+  }
+  return {
+    id: 'init',
+    role: 'assistant',
+    content: "Hello! How can I help you today? I can answer questions, provide feedback, or connect you with a broker.",
+  };
+};
+
+export const useChat = () => {
+  const { selectedAgent } = useChatContext();
+  const [messages, setMessages] = useState<Message[]>([getInitialMessage(selectedAgent)]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setMessages([getInitialMessage(selectedAgent)]);
+    setInput('');
+  }, [selectedAgent]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
@@ -34,13 +50,35 @@ export const useChat = () => {
     if (!input.trim() || isLoading) return;
 
     const userMessage: Message = { id: Date.now().toString(), role: 'user', content: input };
-    setMessages(prev => [...prev, userMessage]);
+    const newMessages = [...messages, userMessage];
+    setMessages(newMessages);
     const currentInput = input;
     setInput('');
     setIsLoading(true);
 
     try {
-      const botResponseContent = await getBotResponse(currentInput);
+      let botResponseContent: string;
+
+      if (selectedAgent === 'mt4') {
+        const response = await fetch('/api/chat-gpt', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            agentId: selectedAgent,
+            messages: newMessages,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`API error: ${response.status} ${response.statusText}`);
+        }
+        
+        const data = await response.json();
+        botResponseContent = data.content;
+      } else {
+        botResponseContent = await getBotResponse(currentInput);
+      }
+      
       const botMessage: Message = { id: (Date.now() + 1).toString(), role: 'assistant', content: botResponseContent };
       setMessages(prev => [...prev, botMessage]);
     } catch (error) {
