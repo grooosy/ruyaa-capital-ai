@@ -1,3 +1,4 @@
+
 import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
@@ -70,12 +71,16 @@ const Index = () => {
         </section>
 
         {/* Feature Grid & Logo Cloud */}
-        <section className="w-full items-center text-center py-16 mt-12 bg-gradient-to-tr from-black/20 via-transparent to-black/20 relative">
-          <div className="absolute inset-0 bg-grid-pattern opacity-50 -z-10" />
+        <section className="w-full items-center text-center py-20 mt-12 bg-gradient-to-tr from-[#181711] via-[#212115] to-[#181711] relative border-y border-green-400/10">
+          <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-transparent via-[#00FF9D0C] to-transparent" />
           <div className="w-full max-w-5xl mx-auto flex flex-col items-center px-6">
             <div className="mb-12">
-              <h2 className="font-manrope text-4xl font-extrabold tracking-tight text-center mb-4 text-gradient-ai">Why Ruyaa AI Outperforms</h2>
-              <p className="text-neutral-300">Our intelligent features work while you sleep.</p>
+              <h2 className="font-playfair text-5xl font-bold mb-4 bg-gradient-to-r from-gold via-[#00FF9D] to-white bg-clip-text text-transparent tracking-tighter drop-shadow-md">
+                <span className="text-gold font-extrabold">Performance by AI</span>
+                <br />
+                <span className="text-[#00FF9D]">Why Ruyaa Outperforms</span>
+              </h2>
+              <p className="text-lg text-gray-300 opacity-95 font-medium">Intelligent features that work while you sleep, consistently delivering professional outcomes.</p>
             </div>
             <div className="mb-16">
               <FeatureGrid />
@@ -83,7 +88,6 @@ const Index = () => {
             <LogoCloud />
           </div>
         </section>
-
 
         {/* AI Agents Showcase */}
         <AIGrid startAnimation={startAiFlowAnimation} />

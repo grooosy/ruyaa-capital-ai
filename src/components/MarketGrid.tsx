@@ -6,7 +6,9 @@ import { AreaChart, Area, ResponsiveContainer } from "recharts";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ExternalLink } from "lucide-react";
 
-// Local modal for chart
+// Row background for zebra stripe
+const rowColors = ["bg-[#161616]", "bg-[#1A1A1A]"];
+
 const useModal = () => {
   const [data, setData] = React.useState<any>(null);
   const open = (asset: any) => setData(asset);
@@ -19,8 +21,6 @@ const fetchMarket = async () => {
   if (!res.ok) throw new Error("Failed to fetch market data");
   return res.json();
 };
-
-const rowColors = ["bg-[#111111]", "bg-[#161616]"];
 
 function formatPrice(p: number) {
   if (p === null || p === undefined) return "--";
@@ -85,54 +85,63 @@ const MarketGrid: React.FC = () => {
   );
 
   return (
-    <div className="relative w-full max-w-xl mx-auto bg-[#1A1A1A] backdrop-blur-sm border border-green-400/30 shadow-lg rounded-2xl p-6">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="font-semibold text-lg lg:text-2xl text-gradient-ai">Market Grid</h2>
-        <span className="text-sm text-green-400/80 select-none">Live •</span>
-      </div>
-      <div className="overflow-x-auto">
-        <table className="w-full border-separate border-spacing-y-1">
-          <thead>
-            <tr className="text-neutral-400 text-xs">
-              <th className="text-left px-3 pb-2 font-normal">Symbol</th>
-              <th className="text-left px-3 pb-2 font-normal">Name</th>
-              <th className="text-right px-3 pb-2 font-normal">Price (USD)</th>
-              <th className="text-right px-3 pb-2 font-normal">24h %</th>
-              <th className="text-center px-3 pb-2 font-normal">Chart</th>
-            </tr>
-          </thead>
-          <tbody>
-            {isLoading
-              ? Array(5)
+    <div className="relative w-full max-w-xl mx-auto p-[2px] rounded-2xl"
+      style={{
+        background: "linear-gradient(120deg,#00FF9D40 0%,#CFA10044 100%)"
+      }}
+    >
+      <div className="bg-[#181711] rounded-2xl px-6 pt-5 pb-4 shadow-neon">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="font-manrope text-2xl font-extrabold text-transparent bg-gradient-to-r from-gold to-[#00FF9D] bg-clip-text">
+            Market <span className="text-neon-green">Grid</span>
+          </h2>
+          <span className="text-sm font-medium text-neon-green flex items-center gap-1">
+            Live <span className="animate-pulse-glow ml-1" style={{ fontSize: '1.7em', lineHeight: 0 }}>•</span>
+          </span>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full border-separate border-spacing-y-1">
+            <thead>
+              <tr className="text-neutral-400 text-xs [font-weight:600]">
+                <th className="text-left px-3 pb-2 font-semibold">Symbol</th>
+                <th className="text-left px-3 pb-2 font-semibold">Name</th>
+                <th className="text-right px-3 pb-2 font-semibold">Price (USD)</th>
+                <th className="text-right px-3 pb-2 font-semibold">24h %</th>
+                <th className="text-center px-3 pb-2 font-semibold">Chart</th>
+              </tr>
+            </thead>
+            <tbody>
+              {isLoading
+                ? Array(5)
                   .fill(0)
                   .map((_, i) => (
                     <tr key={i} className={rowColors[i % 2] + " rounded-lg"}>
-                      <td colSpan={5}>
-                        <Skeleton className="h-10 w-full rounded-lg" />
+                      <td colSpan={5} className="py-3">
+                        <Skeleton className="h-8 w-full rounded-lg" />
                       </td>
                     </tr>
                   ))
-              : (data ?? []).map((asset: any, i: number) => {
+                : (data ?? []).map((asset: any, i: number) => {
                   const positive = asset.change24hPct >= 0;
                   return (
                     <motion.tr
                       key={asset.symbol}
                       className={
                         (rowColors[i % 2]) +
-                        " group transition-colors rounded-lg cursor-pointer hover:shadow-neon hover:ring-2 hover:ring-green-400 hover:z-10"
+                        " group transition-colors rounded-lg cursor-pointer hover:shadow-neon hover:ring-2 hover:ring-green-400"
                       }
                       layout
                       onClick={() => modal.open(asset)}
-                      whileHover={{ scale: 1.01 }}
+                      whileHover={{ scale: 1.012 }}
                     >
-                      <td className="px-3 py-2 font-semibold text-neutral-200">{asset.symbol}</td>
+                      <td className="px-3 py-2 font-bold font-mono text-neutral-100 tracking-tight">{asset.symbol}</td>
                       <td className="px-3 py-2 text-neutral-400">{asset.name}</td>
-                      <MotionTD value={asset.price} className="font-mono text-lg font-bold text-white text-right">
+                      <MotionTD value={asset.price} className="font-mono text-lg font-semibold text-white text-right">
                         {formatPrice(asset.price)}
                       </MotionTD>
                       <MotionTD
                         value={asset.change24hPct}
-                        className={"text-right font-semibold " + (positive ? "text-green-400" : "text-red-500")}
+                        className={"text-right font-semibold " + (positive ? "text-neon-green" : "text-red-500")}
                       >
                         {formatChange(asset.change24hPct)}
                       </MotionTD>
@@ -142,68 +151,69 @@ const MarketGrid: React.FC = () => {
                     </motion.tr>
                   );
                 })}
-          </tbody>
-        </table>
-      </div>
-      {/* Modal w/ 7d chart */}
-      <AnimatePresence>
-        {modal.data && (
-          <motion.div
-            className="fixed inset-0 z-40 bg-black bg-opacity-70 flex items-center justify-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={modal.close}
-          >
+            </tbody>
+          </table>
+        </div>
+        {/* Modal w/ chart */}
+        <AnimatePresence>
+          {modal.data && (
             <motion.div
-              className="bg-[#131313] rounded-2xl border border-green-400/30 shadow-neon p-6 max-w-sm w-full relative"
-              initial={{ scale: 0.98, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.98, opacity: 0 }}
-              onClick={e => e.stopPropagation()}
+              className="fixed inset-0 z-40 bg-black bg-opacity-70 flex items-center justify-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={modal.close}
             >
-              <h3 className="text-xl text-white font-bold mb-2">{modal.data.name} ({modal.data.symbol})</h3>
-              <div className="font-medium text-lg pb-2">{formatPrice(modal.data.price)} <span className={modal.data.change24hPct >= 0 ? "text-green-400" : "text-red-500"}>({formatChange(modal.data.change24hPct)})</span></div>
-              <div className="mt-2 mb-6 w-full h-32">
-                <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={modal.data.sparkline.map((y: number, i: number) => ({ x: i, y }))}>
-                    <Area
-                      type="monotone"
-                      dataKey="y"
-                      stroke="#00FF9D"
-                      strokeWidth={2.5}
-                      fill="url(#neonFillModal)"
-                      dot={false}
-                      isAnimationActive={true}
-                    />
-                    <defs>
-                      <linearGradient id="neonFillModal" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#00FF9D" stopOpacity={0.28} />
-                        <stop offset="100%" stopColor="#181711" stopOpacity={0.05} />
-                      </linearGradient>
-                    </defs>
-                  </AreaChart>
-                </ResponsiveContainer>
-              </div>
-              <button
-                className="btn-neongreen w-full mx-auto mt-2 flex items-center justify-center text-base py-3 px-6 rounded-full font-bold transition-all"
-                onClick={() => {
-                  window.open("https://www.binance.com/", "_blank", "noopener,noreferrer");
-                }}
+              <motion.div
+                className="bg-[#131313] rounded-2xl border border-green-400/30 shadow-neon p-6 max-w-sm w-full relative"
+                initial={{ scale: 0.98, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.98, opacity: 0 }}
+                onClick={e => e.stopPropagation()}
               >
-                <ExternalLink className="w-4 h-4 mr-2" /> Trade Now
-              </button>
-              <button
-                aria-label="Close"
-                onClick={modal.close}
-                className="absolute right-3.5 top-3.5 text-green-400/70 hover:text-green-400/100 transition text-xl"
-              >
-                ×
-              </button>
+                <h3 className="text-xl text-white font-bold mb-2">{modal.data.name} ({modal.data.symbol})</h3>
+                <div className="font-medium text-lg pb-2">{formatPrice(modal.data.price)} <span className={modal.data.change24hPct >= 0 ? "text-neon-green" : "text-red-500"}>({formatChange(modal.data.change24hPct)})</span></div>
+                <div className="mt-2 mb-6 w-full h-32">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart data={modal.data.sparkline.map((y: number, i: number) => ({ x: i, y }))}>
+                      <Area
+                        type="monotone"
+                        dataKey="y"
+                        stroke="#00FF9D"
+                        strokeWidth={2.5}
+                        fill="url(#neonFillModal)"
+                        dot={false}
+                        isAnimationActive={true}
+                      />
+                      <defs>
+                        <linearGradient id="neonFillModal" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stopColor="#00FF9D" stopOpacity={0.28} />
+                          <stop offset="100%" stopColor="#181711" stopOpacity={0.05} />
+                        </linearGradient>
+                      </defs>
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </div>
+                <button
+                  className="btn-neongreen w-full mx-auto mt-2 flex items-center justify-center text-base py-3 px-6 rounded-full font-bold transition-all"
+                  onClick={() => {
+                    window.open("https://www.binance.com/", "_blank", "noopener,noreferrer");
+                  }}
+                >
+                  <ExternalLink className="w-4 h-4 mr-2" /> Trade Now
+                </button>
+                <button
+                  aria-label="Close"
+                  onClick={modal.close}
+                  className="absolute right-3.5 top-3.5 text-green-400/70 hover:text-green-400/100 transition text-xl"
+                >
+                  ×
+                </button>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 };

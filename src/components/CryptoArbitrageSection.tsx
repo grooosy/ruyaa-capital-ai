@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import ArbitrageTicker from './ArbitrageTicker';
@@ -27,38 +28,44 @@ const CryptoArbitrageSection = () => {
 
     return (
         <motion.section 
-            className="w-full max-w-6xl mx-auto flex flex-col items-center text-center mt-16 p-6 sm:p-12 relative bg-gray-950/20 border border-green/10 rounded-2xl bg-grid-pattern overflow-hidden"
+            className="w-full max-w-6xl mx-auto flex flex-col items-center text-center mt-20 px-4 sm:px-10 py-12 relative rounded-2xl bg-gradient-to-tr from-black/40 via-card/60 to-black/30 border border-green-400/10 shadow-neon"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5 }}
         >
-            <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4">
-                {t('arbitrage_title')} <span className="text-gradient-green">{t('arbitrage_subtitle')}</span>
+            <h2 className="text-4xl lg:text-5xl font-extrabold mb-4 bg-gradient-to-r from-green-400 to-gold bg-clip-text text-transparent">
+                {t('arbitrage_title')} <span className="text-gradient-gold">{t('arbitrage_subtitle')}</span>
             </h2>
-            <p className="text-lg text-gray-400 mb-12 max-w-3xl">
+            <p className="text-lg text-gray-300 mb-10 max-w-3xl mx-auto">
                 {t('arbitrage_desc')}
             </p>
             
-            <ArbitrageTicker />
+            <div className="w-full max-w-2xl mx-auto mb-8">
+                <ArbitrageTicker />
+            </div>
 
-            <div className="w-full flex flex-col lg:flex-row lg:rtl:flex-row-reverse items-center lg:items-start justify-center gap-8 mt-8">
-                <ArbitrageVisual />
-                <ArbitrageAlertCard
-                    show={showAlert}
-                    onClose={handleCloseAlert}
-                    data={DUMMY_ARBITRAGE_DATA}
-                />
+            <div className="w-full flex flex-col md:flex-row md:rtl:flex-row-reverse items-center justify-center gap-6 mt-1">
+                <div className="flex-1 flex min-w-[280px] justify-center">
+                    <ArbitrageVisual />
+                </div>
+                <div className="flex-1 flex min-w-[280px] justify-center">
+                    <ArbitrageAlertCard
+                        show={showAlert}
+                        onClose={handleCloseAlert}
+                        data={DUMMY_ARBITRAGE_DATA}
+                    />
+                </div>
             </div>
             
             <motion.div
-                className="mt-12"
-                whileHover={{ scale: 1.02 }}
+                className="mt-10"
+                whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
             >
               <Link
                   to="/agents/arbitrage"
-                  className="bg-green text-dark-charcoal px-8 py-4 rounded-xl text-lg font-bold shadow-green-glow hover:bg-green/90 transition-all duration-300 tracking-wide inline-flex items-center gap-2"
+                  className="bg-gradient-to-r from-[#00FF9D] to-gold text-dark-charcoal px-8 py-4 rounded-xl text-lg font-bold shadow-green-glow hover:from-green-300 hover:to-gold/70 transition-all duration-300 tracking-wide inline-flex items-center gap-2"
               >
                   {t('try_now_arbitrage')}
                   <ArrowRight className="w-5 h-5 rtl:rotate-180" />
