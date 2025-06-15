@@ -1,5 +1,5 @@
-
 import type { Config } from "tailwindcss";
+import colors from "tailwindcss/colors";
 
 export default {
   darkMode: ["class"],
@@ -24,7 +24,7 @@ export default {
     },
     extend: {
       colors: {
-        bg: "#181711",
+        ...colors,
         green: "#10A169",
         gold: "#CFA100",
         "dark-charcoal": "#181711",
