@@ -53,15 +53,15 @@ export const useLessonsData = (courseId: string) => {
           title_ar: lessonContent.titleAr,
           description: lessonContent.description,
           description_ar: lessonContent.descriptionAr,
-          video_url: lessonContent.type === 'video' ? lessonContent.url : '',
+          video_url: '', // All lessons are now interactive, no video URLs
           thumbnail_url: null,
-          duration_seconds: lessonContent.type === 'video' ? 300 : 180, // 5 min for video, 3 min for interactive
-          topics: lessonContent.type === 'interactive' ? ['Interactive Learning'] : ['Video Learning'],
-          topics_ar: lessonContent.type === 'interactive' ? ['تعلم تفاعلي'] : ['تعلم بالفيديو'],
+          duration_seconds: 180, // 3 minutes for interactive content
+          topics: ['Interactive Learning', 'AI-Powered'],
+          topics_ar: ['تعلم تفاعلي', 'مدعوم بالذكاء الاصطناعي'],
           is_active: true,
           created_at: new Date().toISOString(),
-          content_type: lessonContent.type,
-          interactive_content: lessonContent.type === 'interactive' ? lessonContent.content : null
+          content_type: 'interactive',
+          interactive_content: lessonContent.content
         };
       });
       
