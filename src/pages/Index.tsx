@@ -1,3 +1,4 @@
+
 import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
@@ -6,6 +7,8 @@ import PathModal from "@/components/PathModal";
 import AIGrid from "@/components/AIGrid";
 import CryptoArbitrageSection from "@/components/CryptoArbitrageSection";
 import FeatureHighlights from "@/components/FeatureHighlights";
+import HeroDashboard from "@/components/HeroDashboard";
+import { ArrowRight } from "lucide-react";
 
 const Index = () => {
   const [modalOpen, setModalOpen] = React.useState(false);
@@ -14,54 +17,50 @@ const Index = () => {
     <div className="relative min-h-screen bg-bg">
       <Navbar />
       
-      <main className="pt-32 pb-20 flex flex-col items-center w-full">
+      <main className="pt-32 pb-20 w-full">
         {/* Hero Section */}
-        <section className="w-full max-w-4xl mx-auto flex flex-col items-center text-center px-6">
-          {/* Main Headline */}
-          <h1 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight max-w-4xl">
-            Open a Verified{" "}
-            <span className="text-green bg-gradient-to-r from-green to-green/80 bg-clip-text text-transparent">
-              MT4 / MT5
-            </span>{" "}
-            or{" "}
-            <span className="text-gold bg-gradient-to-r from-gold to-gold/80 bg-clip-text text-transparent">
-              Crypto
-            </span>{" "}
-            Account in 1 Minute.
-          </h1>
-          
-          {/* Subtitle */}
-          <p className="text-xl text-gray-300 mb-12 max-w-3xl leading-relaxed">
-            1-click to start trading Gold or Bitcoin with your AI.
-          </p>
-          
-          {/* Feature Highlights */}
-          <div className="mb-12">
+        <section className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between px-6 gap-12">
+          {/* Left Side: Text content */}
+          <div className="lg:w-1/2 text-center lg:text-left">
+            <h1 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+              Your 24/7 AI-driven{' '}
+              <span className="text-gold">
+                trading assistant and broker connector
+              </span>
+            </h1>
+            
+            <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+              We're not a trading platform. We're a broker connector, offering smart AI tools, signal systems, portfolio feedback, and education with tiered access.
+            </p>
+
+            <motion.button
+              onClick={() => setModalOpen(true)}
+              className="bg-gold text-dark-charcoal px-8 py-4 rounded-xl text-lg font-bold shadow-gold-glow hover:bg-gold/90 transition-all duration-300 tracking-wide inline-flex items-center gap-2"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Open Account • Start Now
+              <ArrowRight className="w-5 h-5" />
+            </motion.button>
+          </div>
+
+          {/* Right Side: Dashboard */}
+          <div className="lg:w-1/2 w-full mt-12 lg:mt-0">
+            <HeroDashboard />
+          </div>
+        </section>
+
+        {/* Feature Highlights & Logo Cloud moved below hero */}
+        <section className="w-full max-w-5xl mx-auto flex flex-col items-center text-center px-6 pt-24 pb-12">
+          <div className="mb-16">
             <FeatureHighlights />
           </div>
-          
-          {/* Official Logos */}
           <LogoCloud />
         </section>
 
+
         {/* AI Agents Showcase */}
         <AIGrid />
-
-        {/* CTA Section */}
-        <section className="w-full max-w-4xl mx-auto flex flex-col items-center text-center px-6 pt-20">
-          <motion.button
-            onClick={() => setModalOpen(true)}
-            className="bg-green text-[#181711] px-10 py-4 rounded-2xl text-xl font-bold shadow-green-glow hover:shadow-lg transition-all duration-300 tracking-wide"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            style={{
-              background: "linear-gradient(135deg, #16C784 0%, #14B574 100%)",
-              boxShadow: "0 8px 32px rgba(22, 199, 132, 0.3)"
-            }}
-          >
-            Open Account Now
-          </motion.button>
-        </section>
 
         {/* Crypto Arbitrage Section */}
         <CryptoArbitrageSection />
