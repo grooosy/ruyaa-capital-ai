@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { useVideoState } from '@/hooks/useVideoState';
 import VideoControls from './VideoControls';
@@ -30,9 +30,14 @@ const RegularVideoPlayer: React.FC<RegularVideoPlayerProps> = ({ videoUrl, title
     resetState,
   } = useVideoState();
 
+  const [isVideoReady, setIsVideoReady] = useState(false);
+  const [videoError, setVideoError] = useState(false);
+
   // Reset state when video changes
   useEffect(() => {
     resetState();
+    setIsVideoReady(false);
+    setVideoError(false);
   }, [videoUrl, resetState]);
 
   // Handle video events
@@ -46,42 +51,88 @@ const RegularVideoPlayer: React.FC<RegularVideoPlayerProps> = ({ videoUrl, title
 
     const handleLoadedMetadata = () => {
       setDuration(video.duration);
+      setIsVideoReady(true);
+      console.log('Video metadata loaded:', { duration: video.duration, title });
+    };
+
+    const handleLoadedData = () => {
+      setIsVideoReady(true);
+      console.log('Video data loaded and ready to play');
+    };
+
+    const handleCanPlay = () => {
+      setIsVideoReady(true);
+      console.log('Video can start playing');
     };
 
     const handleEnded = () => {
       setIsPlaying(false);
       setHasEnded(true);
+      console.log('Video ended:', title);
       if (onVideoEnd && !hasEnded) {
         onVideoEnd();
       }
     };
 
-    const handlePlay = () => setIsPlaying(true);
-    const handlePause = () => setIsPlaying(false);
+    const handlePlay = () => {
+      setIsPlaying(true);
+      console.log('Video started playing');
+    };
+
+    const handlePause = () => {
+      setIsPlaying(false);
+      console.log('Video paused');
+    };
+
+    const handleError = (e: Event) => {
+      console.error('Video error:', e);
+      setVideoError(true);
+      setIsVideoReady(false);
+    };
+
+    const handleVolumeChange = () => {
+      setVolume(video.volume);
+      setIsMuted(video.muted);
+    };
 
     video.addEventListener('timeupdate', handleTimeUpdate);
     video.addEventListener('loadedmetadata', handleLoadedMetadata);
+    video.addEventListener('loadeddata', handleLoadedData);
+    video.addEventListener('canplay', handleCanPlay);
     video.addEventListener('ended', handleEnded);
     video.addEventListener('play', handlePlay);
     video.addEventListener('pause', handlePause);
+    video.addEventListener('error', handleError);
+    video.addEventListener('volumechange', handleVolumeChange);
 
     return () => {
       video.removeEventListener('timeupdate', handleTimeUpdate);
       video.removeEventListener('loadedmetadata', handleLoadedMetadata);
+      video.removeEventListener('loadeddata', handleLoadedData);
+      video.removeEventListener('canplay', handleCanPlay);
       video.removeEventListener('ended', handleEnded);
       video.removeEventListener('play', handlePlay);
       video.removeEventListener('pause', handlePause);
+      video.removeEventListener('error', handleError);
+      video.removeEventListener('volumechange', handleVolumeChange);
     };
-  }, [onVideoEnd, hasEnded, setIsPlaying, setCurrentTime, setDuration, setHasEnded]);
+  }, [onVideoEnd, hasEnded, setIsPlaying, setCurrentTime, setDuration, setHasEnded, setVolume, setIsMuted, title]);
 
-  const togglePlay = () => {
+  const togglePlay = async () => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || !isVideoReady) {
+      console.log('Video not ready for playback');
+      return;
+    }
 
-    if (isPlaying) {
-      video.pause();
-    } else {
-      video.play();
+    try {
+      if (isPlaying) {
+        video.pause();
+      } else {
+        await video.play();
+      }
+    } catch (error) {
+      console.error('Error toggling video playback:', error);
     }
   };
 
@@ -89,8 +140,9 @@ const RegularVideoPlayer: React.FC<RegularVideoPlayerProps> = ({ videoUrl, title
     const video = videoRef.current;
     if (!video) return;
 
-    setIsMuted(!isMuted);
-    video.muted = !isMuted;
+    const newMuted = !isMuted;
+    setIsMuted(newMuted);
+    video.muted = newMuted;
   };
 
   const handleVolumeChange = (newVolume: number) => {
@@ -104,7 +156,7 @@ const RegularVideoPlayer: React.FC<RegularVideoPlayerProps> = ({ videoUrl, title
 
   const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || !isVideoReady) return;
 
     const rect = e.currentTarget.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
@@ -113,7 +165,7 @@ const RegularVideoPlayer: React.FC<RegularVideoPlayerProps> = ({ videoUrl, title
     setCurrentTime(newTime);
   };
 
-  if (!isValidVideoUrl(videoUrl)) {
+  if (!isValidVideoUrl(videoUrl) || videoError) {
     return <VideoPlaceholder title={title} videoUrl={videoUrl} />;
   }
 
@@ -126,7 +178,20 @@ const RegularVideoPlayer: React.FC<RegularVideoPlayerProps> = ({ videoUrl, title
             className="w-full h-full object-cover"
             src={videoUrl}
             poster=""
+            preload="metadata"
+            playsInline
+            controls={false}
           />
+          
+          {/* Loading overlay */}
+          {!isVideoReady && !videoError && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/50">
+              <div className="text-white text-center">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green mx-auto mb-2"></div>
+                <p className="text-sm">Loading video...</p>
+              </div>
+            </div>
+          )}
           
           <VideoControls
             isPlaying={isPlaying}

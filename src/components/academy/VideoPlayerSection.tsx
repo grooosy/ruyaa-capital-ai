@@ -27,7 +27,30 @@ const VideoPlayerSection: React.FC<VideoPlayerSectionProps> = ({
   const { i18n } = useTranslation();
   const isArabic = i18n.language === 'ar';
 
-  if (!selectedLesson) return null;
+  if (!selectedLesson) {
+    return (
+      <div className="mb-6">
+        <div className="aspect-video bg-gradient-to-br from-green/10 to-gold/10 rounded-lg border border-green/20 flex items-center justify-center">
+          <div className="text-center text-white">
+            <Play className="w-16 h-16 mx-auto mb-4 text-green" />
+            <p className="text-lg font-semibold">
+              {isArabic ? 'اختر درساً لبدء المشاهدة' : 'Select a lesson to start watching'}
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const isCompleted = completedLessons.includes(selectedLesson.id);
+
+  console.log('VideoPlayerSection rendering:', {
+    lessonId: selectedLesson.id,
+    title: selectedLesson.title,
+    videoUrl: selectedLesson.video_url,
+    isCompleted,
+    videoKey
+  });
 
   return (
     <div className="mb-6">
@@ -44,19 +67,21 @@ const VideoPlayerSection: React.FC<VideoPlayerSectionProps> = ({
         <p className="text-gray-300 mb-4">
           {isArabic ? selectedLesson.description_ar : selectedLesson.description}
         </p>
-        <div className="flex flex-wrap gap-2 mb-4">
-          {(isArabic ? selectedLesson.topics_ar : selectedLesson.topics)?.map((topic, index) => (
-            <Badge key={index} variant="outline" className="border-gold/30 text-gold">
-              {topic}
-            </Badge>
-          ))}
-        </div>
+        {(isArabic ? selectedLesson.topics_ar : selectedLesson.topics) && (
+          <div className="flex flex-wrap gap-2 mb-4">
+            {(isArabic ? selectedLesson.topics_ar : selectedLesson.topics)?.map((topic, index) => (
+              <Badge key={index} variant="outline" className="border-gold/30 text-gold">
+                {topic}
+              </Badge>
+            ))}
+          </div>
+        )}
         <Button 
           onClick={onManualComplete}
           className="w-full bg-green hover:bg-green/90"
-          disabled={completedLessons.includes(selectedLesson.id)}
+          disabled={isCompleted}
         >
-          {completedLessons.includes(selectedLesson.id) ? (
+          {isCompleted ? (
             <>
               <CheckCircle className="w-4 h-4 mr-2" />
               {isArabic ? 'مكتمل' : 'Completed'}

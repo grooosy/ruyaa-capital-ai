@@ -33,7 +33,11 @@ const CourseCurriculum: React.FC<CourseCurriculumProps> = ({
   };
 
   const handleLessonClick = (lesson: Lesson) => {
-    console.log('Lesson clicked:', lesson.title);
+    console.log('Lesson clicked in curriculum:', {
+      id: lesson.id,
+      title: lesson.title,
+      videoUrl: lesson.video_url
+    });
     onLessonSelect(lesson);
   };
 
@@ -93,7 +97,7 @@ const CourseCurriculum: React.FC<CourseCurriculumProps> = ({
                   {isCompleted ? (
                     <CheckCircle className="w-5 h-5 text-green" />
                   ) : isSelected ? (
-                    <Play className="w-5 h-5 text-green" />
+                    <Play className="w-5 h-5 text-green fill-current" />
                   ) : (
                     <div className="w-5 h-5 border-2 border-gray-600 rounded-full flex items-center justify-center">
                       <span className="text-xs text-gray-400 font-medium">{index + 1}</span>
