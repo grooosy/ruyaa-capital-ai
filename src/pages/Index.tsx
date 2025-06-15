@@ -1,10 +1,10 @@
-
 import React from "react";
 import Navbar from "@/components/Navbar";
 import VariableDeposit from "@/components/VariableDeposit";
 import LogoCloud from "@/components/LogoCloud";
 import PathModal from "@/components/PathModal";
 import AIGrid from "@/components/AIGrid";
+import CryptoArbitrageSection from "@/components/CryptoArbitrageSection";
 
 const Index = () => {
   const [deposit, setDeposit] = React.useState(3000);
@@ -37,6 +37,8 @@ const Index = () => {
           </div>
         </section>
         <LogoCloud />
+        {/* --- Add Crypto Arbitrage Section right here --- */}
+        <CryptoArbitrageSection />
         {/* Replace how-it-works section with AIGrid */}
         <section className="w-full max-w-5xl mx-auto mt-24 flex flex-col items-center">
           <AIGrid />
