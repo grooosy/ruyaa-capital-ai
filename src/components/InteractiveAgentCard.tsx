@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Tilt from 'react-parallax-tilt';
@@ -70,7 +71,7 @@ const InteractiveAgentCard: React.FC<InteractiveAgentCardProps> = ({ type, onOpe
             >
                 <div className="absolute inset-0 opacity-50" style={patternStyle} />
                 <div className="relative">
-                    <div className="flex items-start justify-between gap-4 mb-3">
+                    <div className="flex items-start justify-between gap-4 mb-6">
                         <h3 className="text-3xl font-bold text-white flex-grow">{data.title}</h3>
                         <div className="flex items-center gap-2 flex-wrap justify-end" style={{maxWidth: '45%'}}>
                             {logosToDisplay.map(logo => {
@@ -90,7 +91,6 @@ const InteractiveAgentCard: React.FC<InteractiveAgentCardProps> = ({ type, onOpe
                             })}
                         </div>
                     </div>
-                    <p className="text-gray-300 mb-6">{data.description}</p>
                     <div className="border-t border-white/10 pt-4">
                         <div className="grid grid-cols-2 gap-x-4 gap-y-3">
                             {metrics.map(({ Icon, text }, index) => (
