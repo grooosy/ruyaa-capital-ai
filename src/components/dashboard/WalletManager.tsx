@@ -9,17 +9,17 @@ interface WalletManagerProps {
     wallets: Tables<'wallets'>[] | null | undefined;
 }
 
-const WalletManager: React.FC<WalletManagerProps> = ({ wallets }) => {
-    const getChainIcon = (chain: string) => {
-        // Simple emoji representation for now
-        switch (chain.toLowerCase()) {
-            case 'btc': return '₿';
-            case 'eth': return 'Ξ';
-            case 'xrp': return '✕';
-            default: return '🪙';
-        }
+const getChainIcon = (chain: string) => {
+    // Simple emoji representation for now
+    switch (chain.toLowerCase()) {
+        case 'btc': return '₿';
+        case 'eth': return 'Ξ';
+        case 'xrp': return '✕';
+        default: return '🪙';
     }
+}
 
+const WalletManager: React.FC<WalletManagerProps> = ({ wallets }) => {
     return (
         <Card className="bg-[#1a1a1a] border-gold/20">
             <CardHeader className="flex flex-row items-center justify-between">

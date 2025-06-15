@@ -10,16 +10,16 @@ interface ArbitrageStatusProps {
     sessions: Tables<'arbitrage_sessions'>[] | null | undefined;
 }
 
-const ArbitrageStatus: React.FC<ArbitrageStatusProps> = ({ sessions }) => {
-    const getStatusVariant = (status: string | null) => {
-        switch (status) {
-            case 'active': return 'bg-green-500/20 text-green-400 border-green-500/50';
-            case 'pending': return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/50';
-            case 'closed': return 'bg-red-500/20 text-red-400 border-red-500/50';
-            default: return 'secondary';
-        }
-    };
+const getStatusVariant = (status: string | null) => {
+    switch (status) {
+        case 'active': return 'bg-green-500/20 text-green-400 border-green-500/50';
+        case 'pending': return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/50';
+        case 'closed': return 'bg-red-500/20 text-red-400 border-red-500/50';
+        default: return 'secondary';
+    }
+};
 
+const ArbitrageStatus: React.FC<ArbitrageStatusProps> = ({ sessions }) => {
     return (
         <Card className="bg-[#1a1a1a] border-gold/20">
             <CardHeader>

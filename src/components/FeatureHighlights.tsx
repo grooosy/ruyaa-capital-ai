@@ -1,29 +1,31 @@
 
 import React from 'react';
 import { ShieldCheck, Zap, MessageSquare, Wallet } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, TFunction } from 'react-i18next';
+
+const getFeatures = (t: TFunction) => [
+  {
+    icon: <MessageSquare className="h-7 w-7 text-gold" />,
+    text: t('feature_1'),
+  },
+  {
+    icon: <Zap className="h-7 w-7 text-gold" />,
+    text: t('feature_2'),
+  },
+  {
+    icon: <Wallet className="h-7 w-7 text-gold" />,
+    text: t('feature_3'),
+  },
+  {
+    icon: <ShieldCheck className="h-7 w-7 text-gold" />,
+    text: t('feature_4'),
+  },
+];
+
 
 const FeatureHighlights: React.FC = () => {
   const { t } = useTranslation();
-  
-  const features = [
-    {
-      icon: <MessageSquare className="h-7 w-7 text-gold" />,
-      text: t('feature_1'),
-    },
-    {
-      icon: <Zap className="h-7 w-7 text-gold" />,
-      text: t('feature_2'),
-    },
-    {
-      icon: <Wallet className="h-7 w-7 text-gold" />,
-      text: t('feature_3'),
-    },
-    {
-      icon: <ShieldCheck className="h-7 w-7 text-gold" />,
-      text: t('feature_4'),
-    },
-  ];
+  const features = getFeatures(t);
 
   return (
     <div className="w-full max-w-4xl mx-auto">
