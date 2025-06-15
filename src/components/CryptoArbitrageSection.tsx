@@ -1,27 +1,35 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import ArbitrageTicker from './ArbitrageTicker';
 import ArbitrageVisual from './ArbitrageVisual';
-import TradeNotification from './TradeNotification';
+import ArbitrageAlertCard from './ArbitrageAlertCard';
+
+const DUMMY_ARBITRAGE_DATA = {
+    pair: 'ETH/USDT',
+    buyExchange: 'Kraken',
+    sellExchange: 'Binance',
+    buyPrice: '$3,005.10',
+    sellPrice: '$3,012.65',
+    profit: '$7.55',
+    potential: '0.25%',
+};
 
 const CryptoArbitrageSection = () => {
-    const [showNotification, setShowNotification] = useState(false);
+    const [showAlert, setShowAlert] = useState(false);
 
     useEffect(() => {
         const showTimer = setTimeout(() => {
-            setShowNotification(true);
+            setShowAlert(true);
         }, 5000);
-
-        const hideTimer = setTimeout(() => {
-            setShowNotification(false);
-        }, 10000);
 
         return () => {
             clearTimeout(showTimer);
-            clearTimeout(hideTimer);
         };
     }, []);
+
+    const handleCloseAlert = () => {
+        setShowAlert(false);
+    };
 
     return (
         <motion.section 
@@ -42,7 +50,11 @@ const CryptoArbitrageSection = () => {
 
             <ArbitrageVisual />
             
-            <TradeNotification show={showNotification} profit="$7.55" />
+            <ArbitrageAlertCard
+                show={showAlert}
+                onClose={handleCloseAlert}
+                data={DUMMY_ARBITRAGE_DATA}
+            />
         </motion.section>
     );
 };

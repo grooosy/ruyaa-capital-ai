@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Zap, DollarSign } from 'lucide-react';
@@ -19,7 +18,7 @@ const ExchangeNode = ({ name, position, isBuy = false }: { name: string, positio
             <p className="text-sm text-gray-400">Exchange</p>
         </motion.div>
         <motion.div 
-            className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 p-3 rounded-lg bg-gray-900/60 border border-gray-700/50 backdrop-blur-md ${isBuy ? '-mt-24' : 'mt-24'}`}
+            className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 p-3 rounded-lg bg-gray-900/60 border border-gray-700/50 backdrop-blur-md ${isBuy ? '-mt-24' : 'mt-20'}`}
             initial={{ opacity: 0, y: isBuy ? -20 : 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 1.5 }}
