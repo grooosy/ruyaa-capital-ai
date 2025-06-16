@@ -19,6 +19,8 @@ import { useEffect } from "react";
 import { WalletProvider } from "./context/WalletProvider";
 import ParticleBackground from "@/components/ParticleBackground";
 import NeuralNetworkOverlay from "@/components/NeuralNetworkOverlay";
+import WhoAreWeCorner from "@/components/WhoAreWeCorner";
+import GlobalMicroInteractions from "@/components/GlobalMicroInteractions";
 
 import '@solana/wallet-adapter-react-ui/styles.css';
 
@@ -37,12 +39,14 @@ const App = () => {
       <TooltipProvider>
         <ChatProvider>
           <WalletProvider>
+            <GlobalMicroInteractions />
             <Toaster />
             <Sonner />
             {/* Global dashboard background */}
             <div className="relative min-h-screen w-full bg-[#0A0A0A] font-spacegrotesk overflow-x-hidden z-0">
               <ParticleBackground />
               <NeuralNetworkOverlay />
+              <WhoAreWeCorner />
               {/* Content sits above the backgrounds */}
               <div className="relative z-10">
                 <BrowserRouter>
