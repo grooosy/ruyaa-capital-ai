@@ -1,13 +1,13 @@
 
 import React from 'react';
 import { motion, Variants } from 'framer-motion';
-import { Key, Scale, Download, Bot } from 'lucide-react';
+import { Key, Bot, LineChart, Wallet } from 'lucide-react';
 
 const flowSteps = [
-  { icon: Key, description: "Sign in to Ruyaa" },
-  { icon: Scale, description: "Choose your path: Gold/Forex or Crypto" },
-  { icon: Download, description: "Enter your info + deposit amount" },
-  { icon: Bot, description: "Start trading smarter with Ruyaa AI — Not Alone" },
+  { icon: Key, description: 'Open MT5 account' },
+  { icon: Bot, description: 'Ask Ruyaa AI' },
+  { icon: LineChart, description: 'Monitor + Learn' },
+  { icon: Wallet, description: 'Withdraw Anytime' },
 ];
 
 const containerVariants: Variants = {
