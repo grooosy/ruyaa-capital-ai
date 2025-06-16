@@ -12,6 +12,7 @@ import Footer from "@/components/Footer";
 import { ArrowRight, Brain, Zap } from "lucide-react";
 import ChatWidget from "@/components/chat/ChatWidget";
 import ParticleBackground from "@/components/ParticleBackground";
+import LiveMarketTicker from "@/components/LiveMarketTicker";
 import { useTranslation } from "react-i18next";
 
 const Index = () => {
@@ -36,6 +37,7 @@ const Index = () => {
     <div className="relative min-h-screen">
       <ParticleBackground />
       <Navbar />
+      <LiveMarketTicker />
       
       <main className="pt-32 pb-20 w-full">
         {/* Hero Section */}
@@ -44,7 +46,7 @@ const Index = () => {
           <div className="lg:w-1/2 text-center lg:text-start">
             <h1 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
               {t('hero_title_1')}{' '}
-              <span className="text-gold">
+              <span className="text-accent">
                 {t('hero_title_2')}
               </span>
             </h1>
@@ -55,7 +57,7 @@ const Index = () => {
 
             <motion.button
               onClick={handleStartNowClick}
-              className="bg-gold text-dark-charcoal px-8 py-4 rounded-xl text-lg font-bold shadow-gold-glow hover:bg-gold/90 transition-all duration-300 tracking-wide inline-flex items-center gap-2"
+              className="bg-accent text-dark-charcoal px-8 py-4 rounded-xl text-lg font-bold shadow-accent-glow hover:bg-accent/90 transition-all duration-300 tracking-wide inline-flex items-center gap-2"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -112,12 +114,12 @@ const Index = () => {
                 <h2 className="font-manrope text-4xl font-extrabold tracking-tight text-center text-white">
                   Why Ruyaa AI Outperforms
                 </h2>
-                <Zap className="w-8 h-8 text-gold animate-pulse" />
+                <Zap className="w-8 h-8 text-accent animate-pulse" />
               </div>
               <p className="text-gray-300 text-lg flex items-center justify-center gap-2">
                 <span className="w-2 h-2 bg-green rounded-full animate-pulse" />
                 Our intelligent features work while you sleep
-                <span className="w-2 h-2 bg-gold rounded-full animate-pulse" />
+                <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
               </p>
             </div>
             <div className="mb-16">
