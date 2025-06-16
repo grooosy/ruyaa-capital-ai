@@ -3,39 +3,34 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { TFunction } from 'i18next';
 import AiBrainIcon from './icons/AiBrainIcon';
+import ConvergingArrowsIcon from './icons/ConvergingArrowsIcon';
+import OneClickIcon from './icons/OneClickIcon';
 import VerifiedShieldIcon from './icons/VerifiedShieldIcon';
-import { GraduationCap, LineChart, Shuffle } from 'lucide-react';
 
 const getFeatures = (t: TFunction) => [
   {
-    icon: <VerifiedShieldIcon />,
-    title: t('feature_1'),
-    subtitle: 'Secure accounts with fast withdrawals',
-    color: 'from-accent/20 to-accent/10'
-  },
-  {
     icon: <AiBrainIcon />,
+    title: t('feature_1'),
+    subtitle: "Always available to help",
+    color: "from-green/20 to-emerald-500/20"
+  },
+  {
+    icon: <ConvergingArrowsIcon />,
     title: t('feature_2'),
-    subtitle: 'Instant answers to trading questions',
-    color: 'from-green/20 to-emerald-500/20'
+    subtitle: "Execute trades precisely",
+    color: "from-blue-500/20 to-cyan-500/20"
   },
   {
-    icon: <GraduationCap />,
+    icon: <OneClickIcon />,
     title: t('feature_3'),
-    subtitle: 'Learn with expert mentoring',
-    color: 'from-blue-500/20 to-cyan-500/20'
+    subtitle: "Instant access to funds",
+    color: "from-gold/20 to-yellow-500/20"
   },
   {
-    icon: <LineChart />,
+    icon: <VerifiedShieldIcon />,
     title: t('feature_4'),
-    subtitle: 'Real-time insights and signals',
-    color: 'from-purple-500/20 to-violet-500/20'
-  },
-  {
-    icon: <Shuffle />,
-    title: t('feature_5'),
-    subtitle: 'Auto-scan profit opportunities',
-    color: 'from-orange-500/20 to-yellow-500/20'
+    subtitle: "Partnered with the best",
+    color: "from-purple-500/20 to-violet-500/20"
   },
 ];
 

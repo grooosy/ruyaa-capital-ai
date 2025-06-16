@@ -16,8 +16,8 @@
   
   body {
     @apply text-white font-jakarta;
-    background-color: #0D0D0D;
-    background-image: radial-gradient(ellipse at top, #23221c, #0D0D0D);
+    background-color: #181711;
+    background-image: radial-gradient(ellipse at top, #23221c, #181711);
     min-height: 100vh;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
