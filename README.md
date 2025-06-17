@@ -60,14 +60,52 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
+## Environment configuration
+
+1. Copy `.env.example` to `.env` and fill in the values:
+
+   ```sh
+   cp .env.example .env
+   ```
+
+   - `VITE_OPENROUTER_API_KEY` / `OPENROUTER_API_KEY` – OpenRouter API key
+   - `VITE_TWELVEDATA_API_KEY` / `TWELVEDATA_API_KEY` – TwelveData API key
+   - `VITE_SUPABASE_URL` – URL of your Supabase project
+   - `VITE_SUPABASE_ANON_KEY` – Supabase anon/public key
+
+2. Add these environment variables to your deployment provider as well (Lovable → Project → Settings → Secrets).
+
+### Connect to your Supabase project
+
+Run the Supabase CLI to link your project (replace `<project-id>` with your Supabase project ref):
+
+```sh
+supabase link --project-ref <project-id>
+```
+
+The project ref is also stored in `supabase/config.toml`.
+
+### Run database migrations
+
+Use the Supabase CLI to apply migrations located in `supabase/migrations`:
+
+```sh
+supabase db push
+```
+
+This will run all SQL files against the linked Supabase database.
+
 ## How can I deploy this project?
 
 Simply open [Lovable](https://lovable.dev/projects/153afdbe-684e-419e-a6e3-9aad59f987cf) and click on Share -> Publish.
 
 ## Can I connect a custom domain to my Lovable project?
 
-Yes, you can!
+Yes! After publishing the project you can point your own domain to it.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+1. In the Lovable dashboard go to **Project → Settings → Domains** and click **Connect Domain**.
+2. Enter the domain name you want to use.
+3. Follow the displayed DNS instructions (usually adding a CNAME record) and wait for propagation.
+4. Once the record is validated Lovable will issue an SSL certificate automatically.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+See [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide) for more details.
