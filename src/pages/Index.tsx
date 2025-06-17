@@ -22,7 +22,7 @@ const Index = () => {
   const [startAiFlowAnimation, setStartAiFlowAnimation] = React.useState(false);
   const { openChat } = useChatContext();
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   // Check if user is visiting for the first time
   useEffect(() => {
@@ -47,7 +47,10 @@ const Index = () => {
   };
 
   return (
-    <div className="relative min-h-screen">
+    <div
+      className="relative min-h-screen bg-bg"
+      dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}
+    >
       <ParticleBackground />
       <Navbar />
       <LiveMarketTicker />
