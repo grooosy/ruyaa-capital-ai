@@ -4,7 +4,7 @@ import { Message } from '@/types/chat';
 import { AgentId } from '@/context/ChatContext';
 import { systemPrompts, modelMap } from '@/config/agentConfig';
 
-const openRouterApiKey = import.meta.env.VITE_OPENROUTER_API_KEY;
+const openRouterApiKey = import.meta.env.VITE_OPENROUTER_API_KEY || import.meta.env.OPENROUTER_API_KEY;
 
 const openrouter = new OpenAI({
   apiKey: openRouterApiKey || "dummy-key",

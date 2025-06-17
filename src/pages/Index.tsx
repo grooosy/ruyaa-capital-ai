@@ -9,7 +9,7 @@ import CryptoArbitrageSection from "@/components/CryptoArbitrageSection";
 import FeatureGrid from "@/components/FeatureGrid";
 import HeroDashboard from "@/components/HeroDashboard";
 import Footer from "@/components/Footer";
-import { ArrowRight, Brain, Zap } from "lucide-react";
+import { ArrowRight, Brain, Zap, UserPlus, Bot, BarChart2, Banknote } from "lucide-react";
 import ChatWidget from "@/components/chat/ChatWidget";
 import ParticleBackground from "@/components/ParticleBackground";
 import LiveMarketTicker from "@/components/LiveMarketTicker";
@@ -54,12 +54,13 @@ const Index = () => {
       
       <main className="pt-32 pb-20 w-full">
         {/* Hero Section */}
-        <section className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between px-6 gap-12">
+        <section className="relative w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between px-6 gap-12 bg-[url('/candles.svg')] bg-center bg-[length:600px] bg-no-repeat">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#151515] via-[#0d0d0d] to-black opacity-80 -z-10" />
           {/* Left Side: Text content */}
           <div className="lg:w-1/2 text-center lg:text-start">
             <h1 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
               {t('hero_title_1')}{' '}
-              <span className="text-green">{t('hero_title_2')}</span>
+              <span className="text-gold">{t('hero_title_2')}</span>
             </h1>
 
             <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
@@ -105,13 +106,13 @@ const Index = () => {
         <section id="how" className="w-full max-w-5xl mx-auto mt-12 px-6">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
             {[
-              { icon: '✅', label: 'Open MT5 account' },
-              { icon: '🤖', label: 'Ask Ruyaa AI' },
-              { icon: '📊', label: 'Monitor + Learn' },
-              { icon: '💸', label: 'Withdraw Anytime' },
+              { icon: UserPlus, label: 'Open MT5 account' },
+              { icon: Bot, label: 'Ask Ruyaa AI' },
+              { icon: BarChart2, label: 'Monitor + Learn' },
+              { icon: Banknote, label: 'Withdraw Anytime' },
             ].map((step, idx) => (
               <div key={idx} className="flex flex-col items-center">
-                <div className="text-3xl mb-2">{step.icon}</div>
+                <step.icon className="w-8 h-8 text-gold mb-2" />
                 <p className="font-semibold text-white">{step.label}</p>
               </div>
             ))}
