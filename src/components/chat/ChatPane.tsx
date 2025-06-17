@@ -20,6 +20,8 @@ const ChatPane = () => {
         handleSubmit,
         handleVoiceRecording,
         handleFileUpload,
+        isRecording,
+        isUploading,
         authRequired,
         clearAuthRequired,
         session
@@ -50,6 +52,8 @@ const ChatPane = () => {
     const handleChange = inGuestMode ? guestChat.handleInputChange : handleInputChange;
     const handleSubmitForm = inGuestMode ? guestChat.handleSubmit : handleSubmit;
     const sending = inGuestMode ? guestChat.isLoading : isLoading;
+    const recording = inGuestMode ? false : isRecording;
+    const uploading = inGuestMode ? false : isUploading;
 
     return (
         <div className="w-full h-full bg-card/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden">
@@ -72,6 +76,8 @@ const ChatPane = () => {
                 onVoiceRecording={handleVoiceRecording}
                 onFileUpload={handleFileUpload}
                 isLoading={sending}
+                isRecording={recording}
+                isUploading={uploading}
             />
 
             <Toaster />
