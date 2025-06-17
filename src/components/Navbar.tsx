@@ -41,7 +41,7 @@ const Navbar: React.FC = () => {
     <header
       className={`fixed z-30 top-12 left-0 w-full transition-all duration-500 ${
         scrolled
-          ? "backdrop-blur-xl bg-black/80 border-b border-green/20 shadow-2xl"
+          ? "backdrop-blur-xl bg-black/80 border-b border-primary/20 shadow-ai-glow"
           : "bg-transparent"
       }`}
     >
@@ -56,7 +56,7 @@ const Navbar: React.FC = () => {
                 <span className="text-white text-sm">→</span>
               </button>
             </div>
-            <button className="px-3 py-1 bg-green/10 hover:bg-green/20 border border-green/30 rounded-lg text-green text-sm font-medium transition-colors">
+            <button className="px-3 py-1 bg-primary/10 hover:bg-primary/20 border border-primary/30 rounded-lg text-primary text-sm font-medium transition-colors">
               Who We Are!
             </button>
           </div>
@@ -93,19 +93,19 @@ const Navbar: React.FC = () => {
         <div className="hidden md:flex items-center space-x-8 rtl:space-x-reverse">
           <Link
             to="/#ai"
-            className="hover:text-green transition-colors font-semibold"
+            className="hover:text-primary transition-colors font-semibold"
           >
             {t("how_it_works")}
           </Link>
           <Link
             to="/agents"
-            className="hover:text-gold transition-colors font-semibold"
+            className="hover:text-secondary transition-colors font-semibold"
           >
             {t("ai_agents")}
           </Link>
           <Link
             to="/academy"
-            className="hover:text-green transition-colors font-semibold"
+            className="hover:text-primary transition-colors font-semibold"
           >
             {isArabic ? "أكاديمية" : "Academy"}
           </Link>
@@ -116,7 +116,7 @@ const Navbar: React.FC = () => {
                 if (depositMenu) navigate("/deposit");
                 setDepositMenu(!depositMenu);
               }}
-              className="hover:text-gold transition-colors font-semibold flex items-center gap-1"
+              className="hover:text-secondary transition-colors font-semibold flex items-center gap-1"
             >
               {t("deposit")}
               <span
@@ -126,37 +126,25 @@ const Navbar: React.FC = () => {
               </span>
             </button>
             {depositMenu && (
-              <div className="absolute mt-2 right-0 bg-card border border-white/10 rounded-lg shadow-lg py-2 w-40 z-50">
+              <div className="absolute mt-2 right-0 bg-surface border border-primary/20 rounded-lg shadow-ai-glow py-2 w-40 z-50">
                 <Link
                   to="/deposit?tab=withdraw"
-                  className="block px-4 py-2 hover:bg-white/5"
+                  className="block px-4 py-2 hover:bg-primary/10 hover:text-primary transition-colors"
                 >
                   Withdraw
                 </Link>
                 <Link
                   to="/deposit?tab=deposit"
-                  className="block px-4 py-2 hover:bg-white/5"
+                  className="block px-4 py-2 hover:bg-primary/10 hover:text-primary transition-colors"
                 >
                   Deposit
-                </Link>
-                <Link
-                  to="/deposit?tab=exchange"
-                  className="block px-4 py-2 hover:bg-white/5"
-                >
-                  Exchange
-                </Link>
-                <Link
-                  to="/deposit?tab=world"
-                  className="block px-4 py-2 hover:bg-white/5"
-                >
-                  WORLD Money
                 </Link>
               </div>
             )}
           </div>
           <Link
             to="/#footer"
-            className="hover:text-green transition-colors font-semibold"
+            className="hover:text-primary transition-colors font-semibold"
           >
             {t("contact")}
           </Link>
@@ -168,7 +156,7 @@ const Navbar: React.FC = () => {
           ) : (
             <Link
               to="/auth"
-              className="hover:text-gold transition-colors font-semibold"
+              className="hover:text-secondary transition-colors font-semibold"
             >
               {t("login")}
             </Link>
