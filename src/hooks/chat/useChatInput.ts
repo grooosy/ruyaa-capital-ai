@@ -84,6 +84,7 @@ export const useChatInput = (submitMessage: SubmitFn) => {
 
   return {
     input,
+    setInput,
     handleInputChange,
     clearInput,
     handleVoiceRecording,
