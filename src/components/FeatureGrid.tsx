@@ -1,42 +1,44 @@
 
 import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { TFunction } from 'i18next';
 import AiBrainIcon from './icons/AiBrainIcon';
 import ConvergingArrowsIcon from './icons/ConvergingArrowsIcon';
-import OneClickIcon from './icons/OneClickIcon';
 import VerifiedShieldIcon from './icons/VerifiedShieldIcon';
+import { GraduationCap, LineChart } from 'lucide-react';
 
-const getFeatures = (t: TFunction) => [
+const features = [
+  {
+    icon: <VerifiedShieldIcon />,
+    title: 'Verified Broker',
+    subtitle: '1-Click Withdraw',
+    color: 'from-green/20 to-emerald-500/20',
+  },
   {
     icon: <AiBrainIcon />,
-    title: t('feature_1'),
-    subtitle: "Always available to help",
-    color: "from-green/20 to-emerald-500/20"
+    title: '24/7 Ruyaa AI Assistant',
+    subtitle: 'Always available to help',
+    color: 'from-blue-500/20 to-cyan-500/20',
+  },
+  {
+    icon: <GraduationCap className="w-8 h-8" />,
+    title: 'Trading Academy + Mentor',
+    subtitle: 'Learn with guidance',
+    color: 'from-gold/20 to-yellow-500/20',
+  },
+  {
+    icon: <LineChart className="w-8 h-8" />,
+    title: 'Live Ticker + Signal Feed',
+    subtitle: 'Real-time trading data',
+    color: 'from-green/20 to-emerald-500/20',
   },
   {
     icon: <ConvergingArrowsIcon />,
-    title: t('feature_2'),
-    subtitle: "Execute trades precisely",
-    color: "from-blue-500/20 to-cyan-500/20"
-  },
-  {
-    icon: <OneClickIcon />,
-    title: t('feature_3'),
-    subtitle: "Instant access to funds",
-    color: "from-gold/20 to-yellow-500/20"
-  },
-  {
-    icon: <VerifiedShieldIcon />,
-    title: t('feature_4'),
-    subtitle: "Partnered with the best",
-    color: "from-purple-500/20 to-violet-500/20"
+    title: 'Crypto Arbitrage System',
+    subtitle: 'Auto profit scan',
+    color: 'from-purple-500/20 to-violet-500/20',
   },
 ];
 
 const FeatureGrid: React.FC = () => {
-  const { t } = useTranslation();
-  const features = getFeatures(t);
 
   return (
     <div className="w-full max-w-4xl mx-auto">
