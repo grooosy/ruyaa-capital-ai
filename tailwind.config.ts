@@ -24,14 +24,14 @@ export default {
     },
     extend: {
       colors: {
-        bg: "#181711",
+        bg: "#0D0D0D",
         green: "#10A169",
-        gold: "#CFA100",
+        gold: "#7FFF00",
         "dark-charcoal": "#181711",
         background: "#181711",
         card: "#23221c",
-        "primary-accent": "#16C784",
-        "secondary-accent": "#E6C419",
+        "primary-accent": "#7FFF00",
+        "secondary-accent": "#7FFF00",
         // retain shadcn base;
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
@@ -44,7 +44,7 @@ export default {
       },
       boxShadow: {
         'green-glow': '0 0 20px 0 rgba(22,199,132,0.40)',
-        'gold-glow': '0 0 20px 0 rgba(230,196,25,0.25)',
+        'gold-glow': '0 0 20px 0 rgba(127,255,0,0.25)',
         'red-glow': '0 0 20px 0 rgba(239, 68, 68, 0.40)',
       },
       keyframes: {
