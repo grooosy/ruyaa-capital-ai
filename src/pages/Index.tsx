@@ -1,6 +1,6 @@
-
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import LogoCloud from "@/components/LogoCloud";
 import PathModal from "@/components/PathModal";
@@ -18,6 +18,16 @@ const Index = () => {
   const [modalOpen, setModalOpen] = React.useState(false);
   const [startAiFlowAnimation, setStartAiFlowAnimation] = React.useState(false);
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  // Check if user is visiting for the first time
+  useEffect(() => {
+    const hasVisited = localStorage.getItem('ruyaa-has-visited');
+    if (!hasVisited) {
+      localStorage.setItem('ruyaa-has-visited', 'true');
+      navigate('/welcome');
+    }
+  }, [navigate]);
 
   const handleStartNowClick = () => {
     const aiSection = document.getElementById('ai');

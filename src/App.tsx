@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -11,6 +10,7 @@ import CryptoPage from "./pages/CryptoPage";
 import ArbitragePage from "./pages/ArbitragePage";
 import AcademyPage from "./pages/AcademyPage";
 import NotFound from "./pages/NotFound";
+import WelcomePage from "./pages/WelcomePage";
 import { ChatProvider } from "./context/ChatContext";
 import AuthPage from "./pages/AuthPage";
 import DashboardPage from "./pages/DashboardPage";
@@ -47,6 +47,7 @@ const App = () => {
               <div className="relative z-10">
                 <BrowserRouter>
                   <Routes>
+                    <Route path="/welcome" element={<WelcomePage />} />
                     <Route path="/" element={<Index />} />
                     <Route path="/auth" element={<AuthPage />} />
                     <Route path="/dashboard" element={<DashboardPage />} />
