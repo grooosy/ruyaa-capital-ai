@@ -4,10 +4,18 @@ import { Message } from '@/types/chat';
 import { AgentId } from '@/context/ChatContext';
 import { systemPrompts, modelMap } from '@/config/agentConfig';
 
-const openRouterApiKey = import.meta.env.VITE_OPENROUTER_API_KEY || import.meta.env.OPENROUTER_API_KEY;
+const openRouterApiKey =
+  import.meta.env.VITE_OPENROUTER_API_KEY ||
+  import.meta.env.OPENROUTER_API_KEY;
+
+if (!openRouterApiKey) {
+  throw new Error(
+    "OpenRouter API key not found. Please define VITE_OPENROUTER_API_KEY or OPENROUTER_API_KEY in your environment."
+  );
+}
 
 const openrouter = new OpenAI({
-  apiKey: openRouterApiKey || "dummy-key",
+  apiKey: openRouterApiKey,
   baseURL: "https://openrouter.ai/api/v1",
   dangerouslyAllowBrowser: true,
 });
