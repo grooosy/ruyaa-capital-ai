@@ -1,11 +1,6 @@
-
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { Session } from "@supabase/supabase-js";
@@ -17,18 +12,20 @@ const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = React.useState(false);
   const [depositMenu, setDepositMenu] = React.useState(false);
   const { t, i18n } = useTranslation();
-  const isArabic = i18n.language === 'ar';
+  const isArabic = i18n.language === "ar";
   const [session, setSession] = React.useState<Session | null>(null);
   const { data: profile } = useProfile(session);
   const navigate = useNavigate();
 
   React.useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
-        setSession(session);
+      setSession(session);
     });
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-        setSession(session);
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
     });
 
     return () => subscription.unsubscribe();
@@ -42,14 +39,27 @@ const Navbar: React.FC = () => {
 
   return (
     <header
-      className={`fixed z-30 top-12 left-0 w-full transition-all duration-300 ${
+      className={`fixed z-30 top-12 left-0 w-full transition-all duration-500 ${
         scrolled
-          ? "backdrop-blur-xl bg-[#181711cc] shadow-green"
+          ? "backdrop-blur-xl bg-black/80 border-b border-green/20 shadow-2xl"
           : "bg-transparent"
       }`}
     >
       <nav className="flex items-center justify-between max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1">
+              <button className="p-2 hover:bg-white/5 rounded-lg transition-colors">
+                <span className="text-white text-sm">←</span>
+              </button>
+              <button className="p-2 hover:bg-white/5 rounded-lg transition-colors">
+                <span className="text-white text-sm">→</span>
+              </button>
+            </div>
+            <button className="px-3 py-1 bg-green/10 hover:bg-green/20 border border-green/30 rounded-lg text-green text-sm font-medium transition-colors">
+              Who We Are!
+            </button>
+          </div>
           <Dialog>
             <DialogTrigger asChild>
               <button
@@ -71,44 +81,99 @@ const Navbar: React.FC = () => {
               />
             </DialogContent>
           </Dialog>
-          <span className="text-lg font-playfair italic text-gold/90 hidden lg:block">
-            {isArabic ? 'يعمل بينما تنام' : 'It works while you sleep'}
-          </span>
+          <div className="hidden lg:flex flex-col">
+            <span className="text-lg font-spacegrotesk font-bold text-gradient-ai tracking-wide">
+              Watch the real AI-power work for you
+            </span>
+            <span className="text-xs text-gray-400 font-medium tracking-wider">
+              It works while you sleep.
+            </span>
+          </div>
         </div>
         <div className="hidden md:flex items-center space-x-8 rtl:space-x-reverse">
-            <Link to="/#ai" className="hover:text-green transition-colors font-semibold">{t('how_it_works')}</Link>
-            <Link to="/agents" className="hover:text-gold transition-colors font-semibold">{t('ai_agents')}</Link>
-            <Link to="/academy" className="hover:text-green transition-colors font-semibold">
-              {isArabic ? 'أكاديمية' : 'Academy'}
-            </Link>
-            <div className="relative" onMouseLeave={() => setDepositMenu(false)}>
-              <button
-                id="deposit-btn"
-                onClick={() => {
-                  if (depositMenu) navigate('/deposit');
-                  setDepositMenu(!depositMenu);
-                }}
-                className="hover:text-gold transition-colors font-semibold flex items-center gap-1"
+          <Link
+            to="/#ai"
+            className="hover:text-green transition-colors font-semibold"
+          >
+            {t("how_it_works")}
+          </Link>
+          <Link
+            to="/agents"
+            className="hover:text-gold transition-colors font-semibold"
+          >
+            {t("ai_agents")}
+          </Link>
+          <Link
+            to="/academy"
+            className="hover:text-green transition-colors font-semibold"
+          >
+            {isArabic ? "أكاديمية" : "Academy"}
+          </Link>
+          <div className="relative" onMouseLeave={() => setDepositMenu(false)}>
+            <button
+              id="deposit-btn"
+              onClick={() => {
+                if (depositMenu) navigate("/deposit");
+                setDepositMenu(!depositMenu);
+              }}
+              className="hover:text-gold transition-colors font-semibold flex items-center gap-1"
+            >
+              {t("deposit")}
+              <span
+                className={`transition-transform ${depositMenu ? "rotate-180" : ""}`}
               >
-                {t('deposit')}
-                <span className={`transition-transform ${depositMenu ? 'rotate-180' : ''}`}>▾</span>
-              </button>
-              {depositMenu && (
-                <div className="absolute mt-2 right-0 bg-card border border-white/10 rounded-lg shadow-lg py-2 w-40 z-50">
-                  <Link to="/deposit?tab=withdraw" className="block px-4 py-2 hover:bg-white/5">Withdraw</Link>
-                  <Link to="/deposit?tab=deposit" className="block px-4 py-2 hover:bg-white/5">Deposit</Link>
-                  <Link to="/deposit?tab=exchange" className="block px-4 py-2 hover:bg-white/5">Exchange</Link>
-                  <Link to="/deposit?tab=world" className="block px-4 py-2 hover:bg-white/5">WORLD Money</Link>
-                </div>
-              )}
-            </div>
-            <Link to="/#footer" className="hover:text-green transition-colors font-semibold">{t('contact')}</Link>
-            {session ? (
-              <UserMenu fullName={profile?.full_name} avatarUrl={profile?.avatar_url} />
-            ) : (
-              <Link to="/auth" className="hover:text-gold transition-colors font-semibold">{t('login')}</Link>
+                ▾
+              </span>
+            </button>
+            {depositMenu && (
+              <div className="absolute mt-2 right-0 bg-card border border-white/10 rounded-lg shadow-lg py-2 w-40 z-50">
+                <Link
+                  to="/deposit?tab=withdraw"
+                  className="block px-4 py-2 hover:bg-white/5"
+                >
+                  Withdraw
+                </Link>
+                <Link
+                  to="/deposit?tab=deposit"
+                  className="block px-4 py-2 hover:bg-white/5"
+                >
+                  Deposit
+                </Link>
+                <Link
+                  to="/deposit?tab=exchange"
+                  className="block px-4 py-2 hover:bg-white/5"
+                >
+                  Exchange
+                </Link>
+                <Link
+                  to="/deposit?tab=world"
+                  className="block px-4 py-2 hover:bg-white/5"
+                >
+                  WORLD Money
+                </Link>
+              </div>
             )}
-            <LangToggle />
+          </div>
+          <Link
+            to="/#footer"
+            className="hover:text-green transition-colors font-semibold"
+          >
+            {t("contact")}
+          </Link>
+          {session ? (
+            <UserMenu
+              fullName={profile?.full_name}
+              avatarUrl={profile?.avatar_url}
+            />
+          ) : (
+            <Link
+              to="/auth"
+              className="hover:text-gold transition-colors font-semibold"
+            >
+              {t("login")}
+            </Link>
+          )}
+          <LangToggle />
         </div>
       </nav>
     </header>

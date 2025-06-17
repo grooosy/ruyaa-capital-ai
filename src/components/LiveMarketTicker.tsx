@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 interface TickerData {
   label: string;
@@ -6,15 +6,15 @@ interface TickerData {
 }
 
 const cryptoSymbols = [
-  { id: 'bitcoin', label: 'BTC/USD' },
-  { id: 'ethereum', label: 'ETH/USD' },
+  { id: "bitcoin", label: "BTC/USD" },
+  { id: "ethereum", label: "ETH/USD" },
 ];
 
 const marketSymbols = [
-  { symbol: 'XAU/USD', label: 'GOLD' },
-  { symbol: 'EUR/USD', label: 'EURUSD' },
-  { symbol: 'NDX', label: 'NASDAQ' },
-  { symbol: 'DXY', label: 'DXY' },
+  { symbol: "XAU/USD", label: "GOLD" },
+  { symbol: "EUR/USD", label: "EURUSD" },
+  { symbol: "NDX", label: "NASDAQ" },
+  { symbol: "DXY", label: "DXY" },
 ];
 
 const fallbackPrices: Record<string, number> = {
@@ -26,43 +26,74 @@ const fallbackPrices: Record<string, number> = {
   dxy: 103,
 };
 
+interface ExtendedTickerData extends TickerData {
+  change?: number;
+  changePercent?: number;
+}
+
 const LiveMarketTicker: React.FC = () => {
-  const [data, setData] = useState<TickerData[]>([]);
+  const [data, setData] = useState<ExtendedTickerData[]>([]);
+  const [prevPrices, setPrevPrices] = useState<Record<string, number>>({});
 
   const fetchPrices = async () => {
     try {
-      const cryptoIds = cryptoSymbols.map((s) => s.id).join(',');
+      const cryptoIds = cryptoSymbols.map((s) => s.id).join(",");
       const res = await fetch(
-        `https://api.coingecko.com/api/v3/simple/price?ids=${cryptoIds}&vs_currencies=usd`
+        `https://api.coingecko.com/api/v3/simple/price?ids=${cryptoIds}&vs_currencies=usd`,
       );
       const json = await res.json();
-      const cryptoData = cryptoSymbols.map((s) => ({
-        label: s.label,
-        price: json[s.id]?.usd ?? fallbackPrices[s.id],
-      }));
+      const cryptoData = cryptoSymbols.map((s) => {
+        const currentPrice = json[s.id]?.usd ?? fallbackPrices[s.id];
+        const prevPrice = prevPrices[s.label] || currentPrice;
+        const change = currentPrice - prevPrice;
+        const changePercent = prevPrice ? (change / prevPrice) * 100 : 0;
+        return {
+          label: s.label,
+          price: currentPrice,
+          change,
+          changePercent,
+        };
+      });
 
       const twelveKey = import.meta.env.VITE_TWELVEDATA_API_KEY;
       if (!twelveKey) {
-        throw new Error('Missing TwelveData API key');
+        throw new Error("Missing TwelveData API key");
       }
       const otherData = await Promise.all(
         marketSymbols.map(async (s) => {
           try {
             const r = await fetch(
-              `https://api.twelvedata.com/price?symbol=${s.symbol}&apikey=${twelveKey}`
+              `https://api.twelvedata.com/price?symbol=${s.symbol}&apikey=${twelveKey}`,
             );
             const j = await r.json();
-            const price = parseFloat(j.price);
-            if (isNaN(price)) throw new Error('price');
-            return { label: s.label, price };
+            const currentPrice = parseFloat(j.price);
+            if (isNaN(currentPrice)) throw new Error("price");
+            const prevPrice = prevPrices[s.label] || currentPrice;
+            const change = currentPrice - prevPrice;
+            const changePercent = prevPrice ? (change / prevPrice) * 100 : 0;
+            return {
+              label: s.label,
+              price: currentPrice,
+              change,
+              changePercent,
+            };
           } catch {
             const key = s.label.toLowerCase();
             return { label: s.label, price: fallbackPrices[key] };
           }
-        })
+        }),
       );
 
-      setData([...cryptoData, ...otherData]);
+      const newData = [...cryptoData, ...otherData];
+
+      // Update previous prices for next comparison
+      const newPrevPrices: Record<string, number> = {};
+      newData.forEach((item) => {
+        newPrevPrices[item.label] = item.price;
+      });
+      setPrevPrices(newPrevPrices);
+
+      setData(newData);
     } catch (e) {
       const newData = [
         ...cryptoSymbols.map((s) => ({
@@ -86,15 +117,67 @@ const LiveMarketTicker: React.FC = () => {
 
   if (data.length === 0) return null;
 
+  const getPriceColor = (changePercent?: number) => {
+    if (!changePercent) return "text-gray-400";
+    if (changePercent > 0) return "text-green";
+    if (changePercent < 0) return "text-red-400";
+    return "text-gray-400";
+  };
+
+  const getChangeIcon = (changePercent?: number) => {
+    if (!changePercent) return "";
+    if (changePercent > 0) return "▲";
+    if (changePercent < 0) return "▼";
+    return "";
+  };
+
   return (
-    <div className="fixed top-0 left-0 z-20 w-full overflow-hidden border-b border-green/20 bg-black/30 backdrop-blur-md">
-      <div className="absolute left-0 top-0 h-full w-12 bg-gradient-to-r from-bg to-transparent z-10" />
-      <div className="absolute right-0 top-0 h-full w-12 bg-gradient-to-l from-bg to-transparent z-10" />
-      <div className="flex animate-marquee whitespace-nowrap py-2">
+    <div className="fixed top-0 left-0 z-20 w-full overflow-hidden border-b border-green/10 bg-gradient-to-r from-black via-gray-900/95 to-black backdrop-blur-xl">
+      <div className="absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-black via-black/90 to-transparent z-10" />
+      <div className="absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-black via-black/90 to-transparent z-10" />
+      <div className="flex animate-marquee whitespace-nowrap py-4">
         {data.map((item) => (
-          <div key={item.label} className="flex items-center gap-2 px-6">
-            <span className="font-bold text-white text-sm">{item.label}</span>
-            <span className="text-green text-sm">{item.price.toLocaleString()}</span>
+          <div
+            key={item.label}
+            className="flex items-center gap-4 px-10 border-r border-white/5 last:border-r-0"
+          >
+            <div className="flex items-center gap-2">
+              <div
+                className={`w-2 h-2 rounded-full animate-pulse ${
+                  item.changePercent && item.changePercent > 0
+                    ? "bg-green shadow-green-glow"
+                    : item.changePercent && item.changePercent < 0
+                      ? "bg-red-400 shadow-red-400/50"
+                      : "bg-gray-400"
+                }`}
+              />
+              <span className="font-bold text-white text-sm font-spacegrotesk tracking-wide">
+                {item.label}
+              </span>
+            </div>
+            <div className="flex items-center gap-3">
+              <span
+                className={`text-sm font-mono font-semibold ${getPriceColor(item.changePercent)}`}
+              >
+                ${item.price.toLocaleString()}
+              </span>
+              {item.changePercent !== undefined && (
+                <div
+                  className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${
+                    item.changePercent > 0
+                      ? "bg-green/10 text-green border border-green/20"
+                      : item.changePercent < 0
+                        ? "bg-red-400/10 text-red-400 border border-red-400/20"
+                        : "bg-gray-400/10 text-gray-400 border border-gray-400/20"
+                  }`}
+                >
+                  <span className="text-[10px]">
+                    {getChangeIcon(item.changePercent)}
+                  </span>
+                  {Math.abs(item.changePercent).toFixed(2)}%
+                </div>
+              )}
+            </div>
           </div>
         ))}
       </div>

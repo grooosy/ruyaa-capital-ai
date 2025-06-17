@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useRoutes } from "react-router-dom";
 import Index from "./pages/Index";
 import AgentsPage from "./pages/AgentsPage";
 import MT4Page from "./pages/MT4Page";
@@ -20,10 +20,39 @@ import { useEffect } from "react";
 import { WalletProvider } from "./context/WalletProvider";
 import ParticleBackground from "@/components/ParticleBackground";
 import NeuralNetworkOverlay from "@/components/NeuralNetworkOverlay";
+import routes from "tempo-routes";
 
-import '@solana/wallet-adapter-react-ui/styles.css';
+import "@solana/wallet-adapter-react-ui/styles.css";
 
 const queryClient = new QueryClient();
+
+const AppRoutes = () => {
+  // Tempo routes - must be called inside Router context
+  const tempoRoutes = import.meta.env.VITE_TEMPO ? useRoutes(routes) : null;
+
+  if (tempoRoutes) {
+    return tempoRoutes;
+  }
+
+  return (
+    <Routes>
+      <Route path="/welcome" element={<WelcomePage />} />
+      <Route path="/" element={<Index />} />
+      <Route path="/auth" element={<AuthPage />} />
+      <Route path="/dashboard" element={<DashboardPage />} />
+      <Route path="/agents" element={<AgentsPage />} />
+      <Route path="/agents/mt4mt5" element={<MT4Page />} />
+      <Route path="/agents/crypto" element={<CryptoPage />} />
+      <Route path="/agents/arbitrage" element={<ArbitragePage />} />
+      <Route path="/academy" element={<AcademyPage />} />
+      <Route path="/deposit" element={<DepositPage />} />
+      {/* Add this before the catchall route */}
+      {import.meta.env.VITE_TEMPO && <Route path="/tempobook/*" />}
+      {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  );
+};
 
 const App = () => {
   const { i18n } = useTranslation();
@@ -40,27 +69,16 @@ const App = () => {
           <WalletProvider>
             <Toaster />
             <Sonner />
-            {/* Global dashboard background */}
-            <div className="relative min-h-screen w-full bg-[#0A0A0A] font-spacegrotesk overflow-x-hidden z-0">
+            {/* Modern AI-styled background */}
+            <div className="relative min-h-screen w-full bg-gradient-to-br from-black via-gray-950 to-black font-spacegrotesk overflow-x-hidden z-0">
+              <div className="absolute inset-0 bg-grid-pattern opacity-[0.02]" />
+              <div className="absolute inset-0 bg-gradient-to-t from-green/5 via-transparent to-transparent" />
               <ParticleBackground />
               <NeuralNetworkOverlay />
               {/* Content sits above the backgrounds */}
               <div className="relative z-10">
                 <BrowserRouter>
-                  <Routes>
-                    <Route path="/welcome" element={<WelcomePage />} />
-                    <Route path="/" element={<Index />} />
-                    <Route path="/auth" element={<AuthPage />} />
-                    <Route path="/dashboard" element={<DashboardPage />} />
-                    <Route path="/agents" element={<AgentsPage />} />
-                    <Route path="/agents/mt4mt5" element={<MT4Page />} />
-                    <Route path="/agents/crypto" element={<CryptoPage />} />
-                    <Route path="/agents/arbitrage" element={<ArbitragePage />} />
-                    <Route path="/academy" element={<AcademyPage />} />
-                    <Route path="/deposit" element={<DepositPage />} />
-                    {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                    <Route path="*" element={<NotFound />} />
-                  </Routes>
+                  <AppRoutes />
                 </BrowserRouter>
               </div>
             </div>
