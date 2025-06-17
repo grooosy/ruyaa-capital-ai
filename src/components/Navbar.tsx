@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
@@ -7,10 +9,13 @@ import { Session } from "@supabase/supabase-js";
 import LangToggle from "./LangToggle";
 import { useProfile } from "@/hooks/useProfile";
 import UserMenu from "./UserMenu";
+import { Bell, Users } from "lucide-react";
+import NotificationDropdown from "./NotificationDropdown";
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = React.useState(false);
   const [depositMenu, setDepositMenu] = React.useState(false);
+  const [notificationOpen, setNotificationOpen] = React.useState(false);
   const { t, i18n } = useTranslation();
   const isArabic = i18n.language === "ar";
   const [session, setSession] = React.useState<Session | null>(null);
@@ -47,19 +52,15 @@ const Navbar: React.FC = () => {
     >
       <nav className="flex items-center justify-between max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center gap-4">
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1">
-              <button className="p-2 hover:bg-white/5 rounded-lg transition-colors">
-                <span className="text-white text-sm">←</span>
-              </button>
-              <button className="p-2 hover:bg-white/5 rounded-lg transition-colors">
-                <span className="text-white text-sm">→</span>
-              </button>
-            </div>
-            <button className="px-3 py-1 bg-primary/10 hover:bg-primary/20 border border-primary/30 rounded-lg text-primary text-sm font-medium transition-colors">
-              Who We Are!
-            </button>
-          </div>
+          {/* Who We Are Button */}
+          <button
+            onClick={() => navigate('/about')}
+            className="hidden md:flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-secondary/10 to-primary/10 border border-secondary/30 rounded-lg text-secondary text-sm font-medium transition-all duration-300 hover:from-secondary/20 hover:to-primary/20 hover:border-secondary/50 hover:shadow-lg hover:shadow-secondary/20"
+          >
+            <Users className="w-4 h-4" />
+            Who We Are
+          </button>
+          
           <Dialog>
             <DialogTrigger asChild>
               <button
@@ -81,13 +82,14 @@ const Navbar: React.FC = () => {
               />
             </DialogContent>
           </Dialog>
-          <div className="hidden lg:flex flex-col">
-            <span className="text-lg font-spacegrotesk font-bold text-gradient-ai tracking-wide">
-              Watch the real AI-power work for you
-            </span>
-            <span className="text-xs text-gray-400 font-medium tracking-wider">
+          
+          {/* Prominent "It works while you sleep" banner */}
+          <div className="hidden lg:flex items-center gap-3 px-4 py-2 bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/10 border border-primary/20 rounded-full backdrop-blur-sm">
+            <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+            <span className="text-sm font-medium text-white tracking-wide">
               It works while you sleep.
             </span>
+            <div className="w-2 h-2 bg-secondary rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
           </div>
         </div>
         <div className="hidden md:flex items-center space-x-8 rtl:space-x-reverse">
@@ -148,6 +150,21 @@ const Navbar: React.FC = () => {
           >
             {t("contact")}
           </Link>
+          {/* Notification Button */}
+          <div className="relative">
+            <button 
+              onClick={() => setNotificationOpen(!notificationOpen)}
+              className="relative p-2 hover:bg-white/5 rounded-lg transition-colors group"
+            >
+              <Bell className="w-5 h-5 text-gray-300 group-hover:text-primary transition-colors" />
+              <span className="absolute -top-1 -right-1 w-3 h-3 bg-secondary rounded-full border-2 border-black animate-pulse"></span>
+            </button>
+            <NotificationDropdown 
+              isOpen={notificationOpen} 
+              onClose={() => setNotificationOpen(false)} 
+            />
+          </div>
+          
           {session ? (
             <UserMenu
               fullName={profile?.full_name}
