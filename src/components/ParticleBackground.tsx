@@ -1,4 +1,6 @@
 
+"use client";
+
 import { useEffect, useMemo, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { type Container, type ISourceOptions } from "@tsparticles/engine";
@@ -33,52 +35,65 @@ const ParticleBackground = () => {
             enable: false,
           },
           onHover: {
-            enable: false,
+            enable: true,
+            mode: "repulse",
+          },
+        },
+        modes: {
+          repulse: {
+            distance: 100,
+            duration: 0.4,
           },
         },
       },
       particles: {
         color: {
-          value: "#7FFF00",
+          value: ["#00ff9d", "#d4af37", "#ffffff"],
         },
         links: {
-          color: "#7FFF00",
-          distance: 150,
+          color: "#00ff9d",
+          distance: 120,
           enable: true,
-          opacity: 0.1,
-          width: 1,
+          opacity: 0.08,
+          width: 0.8,
         },
         move: {
           direction: "none",
           enable: true,
           outModes: {
-            default: "out",
+            default: "bounce",
           },
-          random: true,
-          speed: 0.2,
+          random: false,
+          speed: 0.3,
           straight: false,
         },
         number: {
           density: {
             enable: true,
-            area: 1000,
+            area: 1200,
           },
-          value: 50,
+          value: 80,
         },
         opacity: {
-          value: { min: 0.1, max: 0.3 },
+          value: { min: 0.05, max: 0.2 },
           animation: {
             enable: true,
-            speed: 0.5,
-            minimumValue: 0.1,
+            speed: 0.8,
+            minimumValue: 0.05,
             sync: false
           }
         },
         shape: {
-          type: "circle",
+          type: ["circle", "triangle"],
         },
         size: {
-          value: { min: 1, max: 2 },
+          value: { min: 0.5, max: 1.5 },
+          animation: {
+            enable: true,
+            speed: 1,
+            minimumValue: 0.5,
+            sync: false
+          }
         },
       },
       detectRetina: true,
