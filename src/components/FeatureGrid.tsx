@@ -46,7 +46,7 @@ const FeatureGrid: React.FC = () => {
         {features.map((feature, index) => (
           <div 
             key={index} 
-            className="group relative flex flex-col items-center justify-center text-center w-40 h-40 bg-black/40 backdrop-blur-md rounded-2xl border border-white/10 p-4 transition-all duration-500 hover:scale-105 hover:border-green/40 hover:shadow-green-glow"
+            className="group relative flex flex-col items-center justify-center text-center w-40 h-40 bg-black/40 backdrop-blur-md rounded-2xl border border-white/10 p-4 transition-all duration-500 hover:scale-105 active:scale-95 hover:border-green/40 hover:shadow-green-glow"
           >
             {/* Dynamic AI Background Gradient */}
             <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />

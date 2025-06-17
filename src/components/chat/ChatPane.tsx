@@ -1,6 +1,8 @@
 
 import React, { useRef, useEffect } from 'react';
 import { useChat } from '@/hooks/useChat';
+import { useGuestChat } from '@/hooks/chat/useGuestChat';
+import { useChatContext } from '@/context/ChatContext';
 import ChatMessage from './ChatMessage';
 import ChatHeader from './ChatHeader';
 import ChatInput from './ChatInput';
@@ -10,23 +12,30 @@ import { Auth } from '../Auth';
 import { Toaster } from '../ui/toaster';
 
 const ChatPane = () => {
-    const { 
-        messages, 
-        input, 
-        isLoading, 
-        handleInputChange, 
-        handleSubmit, 
-        handleVoiceRecording, 
-        handleFileUpload, 
-        authRequired, 
-        clearAuthRequired 
+    const {
+        messages,
+        input,
+        isLoading,
+        handleInputChange,
+        handleSubmit,
+        handleVoiceRecording,
+        handleFileUpload,
+        authRequired,
+        clearAuthRequired,
+        session
     } = useChat();
+    const { selectedAgent } = useChatContext();
+    const guestChat = useGuestChat(selectedAgent);
     
     const messagesEndRef = useRef<HTMLDivElement>(null);
+    const inGuestMode = !session;
+
+    const scrollMessages = inGuestMode ? guestChat.messages : messages;
+    const loadingState = inGuestMode ? guestChat.isLoading : isLoading;
 
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, [messages, isLoading]);
+    }, [scrollMessages, loadingState]);
 
     if (authRequired) {
         return (
@@ -36,6 +45,11 @@ const ChatPane = () => {
             </div>
         );
     }
+    const displayMessages = inGuestMode ? guestChat.messages : messages;
+    const currentInput = inGuestMode ? guestChat.input : input;
+    const handleChange = inGuestMode ? guestChat.handleInputChange : handleInputChange;
+    const handleSubmitForm = inGuestMode ? guestChat.handleSubmit : handleSubmit;
+    const sending = inGuestMode ? guestChat.isLoading : isLoading;
 
     return (
         <div className="w-full h-full bg-card/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden">
@@ -43,23 +57,23 @@ const ChatPane = () => {
 
             <ScrollArea className="flex-1">
               <div className="p-4 space-y-4">
-                {messages.map((message) => (
+                {displayMessages.map((message) => (
                     <ChatMessage key={message.id} message={message} />
                 ))}
-                {isLoading && <LoadingBubble />}
+                {sending && <LoadingBubble />}
                 <div ref={messagesEndRef} />
               </div>
             </ScrollArea>
 
             <ChatInput
-                input={input}
-                onInputChange={handleInputChange}
-                onSubmit={handleSubmit}
+                input={currentInput}
+                onInputChange={handleChange}
+                onSubmit={handleSubmitForm}
                 onVoiceRecording={handleVoiceRecording}
                 onFileUpload={handleFileUpload}
-                isLoading={isLoading}
+                isLoading={sending}
             />
-            
+
             <Toaster />
         </div>
     );
