@@ -9,7 +9,7 @@ import CryptoArbitrageSection from "@/components/CryptoArbitrageSection";
 import FeatureGrid from "@/components/FeatureGrid";
 import HeroDashboard from "@/components/HeroDashboard";
 import Footer from "@/components/Footer";
-import { ArrowRight, Brain, Zap, UserPlus, Bot, BarChart2, Banknote } from "lucide-react";
+import { ArrowRight, Brain, Zap, Bot, BarChart2, Wallet } from "lucide-react";
 import ChatWidget from "@/components/chat/ChatWidget";
 import ParticleBackground from "@/components/ParticleBackground";
 import LiveMarketTicker from "@/components/LiveMarketTicker";
@@ -74,7 +74,7 @@ const Index = () => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Start Trading
+                {t('hero_button')}
                 <ArrowRight className="w-5 h-5 rtl:rotate-180" />
               </motion.button>
               <motion.button
@@ -106,15 +106,20 @@ const Index = () => {
         <section id="how" className="w-full max-w-5xl mx-auto mt-12 px-6">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
             {[
-              { icon: UserPlus, label: 'Open MT5 account' },
+              { icon: () => <img src="/logos/mt4mt5.svg" className="w-8 h-8" />, label: 'Open MT5 account' },
               { icon: Bot, label: 'Ask Ruyaa AI' },
               { icon: BarChart2, label: 'Monitor + Learn' },
-              { icon: Banknote, label: 'Withdraw Anytime' },
+              { icon: Wallet, label: 'Withdraw Anytime' },
             ].map((step, idx) => (
-              <div key={idx} className="flex flex-col items-center">
-                <step.icon className="w-8 h-8 text-gold mb-2" />
+              <motion.div
+                key={idx}
+                className="flex flex-col items-center"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <step.icon className="w-8 h-8 text-green mb-2" />
                 <p className="font-semibold text-white">{step.label}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </section>

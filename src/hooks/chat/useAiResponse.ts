@@ -6,7 +6,8 @@ import { Message } from '@/types/chat';
 import { AgentId } from '@/context/ChatContext';
 import { fetchAiResponse, getFallbackResponse } from '@/services/aiService';
 
-const openRouterApiKey = import.meta.env.VITE_OPENROUTER_API_KEY;
+const openRouterApiKey =
+  import.meta.env.VITE_OPENROUTER_API_KEY || import.meta.env.OPENROUTER_API_KEY;
 
 export const useAiResponse = () => {
   const [isAiLoading, setIsAiLoading] = useState(false);
@@ -24,7 +25,7 @@ export const useAiResponse = () => {
       const errorMessage: Message = {
         id: Date.now().toString(),
         role: 'assistant',
-        content: "The OpenRouter API key is not configured. Please set the VITE_OPENROUTER_API_KEY in your project's environment variables."
+        content: "The OpenRouter API key is not configured. Please set the VITE_OPENROUTER_API_KEY (or OPENROUTER_API_KEY) in your project's environment variables."
       };
       addMessageMutation.mutate({ ...errorMessage, thread_id: threadId });
       return;

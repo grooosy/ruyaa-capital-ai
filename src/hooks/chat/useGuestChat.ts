@@ -37,7 +37,12 @@ export const useGuestChat = (selectedAgent: AgentId) => {
         role: 'assistant',
         content: botContent,
       };
-      setMessages((prev) => [...prev, botMsg]);
+      const signInPrompt: Message = {
+        id: Date.now().toString() + '-signin',
+        role: 'assistant',
+        content: 'Create an account or sign in for personalized trading advice.',
+      };
+      setMessages((prev) => [...prev, botMsg, signInPrompt]);
     } catch (err) {
       setMessages((prev) => [
         ...prev,

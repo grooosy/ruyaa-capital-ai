@@ -5,14 +5,23 @@ interface TickerData {
   price: number;
 }
 
-const symbols = [
+const cryptoSymbols = [
   { id: 'bitcoin', label: 'BTC/USD' },
   { id: 'ethereum', label: 'ETH/USD' },
+];
+
+const marketSymbols = [
+  { symbol: 'XAU/USD', label: 'GOLD' },
+  { symbol: 'NDX', label: 'NASDAQ' },
+  { symbol: 'DXY', label: 'DXY' },
 ];
 
 const fallbackPrices: Record<string, number> = {
   bitcoin: 68000,
   ethereum: 3500,
+  gold: 2300,
+  nasdaq: 17000,
+  dxy: 103,
 };
 
 const LiveMarketTicker: React.FC = () => {
@@ -20,21 +29,47 @@ const LiveMarketTicker: React.FC = () => {
 
   const fetchPrices = async () => {
     try {
-      const ids = symbols.map((s) => s.id).join(',');
+      const cryptoIds = cryptoSymbols.map((s) => s.id).join(',');
       const res = await fetch(
-        `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd`
+        `https://api.coingecko.com/api/v3/simple/price?ids=${cryptoIds}&vs_currencies=usd`
       );
       const json = await res.json();
-      const newData = symbols.map((s) => ({
+      const cryptoData = cryptoSymbols.map((s) => ({
         label: s.label,
         price: json[s.id]?.usd ?? fallbackPrices[s.id],
       }));
-      setData(newData);
+
+      const twelveKey =
+        import.meta.env.VITE_TWELVEDATA_API_KEY || import.meta.env.TWELVEDATA_API_KEY || 'demo';
+      const otherData = await Promise.all(
+        marketSymbols.map(async (s) => {
+          try {
+            const r = await fetch(
+              `https://api.twelvedata.com/price?symbol=${s.symbol}&apikey=${twelveKey}`
+            );
+            const j = await r.json();
+            const price = parseFloat(j.price);
+            if (isNaN(price)) throw new Error('price');
+            return { label: s.label, price };
+          } catch {
+            const key = s.label.toLowerCase();
+            return { label: s.label, price: fallbackPrices[key] };
+          }
+        })
+      );
+
+      setData([...cryptoData, ...otherData]);
     } catch (e) {
-      const newData = symbols.map((s) => ({
-        label: s.label,
-        price: fallbackPrices[s.id],
-      }));
+      const newData = [
+        ...cryptoSymbols.map((s) => ({
+          label: s.label,
+          price: fallbackPrices[s.id],
+        })),
+        ...marketSymbols.map((s) => ({
+          label: s.label,
+          price: fallbackPrices[s.label.toLowerCase()],
+        })),
+      ];
       setData(newData);
     }
   };
