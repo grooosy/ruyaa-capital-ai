@@ -12,12 +12,13 @@ import Footer from "@/components/Footer";
 import { ArrowRight, Brain, Zap } from "lucide-react";
 import ChatWidget from "@/components/chat/ChatWidget";
 import ParticleBackground from "@/components/ParticleBackground";
-import { useTranslation } from "react-i18next";
+import LiveMarketTicker from "@/components/LiveMarketTicker";
+import { useChatContext } from "@/context/ChatContext";
 
 const Index = () => {
   const [modalOpen, setModalOpen] = React.useState(false);
   const [startAiFlowAnimation, setStartAiFlowAnimation] = React.useState(false);
-  const { t } = useTranslation();
+  const { openChat } = useChatContext();
   const navigate = useNavigate();
 
   // Check if user is visiting for the first time
@@ -46,37 +47,68 @@ const Index = () => {
     <div className="relative min-h-screen">
       <ParticleBackground />
       <Navbar />
+      <LiveMarketTicker />
       
       <main className="pt-32 pb-20 w-full">
         {/* Hero Section */}
-        <section className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row lg:rtl:flex-row-reverse items-center justify-between px-6 gap-12">
+        <section className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between px-6 gap-12">
           {/* Left Side: Text content */}
           <div className="lg:w-1/2 text-center lg:text-start">
             <h1 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-              {t('hero_title_1')}{' '}
-              <span className="text-gold">
-                {t('hero_title_2')}
-              </span>
+              Trade Like a Professional — <span className="text-green">With AI</span>. Not Alone.
             </h1>
-            
-            <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-              {t('hero_description')}
-            </p>
 
-            <motion.button
-              onClick={handleStartNowClick}
-              className="bg-gold text-dark-charcoal px-8 py-4 rounded-xl text-lg font-bold shadow-gold-glow hover:bg-gold/90 transition-all duration-300 tracking-wide inline-flex items-center gap-2"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              {t('hero_button')}
-              <ArrowRight className="w-5 h-5 rtl:rotate-180" />
-            </motion.button>
+            <p className="text-lg text-gray-300 mb-8">Connected to Liraa | MT4 / MT5 | Withdraw Anytime</p>
+
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4 justify-center lg:justify-start">
+              <motion.button
+                onClick={handleStartNowClick}
+                className="bg-green text-dark-charcoal px-6 py-3 rounded-xl font-semibold shadow-green-glow hover:bg-green/90 transition-all inline-flex items-center gap-2"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                Start Trading
+                <ArrowRight className="w-5 h-5 rtl:rotate-180" />
+              </motion.button>
+              <motion.button
+                onClick={() => openChat(null)}
+                className="bg-card border border-white/10 px-6 py-3 rounded-xl font-semibold hover:border-green transition"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                Ask Ruyaa AI
+              </motion.button>
+              <motion.button
+                onClick={() => document.getElementById('how')?.scrollIntoView({ behavior: 'smooth' })}
+                className="px-6 py-3 rounded-xl border border-green text-green hover:bg-green/10 transition"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                See How It Works
+              </motion.button>
+            </div>
           </div>
 
           {/* Right Side: Dashboard */}
           <div className="lg:w-1/2 w-full mt-12 lg:mt-0">
             <HeroDashboard />
+          </div>
+        </section>
+
+        {/* How It Works */}
+        <section id="how" className="w-full max-w-5xl mx-auto mt-12 px-6">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+            {[
+              { icon: '✅', label: 'Open MT5 account' },
+              { icon: '🤖', label: 'Ask Ruyaa AI' },
+              { icon: '📊', label: 'Monitor + Learn' },
+              { icon: '💸', label: 'Withdraw Anytime' },
+            ].map((step, idx) => (
+              <div key={idx} className="flex flex-col items-center">
+                <div className="text-3xl mb-2">{step.icon}</div>
+                <p className="font-semibold text-white">{step.label}</p>
+              </div>
+            ))}
           </div>
         </section>
 
