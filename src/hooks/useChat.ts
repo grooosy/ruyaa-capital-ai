@@ -14,8 +14,7 @@ export const useChat = (agentIdOverride?: AgentId) => {
   const { session, userId, userProfile, authRequired, setAuthRequired, clearAuthRequired } = useAuthState();
   const { threadId, isLoadingThread } = useThread(userId, selectedAgent);
   const { messages, isLoadingMessages, addMessageMutation, logUsage } = useMessages(threadId, selectedAgent, userProfile);
-  const { input, handleInputChange, clearInput, handleVoiceRecording, handleFileUpload } = useChatInput();
-  
+
   const { submitMessage, isSubmitting } = useMessageSubmission({
     threadId,
     selectedAgent,
@@ -25,6 +24,8 @@ export const useChat = (agentIdOverride?: AgentId) => {
     logUsage,
     setAuthRequired,
   });
+
+  const { input, handleInputChange, clearInput, handleVoiceRecording, handleFileUpload, isRecording, isUploading } = useChatInput(submitMessage);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,6 +44,8 @@ export const useChat = (agentIdOverride?: AgentId) => {
     handleSubmit,
     handleVoiceRecording,
     handleFileUpload,
+    isRecording,
+    isUploading,
     authRequired,
     clearAuthRequired,
     session,

@@ -12,6 +12,8 @@ interface ChatInputProps {
   onVoiceRecording: () => void;
   onFileUpload: (event: React.ChangeEvent<HTMLInputElement>) => void;
   isLoading: boolean;
+  isRecording?: boolean;
+  isUploading?: boolean;
   placeholder?: string;
 }
 
@@ -22,6 +24,8 @@ const ChatInput: React.FC<ChatInputProps> = ({
   onVoiceRecording,
   onFileUpload,
   isLoading,
+  isRecording = false,
+  isUploading = false,
   placeholder = "Ask anything..."
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -60,25 +64,25 @@ const ChatInput: React.FC<ChatInputProps> = ({
       <div className="flex items-center justify-end gap-1 mt-2">
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              onClick={onVoiceRecording} 
-              disabled={isLoading}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={onVoiceRecording}
+              disabled={isLoading || isUploading}
             >
-              <Mic className="w-4 h-4 text-gray-400 hover:text-white" />
+              <Mic className={`w-4 h-4 ${isRecording ? 'text-red-500 animate-pulse' : 'text-gray-400 hover:text-white'}`} />
             </Button>
           </TooltipTrigger>
-          <TooltipContent><p>Record Voice (coming soon)</p></TooltipContent>
+          <TooltipContent><p>{isRecording ? 'Stop Recording' : 'Record Voice'}</p></TooltipContent>
         </Tooltip>
         
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              onClick={triggerFileUpload} 
-              disabled={isLoading}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={triggerFileUpload}
+              disabled={isLoading || isUploading || isRecording}
             >
               <Paperclip className="w-4 h-4 text-gray-400 hover:text-white" />
             </Button>
@@ -86,13 +90,19 @@ const ChatInput: React.FC<ChatInputProps> = ({
           <TooltipContent><p>Attach File</p></TooltipContent>
         </Tooltip>
         
-        <input 
-          type="file" 
-          ref={fileInputRef} 
-          onChange={onFileUpload} 
-          className="hidden" 
-          accept="image/*, .pdf, .doc, .docx" 
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={onFileUpload}
+          className="hidden"
+          accept="image/*, .pdf, .doc, .docx"
         />
+        {isRecording && (
+          <span className="text-xs text-red-500 ml-2">Recording...</span>
+        )}
+        {isUploading && !isRecording && (
+          <span className="text-xs text-gray-300 ml-2 flex items-center"><svg className="w-3 h-3 mr-1 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" className="opacity-25"/><path d="M4 12a8 8 0 018-8" className="opacity-75"/></svg>Uploading...</span>
+        )}
       </div>
     </div>
   );
