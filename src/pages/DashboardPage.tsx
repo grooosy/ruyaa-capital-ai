@@ -90,7 +90,7 @@ const DashboardPage = () => {
 
   if (loadingSession || isLoadingData || !session) {
     return (
-      <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center">
+      <div className="min-h-screen bg-[#0D0D0D] flex items-center justify-center">
         <span className="text-green-400 text-lg animate-pulse">Loading Dashboard...</span>
       </div>
     );
@@ -99,7 +99,7 @@ const DashboardPage = () => {
   const featuresActive = dashboardData?.features && dashboardData.features.length > 0;
 
   return (
-    <div className="relative min-h-screen bg-[#0A0A0A] font-spacegrotesk">
+    <div className="relative min-h-screen bg-[#0D0D0D] font-spacegrotesk">
       <Navbar />
       <DashboardLayout>
         <motion.div

@@ -9,7 +9,7 @@ const AuthPage = () => {
   const [isSignUp, setIsSignUp] = useState(false);
 
   return (
-    <div className="relative min-h-screen bg-[#0A0A0A] font-spacegrotesk">
+    <div className="relative min-h-screen bg-[#0D0D0D] font-spacegrotesk">
       <ParticleBackground />
       <Navbar />
       
@@ -52,18 +52,18 @@ const AuthPage = () => {
             >
               <div className="relative">
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-green to-gold rounded-full blur-xl"
+                  className="absolute inset-0 bg-gradient-to-r from-green to-green rounded-full blur-xl"
                   animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
                   transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                 />
-                <div className="relative w-16 h-16 bg-gradient-to-r from-green to-gold rounded-full flex items-center justify-center">
-                  <Brain className="w-8 h-8 text-[#0A0A0A]" />
+                <div className="relative w-16 h-16 bg-gradient-to-r from-green to-green rounded-full flex items-center justify-center">
+                  <Brain className="w-8 h-8 text-[#0D0D0D]" />
                 </div>
               </div>
             </motion.div>
 
             <h1 className="text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
-              Sign up for <span className="text-transparent bg-clip-text bg-gradient-to-r from-green to-gold">free</span>
+              Sign up for <span className="text-transparent bg-clip-text bg-gradient-to-r from-green to-green">free</span>
             </h1>
             <h2 className="text-2xl lg:text-3xl font-bold text-white mb-6">
               To call you by <span className="text-gold">Your name</span>
@@ -77,7 +77,7 @@ const AuthPage = () => {
             <div className="space-y-4 mb-8">
               {[
                 { icon: Sparkles, text: "AI-Powered Trading Signals", color: "text-green" },
-                { icon: Shield, text: "Secure & Regulated Platform", color: "text-gold" },
+                { icon: Shield, text: "Secure & Regulated Platform", color: "text-green" },
                 { icon: Zap, text: "Real-time Market Analysis", color: "text-green" },
               ].map((feature, index) => (
                 <motion.div
@@ -87,7 +87,7 @@ const AuthPage = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.8 + index * 0.2 }}
                 >
-                  <div className="w-10 h-10 bg-gradient-to-r from-green/20 to-gold/20 rounded-full flex items-center justify-center border border-green/30">
+                  <div className="w-10 h-10 bg-gradient-to-r from-green/20 to-green/20 rounded-full flex items-center justify-center border border-green/30">
                     <feature.icon className={`w-5 h-5 ${feature.color}`} />
                   </div>
                   <span className="text-gray-300 font-medium">{feature.text}</span>

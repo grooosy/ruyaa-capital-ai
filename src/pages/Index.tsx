@@ -106,14 +106,18 @@ const Index = () => {
         <section id="how" className="w-full max-w-5xl mx-auto mt-12 px-6">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
             {[
-              { icon: () => <img src="/logos/mt4mt5.svg" className="w-8 h-8" />, label: 'Open MT5 account' },
+              { icon: () => <img src="/icons/gold-bars.svg" className="w-8 h-8" />, label: 'Open MT5 account' },
               { icon: Bot, label: 'Ask Ruyaa AI' },
               { icon: BarChart2, label: 'Monitor + Learn' },
               { icon: Wallet, label: 'Withdraw Anytime' },
             ].map((step, idx) => (
               <motion.div
                 key={idx}
-                className="flex flex-col items-center"
+                onClick={() => {
+                  if (idx === 0) navigate('/agents/mt4mt5');
+                  if (idx === 3) document.getElementById('deposit-btn')?.click();
+                }}
+                className="flex flex-col items-center cursor-pointer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >

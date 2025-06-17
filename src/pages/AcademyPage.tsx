@@ -124,7 +124,7 @@ const AcademyPage = () => {
 
   if (coursesLoading || lessonsLoading) {
     return (
-      <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center">
+      <div className="min-h-screen bg-[#0D0D0D] flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-green mx-auto mb-4"></div>
           <p className="text-white text-lg">
@@ -136,7 +136,7 @@ const AcademyPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A]" dir={isArabic ? 'rtl' : 'ltr'}>
+    <div className="min-h-screen bg-[#0D0D0D]" dir={isArabic ? 'rtl' : 'ltr'}>
       <Navbar />
       
       <main className="pt-32 pb-20">

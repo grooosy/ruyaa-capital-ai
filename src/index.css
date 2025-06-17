@@ -15,9 +15,9 @@
   }
   
   body {
-    @apply text-white font-jakarta;
-    background-color: #181711;
-    background-image: radial-gradient(ellipse at top, #23221c, #181711);
+    @apply text-white font-inter;
+    background-color: #0D0D0D;
+    background-image: none;
     min-height: 100vh;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
@@ -25,7 +25,7 @@
   }
   
   html {
-    font-family: "Plus Jakarta Sans", "Manrope", "Inter", "Playfair Display", "Space Grotesk", sans-serif;
+    font-family: "Inter", "Plus Jakarta Sans", "Manrope", "Playfair Display", "Space Grotesk", sans-serif;
     scroll-behavior: smooth;
   }
 

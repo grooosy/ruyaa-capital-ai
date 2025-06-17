@@ -6,7 +6,7 @@ const NavigationButtons: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="fixed top-6 start-6 flex flex-col gap-2 z-40 rtl:start-auto rtl:end-6">
+    <div className="fixed top-20 start-6 flex flex-col gap-2 z-40 rtl:start-auto rtl:end-6">
       <button
         aria-label="Go back"
         onClick={() => navigate(-1)}

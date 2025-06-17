@@ -46,7 +46,7 @@ const WelcomePage: React.FC = () => {
   const currentText = welcomeText[currentLanguage];
 
   return (
-    <div className="relative min-h-screen bg-[#0A0A0A] font-spacegrotesk overflow-hidden" dir={currentLanguage === 'ar' ? 'rtl' : 'ltr'}>
+    <div className="relative min-h-screen bg-[#0D0D0D] font-spacegrotesk overflow-hidden" dir={currentLanguage === 'ar' ? 'rtl' : 'ltr'}>
       <ParticleBackground />
       
       {/* AI Neural Network Background */}
@@ -117,12 +117,12 @@ const WelcomePage: React.FC = () => {
               >
                 <div className="relative">
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-green to-gold rounded-full blur-xl"
+                    className="absolute inset-0 bg-gradient-to-r from-green to-green rounded-full blur-xl"
                     animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
                     transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                   />
-                  <div className="relative w-24 h-24 mx-auto bg-gradient-to-r from-green to-gold rounded-full flex items-center justify-center">
-                    <Brain className="w-12 h-12 text-[#0A0A0A]" />
+                  <div className="relative w-24 h-24 mx-auto bg-gradient-to-r from-green to-green rounded-full flex items-center justify-center">
+                    <Brain className="w-12 h-12 text-[#0D0D0D]" />
                   </div>
                 </div>
               </motion.div>
@@ -136,7 +136,7 @@ const WelcomePage: React.FC = () => {
                 exit={{ opacity: 0, x: currentLanguage === 'ar' ? -50 : 50 }}
                 transition={{ duration: 0.5 }}
               >
-                <h1 className="text-6xl lg:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green via-gold to-green mb-4">
+                <h1 className="text-6xl lg:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green to-green mb-4">
                   {currentText.hello}
                 </h1>
               </motion.div>
@@ -175,7 +175,7 @@ const WelcomePage: React.FC = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5, delay: 1.2 + index * 0.2 }}
                   >
-                    <div className="w-16 h-16 bg-gradient-to-r from-green/20 to-gold/20 rounded-full flex items-center justify-center border border-green/30">
+                    <div className="w-16 h-16 bg-gradient-to-r from-green/20 to-green/20 rounded-full flex items-center justify-center border border-green/30">
                       <feature.icon className="w-8 h-8 text-green" />
                     </div>
                     <span className="text-sm text-gray-400 font-medium">{feature.label}</span>
@@ -191,7 +191,7 @@ const WelcomePage: React.FC = () => {
               >
                 <Button
                   onClick={handleContinue}
-                  className="group relative px-12 py-6 text-xl font-bold bg-gradient-to-r from-green to-gold hover:from-green/90 hover:to-gold/90 text-[#0A0A0A] rounded-2xl shadow-2xl transition-all duration-300 hover:scale-105"
+                  className="group relative px-12 py-6 text-xl font-bold bg-green hover:bg-green/90 text-[#0D0D0D] rounded-2xl shadow-2xl transition-all duration-300 hover:scale-105"
                 >
                   <span className="relative z-10 flex items-center gap-3">
                     {currentText.continue}
@@ -200,7 +200,7 @@ const WelcomePage: React.FC = () => {
                   
                   {/* Button glow effect */}
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-green to-gold rounded-2xl blur-xl opacity-50"
+                    className="absolute inset-0 bg-green rounded-2xl blur-xl opacity-50"
                     animate={{ scale: [1, 1.05, 1] }}
                     transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                   />
@@ -236,7 +236,7 @@ const WelcomePage: React.FC = () => {
       </div>
 
       {/* Bottom Gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0A0A0A] to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0D0D0D] to-transparent" />
     </div>
   );
 };
