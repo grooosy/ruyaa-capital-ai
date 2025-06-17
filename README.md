@@ -4,6 +4,18 @@
 
 **URL**: https://lovable.dev/projects/153afdbe-684e-419e-a6e3-9aad59f987cf
 
+## Environment Setup
+
+The application requires an **OpenRouter API key** to enable AI features. Provide this key in a `.env` file using either of the following variables:
+
+```bash
+VITE_OPENROUTER_API_KEY=<your_api_key>
+# or
+OPENROUTER_API_KEY=<your_api_key>
+```
+
+The app will throw an error on startup if neither variable is defined. See `.env.example` for all available options.
+
 ## How can I edit this code?
 
 There are several ways of editing your application.
