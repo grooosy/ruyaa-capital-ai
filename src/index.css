@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
 
 /* Space Grotesk: Used for dashboard modern look */
 @import "@fontsource/space-grotesk/400.css";
@@ -13,45 +13,69 @@
   * {
     box-sizing: border-box;
   }
-  
+
   body {
     @apply text-white font-inter;
-    background-color: #0D0D0D;
-    background-image: none;
+    background: linear-gradient(
+      135deg,
+      #000000 0%,
+      #0a0a0a 25%,
+      #111111 50%,
+      #0a0a0a 75%,
+      #000000 100%
+    );
+    background-attachment: fixed;
+    background-size: 400% 400%;
+    animation: gradientShift 20s ease infinite;
     min-height: 100vh;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  
+
+  @keyframes gradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
   html {
-    font-family: "Inter", "Plus Jakarta Sans", "Manrope", "Playfair Display", "Space Grotesk", sans-serif;
+    font-family:
+      "Inter", "Plus Jakarta Sans", "Manrope", "Playfair Display",
+      "Space Grotesk", sans-serif;
     scroll-behavior: smooth;
   }
 
   .font-spacegrotesk {
-    font-family: "Space Grotesk", "Manrope", "Inter", "Plus Jakarta Sans", sans-serif !important;
+    font-family:
+      "Space Grotesk", "Manrope", "Inter", "Plus Jakarta Sans", sans-serif !important;
     letter-spacing: 0.01em;
   }
 
   ::selection {
     background: rgba(0, 255, 157, 0.15);
-    color: #00FF9D;
+    color: #00ff9d;
   }
-  
+
   ::-webkit-scrollbar {
     width: 8px;
   }
-  
+
   ::-webkit-scrollbar-track {
     background: #23221c;
   }
-  
+
   ::-webkit-scrollbar-thumb {
-    background: #00FF9D;
+    background: #00ff9d;
     border-radius: 4px;
   }
-  
+
   ::-webkit-scrollbar-thumb:hover {
     background: #00cc7a;
   }
@@ -70,22 +94,27 @@
     @apply bg-[#1A1A1A] backdrop-blur-sm rounded-xl p-6 relative overflow-hidden;
   }
   .shadow-neon {
-    box-shadow: 0 0 20px 0 #00FF9D33, 0 2px 15px 0 #23221c10;
+    box-shadow:
+      0 0 20px 0 #00ff9d33,
+      0 2px 15px 0 #23221c10;
   }
   .shadow-neon-bright {
-    box-shadow: 0 0 32px 2px #00FF9D88;
+    box-shadow: 0 0 32px 2px #00ff9d88;
   }
   .text-neon-green {
-    color: #00FF9D;
-    text-shadow: 0 0 4px #00FF9D55;
+    color: #00ff9d;
+    text-shadow: 0 0 4px #00ff9d55;
   }
   .ring-neon-green {
-    box-shadow: 0 0 12px #00FF9Dbb, 0 0 0 2px #00FF9D;
+    box-shadow:
+      0 0 12px #00ff9dbb,
+      0 0 0 2px #00ff9d;
   }
 }
 
 @keyframes pulse-glow {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.8;
     transform: scale(1);
   }
@@ -95,19 +124,34 @@
   }
 }
 .animate-pulse-glow {
-  animation: pulse-glow 1.5s cubic-bezier(.4,0,.6,1) infinite;
+  animation: pulse-glow 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 .shadow-green {
-  box-shadow: 0 4px 20px rgba(22, 199, 132, 0.25);
+  box-shadow: 0 4px 20px rgba(0, 255, 157, 0.25);
 }
 
 .shadow-green-glow {
-  box-shadow: 0 0 40px rgba(22, 199, 132, 0.3);
+  box-shadow: 0 0 40px rgba(0, 255, 157, 0.3);
 }
 
 .shadow-gold-glow {
-  box-shadow: 0 0 30px rgba(230, 196, 25, 0.25);
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.25);
+}
+
+.glassmorphism {
+  background: rgba(26, 26, 26, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 255, 157, 0.15);
 }
 
 .shadow-inner-green {
@@ -128,43 +172,49 @@
 }
 
 .text-gradient-green {
-  background: linear-gradient(135deg, #10A169 0%, #0D8F5A 100%);
+  background: linear-gradient(135deg, #00ff9d 0%, #00cc7a 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .text-gradient-gold {
-  background: linear-gradient(135deg, #CFA100 0%, #B38E00 100%);
+  background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .text-gradient-ai {
-  background: linear-gradient(90deg, #CFA100 0%, #00FF9D 100%);
+  background: linear-gradient(90deg, #ffd700 0%, #00ff9d 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .bg-grid-pattern {
-  background-image: linear-gradient(rgba(22, 199, 132, 0.05) 1px, transparent 1px), linear-gradient(to right, rgba(22, 199, 132, 0.05) 1px, transparent 1px);
+  background-image:
+    linear-gradient(rgba(0, 255, 157, 0.05) 1px, transparent 1px),
+    linear-gradient(to right, rgba(0, 255, 157, 0.05) 1px, transparent 1px);
   background-size: 1.5rem 1.5rem;
 }
 
 @keyframes floatY {
-  0% { 
+  0% {
     transform: translateY(0px);
   }
-  100% { 
+  100% {
     transform: translateY(-8px);
   }
 }
 
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-25%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-25%);
+  }
 }
 
 .animate-marquee {
@@ -172,11 +222,12 @@
 }
 
 @keyframes pulse-subtle {
-  0%, 100% { 
+  0%,
+  100% {
     transform: scale(1);
     box-shadow: 0 0 0 0 rgba(22, 199, 132, 0.2);
   }
-  50% { 
+  50% {
     transform: scale(1.02);
     box-shadow: 0 0 30px 15px rgba(22, 199, 132, 0);
   }
