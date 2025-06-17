@@ -36,6 +36,17 @@ npm i
 npm run dev
 ```
 
+## Environment variables
+
+Create a `.env` file in the project root and add your Supabase credentials:
+
+```bash
+SUPABASE_URL=<your-supabase-url>
+SUPABASE_ANON_KEY=<your-anon-key>
+```
+
+These variables are required for the Supabase client in `src/integrations/supabase/client.ts`.
+
 **Edit a file directly in GitHub**
 
 - Navigate to the desired file(s).
