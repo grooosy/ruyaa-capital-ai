@@ -25,7 +25,16 @@ export const useChat = (agentIdOverride?: AgentId) => {
     setAuthRequired,
   });
 
-  const { input, handleInputChange, clearInput, handleVoiceRecording, handleFileUpload, isRecording, isUploading } = useChatInput(submitMessage);
+  const {
+    input,
+    setInput,
+    handleInputChange,
+    clearInput,
+    handleVoiceRecording,
+    handleFileUpload,
+    isRecording,
+    isUploading,
+  } = useChatInput(submitMessage);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,6 +48,7 @@ export const useChat = (agentIdOverride?: AgentId) => {
   return {
     messages,
     input,
+    setInput,
     isLoading: isLoadingThread || isLoadingMessages || isSubmitting,
     handleInputChange,
     handleSubmit,

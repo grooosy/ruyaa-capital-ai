@@ -1,5 +1,5 @@
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useChat } from '@/hooks/useChat';
 import { useGuestChat } from '@/hooks/chat/useGuestChat';
 import { useChatContext } from '@/context/ChatContext';
@@ -10,12 +10,14 @@ import LoadingBubble from './LoadingBubble';
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Auth } from '../Auth';
 import { Toaster } from '../ui/toaster';
+import HumanHelpModal from './HumanHelpModal';
 
 const ChatPane = () => {
     const {
         messages,
         input,
         isLoading,
+        setInput,
         handleInputChange,
         handleSubmit,
         handleVoiceRecording,
@@ -28,6 +30,7 @@ const ChatPane = () => {
     } = useChat();
     const { selectedAgent } = useChatContext();
     const guestChat = useGuestChat(selectedAgent);
+    const [humanOpen, setHumanOpen] = useState(false);
     
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const inGuestMode = !session;
@@ -50,10 +53,18 @@ const ChatPane = () => {
     const displayMessages = inGuestMode ? guestChat.messages : messages;
     const currentInput = inGuestMode ? guestChat.input : input;
     const handleChange = inGuestMode ? guestChat.handleInputChange : handleInputChange;
+    const setInputHandler = inGuestMode ? guestChat.setInput : setInput;
     const handleSubmitForm = inGuestMode ? guestChat.handleSubmit : handleSubmit;
     const sending = inGuestMode ? guestChat.isLoading : isLoading;
     const recording = inGuestMode ? false : isRecording;
     const uploading = inGuestMode ? false : isUploading;
+
+    const quickActions = [
+        { label: 'How to start?', value: 'How do I start trading?' },
+        { label: 'Show signals', value: 'Show signals' },
+        { label: 'Withdraw help', value: 'How do I withdraw?' },
+        { label: 'Talk to Human \uD83D\uDC64', value: null },
+    ];
 
     return (
         <div className="w-full h-full bg-card/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden">
@@ -69,6 +80,24 @@ const ChatPane = () => {
               </div>
             </ScrollArea>
 
+            <div className="border-t border-white/10 bg-card/50 flex items-center gap-2 overflow-x-auto p-2">
+              {quickActions.map((action) => (
+                <button
+                  key={action.label}
+                  onClick={() => {
+                    if (action.value) {
+                      setInputHandler(action.value);
+                    } else {
+                      setHumanOpen(true);
+                    }
+                  }}
+                  className="text-sm px-3 py-1 rounded-full border border-white/20 hover:bg-white/10 whitespace-nowrap"
+                >
+                  {action.label}
+                </button>
+              ))}
+            </div>
+
             <ChatInput
                 input={currentInput}
                 onInputChange={handleChange}
@@ -79,6 +108,8 @@ const ChatPane = () => {
                 isRecording={recording}
                 isUploading={uploading}
             />
+
+            <HumanHelpModal open={humanOpen} onOpenChange={setHumanOpen} />
 
             <Toaster />
         </div>

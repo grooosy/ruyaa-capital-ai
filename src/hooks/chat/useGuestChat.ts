@@ -60,6 +60,7 @@ export const useGuestChat = (selectedAgent: AgentId) => {
   return {
     messages,
     input,
+    setInput,
     isLoading,
     handleInputChange,
     handleSubmit,
