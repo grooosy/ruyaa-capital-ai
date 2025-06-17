@@ -27,7 +27,7 @@ const ChatWidget = () => {
       <div className="fixed bottom-6 right-6 z-[100]">
         <motion.button
           onClick={toggleChat}
-          className="bg-gold text-dark-charcoal p-4 rounded-full shadow-gold-glow hover:bg-gold/90 transition-all duration-300 flex items-center justify-center"
+          className="bg-green text-dark-charcoal p-4 rounded-full shadow-green-glow hover:bg-green/90 transition-all duration-300 flex items-center justify-center"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           aria-label="Toggle AI Chat"

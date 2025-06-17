@@ -41,8 +41,10 @@ const LiveMarketTicker: React.FC = () => {
         price: json[s.id]?.usd ?? fallbackPrices[s.id],
       }));
 
-      const twelveKey =
-        import.meta.env.VITE_TWELVEDATA_API_KEY || import.meta.env.TWELVEDATA_API_KEY || 'demo';
+      const twelveKey = import.meta.env.VITE_TWELVEDATA_API_KEY;
+      if (!twelveKey) {
+        throw new Error('Missing TwelveData API key');
+      }
       const otherData = await Promise.all(
         marketSymbols.map(async (s) => {
           try {
