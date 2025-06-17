@@ -9,6 +9,7 @@ import MT4Page from "./pages/MT4Page";
 import CryptoPage from "./pages/CryptoPage";
 import ArbitragePage from "./pages/ArbitragePage";
 import AcademyPage from "./pages/AcademyPage";
+import DepositPage from "./pages/DepositPage";
 import NotFound from "./pages/NotFound";
 import WelcomePage from "./pages/WelcomePage";
 import { ChatProvider } from "./context/ChatContext";
@@ -56,6 +57,7 @@ const App = () => {
                     <Route path="/agents/crypto" element={<CryptoPage />} />
                     <Route path="/agents/arbitrage" element={<ArbitragePage />} />
                     <Route path="/academy" element={<AcademyPage />} />
+                    <Route path="/deposit" element={<DepositPage />} />
                     {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                     <Route path="*" element={<NotFound />} />
                   </Routes>

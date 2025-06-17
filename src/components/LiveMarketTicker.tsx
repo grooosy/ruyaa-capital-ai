@@ -12,6 +12,7 @@ const cryptoSymbols = [
 
 const marketSymbols = [
   { symbol: 'XAU/USD', label: 'GOLD' },
+  { symbol: 'EUR/USD', label: 'EURUSD' },
   { symbol: 'NDX', label: 'NASDAQ' },
   { symbol: 'DXY', label: 'DXY' },
 ];
@@ -20,6 +21,7 @@ const fallbackPrices: Record<string, number> = {
   bitcoin: 68000,
   ethereum: 3500,
   gold: 2300,
+  eurusd: 1.07,
   nasdaq: 17000,
   dxy: 103,
 };
@@ -83,7 +85,7 @@ const LiveMarketTicker: React.FC = () => {
   if (data.length === 0) return null;
 
   return (
-    <div className="relative w-full overflow-hidden border-y border-green/20 bg-black/30 backdrop-blur-md">
+    <div className="fixed top-0 left-0 z-20 w-full overflow-hidden border-b border-green/20 bg-black/30 backdrop-blur-md">
       <div className="absolute left-0 top-0 h-full w-12 bg-gradient-to-r from-bg to-transparent z-10" />
       <div className="absolute right-0 top-0 h-full w-12 bg-gradient-to-l from-bg to-transparent z-10" />
       <div className="flex animate-marquee whitespace-nowrap py-2">

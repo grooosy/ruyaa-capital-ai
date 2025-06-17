@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Dialog,
   DialogContent,
@@ -15,10 +15,12 @@ import UserMenu from "./UserMenu";
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = React.useState(false);
+  const [depositMenu, setDepositMenu] = React.useState(false);
   const { t, i18n } = useTranslation();
   const isArabic = i18n.language === 'ar';
   const [session, setSession] = React.useState<Session | null>(null);
   const { data: profile } = useProfile(session);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -40,7 +42,7 @@ const Navbar: React.FC = () => {
 
   return (
     <header
-      className={`fixed z-30 top-0 left-0 w-full transition-all duration-300 ${
+      className={`fixed z-30 top-12 left-0 w-full transition-all duration-300 ${
         scrolled
           ? "backdrop-blur-xl bg-[#181711cc] shadow-green"
           : "bg-transparent"
@@ -79,7 +81,27 @@ const Navbar: React.FC = () => {
             <Link to="/academy" className="hover:text-green transition-colors font-semibold">
               {isArabic ? 'أكاديمية' : 'Academy'}
             </Link>
-            <Link to="/#deposit" className="hover:text-gold transition-colors font-semibold">{t('deposit')}</Link>
+            <div className="relative" onMouseLeave={() => setDepositMenu(false)}>
+              <button
+                id="deposit-btn"
+                onClick={() => {
+                  if (depositMenu) navigate('/deposit');
+                  setDepositMenu(!depositMenu);
+                }}
+                className="hover:text-gold transition-colors font-semibold flex items-center gap-1"
+              >
+                {t('deposit')}
+                <span className={`transition-transform ${depositMenu ? 'rotate-180' : ''}`}>▾</span>
+              </button>
+              {depositMenu && (
+                <div className="absolute mt-2 right-0 bg-card border border-white/10 rounded-lg shadow-lg py-2 w-40 z-50">
+                  <Link to="/deposit?tab=withdraw" className="block px-4 py-2 hover:bg-white/5">Withdraw</Link>
+                  <Link to="/deposit?tab=deposit" className="block px-4 py-2 hover:bg-white/5">Deposit</Link>
+                  <Link to="/deposit?tab=exchange" className="block px-4 py-2 hover:bg-white/5">Exchange</Link>
+                  <Link to="/deposit?tab=world" className="block px-4 py-2 hover:bg-white/5">WORLD Money</Link>
+                </div>
+              )}
+            </div>
             <Link to="/#footer" className="hover:text-green transition-colors font-semibold">{t('contact')}</Link>
             {session ? (
               <UserMenu fullName={profile?.full_name} avatarUrl={profile?.avatar_url} />

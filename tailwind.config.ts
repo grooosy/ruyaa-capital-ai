@@ -18,6 +18,7 @@ export default {
       }
     },
     fontFamily: {
+      inter: ['Inter', 'sans-serif'],
       manrope: ['Manrope', 'Noto Sans', 'sans-serif'],
       playfair: ['"Playfair Display"', 'serif'],
       jakarta: ['"Plus Jakarta Sans"', 'sans-serif'],
@@ -25,7 +26,7 @@ export default {
     extend: {
       colors: {
         bg: "#0D0D0D",
-        green: "#10A169",
+        green: "#7FFF00",
         gold: "#7FFF00",
         "dark-charcoal": "#181711",
         background: "#181711",
