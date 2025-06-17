@@ -73,7 +73,7 @@ const Index = () => {
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 justify-center lg:justify-start">
               <motion.button
                 onClick={handleStartNowClick}
-                className="bg-green text-dark-charcoal px-6 py-3 rounded-xl font-semibold shadow-green-glow hover:bg-green/90 transition-all inline-flex items-center gap-2"
+                className="btn-ai-primary inline-flex items-center gap-2"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -82,19 +82,11 @@ const Index = () => {
               </motion.button>
               <motion.button
                 onClick={() => openChat(null)}
-                className="bg-card border border-white/10 px-6 py-3 rounded-xl font-semibold hover:border-green transition"
+                className="btn-ai-secondary"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
                 Ask Ruyaa AI
-              </motion.button>
-              <motion.button
-                onClick={() => document.getElementById('how')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-6 py-3 rounded-xl border border-green text-green hover:bg-green/10 transition"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                See How It Works
               </motion.button>
             </div>
           </div>
@@ -106,10 +98,10 @@ const Index = () => {
         </section>
 
         {/* How It Works */}
-        <section id="how" className="w-full max-w-5xl mx-auto mt-12 px-6">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+        <section id="how" className="w-full max-w-6xl mx-auto mt-16 px-6">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
             {[
-              { icon: () => <img src="/icons/gold-bars.svg" className="w-8 h-8" />, label: 'Open MT5 account' },
+              { icon: () => <img src="/icons/gold-bars.svg" className="w-10 h-10" />, label: 'Open MT5 account' },
               { icon: Bot, label: 'Ask Ruyaa AI' },
               { icon: BarChart2, label: 'Monitor + Learn' },
               { icon: Wallet, label: 'Withdraw Anytime' },
@@ -120,12 +112,12 @@ const Index = () => {
                   if (idx === 0) navigate('/agents/mt4mt5');
                   if (idx === 3) document.getElementById('deposit-btn')?.click();
                 }}
-                className="flex flex-col items-center cursor-pointer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                className="ai-card ai-card-hover flex flex-col items-center cursor-pointer text-center"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
-                <step.icon className="w-8 h-8 text-green mb-2" />
-                <p className="font-semibold text-white">{step.label}</p>
+                <step.icon className={`w-10 h-10 mb-4 ${idx % 2 === 0 ? 'text-primary' : 'text-secondary'}`} />
+                <p className="font-semibold text-white text-sm">{step.label}</p>
               </motion.div>
             ))}
           </div>
@@ -169,16 +161,16 @@ const Index = () => {
             <div className="mb-12">
               {/* Enhanced Title with AI Elements */}
               <div className="flex items-center justify-center gap-3 mb-4">
-                <Brain className="w-8 h-8 text-green animate-pulse" />
-                <h2 className="font-manrope text-4xl font-extrabold tracking-tight text-center text-white">
+                <Brain className="w-8 h-8 text-primary animate-pulse" />
+                <h2 className="font-manrope text-4xl font-extrabold tracking-tight text-center text-gradient-ai">
                   Why Ruyaa AI Outperforms
                 </h2>
-                <Zap className="w-8 h-8 text-green animate-pulse" />
+                <Zap className="w-8 h-8 text-secondary animate-pulse" />
               </div>
               <p className="text-gray-300 text-lg flex items-center justify-center gap-2">
-                <span className="w-2 h-2 bg-green rounded-full animate-pulse" />
+                <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
                 Our intelligent features work while you sleep
-                <span className="w-2 h-2 bg-green rounded-full animate-pulse" />
+                <span className="w-2 h-2 bg-secondary rounded-full animate-pulse" />
               </p>
             </div>
             <div className="mb-16">

@@ -24,15 +24,23 @@ export default {
     },
     extend: {
       colors: {
-        bg: "#000000",
-        green: "#00FF9D",
-        gold: "#FFD700",
-        "dark-charcoal": "#0A0A0A",
-        background: "#000000",
-        card: "#111111",
-        "primary-accent": "#00FF9D",
-        "secondary-accent": "#FFD700",
-        // retain shadcn base;
+        // Futuristic AI Color Palette
+        bg: "#0B0B0F",
+        primary: "#FFB800", // Golden future
+        secondary: "#00C896", // AI emerald
+        surface: "#161618",
+        "surface-light": "#1F1F23",
+        
+        // Legacy aliases for compatibility
+        green: "#00C896",
+        gold: "#FFB800",
+        "dark-charcoal": "#0B0B0F",
+        background: "#0B0B0F",
+        card: "#161618",
+        "primary-accent": "#FFB800",
+        "secondary-accent": "#00C896",
+        
+        // Shadcn base
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -43,12 +51,15 @@ export default {
         "2xl": "1.5rem", // modals
       },
       boxShadow: {
-        "green-glow":
-          "0 0 30px 0 rgba(0,255,157,0.5), 0 0 60px 0 rgba(0,255,157,0.2)",
-        "gold-glow":
-          "0 0 30px 0 rgba(255,215,0,0.4), 0 0 60px 0 rgba(255,215,0,0.15)",
-        "red-glow":
-          "0 0 30px 0 rgba(239, 68, 68, 0.5), 0 0 60px 0 rgba(239, 68, 68, 0.2)",
+        "ai-glow": "0 4px 24px rgba(255, 184, 0, 0.25), 0 8px 48px rgba(255, 184, 0, 0.1)",
+        "emerald-glow": "0 4px 24px rgba(0, 200, 150, 0.25), 0 8px 48px rgba(0, 200, 150, 0.1)",
+        "future-card": "0 8px 32px rgba(255, 184, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.4)",
+        "neural": "0 0 40px rgba(255, 184, 0, 0.15), inset 0 1px 0 rgba(255, 184, 0, 0.1)",
+        
+        // Legacy support
+        "green-glow": "0 4px 24px rgba(0, 200, 150, 0.25)",
+        "gold-glow": "0 4px 24px rgba(255, 184, 0, 0.25)",
+        "red-glow": "0 4px 24px rgba(239, 68, 68, 0.25)",
       },
       keyframes: {
         floating: {
