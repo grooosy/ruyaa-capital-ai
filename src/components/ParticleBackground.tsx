@@ -39,10 +39,10 @@ const ParticleBackground = () => {
       },
       particles: {
         color: {
-          value: "#CFA100", // Faint gold from theme
+          value: "#7FFF00",
         },
         links: {
-          color: "#CFA100",
+          color: "#7FFF00",
           distance: 150,
           enable: true,
           opacity: 0.1,
