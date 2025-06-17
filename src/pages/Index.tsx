@@ -14,12 +14,15 @@ import ChatWidget from "@/components/chat/ChatWidget";
 import ParticleBackground from "@/components/ParticleBackground";
 import LiveMarketTicker from "@/components/LiveMarketTicker";
 import { useChatContext } from "@/context/ChatContext";
+import { useTranslation } from "react-i18next";
+import NavigationButtons from "@/components/NavigationButtons";
 
 const Index = () => {
   const [modalOpen, setModalOpen] = React.useState(false);
   const [startAiFlowAnimation, setStartAiFlowAnimation] = React.useState(false);
   const { openChat } = useChatContext();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   // Check if user is visiting for the first time
   useEffect(() => {
@@ -55,10 +58,13 @@ const Index = () => {
           {/* Left Side: Text content */}
           <div className="lg:w-1/2 text-center lg:text-start">
             <h1 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-              Trade Like a Professional — <span className="text-green">With AI</span>. Not Alone.
+              {t('hero_title_1')}{' '}
+              <span className="text-green">{t('hero_title_2')}</span>
             </h1>
 
-            <p className="text-lg text-gray-300 mb-8">Connected to Liraa | MT4 / MT5 | Withdraw Anytime</p>
+            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+              {t('hero_description')}
+            </p>
 
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 justify-center lg:justify-start">
               <motion.button
@@ -185,6 +191,9 @@ const Index = () => {
 
       {/* AI Chat Widget */}
       <ChatWidget />
+
+      {/* Browser navigation buttons */}
+      <NavigationButtons />
     </div>
   );
 };
