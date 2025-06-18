@@ -9,7 +9,7 @@ import { Session } from "@supabase/supabase-js";
 import LangToggle from "./LangToggle";
 import { useProfile } from "@/hooks/useProfile";
 import UserMenu from "./UserMenu";
-import { Bell, Users } from "lucide-react";
+import { Bell, Users, ChevronLeft, ChevronRight } from "lucide-react";
 import NotificationDropdown from "./NotificationDropdown";
 
 const Navbar: React.FC = () => {
@@ -52,49 +52,60 @@ const Navbar: React.FC = () => {
     >
       <nav className="flex items-center justify-between max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center gap-4">
+          {/* Navigation Arrows */}
+          <div className="hidden md:flex items-center gap-2">
+            <button
+              onClick={() => window.history.back()}
+              className="p-2 hover:bg-white/5 rounded-lg transition-all duration-300 group"
+              aria-label="Go back"
+            >
+              <ChevronLeft className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
+            </button>
+            <button
+              onClick={() => window.history.forward()}
+              className="p-2 hover:bg-white/5 rounded-lg transition-all duration-300 group"
+              aria-label="Go forward"
+            >
+              <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
+            </button>
+          </div>
+
           {/* Who We Are Button */}
           <button
-            onClick={() => navigate('/about')}
-            className="hidden md:flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-secondary/10 to-primary/10 border border-secondary/30 rounded-lg text-secondary text-sm font-medium transition-all duration-300 hover:from-secondary/20 hover:to-primary/20 hover:border-secondary/50 hover:shadow-lg hover:shadow-secondary/20"
+            onClick={() => navigate("/about")}
+            className="hidden md:flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm font-medium transition-all duration-300 hover:bg-white/10 hover:border-white/20 backdrop-blur-sm"
           >
             <Users className="w-4 h-4" />
             Who We Are
           </button>
-          
-          <Dialog>
-            <DialogTrigger asChild>
-              <button
-                aria-label="Enlarge logo"
-                className="p-0 bg-transparent border-none appearance-none cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-green rounded-sm"
-              >
+
+          <div className="flex items-center gap-4">
+            <Dialog>
+              <DialogTrigger asChild>
+                <button
+                  aria-label="Enlarge logo"
+                  className="p-0 bg-transparent border-none appearance-none cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-green rounded-sm"
+                >
+                  <img
+                    src="/lovable-uploads/4fc94ce9-7009-46fc-ad4b-ed3edffc3240.png"
+                    alt="RuyaaCapital-AI Logo"
+                    className="h-12 w-auto"
+                  />
+                </button>
+              </DialogTrigger>
+              <DialogContent className="w-auto max-w-2xl p-0 bg-transparent border-none shadow-none">
                 <img
                   src="/lovable-uploads/4fc94ce9-7009-46fc-ad4b-ed3edffc3240.png"
-                  alt="RuyaaCapital-AI Logo"
-                  className="h-12 w-auto"
+                  alt="RuyaaCapital-AI Logo - enlarged"
+                  className="w-full h-auto rounded-lg"
                 />
-              </button>
-            </DialogTrigger>
-            <DialogContent className="w-auto max-w-2xl p-0 bg-transparent border-none shadow-none">
-              <img
-                src="/lovable-uploads/4fc94ce9-7009-46fc-ad4b-ed3edffc3240.png"
-                alt="RuyaaCapital-AI Logo - enlarged"
-                className="w-full h-auto rounded-lg"
-              />
-            </DialogContent>
-          </Dialog>
-          
-          {/* Prominent "It works while you sleep" banner */}
-          <div className="hidden lg:flex items-center gap-3 px-4 py-2 bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/10 border border-primary/20 rounded-full backdrop-blur-sm">
-            <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-            <span className="text-sm font-medium text-white tracking-wide">
-              It works while you sleep.
-            </span>
-            <div className="w-2 h-2 bg-secondary rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
         <div className="hidden md:flex items-center space-x-8 rtl:space-x-reverse">
           <Link
-            to="/#ai"
+            to="/how-it-works"
             className="hover:text-primary transition-colors font-semibold"
           >
             {t("how_it_works")}
@@ -111,38 +122,30 @@ const Navbar: React.FC = () => {
           >
             {isArabic ? "أكاديمية" : "Academy"}
           </Link>
-          <div className="relative" onMouseLeave={() => setDepositMenu(false)}>
+          <div className="relative group">
             <button
               id="deposit-btn"
-              onClick={() => {
-                if (depositMenu) navigate("/deposit");
-                setDepositMenu(!depositMenu);
-              }}
               className="hover:text-secondary transition-colors font-semibold flex items-center gap-1"
             >
               {t("deposit")}
-              <span
-                className={`transition-transform ${depositMenu ? "rotate-180" : ""}`}
-              >
+              <span className={`transition-transform group-hover:rotate-180`}>
                 ▾
               </span>
             </button>
-            {depositMenu && (
-              <div className="absolute mt-2 right-0 bg-surface border border-primary/20 rounded-lg shadow-ai-glow py-2 w-40 z-50">
-                <Link
-                  to="/deposit?tab=withdraw"
-                  className="block px-4 py-2 hover:bg-primary/10 hover:text-primary transition-colors"
-                >
-                  Withdraw
-                </Link>
-                <Link
-                  to="/deposit?tab=deposit"
-                  className="block px-4 py-2 hover:bg-primary/10 hover:text-primary transition-colors"
-                >
-                  Deposit
-                </Link>
-              </div>
-            )}
+            <div className="absolute mt-2 right-0 bg-black/90 border border-primary/20 rounded-lg shadow-ai-glow py-2 w-48 z-50 backdrop-blur-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              <Link
+                to="/deposit?tab=deposit"
+                className="block px-4 py-2 hover:bg-primary/10 hover:text-primary transition-colors text-white"
+              >
+                Deposit
+              </Link>
+              <Link
+                to="/deposit?tab=withdraw"
+                className="block px-4 py-2 hover:bg-primary/10 hover:text-primary transition-colors text-white"
+              >
+                Withdraw
+              </Link>
+            </div>
           </div>
           <Link
             to="/#footer"
@@ -152,19 +155,19 @@ const Navbar: React.FC = () => {
           </Link>
           {/* Notification Button */}
           <div className="relative">
-            <button 
+            <button
               onClick={() => setNotificationOpen(!notificationOpen)}
               className="relative p-2 hover:bg-white/5 rounded-lg transition-colors group"
             >
               <Bell className="w-5 h-5 text-gray-300 group-hover:text-primary transition-colors" />
               <span className="absolute -top-1 -right-1 w-3 h-3 bg-secondary rounded-full border-2 border-black animate-pulse"></span>
             </button>
-            <NotificationDropdown 
-              isOpen={notificationOpen} 
-              onClose={() => setNotificationOpen(false)} 
+            <NotificationDropdown
+              isOpen={notificationOpen}
+              onClose={() => setNotificationOpen(false)}
             />
           </div>
-          
+
           {session ? (
             <UserMenu
               fullName={profile?.full_name}

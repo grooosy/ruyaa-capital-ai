@@ -52,7 +52,7 @@ export const fetchAiResponse = async (
 
     if (!botResponse || !botResponse.content) {
       console.warn("Received empty response from AI");
-      return "I apologize, but I didn't receive a proper response. Could you please try again?";
+      return "I'm having service maintenance - please wait while I prepare myself and come back soon. 🔧✨";
     }
 
     if (botResponse.function_call) {
@@ -67,16 +67,16 @@ export const fetchAiResponse = async (
 
     if (error instanceof OpenAI.APIError) {
       if (error.status === 401) {
-        return "Authentication failed. Please check your API key configuration.";
+        return "I'm having service maintenance - please wait while I prepare myself and come back soon. 🔧✨";
       } else if (error.status === 429) {
         return "I'm experiencing high demand right now. Please try again in a moment.";
       } else if (error.status === 500) {
-        return "The AI service is temporarily unavailable. Please try again later.";
+        return "I'm having service maintenance - please wait while I prepare myself and come back soon. 🔧✨";
       }
-      throw error; // Re-throw for handling in the calling code
+      return "I'm having service maintenance - please wait while I prepare myself and come back soon. 🔧✨";
     }
 
-    throw error;
+    return "I'm having service maintenance - please wait while I prepare myself and come back soon. 🔧✨";
   }
 };
 
@@ -84,14 +84,6 @@ export const getFallbackResponse = async (message: string): Promise<string> => {
   console.log("Using fallback response for message:", message);
   await new Promise((resolve) => setTimeout(resolve, 1500));
 
-  // Provide more intelligent fallback responses
-  const fallbackResponses = [
-    `Thank you for your message: "${message}". I'm RuyaaCapital AI Support. To enable full AI capabilities, please configure your OpenRouter API key.`,
-    `I received your request about "${message}". I'm currently in demo mode - for full AI features, an API key is required.`,
-    `Your message "${message}" has been received. To unlock advanced AI responses, please set up your API credentials.`,
-  ];
-
-  const randomResponse =
-    fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)];
-  return randomResponse;
+  // Return maintenance message instead of API key configuration message
+  return "I'm having service maintenance - please wait while I prepare myself and come back soon. 🔧✨";
 };

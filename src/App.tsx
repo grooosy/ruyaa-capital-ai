@@ -12,6 +12,7 @@ import AcademyPage from "./pages/AcademyPage";
 import DepositPage from "./pages/DepositPage";
 import NotFound from "./pages/NotFound";
 import WelcomePage from "./pages/WelcomePage";
+import HowItWorksPage from "./pages/HowItWorksPage";
 import { ChatProvider } from "./context/ChatContext";
 import AuthPage from "./pages/AuthPage";
 import DashboardPage from "./pages/DashboardPage";
@@ -46,6 +47,7 @@ const AppRoutes = () => {
       <Route path="/agents/arbitrage" element={<ArbitragePage />} />
       <Route path="/academy" element={<AcademyPage />} />
       <Route path="/deposit" element={<DepositPage />} />
+      <Route path="/how-it-works" element={<HowItWorksPage />} />
       {/* Add this before the catchall route */}
       {import.meta.env.VITE_TEMPO && <Route path="/tempobook/*" />}
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
