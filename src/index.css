@@ -18,11 +18,11 @@
     @apply text-white font-inter;
     background: linear-gradient(
       135deg,
-      #0B0B0F 0%,
-      #0F0F15 25%,
+      #0b0b0f 0%,
+      #0f0f15 25%,
       #161618 50%,
-      #0F0F15 75%,
-      #0B0B0F 100%
+      #0f0f15 75%,
+      #0b0b0f 100%
     );
     background-attachment: fixed;
     background-size: 400% 400%;
@@ -60,7 +60,7 @@
 
   ::selection {
     background: rgba(255, 184, 0, 0.2);
-    color: #FFB800;
+    color: #ffb800;
   }
 
   ::-webkit-scrollbar {
@@ -68,16 +68,17 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: #161618;
+    background: #0b0b0f;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(45deg, #FFB800, #00C896);
+    background: rgba(255, 255, 255, 0.8);
     border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(45deg, #FFA000, #00B085);
+    background: rgba(255, 255, 255, 0.9);
   }
 }
 
@@ -86,11 +87,11 @@
   .btn-ai-primary {
     @apply bg-gradient-to-r from-primary to-primary/80 text-black font-semibold px-6 py-3 rounded-lg shadow-ai-glow hover:shadow-neural hover:scale-105 transition-all duration-300;
   }
-  
+
   .btn-ai-secondary {
     @apply bg-surface border border-primary/30 text-white font-semibold px-6 py-3 rounded-lg hover:border-primary hover:bg-primary/5 hover:shadow-ai-glow transition-all duration-300;
   }
-  
+
   .btn-emerald {
     @apply bg-gradient-to-r from-secondary to-secondary/80 text-black font-semibold px-6 py-3 rounded-lg shadow-emerald-glow hover:scale-105 transition-all duration-300;
   }
@@ -101,35 +102,35 @@
   .ai-card {
     @apply bg-surface/80 backdrop-blur-sm rounded-xl p-6 border border-white/5 shadow-future-card relative overflow-hidden;
   }
-  
+
   .ai-card-hover {
     @apply hover:border-primary/20 hover:shadow-ai-glow hover:scale-[1.02] transition-all duration-300;
   }
-  
+
   .neural-border {
-    background: linear-gradient(135deg, #FFB800 0%, #00C896 100%);
+    background: linear-gradient(135deg, #ffb800 0%, #00c896 100%);
     padding: 1px;
     border-radius: 12px;
   }
-  
+
   .neural-border-inner {
     @apply bg-surface rounded-xl;
   }
-  
+
   .text-gradient-ai {
-    background: linear-gradient(135deg, #FFB800 0%, #00C896 100%);
+    background: linear-gradient(135deg, #ffb800 0%, #00c896 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  
+
   .text-ai-glow {
-    color: #FFB800;
+    color: #ffb800;
     text-shadow: 0 0 8px rgba(255, 184, 0, 0.4);
   }
-  
+
   .bg-neural-grid {
-    background-image: 
+    background-image:
       linear-gradient(rgba(255, 184, 0, 0.03) 1px, transparent 1px),
       linear-gradient(to right, rgba(255, 184, 0, 0.03) 1px, transparent 1px);
     background-size: 2rem 2rem;
@@ -196,21 +197,21 @@
 }
 
 .text-gradient-primary {
-  background: linear-gradient(135deg, #FFB800 0%, #FFA000 100%);
+  background: linear-gradient(135deg, #ffb800 0%, #ffa000 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .text-gradient-secondary {
-  background: linear-gradient(135deg, #00C896 0%, #00B085 100%);
+  background: linear-gradient(135deg, #00c896 0%, #00b085 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .text-gradient-ai {
-  background: linear-gradient(135deg, #FFB800 0%, #00C896 100%);
+  background: linear-gradient(135deg, #ffb800 0%, #00c896 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -290,7 +291,8 @@
 }
 
 @keyframes pulse-slow {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.6;
   }
   50% {

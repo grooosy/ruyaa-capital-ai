@@ -12,26 +12,128 @@ const AuthPage = () => {
     <div className="relative min-h-screen bg-[#0D0D0D] font-spacegrotesk">
       <ParticleBackground />
       <Navbar />
-      
-      {/* AI Neural Network Background */}
-      <div className="absolute inset-0 opacity-10">
+
+      {/* Enhanced AI Neural Network Background */}
+      <div className="absolute inset-0 opacity-15">
         <svg className="w-full h-full" viewBox="0 0 1200 800">
           <defs>
-            <linearGradient id="authNeuralGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#10A169" stopOpacity="0.4" />
-              <stop offset="100%" stopColor="#CFA100" stopOpacity="0.4" />
+            <linearGradient
+              id="authNeuralGlow"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="100%"
+            >
+              <stop offset="0%" stopColor="#00A86B" stopOpacity="0.5" />
+              <stop offset="50%" stopColor="#FFB800" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#00A86B" stopOpacity="0.5" />
+            </linearGradient>
+            <linearGradient
+              id="authNeuralGlow2"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="100%"
+            >
+              <stop offset="0%" stopColor="#FFB800" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="#00A86B" stopOpacity="0.3" />
             </linearGradient>
           </defs>
+
+          {/* Multiple flowing neural paths */}
           <motion.path
             d="M0,400 Q300,200 600,400 Q900,600 1200,400"
             stroke="url(#authNeuralGlow)"
+            strokeWidth="2.5"
+            fill="none"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{
+              duration: 4,
+              ease: "easeInOut",
+              repeat: Infinity,
+              repeatType: "reverse",
+            }}
+          />
+          <motion.path
+            d="M0,200 Q400,500 800,200 Q1000,100 1200,300"
+            stroke="url(#authNeuralGlow2)"
             strokeWidth="2"
             fill="none"
             initial={{ pathLength: 0 }}
             animate={{ pathLength: 1 }}
-            transition={{ duration: 3, ease: "easeInOut", repeat: Infinity, repeatType: "reverse" }}
+            transition={{
+              duration: 5,
+              ease: "easeInOut",
+              repeat: Infinity,
+              repeatType: "reverse",
+              delay: 1.5,
+            }}
           />
+          <motion.path
+            d="M200,600 Q500,300 800,600 Q1000,400 1200,600"
+            stroke="url(#authNeuralGlow)"
+            strokeWidth="1.5"
+            fill="none"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{
+              duration: 6,
+              ease: "easeInOut",
+              repeat: Infinity,
+              repeatType: "reverse",
+              delay: 2.5,
+            }}
+          />
+
+          {/* Animated neural nodes */}
+          {[...Array(10)].map((_, i) => (
+            <motion.circle
+              key={i}
+              cx={120 + i * 120}
+              cy={300 + Math.sin(i * 0.7) * 200}
+              r={2 + (i % 3)}
+              fill={i % 2 === 0 ? "#00A86B" : "#FFB800"}
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{
+                scale: [1, 1.8, 1],
+                opacity: [0.3, 0.7, 0.3],
+              }}
+              transition={{
+                delay: i * 0.4,
+                duration: 3 + (i % 2),
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
         </svg>
+
+        {/* Floating AI particles */}
+        <div className="absolute inset-0">
+          {[...Array(12)].map((_, i) => (
+            <motion.div
+              key={`auth-particle-${i}`}
+              className={`absolute w-1 h-1 rounded-full ${i % 2 === 0 ? "bg-green/30" : "bg-gold/30"}`}
+              style={{
+                left: `${10 + i * 8}%`,
+                top: `${15 + (i % 4) * 20}%`,
+              }}
+              animate={{
+                y: [0, -25, 0],
+                x: [0, Math.sin(i) * 15, 0],
+                opacity: [0.2, 0.6, 0.2],
+                scale: [1, 1.3, 1],
+              }}
+              transition={{
+                duration: 4 + Math.random() * 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: i * 0.3,
+              }}
+            />
+          ))}
+        </div>
       </div>
 
       <div className="relative z-10 flex min-h-screen">
@@ -52,33 +154,64 @@ const AuthPage = () => {
             >
               <div className="relative">
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-green to-green rounded-full blur-xl"
-                  animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute inset-0 bg-gradient-to-r from-green/70 to-green/50 rounded-full blur-xl"
+                  animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.5, 0.2] }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
                 />
-                <div className="relative w-16 h-16 bg-gradient-to-r from-green to-green rounded-full flex items-center justify-center">
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-gold/30 to-green/30 rounded-full blur-2xl"
+                  animate={{ scale: [1.1, 1.4, 1.1], opacity: [0.1, 0.3, 0.1] }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 1.5,
+                  }}
+                />
+                <div className="relative w-16 h-16 bg-gradient-to-r from-green/80 to-green/60 rounded-full flex items-center justify-center shadow-xl">
                   <Brain className="w-8 h-8 text-[#0D0D0D]" />
                 </div>
               </div>
             </motion.div>
 
             <h1 className="text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
-              Sign up for <span className="text-transparent bg-clip-text bg-gradient-to-r from-green to-green">free</span>
+              Sign up for{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-green to-green">
+                free
+              </span>
             </h1>
             <h2 className="text-2xl lg:text-3xl font-bold text-white mb-6">
               To call you by <span className="text-gold">Your name</span>
             </h2>
-            
+
             <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-              Join thousands of traders who trust RuyaaCapital-AI for intelligent trading solutions powered by advanced artificial intelligence.
+              Join thousands of traders who trust RuyaaCapital-AI for
+              intelligent trading solutions powered by advanced artificial
+              intelligence.
             </p>
 
             {/* AI Features */}
             <div className="space-y-4 mb-8">
               {[
-                { icon: Sparkles, text: "AI-Powered Trading Signals", color: "text-green" },
-                { icon: Shield, text: "Secure & Regulated Platform", color: "text-green" },
-                { icon: Zap, text: "Real-time Market Analysis", color: "text-green" },
+                {
+                  icon: Sparkles,
+                  text: "AI-Powered Trading Signals",
+                  color: "text-green",
+                },
+                {
+                  icon: Shield,
+                  text: "Secure & Regulated Platform",
+                  color: "text-green",
+                },
+                {
+                  icon: Zap,
+                  text: "Real-time Market Analysis",
+                  color: "text-green",
+                },
               ].map((feature, index) => (
                 <motion.div
                   key={feature.text}
@@ -87,10 +220,39 @@ const AuthPage = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.8 + index * 0.2 }}
                 >
-                  <div className="w-10 h-10 bg-gradient-to-r from-green/20 to-green/20 rounded-full flex items-center justify-center border border-green/30">
-                    <feature.icon className={`w-5 h-5 ${feature.color}`} />
-                  </div>
-                  <span className="text-gray-300 font-medium">{feature.text}</span>
+                  <motion.div
+                    className="w-10 h-10 bg-gradient-to-r from-green/20 to-green/20 rounded-full flex items-center justify-center border border-green/30 relative overflow-hidden"
+                    whileHover={{ scale: 1.1 }}
+                    animate={{
+                      boxShadow: [
+                        "0 0 0 0 rgba(0, 168, 107, 0.2)",
+                        "0 0 0 8px rgba(0, 168, 107, 0)",
+                        "0 0 0 0 rgba(0, 168, 107, 0.2)",
+                      ],
+                    }}
+                    transition={{
+                      duration: 2.5,
+                      repeat: Infinity,
+                      delay: index * 0.4,
+                    }}
+                  >
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-green/10 to-transparent"
+                      animate={{ x: ["-100%", "100%"] }}
+                      transition={{
+                        duration: 2.5,
+                        repeat: Infinity,
+                        ease: "linear",
+                        delay: index * 0.2,
+                      }}
+                    />
+                    <feature.icon
+                      className={`w-5 h-5 ${feature.color} relative z-10`}
+                    />
+                  </motion.div>
+                  <span className="text-gray-300 font-medium">
+                    {feature.text}
+                  </span>
                 </motion.div>
               ))}
             </div>

@@ -18,7 +18,6 @@ import LiveMarketTicker from "@/components/LiveMarketTicker";
 import { useChatContext } from "@/context/ChatContext";
 import { useTranslation } from "react-i18next";
 
-
 const Index = () => {
   const [modalOpen, setModalOpen] = React.useState(false);
   const [startAiFlowAnimation, setStartAiFlowAnimation] = React.useState(false);
@@ -28,17 +27,17 @@ const Index = () => {
 
   // Check if user is visiting for the first time
   useEffect(() => {
-    const hasVisited = localStorage.getItem('ruyaa-has-visited');
+    const hasVisited = localStorage.getItem("ruyaa-has-visited");
     if (!hasVisited) {
-      localStorage.setItem('ruyaa-has-visited', 'true');
-      navigate('/welcome');
+      localStorage.setItem("ruyaa-has-visited", "true");
+      navigate("/welcome");
     }
   }, [navigate]);
 
   const handleStartNowClick = () => {
-    const aiSection = document.getElementById('ai');
+    const aiSection = document.getElementById("ai");
     if (aiSection) {
-      aiSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      aiSection.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
     if (!startAiFlowAnimation) {
@@ -51,56 +50,174 @@ const Index = () => {
   return (
     <div
       className="relative min-h-screen bg-bg"
-      dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}
+      dir={i18n.language === "ar" ? "rtl" : "ltr"}
     >
       <ParticleBackground />
       <Navbar />
       <LiveMarketTicker />
-      
+
       <main className="pt-32 pb-20 w-full">
         {/* Hero Section */}
         <section className="relative w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between px-6 gap-12">
-          {/* Modern AI Grid Background */}
-          <div className="absolute inset-0 -z-10">
-            <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-gray-950/95 to-black/90" />
-            <div className="absolute inset-0 bg-grid-pattern opacity-[0.03]" />
-            {/* Neural Network Lines */}
-            <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 800 600">
+          {/* Enhanced Modern AI Background */}
+          <div className="absolute inset-0 -z-10 overflow-hidden rounded-3xl">
+            {/* Base gradient background */}
+            <div className="absolute inset-0 bg-gradient-to-br from-black/95 via-gray-950/90 to-black/95" />
+
+            {/* Animated grid pattern */}
+            <div className="absolute inset-0 bg-grid-pattern opacity-[0.04] animate-pulse-slow" />
+
+            {/* Moving neural network lines */}
+            <svg
+              className="absolute inset-0 w-full h-full opacity-30"
+              viewBox="0 0 800 600"
+            >
               <defs>
-                <linearGradient id="heroAiGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#00ff9d" stopOpacity="0.3" />
-                  <stop offset="50%" stopColor="#d4af37" stopOpacity="0.2" />
-                  <stop offset="100%" stopColor="#00ff9d" stopOpacity="0.3" />
+                <linearGradient
+                  id="heroAiGlow"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop offset="0%" stopColor="#00C896" stopOpacity="0.4" />
+                  <stop offset="50%" stopColor="#FFB800" stopOpacity="0.3" />
+                  <stop offset="100%" stopColor="#00C896" stopOpacity="0.4" />
+                </linearGradient>
+                <linearGradient
+                  id="heroAiGlow2"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop offset="0%" stopColor="#FFB800" stopOpacity="0.3" />
+                  <stop offset="50%" stopColor="#00C896" stopOpacity="0.2" />
+                  <stop offset="100%" stopColor="#FFB800" stopOpacity="0.3" />
                 </linearGradient>
               </defs>
-              <path 
-                d="M0,300 Q200,150 400,300 Q600,450 800,300" 
-                stroke="url(#heroAiGlow)" 
-                strokeWidth="1" 
+
+              {/* Animated flowing paths */}
+              <motion.path
+                d="M0,300 Q200,150 400,300 Q600,450 800,300"
+                stroke="url(#heroAiGlow)"
+                strokeWidth="2"
                 fill="none"
                 className="animate-pulse-slow"
+                initial={{ pathLength: 0, opacity: 0 }}
+                animate={{ pathLength: 1, opacity: 1 }}
+                transition={{
+                  duration: 4,
+                  ease: "easeInOut",
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                }}
               />
-              <path 
-                d="M0,150 Q300,300 600,150 Q700,50 800,150" 
-                stroke="url(#heroAiGlow)" 
-                strokeWidth="0.8" 
+              <motion.path
+                d="M0,150 Q300,300 600,150 Q700,50 800,150"
+                stroke="url(#heroAiGlow2)"
+                strokeWidth="1.5"
                 fill="none"
                 className="animate-pulse-slow"
-                style={{ animationDelay: '1.5s' }}
+                initial={{ pathLength: 0, opacity: 0 }}
+                animate={{ pathLength: 1, opacity: 1 }}
+                transition={{
+                  duration: 5,
+                  ease: "easeInOut",
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  delay: 1.5,
+                }}
               />
-              <circle cx="200" cy="200" r="3" fill="#00ff9d" opacity="0.4" className="animate-pulse" />
-              <circle cx="600" cy="250" r="2" fill="#d4af37" opacity="0.3" className="animate-pulse" style={{ animationDelay: '0.8s' }} />
+
+              {/* Pulsing neural nodes */}
+              <motion.circle
+                cx="200"
+                cy="200"
+                r="4"
+                fill="#00C896"
+                opacity="0.6"
+                animate={{ scale: [1, 1.5, 1], opacity: [0.6, 1, 0.6] }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+              <motion.circle
+                cx="600"
+                cy="250"
+                r="3"
+                fill="#FFB800"
+                opacity="0.5"
+                animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0.9, 0.5] }}
+                transition={{
+                  duration: 2.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 0.8,
+                }}
+              />
+              <motion.circle
+                cx="400"
+                cy="400"
+                r="2"
+                fill="#00C896"
+                opacity="0.4"
+                animate={{ scale: [1, 1.8, 1], opacity: [0.4, 0.8, 0.4] }}
+                transition={{
+                  duration: 3.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 1.2,
+                }}
+              />
             </svg>
+
+            {/* Floating AI particles */}
+            <div className="absolute inset-0">
+              {[...Array(8)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className={`absolute w-1 h-1 rounded-full ${i % 2 === 0 ? "bg-primary/40" : "bg-secondary/40"}`}
+                  style={{
+                    left: `${15 + i * 12}%`,
+                    top: `${20 + (i % 3) * 25}%`,
+                  }}
+                  animate={{
+                    y: [0, -20, 0],
+                    opacity: [0.4, 0.8, 0.4],
+                    scale: [1, 1.2, 1],
+                  }}
+                  transition={{
+                    duration: 4 + i * 0.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: i * 0.3,
+                  }}
+                />
+              ))}
+            </div>
+
+            {/* Subtle glow effects */}
+            <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-primary/10 rounded-full blur-3xl animate-pulse-slow" />
+            <div
+              className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-secondary/10 rounded-full blur-2xl animate-pulse-slow"
+              style={{ animationDelay: "2s" }}
+            />
           </div>
           {/* Left Side: Text content */}
           <div className="lg:w-1/2 text-center lg:text-start">
             <h1 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-              {t('hero_title_1')}{' '}
-              <span className="text-green">{t('hero_title_2')}</span>
+              {t("hero_title_1")}{" "}
+              <span className="text-emerald-700">{t("hero_title_2")}</span>
             </h1>
 
             <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-              {t('hero_description')}
+              <span className="text-yellow-600 font-semibold">
+                It works while you sleep.
+              </span>{" "}
+              We make it do things for you, not only reply to you.
             </p>
 
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 justify-center lg:justify-start">
@@ -110,8 +227,23 @@ const Index = () => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                {t('hero_button')}
+                Open Account • Start Now
                 <ArrowRight className="w-5 h-5 rtl:rotate-180" />
+              </motion.button>
+
+              <motion.button
+                onClick={() => openChat(null)}
+                className="btn-ai-secondary inline-flex items-center gap-2 relative"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Bot className="w-5 h-5" />
+                Ask Ruyaa AI
+                <motion.div
+                  className="absolute -top-1 -right-1 w-3 h-3 bg-secondary rounded-full animate-pulse"
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
               </motion.button>
             </div>
           </div>
@@ -122,40 +254,42 @@ const Index = () => {
           </div>
         </section>
 
-        {/* How It Works */}
-        <section id="how" className="w-full max-w-6xl mx-auto mt-16 px-6">
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
-            {[
-              { icon: () => <img src="/icons/gold-bars.svg" className="w-10 h-10" />, label: 'Open MT5 account' },
-              { icon: BarChart2, label: 'Monitor + Learn' },
-              { icon: Wallet, label: 'Withdraw Anytime' },
-            ].map((step, idx) => (
-              <motion.div
-                key={idx}
-                onClick={() => {
-                  if (idx === 0) navigate('/agents/mt4mt5');
-                  if (idx === 2) document.getElementById('deposit-btn')?.click();
-                }}
-                className="ai-card ai-card-hover flex flex-col items-center cursor-pointer text-center"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <step.icon className={`w-10 h-10 mb-4 ${idx % 2 === 0 ? 'text-primary' : 'text-secondary'}`} />
-                <p className="font-semibold text-white text-sm">{step.label}</p>
-              </motion.div>
-            ))}
-          </div>
-        </section>
-
         {/* Enhanced AI Features Section */}
         <section className="w-full items-center text-center py-16 mt-12 relative">
           {/* Advanced AI Background */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-green/5 to-black/80" />
-          <div className="absolute inset-0 bg-grid-pattern opacity-[0.02]" />
-          
+          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-gray-950/50 to-black/90" />
+          <div className="absolute inset-0 bg-grid-pattern opacity-[0.03]" />
+
+          {/* Subtle animated background elements */}
+          <div className="absolute inset-0 overflow-hidden">
+            {[...Array(5)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-1 h-1 bg-white/20 rounded-full"
+                style={{
+                  left: `${20 + i * 20}%`,
+                  top: `${30 + (i % 2) * 40}%`,
+                }}
+                animate={{
+                  y: [0, -30, 0],
+                  opacity: [0.2, 0.5, 0.2],
+                }}
+                transition={{
+                  duration: 4 + i * 0.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: i * 0.8,
+                }}
+              />
+            ))}
+          </div>
+
           {/* Animated Neural Network Lines */}
           <div className="absolute inset-0 overflow-hidden">
-            <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1200 800">
+            <svg
+              className="absolute inset-0 w-full h-full"
+              viewBox="0 0 1200 800"
+            >
               <defs>
                 <linearGradient id="aiGlow" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stopColor="#10A169" stopOpacity="0.2" />
@@ -163,20 +297,20 @@ const Index = () => {
                   <stop offset="100%" stopColor="#10A169" stopOpacity="0.2" />
                 </linearGradient>
               </defs>
-              <path 
-                d="M0,400 Q300,200 600,400 Q900,600 1200,400" 
-                stroke="url(#aiGlow)" 
-                strokeWidth="1" 
+              <path
+                d="M0,400 Q300,200 600,400 Q900,600 1200,400"
+                stroke="url(#aiGlow)"
+                strokeWidth="1"
                 fill="none"
                 className="animate-pulse-slow"
               />
-              <path 
-                d="M0,200 Q400,400 800,200 Q1000,0 1200,200" 
-                stroke="url(#aiGlow)" 
-                strokeWidth="0.5" 
+              <path
+                d="M0,200 Q400,400 800,200 Q1000,0 1200,200"
+                stroke="url(#aiGlow)"
+                strokeWidth="0.5"
                 fill="none"
                 className="animate-pulse-slow"
-                style={{ animationDelay: '1s' }}
+                style={{ animationDelay: "1s" }}
               />
             </svg>
           </div>
@@ -184,18 +318,48 @@ const Index = () => {
           <div className="w-full max-w-5xl mx-auto flex flex-col items-center px-6 relative z-10">
             <div className="mb-12">
               {/* Enhanced Title with AI Elements */}
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <Brain className="w-8 h-8 text-primary animate-pulse" />
-                <h2 className="font-manrope text-4xl font-extrabold tracking-tight text-center text-gradient-ai">
+              <div className="flex items-center justify-center gap-4 mb-6">
+                <motion.div
+                  animate={{
+                    rotate: [0, 360],
+                    scale: [1, 1.1, 1],
+                  }}
+                  transition={{
+                    duration: 8,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                >
+                  <Brain className="w-10 h-10 text-primary" />
+                </motion.div>
+
+                <h2 className="font-spacegrotesk text-5xl font-bold tracking-tight text-center bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent">
                   Why Ruyaa AI Outperforms
                 </h2>
-                <Zap className="w-8 h-8 text-secondary animate-pulse" />
+
+                <motion.div
+                  animate={{
+                    scale: [1, 1.3, 1],
+                    opacity: [0.7, 1, 0.7],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                >
+                  <Zap className="w-10 h-10 text-secondary" />
+                </motion.div>
               </div>
-              <p className="text-gray-300 text-lg flex items-center justify-center gap-2">
-                <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+
+              <motion.p
+                className="text-gray-400 text-lg text-center max-w-2xl mx-auto"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+              >
                 Our intelligent features work while you sleep
-                <span className="w-2 h-2 bg-secondary rounded-full animate-pulse" />
-              </p>
+              </motion.p>
             </div>
             <div className="mb-16">
               <FeatureGrid />
@@ -209,7 +373,6 @@ const Index = () => {
 
         {/* Crypto Arbitrage Section */}
         <CryptoArbitrageSection />
-
       </main>
 
       {/* Professional Footer */}
