@@ -27,7 +27,7 @@ const OptionCard: React.FC<OptionCardProps> = ({
     className="relative group"
   >
     <Card
-      className={`bg-gradient-to-br from-gray-800/40 to-gray-900/60 border border-gray-700 hover:border-gray-500 transition-all duration-300 h-full ${comingSoon ? "opacity-75" : ""}`}
+      className={`bg-[#1a1a1a] border border-[#3f352e] hover:border-[#57493e] transition-all duration-300 h-full ${comingSoon ? "opacity-75" : ""}`}
     >
       <CardHeader className="pb-4">
         <div className="flex items-center gap-3 mb-2">
@@ -47,14 +47,14 @@ const OptionCard: React.FC<OptionCardProps> = ({
         {href ? (
           <a
             href={href}
-            className={`inline-flex items-center justify-center w-full py-2 rounded-md bg-gray-700/50 hover:bg-gray-700 text-white border border-gray-600 hover:border-gray-400 transition-all duration-300 ${comingSoon ? "cursor-not-allowed opacity-50" : ""}`}
+            className={`inline-flex items-center justify-center w-full py-2 rounded-md bg-[#1f1b18] hover:bg-[#2a2623] text-white border border-[#3f352e] hover:border-[#57493e] transition-all duration-300 ${comingSoon ? "cursor-not-allowed opacity-50" : ""}`}
           >
             {comingSoon ? "Coming Soon" : "Select"}
             {!comingSoon && <ArrowRight className="w-4 h-4 ml-2" />}
           </a>
         ) : (
           <Button
-            className={`w-full bg-gray-700/50 hover:bg-gray-700 text-white border border-gray-600 hover:border-gray-400 transition-all duration-300 ${comingSoon ? "cursor-not-allowed opacity-50" : ""}`}
+            className={`w-full bg-[#1f1b18] hover:bg-[#2a2623] text-white border border-[#3f352e] hover:border-[#57493e] transition-all duration-300 ${comingSoon ? "cursor-not-allowed opacity-50" : ""}`}
             disabled={comingSoon}
           >
             {comingSoon ? "Coming Soon" : "Select"}
@@ -64,7 +64,7 @@ const OptionCard: React.FC<OptionCardProps> = ({
       </CardContent>
     </Card>
     <div
-      className="absolute inset-0 bg-gray-800 rounded-lg blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10"
+      className="absolute inset-0 bg-black rounded-lg blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-300 -z-10"
     />
   </motion.div>
 );
