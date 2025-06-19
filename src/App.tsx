@@ -23,7 +23,7 @@ import { useEffect } from "react"
 import { WalletProvider } from "./context/WalletProvider"
 import ParticleBackground from "@/components/ParticleBackground"
 import NeuralNetworkOverlay from "@/components/NeuralNetworkOverlay"
-import routes from "tempo-routes"
+import routes from "./tempo-routes"
 import { useRoutes } from "react-router-dom"
 
 import "@solana/wallet-adapter-react-ui/styles.css"
@@ -32,7 +32,7 @@ const queryClient = new QueryClient()
 
 const AppRoutes = () => {
   // Tempo routes - must be called inside Router context
-  const tempoRoutes = import.meta.env.VITE_TEMPO ? useRoutes(routes) : null
+  const tempoRoutes = process.env.NEXT_PUBLIC_TEMPO ? useRoutes(routes) : null
 
   return (
     <Routes>
@@ -48,7 +48,7 @@ const AppRoutes = () => {
       <Route path="/deposit" element={<DepositPage />} />
       <Route path="/how-it-works" element={<HowItWorksPage />} />
       {/* Add this before the catchall route */}
-      {import.meta.env.VITE_TEMPO && <Route path="/tempobook/*" />}
+      {process.env.NEXT_PUBLIC_TEMPO && <Route path="/tempobook/*" />}
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
       <Route path="*" element={<NotFound />} />
     </Routes>
@@ -57,7 +57,7 @@ const AppRoutes = () => {
 
 const App = () => {
   const { i18n } = useTranslation()
-  const tempoRoutes = import.meta.env.VITE_TEMPO ? useRoutes(routes) : null
+  const tempoRoutes = process.env.NEXT_PUBLIC_TEMPO ? useRoutes(routes) : null
 
   useEffect(() => {
     document.documentElement.dir = i18n.language === "ar" ? "rtl" : "ltr"

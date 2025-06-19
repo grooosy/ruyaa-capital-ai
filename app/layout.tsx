@@ -18,6 +18,7 @@ export default function RootLayout({
       <body>
         {/* Professional background system */}
         <div className="site-background">
+          <div className="star-field" />
           <div className="grid-pattern" />
           <div className="gradient-orbs">
             <div className="gradient-orb orb-1" />

@@ -59,7 +59,7 @@ const LiveMarketTicker = () => {
         }
       })
 
-      const twelveKey = import.meta.env.VITE_TWELVEDATA_API_KEY
+      const twelveKey = process.env.NEXT_PUBLIC_TWELVEDATA_API_KEY
       if (!twelveKey) {
         throw new Error("Missing TwelveData API key")
       }

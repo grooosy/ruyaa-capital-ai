@@ -71,9 +71,9 @@ body {
 
   body {
     @apply bg-background text-foreground antialiased;
-    background-image: radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.03) 0%, transparent 50%),
-      radial-gradient(circle at 40% 40%, rgba(6, 182, 212, 0.02) 0%, transparent 50%);
+    background-image: radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.15) 0%, transparent 60%),
+      radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.12) 0%, transparent 60%),
+      radial-gradient(circle at 40% 40%, rgba(6, 182, 212, 0.1) 0%, transparent 60%);
     background-attachment: fixed;
     background-size: 100% 100%;
     min-height: 100vh;
@@ -89,6 +89,15 @@ body {
   height: 100%;
   pointer-events: none;
   z-index: -2;
+}
+
+.star-field {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.25) 1px, transparent 0);
+  background-size: 40px 40px;
+  animation: stars-move 80s linear infinite;
+  opacity: 0.1;
 }
 
 .grid-pattern {
@@ -395,4 +404,13 @@ body {
 
 .animate-scroll {
   animation: scroll 30s linear infinite;
+}
+
+@keyframes stars-move {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-2000px);
+  }
 }
