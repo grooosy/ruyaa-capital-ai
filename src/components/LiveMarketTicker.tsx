@@ -1,6 +1,5 @@
 "use client"
 
-import type React from "react"
 import { useEffect, useState } from "react"
 
 interface TickerData {
@@ -37,7 +36,7 @@ interface ExtendedTickerData extends TickerData {
   signal?: "bullish" | "bearish" | "neutral"
 }
 
-const LiveMarketTicker: React.FC = () => {
+const LiveMarketTicker = () => {
   const [data, setData] = useState<ExtendedTickerData[]>([])
   const [prevPrices, setPrevPrices] = useState<Record<string, number>>({})
   const [priceHistory, setPriceHistory] = useState<Record<string, number[]>>({})

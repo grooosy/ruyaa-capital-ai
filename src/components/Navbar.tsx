@@ -12,7 +12,7 @@ import UserMenu from "./UserMenu"
 import { Bell, Users, ChevronLeft, ChevronRight } from "lucide-react"
 import NotificationDropdown from "./NotificationDropdown"
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
   const [scrolled, setScrolled] = React.useState(false)
   const [notificationOpen, setNotificationOpen] = React.useState(false)
   const { t, i18n } = useTranslation()

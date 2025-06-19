@@ -1,6 +1,5 @@
 "use client"
 
-import type React from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Bar, BarChart as RechartsBarChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from "recharts"
 import AIMarketTable from "./AIMarketTable"
@@ -67,7 +66,7 @@ const PerformanceChart = () => (
   </Card>
 )
 
-const HeroDashboard: React.FC = () => {
+const HeroDashboard = () => {
   return (
     <div className="flex flex-col gap-6 p-8 rounded-3xl bg-gradient-to-br from-black/90 via-gray-900/50 to-black/90 backdrop-blur-xl border border-green/20 shadow-2xl hover:shadow-green/20 transition-all duration-500 hover:border-green/30">
       <div className="flex items-center justify-between mb-4">

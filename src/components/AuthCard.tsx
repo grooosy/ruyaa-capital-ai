@@ -1,62 +1,119 @@
-import React, { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { useNavigate } from "react-router-dom";
-import { Toaster } from "@/components/ui/toaster";
-import EmailAuthForm from "./auth/EmailAuthForm";
-import WalletConnectButton from "./auth/WalletConnectButton";
+"use client"
 
-type AuthType = "signIn" | "signUp";
+import type React from "react"
 
-const AuthCard: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<AuthType>("signIn");
-  const navigate = useNavigate();
+import { useState } from "react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Mail, Lock, User, Eye, EyeOff } from "lucide-react"
+import { motion } from "framer-motion"
 
-  useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_, session) => {
-      if (session) navigate("/dashboard");
-    });
-    return () => { subscription.unsubscribe(); };
-  }, [navigate]);
+interface AuthCardProps {
+  mode: "login" | "signup"
+  onModeChange: (mode: "login" | "signup") => void
+  onSubmit: (email: string, password: string, name?: string) => void
+  loading?: boolean
+}
+
+const AuthCard = ({ mode, onModeChange, onSubmit, loading = false }: AuthCardProps) => {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [name, setName] = useState("")
+  const [showPassword, setShowPassword] = useState(false)
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    onSubmit(email, password, mode === "signup" ? name : undefined)
+  }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen w-full bg-[#0A0A0A] font-spacegrotesk">
-      <div className="w-full max-w-md mx-auto bg-[#1A1A1A]/60 backdrop-blur-md rounded-2xl shadow-lg p-8 relative z-10 animate-fade-in">
-        {/* Tabs */}
-        <div className="flex justify-center mb-8">
-          <button
-            className={`px-5 py-1 font-semibold text-white transition border-b-2 ${activeTab === "signIn"
-                ? "border-green-400 text-neon-green"
-                : "border-transparent text-neutral-400 hover:text-green-400"
-              }`}
-            onClick={() => setActiveTab("signIn")}
-            tabIndex={0}
-          >Sign In</button>
-          <button
-            className={`px-5 py-1 font-semibold text-white transition border-b-2 ${activeTab === "signUp"
-                ? "border-green-400 text-neon-green"
-                : "border-transparent text-neutral-400 hover:text-green-400"
-              }`}
-            onClick={() => setActiveTab("signUp")}
-            tabIndex={0}
-          >Sign Up</button>
-        </div>
+    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+      <Card className="w-full max-w-md mx-auto">
+        <CardHeader className="text-center">
+          <CardTitle className="text-2xl font-bold text-white">
+            {mode === "login" ? "Welcome Back" : "Create Account"}
+          </CardTitle>
+          <p className="text-gray-400">
+            {mode === "login" ? "Sign in to access your AI trading dashboard" : "Join thousands of successful traders"}
+          </p>
+        </CardHeader>
 
-        {/* Email/Password or Google Auth */}
-        <EmailAuthForm activeTab={activeTab} setActiveTab={setActiveTab} />
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {mode === "signup" && (
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-300">Full Name</label>
+                <div className="relative">
+                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="w-full pl-10 pr-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-green"
+                    placeholder="Enter your full name"
+                    required
+                  />
+                </div>
+              </div>
+            )}
 
-        {/* Or connect wallet */}
-        <div className="relative flex pt-8 pb-4 items-center">
-          <div className="flex-grow border-t border-neutral-700"></div>
-          <span className="mx-4 text-neutral-500 text-xs uppercase tracking-widest">OR CONNECT WALLET</span>
-          <div className="flex-grow border-t border-neutral-700"></div>
-        </div>
-        
-        {/* Wallet Connect logic */}
-        <WalletConnectButton />
-        <Toaster />
-      </div>
-    </div>
-  );
-};
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-gray-300">Email</label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-green"
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
+            </div>
 
-export default AuthCard;
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-gray-300">Password</label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full pl-10 pr-12 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-green"
+                  placeholder="Enter your password"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
+                >
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+
+            <Button type="submit" className="w-full bg-green hover:bg-green/90" disabled={loading}>
+              {loading ? "Processing..." : mode === "login" ? "Sign In" : "Create Account"}
+            </Button>
+          </form>
+
+          <div className="mt-6 text-center">
+            <p className="text-gray-400">
+              {mode === "login" ? "Don't have an account?" : "Already have an account?"}
+              <button
+                onClick={() => onModeChange(mode === "login" ? "signup" : "login")}
+                className="ml-2 text-green hover:text-green/80 font-medium"
+              >
+                {mode === "login" ? "Sign up" : "Sign in"}
+              </button>
+            </p>
+          </div>
+        </CardContent>
+      </Card>
+    </motion.div>
+  )
+}
+
+export default AuthCard

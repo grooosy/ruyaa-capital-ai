@@ -1,84 +1,52 @@
 "use client"
 
-// AgentSelectionCard is used on the landing page to showcase available agent types.
 import type React from "react"
+
+import { Card, CardContent } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { ArrowRight } from "lucide-react"
 import { motion } from "framer-motion"
-import { Link } from "react-router-dom"
-import { cn } from "@/lib/utils"
 
 interface AgentSelectionCardProps {
-  id: string
   title: string
   description: string
-  logoSrc: string
-  href?: string
-  onClick?: () => void
+  icon: React.ReactNode
+  onSelect: () => void
+  isSelected?: boolean
 }
 
-const AgentSelectionCard: React.FC<AgentSelectionCardProps> = ({ id, title, description, logoSrc, href, onClick }) => {
-  const cardContent = (
-    <motion.div
-      className={cn(
-        "relative group h-full p-8 flex flex-col items-center justify-center text-center overflow-hidden",
-        "rounded-2xl shadow-xl transition-all duration-300 cursor-pointer",
-        "bg-gradient-to-br from-[#1a1a1c]/70 to-[#111114]/60 backdrop-blur-lg",
-        "border-2 border-[#d4af37]/40",
-      )}
-      whileHover={{ rotateX: 8, rotateY: -8 }}
-    >
-      {/* Background decorations */}
-      {id === "crypto" && (
-        <div className="absolute inset-0 flex items-center justify-center opacity-30" aria-hidden="true">
-          <div
-            className="w-48 h-48 border-2 border-[#d4af37]/20 rounded-full animate-spin-slow"
-            style={{ animationDuration: "20s" }}
-          />
-          <div
-            className="absolute w-64 h-64 border border-[#d4af37]/20 rounded-full animate-spin-slow"
-            style={{ animationDirection: "reverse", animationDuration: "25s" }}
-          />
-        </div>
-      )}
-
-      <div className="relative z-10 flex flex-col items-center justify-center h-full">
-        <div className="relative mb-6 h-16 w-16 flex items-center justify-center">
-          <img
-            src={logoSrc || "/placeholder.svg"}
-            alt={`${title} logo`}
-            className="w-16 h-16 transition-transform duration-300 group-hover:scale-110"
-          />
-          {id === "mt4" && (
-            <div
-              className="absolute -inset-4 opacity-10"
-              style={{
-                backgroundImage:
-                  "linear-gradient(rgba(212,175,55,0.5) 1px, transparent 1px), linear-gradient(to right, rgba(212,175,55,0.5) 1px, transparent 1px)",
-                backgroundSize: "1.5rem 1.5rem",
-                maskImage: "radial-gradient(ellipse at center, black 0%, transparent 70%)",
-              }}
-            />
-          )}
-        </div>
-        <h3 className="text-xl font-bold text-white mb-2 transition-colors">{title}</h3>
-        <p className="text-neutral-400 text-sm">{description}</p>
-      </div>
-    </motion.div>
-  )
-
-  const cardContainerClasses = "block h-full"
-
-  if (onClick) {
-    return (
-      <div onClick={onClick} className={cardContainerClasses} role="button" tabIndex={0}>
-        {cardContent}
-      </div>
-    )
-  }
-
+const AgentSelectionCard = ({ title, description, icon, onSelect, isSelected = false }: AgentSelectionCardProps) => {
   return (
-    <Link to={href || "#"} className={cardContainerClasses}>
-      {cardContent}
-    </Link>
+    <motion.div
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+      className={`cursor-pointer transition-all duration-300 ${isSelected ? "ring-2 ring-green" : ""}`}
+      onClick={onSelect}
+    >
+      <Card className={`h-full ${isSelected ? "border-green bg-green/5" : "border-gray-700 hover:border-green/50"}`}>
+        <CardContent className="p-6 text-center space-y-4">
+          <div className="w-16 h-16 mx-auto bg-green/10 border border-green/20 rounded-full flex items-center justify-center">
+            {icon}
+          </div>
+
+          <div className="space-y-2">
+            <h3 className="text-xl font-bold text-white">{title}</h3>
+            <p className="text-gray-400 text-sm leading-relaxed">{description}</p>
+          </div>
+
+          <Button
+            className={`w-full ${isSelected ? "bg-green" : "bg-gray-700 hover:bg-green"}`}
+            onClick={(e) => {
+              e.stopPropagation()
+              onSelect()
+            }}
+          >
+            {isSelected ? "Selected" : "Select Agent"}
+            <ArrowRight className="w-4 h-4 ml-2" />
+          </Button>
+        </CardContent>
+      </Card>
+    </motion.div>
   )
 }
 

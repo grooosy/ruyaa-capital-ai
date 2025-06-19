@@ -1,6 +1,5 @@
 "use client"
 
-import type React from "react"
 import { motion } from "framer-motion"
 import { Clock, Star, Users } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
@@ -15,7 +14,7 @@ interface AcademyHeroProps {
   lessons: Lesson[] | undefined
 }
 
-const AcademyHero: React.FC<AcademyHeroProps> = ({ currentCourse, lessons }) => {
+const AcademyHero = ({ currentCourse, lessons }: AcademyHeroProps) => {
   const { i18n } = useTranslation()
   const isArabic = i18n.language === "ar"
 

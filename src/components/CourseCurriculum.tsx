@@ -1,6 +1,5 @@
 "use client"
 
-import type React from "react"
 import { motion } from "framer-motion"
 import { Clock, CheckCircle, Play } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
@@ -17,13 +16,13 @@ interface CourseCurriculumProps {
   isLoading?: boolean
 }
 
-const CourseCurriculum: React.FC<CourseCurriculumProps> = ({
+const CourseCurriculum = ({
   lessons,
   selectedLesson,
   completedLessons,
   onLessonSelect,
   isLoading = false,
-}) => {
+}: CourseCurriculumProps) => {
   const { i18n } = useTranslation()
   const isArabic = i18n.language === "ar"
 

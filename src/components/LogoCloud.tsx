@@ -1,9 +1,8 @@
 "use client"
 
-import type React from "react"
 import { mt4mt5Logo, cryptoLogos } from "@/data/logos"
 
-const LogoCloud: React.FC = () => {
+const LogoCloud = () => {
   return (
     <div className="flex items-center justify-center flex-wrap gap-x-12 gap-y-8 w-full max-w-3xl mx-auto">
       <div className="flex items-center gap-8">

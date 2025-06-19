@@ -1,6 +1,5 @@
 "use client"
 
-import type React from "react"
 import { motion } from "framer-motion"
 import { CheckCircle, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -12,7 +11,7 @@ interface CourseCompletionCardProps {
   progressPercentage: number
 }
 
-const CourseCompletionCard: React.FC<CourseCompletionCardProps> = ({ progressPercentage }) => {
+const CourseCompletionCard = ({ progressPercentage }: CourseCompletionCardProps) => {
   const { i18n } = useTranslation()
   const isArabic = i18n.language === "ar"
 

@@ -1,4 +1,3 @@
-import type React from "react"
 import { Play } from "lucide-react"
 import InteractiveLessonCard from "./InteractiveLessonCard"
 import { useTranslation } from "react-i18next"
@@ -11,13 +10,13 @@ interface VideoPlayerSectionProps {
   onManualComplete: () => void
 }
 
-const VideoPlayerSection: React.FC<VideoPlayerSectionProps> = ({
+const VideoPlayerSection = ({
   selectedLesson,
   completedLessons,
   videoKey,
   onVideoEnd,
   onManualComplete,
-}) => {
+}: VideoPlayerSectionProps) => {
   const { i18n } = useTranslation()
   const isArabic = i18n.language === "ar"
 
@@ -38,7 +37,6 @@ const VideoPlayerSection: React.FC<VideoPlayerSectionProps> = ({
 
   const isCompleted = completedLessons.includes(selectedLesson.id)
 
-  // All lessons are now interactive - show the interactive lesson card
   return (
     <div className="mb-6">
       <InteractiveLessonCard lesson={selectedLesson} isCompleted={isCompleted} onComplete={onManualComplete} />

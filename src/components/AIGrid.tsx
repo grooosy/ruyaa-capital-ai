@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next"
 
 type ActiveView = "mt" | "crypto" | null
 
-const AIGrid: React.FC<{ startAnimation?: boolean }> = ({ startAnimation = false }) => {
+const AIGrid = ({ startAnimation = false }: { startAnimation?: boolean }) => {
   const [detailView, setDetailView] = React.useState<ActiveView>(null)
   const { t } = useTranslation()
 

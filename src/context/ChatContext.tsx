@@ -1,6 +1,5 @@
 "use client"
 
-import type React from "react"
 import { createContext, useState, useContext, type ReactNode } from "react"
 
 export type AgentId = "mt4mt5" | "crypto" | "arbitrage" | null
@@ -14,7 +13,7 @@ interface ChatContextType {
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined)
 
-export const ChatProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const ChatProvider = ({ children }: { children: ReactNode }) => {
   const [isChatOpen, setIsChatOpen] = useState(false)
   const [selectedAgent, setSelectedAgent] = useState<AgentId>(null)
 

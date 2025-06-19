@@ -1,249 +1,187 @@
 "use client"
 
-import type React from "react"
 import { useState } from "react"
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { motion, AnimatePresence } from "framer-motion"
+import { X, CheckCircle, XCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Trophy, Brain } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
-import { useTranslation } from "react-i18next"
-import { getQuizData } from "@/utils/videoUtils"
+
+interface QuizQuestion {
+  id: string
+  question: string
+  options: string[]
+  correctAnswer: number
+}
 
 interface QuizModalProps {
   isOpen: boolean
   onClose: () => void
-  onComplete: (score: number) => void
-  quizNumber: number
+  onComplete: () => void
+  questions: QuizQuestion[]
 }
 
-const QuizModal: React.FC<QuizModalProps> = ({ isOpen, onClose, onComplete, quizNumber }) => {
-  const { i18n } = useTranslation()
-  const isArabic = i18n.language === "ar"
+const QuizModal = ({ isOpen, onClose, onComplete, questions }: QuizModalProps) => {
   const [currentQuestion, setCurrentQuestion] = useState(0)
-  const [selectedAnswers, setSelectedAnswers] = useState<number[]>([])
-  const [showResults, setShowResults] = useState(false)
-
-  const quizData = getQuizData(quizNumber)
-  const score = selectedAnswers.reduce((acc, answer, index) => {
-    return acc + (answer === quizData.questions[index].correct ? 1 : 0)
-  }, 0)
+  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null)
+  const [showResult, setShowResult] = useState(false)
+  const [score, setScore] = useState(0)
+  const [answers, setAnswers] = useState<number[]>([])
 
   const handleAnswerSelect = (answerIndex: number) => {
-    const newAnswers = [...selectedAnswers]
-    newAnswers[currentQuestion] = answerIndex
-    setSelectedAnswers(newAnswers)
+    setSelectedAnswer(answerIndex)
   }
 
   const handleNext = () => {
-    if (currentQuestion < quizData.questions.length - 1) {
+    if (selectedAnswer === null) return
+
+    const newAnswers = [...answers, selectedAnswer]
+    setAnswers(newAnswers)
+
+    if (selectedAnswer === questions[currentQuestion].correctAnswer) {
+      setScore(score + 1)
+    }
+
+    if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1)
+      setSelectedAnswer(null)
     } else {
-      setShowResults(true)
+      setShowResult(true)
     }
   }
 
-  const handleFinish = () => {
-    onComplete(score)
-    handleReset()
+  const handleComplete = () => {
+    onComplete()
     onClose()
-  }
-
-  const handleReset = () => {
+    // Reset quiz state
     setCurrentQuestion(0)
-    setSelectedAnswers([])
-    setShowResults(false)
+    setSelectedAnswer(null)
+    setShowResult(false)
+    setScore(0)
+    setAnswers([])
   }
 
-  const getScoreColor = () => {
-    const percentage = (score / quizData.questions.length) * 100
-    if (percentage >= 80) return "text-green"
-    if (percentage >= 60) return "text-gold"
-    return "text-red-400"
+  const resetQuiz = () => {
+    setCurrentQuestion(0)
+    setSelectedAnswer(null)
+    setShowResult(false)
+    setScore(0)
+    setAnswers([])
   }
 
-  const getScoreMessage = () => {
-    const percentage = (score / quizData.questions.length) * 100
-    if (percentage >= 80) {
-      return isArabic ? "🎉 ممتاز! أنت تتقن المادة!" : "🎉 Excellent! You mastered the material!"
-    }
-    if (percentage >= 60) {
-      return isArabic ? "👍 جيد! راجع بعض النقاط وحاول مرة أخرى" : "👍 Good! Review some points and try again"
-    }
-    return isArabic ? "📚 تحتاج لمراجعة أكثر. لا تستسلم!" : "📚 Need more review. Don't give up!"
-  }
+  if (!isOpen) return null
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl bg-card border-green/20">
-        <DialogHeader>
-          <DialogTitle className="flex items-center gap-3 text-xl">
-            <motion.div className="p-2 bg-green/20 rounded-full" whileHover={{ scale: 1.1, rotate: 5 }}>
-              <Brain className="w-6 h-6 text-green" />
-            </motion.div>
-            <span className="text-white">{isArabic ? quizData.titleAr : quizData.title}</span>
-          </DialogTitle>
-        </DialogHeader>
-
-        <div className="space-y-6">
-          {!showResults ? (
-            <>
-              {/* Progress */}
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-400">
-                  {isArabic ? "السؤال" : "Question"} {currentQuestion + 1} {isArabic ? "من" : "of"}{" "}
-                  {quizData.questions.length}
-                </span>
-                <div className="flex gap-1">
-                  {quizData.questions.map((_, index) => (
-                    <div
-                      key={index}
-                      className={`w-3 h-3 rounded-full transition-colors ${
-                        index < currentQuestion ? "bg-green" : index === currentQuestion ? "bg-gold" : "bg-gray-600"
-                      }`}
-                    />
-                  ))}
-                </div>
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+        onClick={onClose}
+      >
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.9, opacity: 0 }}
+          onClick={(e) => e.stopPropagation()}
+          className="w-full max-w-2xl"
+        >
+          <Card className="bg-gradient-to-br from-black/95 via-gray-900/90 to-black/95 backdrop-blur-xl border border-green/20">
+            <CardContent className="p-8">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold text-white">Lesson Quiz</h2>
+                <button onClick={onClose} className="text-gray-400 hover:text-white transition-colors">
+                  <X className="w-6 h-6" />
+                </button>
               </div>
 
-              {/* Question */}
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentQuestion}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Card className="bg-gradient-to-r from-green/5 to-gold/5 border-green/20">
-                    <CardContent className="p-6">
-                      <h3 className="text-lg font-semibold text-white mb-4">
-                        {isArabic
-                          ? quizData.questions[currentQuestion].questionAr
-                          : quizData.questions[currentQuestion].question}
-                      </h3>
-
-                      <div className="space-y-3">
-                        {quizData.questions[currentQuestion].options.map((option, index) => {
-                          const optionText = isArabic ? quizData.questions[currentQuestion].optionsAr[index] : option
-
-                          return (
-                            <motion.button
-                              key={index}
-                              whileHover={{ scale: 1.02 }}
-                              whileTap={{ scale: 0.98 }}
-                              onClick={() => handleAnswerSelect(index)}
-                              className={`w-full p-4 text-left rounded-lg border transition-all ${
-                                selectedAnswers[currentQuestion] === index
-                                  ? "border-green bg-green/10 text-green"
-                                  : "border-gray-600 hover:border-green/50 text-gray-300 hover:bg-green/5"
-                              }`}
-                            >
-                              <div className="flex items-center gap-3">
-                                <div
-                                  className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
-                                    selectedAnswers[currentQuestion] === index
-                                      ? "border-green bg-green"
-                                      : "border-gray-600"
-                                  }`}
-                                >
-                                  {selectedAnswers[currentQuestion] === index && (
-                                    <div className="w-2 h-2 bg-white rounded-full" />
-                                  )}
-                                </div>
-                                <span>{optionText}</span>
-                              </div>
-                            </motion.button>
-                          )
-                        })}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              </AnimatePresence>
-
-              {/* Navigation */}
-              <div className="flex gap-3">
-                <Button
-                  onClick={() => setCurrentQuestion(Math.max(0, currentQuestion - 1))}
-                  disabled={currentQuestion === 0}
-                  variant="outline"
-                  className="border-green/30 text-green hover:bg-green/10"
-                >
-                  {isArabic ? "السابق" : "Previous"}
-                </Button>
-
-                <Button
-                  onClick={handleNext}
-                  disabled={selectedAnswers[currentQuestion] === undefined}
-                  className="flex-1 bg-green hover:bg-green/90"
-                >
-                  {currentQuestion === quizData.questions.length - 1
-                    ? isArabic
-                      ? "إنهاء الاختبار"
-                      : "Finish Quiz"
-                    : isArabic
-                      ? "التالي"
-                      : "Next"}
-                </Button>
-              </div>
-            </>
-          ) : (
-            /* Results */
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="text-center space-y-6"
-            >
-              <div className="flex justify-center">
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                  className="p-4 bg-green/20 rounded-full"
-                >
-                  <Trophy className="w-12 h-12 text-gold" />
-                </motion.div>
-              </div>
-
-              <div>
-                <h3 className="text-2xl font-bold text-white mb-2">
-                  {isArabic ? "انتهيت من الاختبار!" : "Quiz Complete!"}
-                </h3>
-                <p className="text-gray-300">{getScoreMessage()}</p>
-              </div>
-
-              <Card className="bg-gradient-to-r from-green/10 to-gold/10 border-green/20">
-                <CardContent className="p-6">
-                  <div className="text-center">
-                    <div className={`text-4xl font-bold mb-2 ${getScoreColor()}`}>
-                      {score}/{quizData.questions.length}
+              {!showResult ? (
+                <div className="space-y-6">
+                  <div className="flex items-center justify-between text-sm text-gray-400">
+                    <span>
+                      Question {currentQuestion + 1} of {questions.length}
+                    </span>
+                    <div className="w-32 bg-gray-700 rounded-full h-2">
+                      <div
+                        className="bg-green h-2 rounded-full transition-all duration-300"
+                        style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
+                      />
                     </div>
-                    <Badge variant="outline" className="border-green/30 text-green">
-                      {Math.round((score / quizData.questions.length) * 100)}%
-                    </Badge>
                   </div>
-                </CardContent>
-              </Card>
 
-              <div className="flex gap-3">
-                <Button
-                  onClick={handleReset}
-                  variant="outline"
-                  className="flex-1 border-green/30 text-green hover:bg-green/10"
-                >
-                  {isArabic ? "إعادة المحاولة" : "Try Again"}
-                </Button>
-                <Button onClick={handleFinish} className="flex-1 bg-green hover:bg-green/90">
-                  {isArabic ? "متابعة" : "Continue"}
-                </Button>
-              </div>
-            </motion.div>
-          )}
-        </div>
-      </DialogContent>
-    </Dialog>
+                  <div className="space-y-4">
+                    <h3 className="text-xl text-white font-semibold">{questions[currentQuestion]?.question}</h3>
+
+                    <div className="space-y-3">
+                      {questions[currentQuestion]?.options.map((option, index) => (
+                        <button
+                          key={index}
+                          onClick={() => handleAnswerSelect(index)}
+                          className={`w-full p-4 text-left rounded-lg border transition-all duration-200 ${
+                            selectedAnswer === index
+                              ? "border-green bg-green/10 text-white"
+                              : "border-gray-600 hover:border-gray-500 text-gray-300 hover:text-white"
+                          }`}
+                        >
+                          <span className="font-medium">{String.fromCharCode(65 + index)}.</span> {option}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex justify-end">
+                    <Button
+                      onClick={handleNext}
+                      disabled={selectedAnswer === null}
+                      className="bg-green hover:bg-green/90"
+                    >
+                      {currentQuestion < questions.length - 1 ? "Next Question" : "Finish Quiz"}
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                <div className="text-center space-y-6">
+                  <div className="space-y-4">
+                    {score >= questions.length * 0.7 ? (
+                      <CheckCircle className="w-16 h-16 text-green mx-auto" />
+                    ) : (
+                      <XCircle className="w-16 h-16 text-red-400 mx-auto" />
+                    )}
+
+                    <h3 className="text-2xl font-bold text-white">
+                      {score >= questions.length * 0.7 ? "Congratulations!" : "Keep Learning!"}
+                    </h3>
+
+                    <p className="text-gray-300">
+                      You scored {score} out of {questions.length} questions correctly.
+                    </p>
+
+                    <div className="text-4xl font-bold text-green">{Math.round((score / questions.length) * 100)}%</div>
+                  </div>
+
+                  <div className="flex gap-4 justify-center">
+                    {score >= questions.length * 0.7 ? (
+                      <Button onClick={handleComplete} className="bg-green hover:bg-green/90">
+                        Complete Lesson
+                      </Button>
+                    ) : (
+                      <>
+                        <Button onClick={resetQuiz} variant="outline">
+                          Retake Quiz
+                        </Button>
+                        <Button onClick={onClose} variant="ghost">
+                          Review Lesson
+                        </Button>
+                      </>
+                    )}
+                  </div>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
   )
 }
 

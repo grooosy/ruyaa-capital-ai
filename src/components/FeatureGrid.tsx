@@ -9,7 +9,7 @@ import { useChatContext } from "@/context/ChatContext"
 import { useNavigate } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 
-const FeatureGrid: React.FC = () => {
+const FeatureGrid = () => {
   const [showSignalModal, setShowSignalModal] = useState(false)
   const { openChat } = useChatContext()
   const navigate = useNavigate()
