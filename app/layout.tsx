@@ -16,14 +16,18 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body>
-        {/* Background elements */}
-        <div className="grid-background" />
-        <div className="gradient-orb gradient-orb-1" />
-        <div className="gradient-orb gradient-orb-2" />
-        <div className="gradient-orb gradient-orb-3" />
+        {/* Professional background system */}
+        <div className="site-background">
+          <div className="grid-pattern" />
+          <div className="gradient-orbs">
+            <div className="gradient-orb orb-1" />
+            <div className="gradient-orb orb-2" />
+            <div className="gradient-orb orb-3" />
+          </div>
+        </div>
 
         {/* Main content wrapper */}
-        <div className="content-wrapper">{children}</div>
+        <div className="main-content">{children}</div>
       </body>
     </html>
   )
