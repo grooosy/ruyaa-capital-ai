@@ -23,7 +23,8 @@
 
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "tempo-routes": ["./lib/tempo-routes"]
     }
   },
   "include": ["src"]

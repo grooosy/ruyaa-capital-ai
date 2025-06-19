@@ -15,6 +15,7 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      "tempo-routes": path.resolve(__dirname, "./lib/tempo-routes"),
     },
   },
 }));

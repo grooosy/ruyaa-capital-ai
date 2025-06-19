@@ -23,6 +23,7 @@ import { useEffect } from "react"
 import { WalletProvider } from "./context/WalletProvider"
 import ParticleBackground from "@/components/ParticleBackground"
 import NeuralNetworkOverlay from "@/components/NeuralNetworkOverlay"
+import AIDesignBackground from "@/components/AIDesignBackground"
 import routes from "tempo-routes"
 import { useRoutes } from "react-router-dom"
 
@@ -81,6 +82,7 @@ const App = () => {
               <div className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-r from-cyan-500/8 to-teal-500/8 rounded-full blur-3xl animate-float-reverse" />
 
               {/* Subtle particle system */}
+              <AIDesignBackground />
               <ParticleBackground />
 
               {/* Enhanced neural network overlay */}
