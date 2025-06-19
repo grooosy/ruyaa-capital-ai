@@ -1,37 +1,63 @@
-import type React from "react"
-import { Helmet } from "react-helmet-async"
+"use client"
 import ParticleBackground from "@/components/ParticleBackground"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
+import HeroDashboard from "@/components/HeroDashboard"
+import FeatureGrid from "@/components/FeatureGrid"
+import AIGrid from "@/components/AIGrid"
+import CryptoArbitrageSection from "@/components/CryptoArbitrageSection"
+import LogoCloud from "@/components/LogoCloud"
+import LiveMarketTicker from "@/components/LiveMarketTicker"
+import ChatWidget from "@/components/chat/ChatWidget"
 
-const Page: React.FC = () => {
+const Page = () => {
   return (
-    <>
-      <Helmet>
-        <title>RuyaaCapital AI - Advanced Trading Platform</title>
-        <meta name="description" content="Experience the future of trading with RuyaaCapital's AI-powered platform" />
-      </Helmet>
+    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+      {/* Particle Background */}
+      <ParticleBackground />
 
-      <div className="relative min-h-screen w-full bg-black font-spacegrotesk overflow-x-hidden">
-        <ParticleBackground />
-        <Navbar />
+      {/* Navigation */}
+      <Navbar />
 
-        <main className="relative z-10 pt-32">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="text-center py-20">
-              <h1 className="text-6xl font-bold text-white mb-6">
-                Welcome to <span className="text-gradient-ai">RuyaaCapital AI</span>
-              </h1>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                Experience the future of trading with our advanced AI-powered platform
-              </p>
-            </div>
-          </div>
-        </main>
+      {/* Main Content */}
+      <main className="relative z-10">
+        {/* Hero Section */}
+        <section className="pt-32 pb-16">
+          <HeroDashboard />
+        </section>
 
-        <Footer />
-      </div>
-    </>
+        {/* Live Market Ticker */}
+        <section className="py-8">
+          <LiveMarketTicker />
+        </section>
+
+        {/* AI Grid Section */}
+        <section className="py-16">
+          <AIGrid />
+        </section>
+
+        {/* Feature Grid */}
+        <section className="py-16">
+          <FeatureGrid />
+        </section>
+
+        {/* Crypto Arbitrage Section */}
+        <section className="py-16">
+          <CryptoArbitrageSection />
+        </section>
+
+        {/* Logo Cloud */}
+        <section className="py-16">
+          <LogoCloud />
+        </section>
+      </main>
+
+      {/* Footer */}
+      <Footer />
+
+      {/* Chat Widget */}
+      <ChatWidget />
+    </div>
   )
 }
 

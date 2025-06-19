@@ -74,7 +74,6 @@
     "react": "^19",
     "react-day-picker": "latest",
     "react-dom": "^19",
-    "react-helmet-async": "latest",
     "react-hook-form": "latest",
     "react-i18next": "latest",
     "react-parallax-tilt": "latest",

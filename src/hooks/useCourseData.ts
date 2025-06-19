@@ -1,16 +1,16 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
-import { useTranslation } from "react-i18next";
-import { Tables } from "@/integrations/supabase/types";
-import { getModernLessonContent } from "@/utils/videoUtils";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
+import { supabase } from "@/integrations/supabase/client"
+import { useTranslation } from "react-i18next"
+import type { Tables } from "@/integrations/supabase/types"
+import { getModernLessonContent } from "@/utils/videoUtils"
 
-type Course = Tables<"video_courses">;
-type Lesson = Tables<"video_lessons">;
-type UserProgress = Tables<"user_course_progress">;
+type Course = Tables<"video_courses">
+type Lesson = Tables<"video_lessons">
+type UserProgress = Tables<"user_course_progress">
 
 export const useCourseData = () => {
-  const { i18n } = useTranslation();
-  const isArabic = i18n.language === "ar";
+  const { i18n } = useTranslation()
+  const isArabic = i18n.language === "ar"
 
   // Fetch courses with optimized loading
   const { data: courses, isLoading: coursesLoading } = useQuery({
@@ -32,22 +32,22 @@ export const useCourseData = () => {
           updated_at: new Date().toISOString(),
           thumbnail_url: null,
         },
-      ] as Course[];
+      ] as Course[]
     },
     staleTime: 5 * 60 * 1000, // 5 minutes
     cacheTime: 10 * 60 * 1000, // 10 minutes
-  });
+  })
 
   return {
     courses,
     coursesLoading,
     isArabic,
-  };
-};
+  }
+}
 
 export const useLessonsData = (courseId: string) => {
-  const { i18n } = useTranslation();
-  const isArabic = i18n.language === "ar";
+  const { i18n } = useTranslation()
+  const isArabic = i18n.language === "ar"
 
   // Create modern interactive lessons with optimized loading
   const { data: lessons, isLoading: lessonsLoading } = useQuery({
@@ -55,7 +55,7 @@ export const useLessonsData = (courseId: string) => {
     queryFn: async () => {
       // Immediate return for faster loading
       const modernLessons = Array.from({ length: 5 }, (_, index) => {
-        const lessonContent = getModernLessonContent(index);
+        const lessonContent = getModernLessonContent(index)
         return {
           id: `modern-lesson-${index + 1}`,
           course_id: courseId,
@@ -73,47 +73,44 @@ export const useLessonsData = (courseId: string) => {
           created_at: new Date().toISOString(),
           content_type: "interactive",
           interactive_content: lessonContent.content,
-        };
-      });
+        }
+      })
 
-      return modernLessons as any[];
+      return modernLessons as any[]
     },
     enabled: !!courseId,
     staleTime: 5 * 60 * 1000, // 5 minutes
     cacheTime: 10 * 60 * 1000, // 10 minutes
-  });
+  })
 
   return {
     lessons,
     lessonsLoading,
     isArabic,
-  };
-};
+  }
+}
 
-export const useUserProgress = (
-  userId: string | undefined,
-  courseId: string,
-) => {
-  const queryClient = useQueryClient();
+export const useUserProgress = (userId: string | undefined, courseId: string) => {
+  const queryClient = useQueryClient()
 
   // Fetch user progress
   const { data: progress, isLoading: progressLoading } = useQuery({
     queryKey: ["userProgress", userId, courseId],
     queryFn: async () => {
-      if (!userId) return null;
+      if (!userId) return null
 
       const { data, error } = await supabase
         .from("user_course_progress")
         .select("*")
         .eq("user_id", userId)
         .eq("course_id", courseId)
-        .maybeSingle();
+        .maybeSingle()
 
-      if (error) throw error;
-      return data as UserProgress | null;
+      if (error) throw error
+      return data as UserProgress | null
     },
     enabled: !!userId && !!courseId,
-  });
+  })
 
   // Update progress mutation
   const updateProgress = useMutation({
@@ -121,10 +118,10 @@ export const useUserProgress = (
       completedLessons,
       progressPercentage,
     }: {
-      completedLessons: string[];
-      progressPercentage: number;
+      completedLessons: string[]
+      progressPercentage: number
     }) => {
-      if (!userId) throw new Error("User not authenticated");
+      if (!userId) throw new Error("User not authenticated")
 
       const progressData = {
         user_id: userId,
@@ -135,27 +132,27 @@ export const useUserProgress = (
         ...(progressPercentage === 100 && {
           completed_at: new Date().toISOString(),
         }),
-      };
+      }
 
       const { data, error } = await supabase
         .from("user_course_progress")
         .upsert(progressData, { onConflict: "user_id,course_id" })
         .select()
-        .single();
+        .single()
 
-      if (error) throw error;
-      return data;
+      if (error) throw error
+      return data
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["userProgress", userId, courseId],
-      });
+      })
     },
-  });
+  })
 
   return {
     progress,
     progressLoading,
     updateProgress,
-  };
-};
+  }
+}

@@ -1,14 +1,14 @@
-import React from 'react';
-import { Play } from 'lucide-react';
-import InteractiveLessonCard from './InteractiveLessonCard';
-import { useTranslation } from 'react-i18next';
+import type React from "react"
+import { Play } from "lucide-react"
+import InteractiveLessonCard from "./InteractiveLessonCard"
+import { useTranslation } from "react-i18next"
 
 interface VideoPlayerSectionProps {
-  selectedLesson: any;
-  completedLessons: string[];
-  videoKey: number;
-  onVideoEnd: () => void;
-  onManualComplete: () => void;
+  selectedLesson: any
+  completedLessons: string[]
+  videoKey: number
+  onVideoEnd: () => void
+  onManualComplete: () => void
 }
 
 const VideoPlayerSection: React.FC<VideoPlayerSectionProps> = ({
@@ -16,10 +16,10 @@ const VideoPlayerSection: React.FC<VideoPlayerSectionProps> = ({
   completedLessons,
   videoKey,
   onVideoEnd,
-  onManualComplete
+  onManualComplete,
 }) => {
-  const { i18n } = useTranslation();
-  const isArabic = i18n.language === 'ar';
+  const { i18n } = useTranslation()
+  const isArabic = i18n.language === "ar"
 
   if (!selectedLesson) {
     return (
@@ -28,26 +28,22 @@ const VideoPlayerSection: React.FC<VideoPlayerSectionProps> = ({
           <div className="text-center text-white">
             <Play className="w-16 h-16 mx-auto mb-4 text-green" />
             <p className="text-lg font-semibold">
-              {isArabic ? 'اختر درساً لبدء التعلم' : 'Select a lesson to start learning'}
+              {isArabic ? "اختر درساً لبدء التعلم" : "Select a lesson to start learning"}
             </p>
           </div>
         </div>
       </div>
-    );
+    )
   }
 
-  const isCompleted = completedLessons.includes(selectedLesson.id);
+  const isCompleted = completedLessons.includes(selectedLesson.id)
 
   // All lessons are now interactive - show the interactive lesson card
   return (
     <div className="mb-6">
-      <InteractiveLessonCard 
-        lesson={selectedLesson} 
-        isCompleted={isCompleted} 
-        onComplete={onManualComplete} 
-      />
+      <InteractiveLessonCard lesson={selectedLesson} isCompleted={isCompleted} onComplete={onManualComplete} />
     </div>
-  );
-};
+  )
+}
 
-export default VideoPlayerSection;
+export default VideoPlayerSection
