@@ -1,11 +1,5 @@
 {
   "framework": "nextjs",
   "buildCommand": "npm run build",
-  "installCommand": "npm install",
-  "functions": {
-    "app/**/*.{js,ts,jsx,tsx}": {
-      "runtime": "nodejs20.x"
-    }
-  },
-  "regions": ["iad1"]
+  "installCommand": "npm install"
 }
