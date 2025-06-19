@@ -1,10 +1,11 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Twitter, Linkedin, Facebook } from "lucide-react";
-import { useTranslation } from "react-i18next";
+"use client"
+import { motion } from "framer-motion"
+import { Mail, Phone, MapPin, Twitter, Linkedin, Facebook } from "lucide-react"
+import { useTranslation } from "react-i18next"
+
 const Footer = () => {
-  const { t } = useTranslation();
-  const currentYear = new Date().getFullYear();
+  const { t } = useTranslation()
+  const currentYear = new Date().getFullYear()
   return (
     <footer className="relative bg-gradient-to-br from-black/95 via-gray-900/80 to-black/95 backdrop-blur-xl border-t border-green/20">
       {/* Neural Network Pattern */}
@@ -16,12 +17,7 @@ const Footer = () => {
               <stop offset="100%" stopColor="#CFA100" stopOpacity="0.1" />
             </linearGradient>
           </defs>
-          <path
-            d="M0,200 Q300,100 600,200 Q900,300 1200,200"
-            stroke="url(#footerGlow)"
-            strokeWidth="1"
-            fill="none"
-          />
+          <path d="M0,200 Q300,100 600,200 Q900,300 1200,200" stroke="url(#footerGlow)" strokeWidth="1" fill="none" />
         </svg>
       </div>
 
@@ -44,12 +40,9 @@ const Footer = () => {
             className="space-y-4"
           >
             <p className="text-gray-400 text-sm leading-relaxed">
-              <span className="text-gradient-ai font-semibold">
-                Watch the real AI-power work for you
-              </span>
+              <span className="text-gradient-ai font-semibold">Watch the real AI-power work for you</span>
               <br />
-              Empowering traders with intelligent AI-driven solutions for forex,
-              crypto, and arbitrage trading.
+              Empowering traders with intelligent AI-driven solutions for forex, crypto, and arbitrage trading.
             </p>
             <div className="flex space-x-4">
               <motion.a
@@ -100,18 +93,13 @@ const Footer = () => {
           >
             <h3 className="text-white font-semibold text-lg">Quick Links</h3>
             <ul className="space-y-2">
-              {["Home", "AI Agents", "Features", "Pricing", "Support"].map(
-                (link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
-                      className="text-gray-400 hover:text-gold transition-colors text-sm"
-                    >
-                      {link}
-                    </a>
-                  </li>
-                ),
-              )}
+              {["Home", "AI Agents", "Features", "Pricing", "Support"].map((link) => (
+                <li key={link}>
+                  <a href="#" className="text-gray-400 hover:text-gold transition-colors text-sm">
+                    {link}
+                  </a>
+                </li>
+              ))}
             </ul>
           </motion.div>
 
@@ -131,26 +119,17 @@ const Footer = () => {
             }}
             className="space-y-4"
           >
-            <h3 className="text-white font-semibold text-lg">
-              Trading Services
-            </h3>
+            <h3 className="text-white font-semibold text-lg">Trading Services</h3>
             <ul className="space-y-2">
-              {[
-                "MT4/MT5 Signals",
-                "Crypto Trading",
-                "Arbitrage Bots",
-                "Market Analysis",
-                "Risk Management",
-              ].map((service) => (
-                <li key={service}>
-                  <a
-                    href="#"
-                    className="text-gray-400 hover:text-gold transition-colors text-sm"
-                  >
-                    {service}
-                  </a>
-                </li>
-              ))}
+              {["MT4/MT5 Signals", "Crypto Trading", "Arbitrage Bots", "Market Analysis", "Risk Management"].map(
+                (service) => (
+                  <li key={service}>
+                    <a href="#" className="text-gray-400 hover:text-gold transition-colors text-sm">
+                      {service}
+                    </a>
+                  </li>
+                ),
+              )}
             </ul>
           </motion.div>
 
@@ -174,9 +153,7 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-gold" />
-                <span className="text-gray-400 text-sm">
-                  support@ruyaaai.com
-                </span>
+                <span className="text-gray-400 text-sm">support@ruyaaai.com</span>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-gold" />
@@ -193,26 +170,15 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-white/10 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-gray-400 text-sm">
-              © {currentYear} RuyaaCapital. All rights reserved.
-            </div>
+            <div className="text-gray-400 text-sm">© {currentYear} RuyaaCapital. All rights reserved.</div>
             <div className="flex items-center gap-6 text-sm">
-              <a
-                href="#"
-                className="text-gray-400 hover:text-gold transition-colors"
-              >
+              <a href="#" className="text-gray-400 hover:text-gold transition-colors">
                 Privacy Policy
               </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-gold transition-colors"
-              >
+              <a href="#" className="text-gray-400 hover:text-gold transition-colors">
                 Terms of Service
               </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-gold transition-colors"
-              >
+              <a href="#" className="text-gray-400 hover:text-gold transition-colors">
                 Cookie Policy
               </a>
             </div>
@@ -223,13 +189,12 @@ const Footer = () => {
         <div className="flex items-center justify-center mt-8">
           <div className="flex items-center gap-2 px-4 py-2 bg-green/10 border border-green/20 rounded-full">
             <div className="w-2 h-2 bg-green rounded-full animate-pulse"></div>
-            <span className="text-green text-xs font-medium">
-              AI Systems Online
-            </span>
+            <span className="text-green text-xs font-medium">AI Systems Online</span>
           </div>
         </div>
       </div>
     </footer>
-  );
-};
-export default Footer;
+  )
+}
+
+export default Footer
