@@ -31,13 +31,13 @@ export default {
         // Enhanced futuristic palette
         bg: "#000000",
         primary: {
-          DEFAULT: "#FFD700",
+          DEFAULT: "#D4AF37",
           50: "#fff8cc",
           100: "#fff099",
           200: "#ffe866",
           300: "#ffe033",
           400: "#ffd900",
-          500: "#FFD700",
+          500: "#D4AF37",
           600: "#e6c000",
           700: "#b39800",
           800: "#806f00",
@@ -75,11 +75,11 @@ export default {
 
         // Enhanced legacy compatibility
         green: "#00A86B",
-        gold: "#FFD700",
+        gold: "#D4AF37",
         "dark-charcoal": "#000000",
         background: "#000000",
         card: "#0a0a0a",
-        "primary-accent": "#FFD700",
+        "primary-accent": "#D4AF37",
         "secondary-accent": "#00A86B",
 
         // Shadcn enhanced

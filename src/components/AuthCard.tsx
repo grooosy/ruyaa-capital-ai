@@ -47,9 +47,10 @@ const AuthCard = ({ mode, onModeChange, onSubmit, loading = false }: AuthCardPro
           <Button
             type="button"
             onClick={handleGoogleLogin}
-            className="w-full mb-4 flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white"
+            className="w-full mb-4 flex items-center justify-center gap-3 bg-white text-gray-800 hover:bg-gray-100 font-medium shadow"
           >
-            <LogIn className="w-4 h-4" /> Continue with Google
+            <img src="/logos/google.svg" alt="Google" className="w-4 h-4" />
+            Sign in with Google
           </Button>
           <form onSubmit={handleSubmit} className="space-y-4">
             {mode === "signup" && (

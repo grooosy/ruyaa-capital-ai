@@ -15,7 +15,7 @@ export const AGENTS: Agent[] = [
     label: "Verified Broker",
     desc: "Institutional-grade security and compliance.",
     angle: 0,
-    color: "#FFD700",
+    color: "#D4AF37",
   },
   {
     id: "chat",
@@ -23,7 +23,7 @@ export const AGENTS: Agent[] = [
     label: "Live AI Chat",
     desc: "24/7 intelligent trading assistance.",
     angle: 60,
-    color: "#FFD700",
+    color: "#D4AF37",
   },
   {
     id: "insights",
@@ -31,7 +31,7 @@ export const AGENTS: Agent[] = [
     label: "Portfolio Insights",
     desc: "Real-time analytics and performance tracking.",
     angle: 120,
-    color: "#FFD700",
+    color: "#D4AF37",
   },
   {
     id: "academy",
@@ -39,7 +39,7 @@ export const AGENTS: Agent[] = [
     label: "Trading Academy",
     desc: "AI-powered learning and strategy optimization.",
     angle: 180,
-    color: "#FFD700",
+    color: "#D4AF37",
   },
   {
     id: "arbitrage",
@@ -47,7 +47,7 @@ export const AGENTS: Agent[] = [
     label: "Crypto Arbitrage",
     desc: "Automated opportunity detection and execution.",
     angle: 240,
-    color: "#FFD700",
+    color: "#D4AF37",
   },
   {
     id: "ticker",
@@ -55,7 +55,7 @@ export const AGENTS: Agent[] = [
     label: "Live Market Ticker",
     desc: "Real-time market data and price feeds.",
     angle: 300,
-    color: "#FFD700",
+    color: "#D4AF37",
   },
 ];
 

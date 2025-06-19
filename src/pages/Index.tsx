@@ -81,7 +81,7 @@ const Index = () => {
                   y2="100%"
                 >
                   <stop offset="0%" stopColor="#00C896" stopOpacity="0.4" />
-                  <stop offset="50%" stopColor="#FFB800" stopOpacity="0.3" />
+                  <stop offset="50%" stopColor="#D4AF37" stopOpacity="0.3" />
                   <stop offset="100%" stopColor="#00C896" stopOpacity="0.4" />
                 </linearGradient>
                 <linearGradient
@@ -91,9 +91,9 @@ const Index = () => {
                   x2="100%"
                   y2="100%"
                 >
-                  <stop offset="0%" stopColor="#FFB800" stopOpacity="0.3" />
+                  <stop offset="0%" stopColor="#D4AF37" stopOpacity="0.3" />
                   <stop offset="50%" stopColor="#00C896" stopOpacity="0.2" />
-                  <stop offset="100%" stopColor="#FFB800" stopOpacity="0.3" />
+                  <stop offset="100%" stopColor="#D4AF37" stopOpacity="0.3" />
                 </linearGradient>
               </defs>
 
@@ -148,7 +148,7 @@ const Index = () => {
                 cx="600"
                 cy="250"
                 r="3"
-                fill="#FFB800"
+                fill="#D4AF37"
                 opacity="0.5"
                 animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0.9, 0.5] }}
                 transition={{
