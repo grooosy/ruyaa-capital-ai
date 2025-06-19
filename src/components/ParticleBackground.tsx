@@ -1,8 +1,5 @@
 "use client"
 
-// ParticleBackground renders a subtle animated particle effect used on all pages
-// to provide an AI-inspired atmosphere without distracting from content.
-
 import { useEffect, useMemo, useState } from "react"
 import Particles, { initParticlesEngine } from "@tsparticles/react"
 import type { Container, ISourceOptions } from "@tsparticles/engine"
@@ -20,7 +17,7 @@ const ParticleBackground = () => {
   }, [])
 
   const particlesLoaded = async (container?: Container): Promise<void> => {
-    // You can add any logic here for when particles are loaded.
+    // Particles loaded callback
   }
 
   const options: ISourceOptions = useMemo(

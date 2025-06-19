@@ -1,49 +1,44 @@
-import React, { useState } from "react";
-import AiBrainIcon from "./icons/AiBrainIcon";
-import ConvergingArrowsIcon from "./icons/ConvergingArrowsIcon";
-import VerifiedShieldIcon from "./icons/VerifiedShieldIcon";
-import { GraduationCap, LineChart, X } from "lucide-react";
-import { useChatContext } from "@/context/ChatContext";
-import { useNavigate } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+"use client"
+
+import React, { useState } from "react"
+import AiBrainIcon from "./icons/AiBrainIcon"
+import ConvergingArrowsIcon from "./icons/ConvergingArrowsIcon"
+import VerifiedShieldIcon from "./icons/VerifiedShieldIcon"
+import { GraduationCap, LineChart, X } from "lucide-react"
+import { useChatContext } from "@/context/ChatContext"
+import { useNavigate } from "react-router-dom"
+import { motion, AnimatePresence } from "framer-motion"
 
 const FeatureGrid: React.FC = () => {
-  const [showSignalModal, setShowSignalModal] = useState(false);
-  const { openChat } = useChatContext();
-  const navigate = useNavigate();
+  const [showSignalModal, setShowSignalModal] = useState(false)
+  const { openChat } = useChatContext()
+  const navigate = useNavigate()
 
   const handleFeatureClick = (featureTitle: string) => {
     switch (featureTitle) {
       case "Verified Broker":
-        // Scroll to MT4/MT5 section
-        const aiSection = document.getElementById("ai");
+        const aiSection = document.getElementById("ai")
         if (aiSection) {
-          aiSection.scrollIntoView({ behavior: "smooth" });
+          aiSection.scrollIntoView({ behavior: "smooth" })
         }
-        break;
+        break
       case "24/7 Ruyaa AI Assistant":
-        // Open chatbot
-        openChat(null);
-        break;
+        openChat(null)
+        break
       case "Trading Academy + Mentor":
-        // Navigate to academy page
-        navigate("/academy");
-        break;
+        navigate("/academy")
+        break
       case "Live Ticker + Signal Feed":
-        // Show signal modal
-        setShowSignalModal(true);
-        break;
+        setShowSignalModal(true)
+        break
       case "Crypto Arbitrage System":
-        // Scroll to arbitrage section
-        const arbitrageSection = document.querySelector(
-          '[class*="CryptoArbitrageSection"]',
-        );
+        const arbitrageSection = document.querySelector('[class*="CryptoArbitrageSection"]')
         if (arbitrageSection) {
-          arbitrageSection.scrollIntoView({ behavior: "smooth" });
+          arbitrageSection.scrollIntoView({ behavior: "smooth" })
         }
-        break;
+        break
     }
-  };
+  }
 
   const features = [
     {
@@ -76,7 +71,7 @@ const FeatureGrid: React.FC = () => {
       subtitle: "Auto profit scan",
       color: "from-purple-500/20 to-violet-500/20",
     },
-  ];
+  ]
 
   return (
     <>
@@ -88,20 +83,16 @@ const FeatureGrid: React.FC = () => {
               onClick={() => handleFeatureClick(feature.title)}
               className="group relative flex flex-col items-center justify-center text-center w-44 h-44 bg-gradient-to-br from-black/90 via-gray-900/50 to-black/90 backdrop-blur-xl border border-white/10 rounded-3xl p-6 transition-all duration-500 hover:border-green/40 hover:shadow-green/30 hover:shadow-2xl cursor-pointer hover:scale-105"
             >
-              {/* Dynamic AI Background Gradient */}
               <div
                 className={`absolute inset-0 bg-gradient-to-br ${feature.color} rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
               />
 
-              {/* Neural Network Pattern */}
               <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] rounded-2xl" />
 
-              {/* Animated Border */}
               <div
                 className="absolute inset-0 rounded-2xl bg-gradient-to-r from-green/0 via-green/50 to-green/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-beam-flow"
                 style={{
-                  background:
-                    "linear-gradient(90deg, transparent, rgba(16, 161, 105, 0.3), transparent)",
+                  background: "linear-gradient(90deg, transparent, rgba(16, 161, 105, 0.3), transparent)",
                   backgroundSize: "200% 100%",
                 }}
               />
@@ -122,14 +113,12 @@ const FeatureGrid: React.FC = () => {
                 </p>
               </div>
 
-              {/* AI Pulse Effect */}
               <div className="absolute inset-0 rounded-2xl border border-green/0 group-hover:border-green/30 group-hover:animate-pulse-subtle transition-all duration-500" />
             </div>
           ))}
         </div>
       </div>
 
-      {/* Signal Feed Modal */}
       <AnimatePresence>
         {showSignalModal && (
           <motion.div
@@ -158,20 +147,15 @@ const FeatureGrid: React.FC = () => {
                   <LineChart className="w-8 h-8 text-green" />
                 </div>
 
-                <h3 className="text-xl font-bold text-white mb-4 font-spacegrotesk">
-                  Live Signal Feed
-                </h3>
+                <h3 className="text-xl font-bold text-white mb-4 font-spacegrotesk">Live Signal Feed</h3>
 
                 <p className="text-gray-300 mb-6 leading-relaxed">
-                  Join the waitlist – This isn't just a signal. It's an AI
-                  engine that understands market reasoning.
+                  Join the waitlist – This isn't just a signal. It's an AI engine that understands market reasoning.
                 </p>
 
                 <div className="flex items-center gap-2 justify-center mb-4">
                   <div className="w-2 h-2 bg-green rounded-full animate-pulse"></div>
-                  <span className="text-green text-sm font-medium">
-                    AI Engine Active
-                  </span>
+                  <span className="text-green text-sm font-medium">AI Engine Active</span>
                 </div>
 
                 <button
@@ -186,7 +170,7 @@ const FeatureGrid: React.FC = () => {
         )}
       </AnimatePresence>
     </>
-  );
-};
+  )
+}
 
-export default FeatureGrid;
+export default FeatureGrid

@@ -1,24 +1,24 @@
-import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Bot, X } from "lucide-react";
-import ChatPane from "./ChatPane";
-import { useChatContext } from "@/context/ChatContext";
-import { useLocation } from "react-router-dom";
+"use client"
+import { motion, AnimatePresence } from "framer-motion"
+import { Bot, X } from "lucide-react"
+import ChatPane from "./ChatPane"
+import { useChatContext } from "@/context/ChatContext"
+import { useLocation } from "react-router-dom"
 
 const ChatWidget = () => {
-  const { isChatOpen, openChat, closeChat } = useChatContext();
-  const location = useLocation();
+  const { isChatOpen, openChat, closeChat } = useChatContext()
+  const location = useLocation()
 
   const toggleChat = () => {
     if (isChatOpen) {
-      closeChat();
+      closeChat()
     } else {
-      openChat(null); // Open generic chat if opened from widget button
+      openChat(null)
     }
-  };
+  }
 
   if (location.pathname.startsWith("/agents/")) {
-    return null;
+    return null
   }
 
   return (
@@ -31,11 +31,10 @@ const ChatWidget = () => {
           whileTap={{ scale: 0.95 }}
           aria-label="Toggle AI Chat"
         >
-          {/* Subtle glow effect */}
           <motion.div
             className="absolute inset-0 bg-gradient-to-r from-green/10 to-secondary/10 rounded-2xl blur-xl"
             animate={{ opacity: [0.3, 0.6, 0.3] }}
-            transition={{ duration: 3, repeat: Infinity }}
+            transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
           />
 
           <AnimatePresence mode="wait">
@@ -47,20 +46,15 @@ const ChatWidget = () => {
               transition={{ duration: 0.2 }}
               className="relative z-10"
             >
-              {isChatOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Bot className="w-6 h-6 text-green" />
-              )}
+              {isChatOpen ? <X className="w-6 h-6" /> : <Bot className="w-6 h-6 text-green" />}
             </motion.div>
           </AnimatePresence>
 
-          {/* Notification dot */}
           {!isChatOpen && (
             <motion.div
               className="absolute -top-1 -right-1 w-3 h-3 bg-secondary rounded-full border-2 border-black"
               animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
+              transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
             />
           )}
         </motion.button>
@@ -77,15 +71,13 @@ const ChatWidget = () => {
             style={{ originY: "bottom", originX: "right" }}
           >
             <div className="relative h-full">
-              {/* Modern dark themed container */}
               <div className="h-full bg-gradient-to-b from-gray-900/95 to-black/95 border border-green/30 rounded-2xl shadow-2xl backdrop-blur-xl overflow-hidden">
-                {/* Subtle animated border */}
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-green/20 via-transparent to-green/10 rounded-2xl"
                   animate={{ rotate: [0, 360] }}
                   transition={{
                     duration: 20,
-                    repeat: Infinity,
+                    repeat: Number.POSITIVE_INFINITY,
                     ease: "linear",
                   }}
                   style={{ padding: "1px" }}
@@ -99,7 +91,7 @@ const ChatWidget = () => {
         )}
       </AnimatePresence>
     </>
-  );
-};
+  )
+}
 
-export default ChatWidget;
+export default ChatWidget

@@ -14,7 +14,6 @@ import NotificationDropdown from "./NotificationDropdown"
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = React.useState(false)
-  const [depositMenu, setDepositMenu] = React.useState(false)
   const [notificationOpen, setNotificationOpen] = React.useState(false)
   const { t, i18n } = useTranslation()
   const isArabic = i18n.language === "ar"
@@ -50,7 +49,6 @@ const Navbar: React.FC = () => {
     >
       <nav className="flex items-center justify-between max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center gap-4">
-          {/* Navigation Arrows */}
           <div className="hidden md:flex items-center gap-2">
             <button
               onClick={() => window.history.back()}
@@ -68,7 +66,6 @@ const Navbar: React.FC = () => {
             </button>
           </div>
 
-          {/* Who We Are Button */}
           <button
             onClick={() => navigate("/about")}
             className="hidden md:flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm font-medium transition-all duration-300 hover:bg-white/10 hover:border-white/20 backdrop-blur-sm"
@@ -112,12 +109,9 @@ const Navbar: React.FC = () => {
             {isArabic ? "أكاديمية" : "Academy"}
           </Link>
           <div className="relative group">
-            <button
-              id="deposit-btn"
-              className="hover:text-secondary transition-colors font-semibold flex items-center gap-1"
-            >
+            <button className="hover:text-secondary transition-colors font-semibold flex items-center gap-1">
               {t("deposit")}
-              <span className={`transition-transform group-hover:rotate-180`}>▾</span>
+              <span className="transition-transform group-hover:rotate-180">▾</span>
             </button>
             <div className="absolute mt-2 right-0 bg-black/90 border border-primary/20 rounded-lg shadow-ai-glow py-2 w-48 z-50 backdrop-blur-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
               <Link
@@ -137,7 +131,6 @@ const Navbar: React.FC = () => {
           <Link to="/#footer" className="px-3 py-1.5 rounded-md text-gray-200 hover:bg-gray-800 transition-colors">
             {t("home")}
           </Link>
-          {/* Notification Button */}
           <div className="relative">
             <button
               onClick={() => setNotificationOpen(!notificationOpen)}

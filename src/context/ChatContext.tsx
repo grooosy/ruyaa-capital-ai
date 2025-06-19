@@ -25,8 +25,6 @@ export const ChatProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const closeChat = () => {
     setIsChatOpen(false)
-    // Keep selectedAgent in case we want to reopen, or set to null.
-    // Setting to null is cleaner to avoid stale state.
     setSelectedAgent(null)
   }
 
