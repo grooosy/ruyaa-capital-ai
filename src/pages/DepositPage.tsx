@@ -53,7 +53,7 @@ const DepositPage: React.FC = () => {
   const subtitle = "Choose how you want to add funds to your account";
 
   return (
-    <div className="relative min-h-screen bg-[#0D0D0D]">
+    <div className="relative min-h-screen bg-[#0D0D0D] font-spacegrotesk">
       <FuturisticBackground />
       <ParticleBackground />
       <Navbar />

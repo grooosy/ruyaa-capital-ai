@@ -50,7 +50,7 @@ const Index = () => {
 
   return (
     <div
-      className="relative min-h-screen bg-gray-900"
+      className="relative min-h-screen bg-[#0D0D0D] font-spacegrotesk"
       dir={i18n.language === "ar" ? "rtl" : "ltr"}
     >
       <FuturisticBackground />

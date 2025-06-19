@@ -55,7 +55,7 @@ const WithdrawPage: React.FC = () => {
   ];
 
   return (
-    <div className="relative min-h-screen bg-[#0D0D0D]">
+    <div className="relative min-h-screen bg-[#0D0D0D] font-spacegrotesk">
       <FuturisticBackground />
       <ParticleBackground />
       <Navbar />

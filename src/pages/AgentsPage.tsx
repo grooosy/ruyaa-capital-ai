@@ -35,7 +35,7 @@ const AgentsPage: React.FC = () => {
   ];
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen bg-[#0D0D0D] font-spacegrotesk">
       <FuturisticBackground />
       <ParticleBackground />
       <Navbar />

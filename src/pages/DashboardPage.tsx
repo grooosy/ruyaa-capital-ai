@@ -13,6 +13,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "@/hooks/use-toast";
 import { WalletProvider, useWallet } from "@solana/wallet-adapter-react";
 import { motion } from "framer-motion";
+import ParticleBackground from "@/components/ParticleBackground";
+import FuturisticBackground from "@/components/FuturisticBackground";
 
 // Helper for framer motion cascade
 const cardStagger = {
@@ -90,7 +92,7 @@ const DashboardPage = () => {
 
   if (loadingSession || isLoadingData || !session) {
     return (
-      <div className="min-h-screen bg-[#0D0D0D] flex items-center justify-center">
+      <div className="min-h-screen bg-[#0D0D0D] font-spacegrotesk flex items-center justify-center">
         <span className="text-green-400 text-lg animate-pulse">Loading Dashboard...</span>
       </div>
     );
@@ -100,6 +102,8 @@ const DashboardPage = () => {
 
   return (
     <div className="relative min-h-screen bg-[#0D0D0D] font-spacegrotesk">
+      <FuturisticBackground />
+      <ParticleBackground />
       <Navbar />
       <DashboardLayout>
         <motion.div
