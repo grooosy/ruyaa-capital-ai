@@ -7,8 +7,19 @@ import { CheckCircle, Play, ArrowRight, Brain, Zap, TrendingUp, Shield, Target, 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
+interface InteractiveContent {
+  steps?: unknown[];
+  concepts?: unknown[];
+  strategies?: unknown[];
+  points?: unknown[];
+}
+
+interface Lesson {
+  interactive_content: InteractiveContent;
+}
+
 interface InteractiveLessonProps {
-  lesson: any;
+  lesson: Lesson;
   isCompleted: boolean;
   onComplete: () => void;
 }

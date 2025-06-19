@@ -14,26 +14,30 @@ const FeatureGrid: React.FC = () => {
 
   const handleFeatureClick = (featureTitle: string) => {
     switch (featureTitle) {
-      case "Verified Broker":
+      case "Verified Broker": {
         // Scroll to MT4/MT5 section
         const aiSection = document.getElementById("ai");
         if (aiSection) {
           aiSection.scrollIntoView({ behavior: "smooth" });
         }
         break;
-      case "24/7 Ruyaa AI Assistant":
+      }
+      case "24/7 Ruyaa AI Assistant": {
         // Open chatbot
         openChat(null);
         break;
-      case "Trading Academy + Mentor":
+      }
+      case "Trading Academy + Mentor": {
         // Navigate to academy page
         navigate("/academy");
         break;
-      case "Live Ticker + Signal Feed":
+      }
+      case "Live Ticker + Signal Feed": {
         // Show signal modal
         setShowSignalModal(true);
         break;
-      case "Crypto Arbitrage System":
+      }
+      case "Crypto Arbitrage System": {
         // Scroll to arbitrage section
         const arbitrageSection = document.querySelector(
           '[class*="CryptoArbitrageSection"]',
@@ -42,6 +46,7 @@ const FeatureGrid: React.FC = () => {
           arbitrageSection.scrollIntoView({ behavior: "smooth" });
         }
         break;
+      }
     }
   };
 

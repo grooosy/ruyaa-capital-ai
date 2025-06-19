@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
-    // @ts-ignore
+    // @ts-expect-error -- allowedHosts is not typed in vite types
     allowedHosts: process.env.TEMPO === "true" ? true : undefined,
   },
   plugins: [react(), tempo()].filter(Boolean),

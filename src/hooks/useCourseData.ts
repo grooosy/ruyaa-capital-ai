@@ -76,7 +76,7 @@ export const useLessonsData = (courseId: string) => {
         };
       });
 
-      return modernLessons as any[];
+      return modernLessons as Lesson[];
     },
     enabled: !!courseId,
     staleTime: 5 * 60 * 1000, // 5 minutes
