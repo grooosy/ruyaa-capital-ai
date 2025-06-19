@@ -10,6 +10,8 @@ import CourseCurriculum from "@/components/CourseCurriculum";
 import CourseProgress from "@/components/CourseProgress";
 import QuizModal from "@/components/academy/QuizModal";
 import AIStatsCard from "@/components/academy/AIStatsCard";
+import ParticleBackground from "@/components/ParticleBackground";
+import FuturisticBackground from "@/components/FuturisticBackground";
 import {
   useCourseData,
   useLessonsData,
@@ -136,7 +138,9 @@ const AcademyPage = () => {
 
   if (coursesLoading || lessonsLoading) {
     return (
-      <div className="min-h-screen bg-[#0D0D0D]" dir={isArabic ? "rtl" : "ltr"}>
+      <div className="relative min-h-screen bg-[#0D0D0D]" dir={isArabic ? "rtl" : "ltr"}>
+        <FuturisticBackground />
+        <ParticleBackground />
         <Navbar />
         <div className="pt-32 flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
@@ -157,7 +161,9 @@ const AcademyPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#0D0D0D]" dir={isArabic ? "rtl" : "ltr"}>
+    <div className="relative min-h-screen bg-[#0D0D0D]" dir={isArabic ? "rtl" : "ltr"}>
+      <FuturisticBackground />
+      <ParticleBackground />
       <Navbar />
 
       <main className="pt-32 pb-20">
