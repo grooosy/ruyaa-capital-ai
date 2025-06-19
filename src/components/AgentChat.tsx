@@ -72,14 +72,14 @@ const AgentChat: React.FC<AgentChatProps> = ({ agentId }) => {
                             className={cn(
                               'p-3 rounded-xl max-w-lg break-words whitespace-pre-wrap',
                               isUser
-                                ? 'bg-gold/90 text-dark-charcoal rounded-br-none'
+                                ? 'bg-card text-gold border border-gold/40 rounded-br-none'
                                 : 'bg-card text-white rounded-bl-none'
                             )}
                           >
                             <Linkify options={linkifyOptions(isUser)}>{message.content}</Linkify>
                           </div>
                           {isUser && (
-                            <div className="w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center shrink-0">
+                            <div className="w-8 h-8 rounded-full bg-card border border-gold/40 flex items-center justify-center shrink-0">
                               <User className="w-5 h-5 text-gold" />
                             </div>
                           )}

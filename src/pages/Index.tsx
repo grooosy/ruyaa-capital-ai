@@ -209,7 +209,7 @@ const Index = () => {
               </motion.button>
 
               <motion.button
-                onClick={() => openChat(null)}
+                onClick={() => openChat('support')}
                 className="bg-gray-800 border border-gray-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-gray-700 hover:border-gray-500 hover:scale-102 transition-all duration-300 inline-flex items-center gap-2 relative"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}

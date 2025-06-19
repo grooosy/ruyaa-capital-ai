@@ -13,7 +13,7 @@ const ChatWidget = () => {
     if (isChatOpen) {
       closeChat();
     } else {
-      openChat(null); // Open generic chat if opened from widget button
+      openChat('support'); // Open generic chat if opened from widget button
     }
   };
 

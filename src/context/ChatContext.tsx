@@ -1,12 +1,12 @@
 
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 
-export type AgentId = 'mt4mt5' | 'crypto' | 'arbitrage' | null;
+export type AgentId = 'mt4mt5' | 'crypto' | 'arbitrage' | 'support';
 
 interface ChatContextType {
   isChatOpen: boolean;
   selectedAgent: AgentId;
-  openChat: (agentId: AgentId) => void;
+  openChat: (agentId: AgentId | null) => void;
   closeChat: () => void;
 }
 
@@ -14,18 +14,16 @@ const ChatContext = createContext<ChatContextType | undefined>(undefined);
 
 export const ChatProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isChatOpen, setIsChatOpen] = useState(false);
-  const [selectedAgent, setSelectedAgent] = useState<AgentId>(null);
+  const [selectedAgent, setSelectedAgent] = useState<AgentId>('support');
 
-  const openChat = (agentId: AgentId) => {
-    setSelectedAgent(agentId);
+  const openChat = (agentId: AgentId | null) => {
+    setSelectedAgent(agentId ?? 'support');
     setIsChatOpen(true);
   };
 
   const closeChat = () => {
     setIsChatOpen(false);
-    // Keep selectedAgent in case we want to reopen, or set to null.
-    // Setting to null is cleaner to avoid stale state.
-    setSelectedAgent(null);
+    setSelectedAgent('support');
   };
 
   return (

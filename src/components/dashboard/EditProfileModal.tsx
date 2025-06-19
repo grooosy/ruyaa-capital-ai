@@ -63,7 +63,13 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({ open, onOpenChange,
           </div>
         </div>
         <DialogFooter>
-          <Button onClick={handleSaveProfile} disabled={saving} className="w-full">Save Profile</Button>
+          <Button
+            onClick={handleSaveProfile}
+            disabled={saving}
+            className="w-full bg-gray-800 border border-gray-600 text-white hover:bg-gray-700"
+          >
+            Save Profile
+          </Button>
         </DialogFooter>
         <div className="mt-4 pt-4 border-t border-gray-600">
           <label className="block mb-2 font-medium">Change Password</label>
@@ -75,7 +81,13 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({ open, onOpenChange,
             placeholder="New password"
             disabled={saving}
           />
-          <Button onClick={handleChangePassword} disabled={saving || !password} className="w-full mt-2">Change Password</Button>
+          <Button
+            onClick={handleChangePassword}
+            disabled={saving || !password}
+            className="w-full mt-2 bg-gray-800 border border-gray-600 text-white hover:bg-gray-700"
+          >
+            Change Password
+          </Button>
         </div>
         <DialogClose asChild>
           <Button variant="outline" className="absolute top-3 right-3" size="icon" aria-label="Close">×</Button>
