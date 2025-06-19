@@ -24,9 +24,9 @@ const AuthPage = () => {
               x2="100%"
               y2="100%"
             >
-              <stop offset="0%" stopColor="#00A86B" stopOpacity="0.5" />
-              <stop offset="50%" stopColor="#FFB800" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="#00A86B" stopOpacity="0.5" />
+              <stop offset="0%" stopColor="#555555" stopOpacity="0.4" />
+              <stop offset="50%" stopColor="#FFD700" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#555555" stopOpacity="0.4" />
             </linearGradient>
             <linearGradient
               id="authNeuralGlow2"
@@ -35,8 +35,8 @@ const AuthPage = () => {
               x2="100%"
               y2="100%"
             >
-              <stop offset="0%" stopColor="#FFB800" stopOpacity="0.4" />
-              <stop offset="100%" stopColor="#00A86B" stopOpacity="0.3" />
+              <stop offset="0%" stopColor="#FFD700" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="#555555" stopOpacity="0.3" />
             </linearGradient>
           </defs>
 
@@ -93,7 +93,7 @@ const AuthPage = () => {
               cx={120 + i * 120}
               cy={300 + Math.sin(i * 0.7) * 200}
               r={2 + (i % 3)}
-              fill={i % 2 === 0 ? "#00A86B" : "#FFB800"}
+              fill={i % 2 === 0 ? "#555555" : "#FFD700"}
               initial={{ scale: 0, opacity: 0 }}
               animate={{
                 scale: [1, 1.8, 1],
@@ -114,7 +114,7 @@ const AuthPage = () => {
           {[...Array(12)].map((_, i) => (
             <motion.div
               key={`auth-particle-${i}`}
-              className={`absolute w-1 h-1 rounded-full ${i % 2 === 0 ? "bg-green/30" : "bg-gold/30"}`}
+              className={`absolute w-1 h-1 rounded-full ${i % 2 === 0 ? "bg-white/20" : "bg-gold/30"}`}
               style={{
                 left: `${10 + i * 8}%`,
                 top: `${15 + (i % 4) * 20}%`,
@@ -154,7 +154,7 @@ const AuthPage = () => {
             >
               <div className="relative">
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-green/70 to-green/50 rounded-full blur-xl"
+                  className="absolute inset-0 bg-gradient-to-r from-white/20 to-white/10 rounded-full blur-xl"
                   animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.5, 0.2] }}
                   transition={{
                     duration: 3,
@@ -163,7 +163,7 @@ const AuthPage = () => {
                   }}
                 />
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-gold/30 to-green/30 rounded-full blur-2xl"
+                  className="absolute inset-0 bg-gradient-to-r from-gold/30 to-white/20 rounded-full blur-2xl"
                   animate={{ scale: [1.1, 1.4, 1.1], opacity: [0.1, 0.3, 0.1] }}
                   transition={{
                     duration: 4,
@@ -172,7 +172,7 @@ const AuthPage = () => {
                     delay: 1.5,
                   }}
                 />
-                <div className="relative w-16 h-16 bg-gradient-to-r from-green/80 to-green/60 rounded-full flex items-center justify-center shadow-xl">
+                <div className="relative w-16 h-16 bg-gradient-to-r from-gold/70 to-gold/50 rounded-full flex items-center justify-center shadow-xl">
                   <Brain className="w-8 h-8 text-[#0D0D0D]" />
                 </div>
               </div>
@@ -180,7 +180,7 @@ const AuthPage = () => {
 
             <h1 className="text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
               Sign up for{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-green to-green">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold to-gold">
                 free
               </span>
             </h1>
@@ -200,17 +200,17 @@ const AuthPage = () => {
                 {
                   icon: Sparkles,
                   text: "AI-Powered Trading Signals",
-                  color: "text-green",
+                  color: "text-gold",
                 },
                 {
                   icon: Shield,
                   text: "Secure & Regulated Platform",
-                  color: "text-green",
+                  color: "text-gold",
                 },
                 {
                   icon: Zap,
                   text: "Real-time Market Analysis",
-                  color: "text-green",
+                  color: "text-gold",
                 },
               ].map((feature, index) => (
                 <motion.div
@@ -221,7 +221,7 @@ const AuthPage = () => {
                   transition={{ duration: 0.5, delay: 0.8 + index * 0.2 }}
                 >
                   <motion.div
-                    className="w-10 h-10 bg-gradient-to-r from-green/20 to-green/20 rounded-full flex items-center justify-center border border-green/30 relative overflow-hidden"
+                    className="w-10 h-10 bg-gradient-to-r from-white/10 to-white/5 rounded-full flex items-center justify-center border border-white/20 relative overflow-hidden"
                     whileHover={{ scale: 1.1 }}
                     animate={{
                       boxShadow: [
@@ -237,7 +237,7 @@ const AuthPage = () => {
                     }}
                   >
                     <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-green/10 to-transparent"
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
                       animate={{ x: ["-100%", "100%"] }}
                       transition={{
                         duration: 2.5,
@@ -265,7 +265,7 @@ const AuthPage = () => {
               className="flex items-center gap-6 text-sm text-gray-400"
             >
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green rounded-full animate-pulse" />
+                <div className="w-2 h-2 bg-gold rounded-full animate-pulse" />
                 <span>10,000+ Active Traders</span>
               </div>
               <div className="flex items-center gap-2">
@@ -280,7 +280,7 @@ const AuthPage = () => {
             {[...Array(4)].map((_, i) => (
               <motion.div
                 key={i}
-                className="absolute w-1 h-1 bg-green/30 rounded-full"
+                className="absolute w-1 h-1 bg-white/20 rounded-full"
                 style={{
                   left: `${20 + i * 20}%`,
                   top: `${20 + i * 15}%`,

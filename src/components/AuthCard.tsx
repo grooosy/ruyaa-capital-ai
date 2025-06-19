@@ -49,7 +49,7 @@ const AuthCard = ({ mode, onModeChange, onSubmit, loading = false }: AuthCardPro
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-green"
+                    className="w-full pl-10 pr-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-gold"
                     placeholder="Enter your full name"
                     required
                   />
@@ -65,7 +65,7 @@ const AuthCard = ({ mode, onModeChange, onSubmit, loading = false }: AuthCardPro
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-green"
+                  className="w-full pl-10 pr-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-gold"
                   placeholder="Enter your email"
                   required
                 />
@@ -80,7 +80,7 @@ const AuthCard = ({ mode, onModeChange, onSubmit, loading = false }: AuthCardPro
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-10 pr-12 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-green"
+                  className="w-full pl-10 pr-12 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-gold"
                   placeholder="Enter your password"
                   required
                 />
@@ -94,7 +94,7 @@ const AuthCard = ({ mode, onModeChange, onSubmit, loading = false }: AuthCardPro
               </div>
             </div>
 
-            <Button type="submit" className="w-full bg-green hover:bg-green/90" disabled={loading}>
+            <Button type="submit" className="w-full bg-gold hover:bg-gold/90" disabled={loading}>
               {loading ? "Processing..." : mode === "login" ? "Sign In" : "Create Account"}
             </Button>
           </form>
@@ -104,7 +104,7 @@ const AuthCard = ({ mode, onModeChange, onSubmit, loading = false }: AuthCardPro
               {mode === "login" ? "Don't have an account?" : "Already have an account?"}
               <button
                 onClick={() => onModeChange(mode === "login" ? "signup" : "login")}
-                className="ml-2 text-green hover:text-green/80 font-medium"
+                className="ml-2 text-gold hover:text-gold/80 font-medium"
               >
                 {mode === "login" ? "Sign up" : "Sign in"}
               </button>

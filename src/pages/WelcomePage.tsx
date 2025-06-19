@@ -59,9 +59,9 @@ const WelcomePage: React.FC = () => {
         <svg className="w-full h-full" viewBox="0 0 1200 800">
           <defs>
             <linearGradient id="neuralGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#00A86B" stopOpacity="0.4" />
-              <stop offset="50%" stopColor="#FFB800" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="#00A86B" stopOpacity="0.4" />
+              <stop offset="0%" stopColor="#555555" stopOpacity="0.3" />
+              <stop offset="50%" stopColor="#FFD700" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#555555" stopOpacity="0.3" />
             </linearGradient>
             <linearGradient
               id="neuralGlow2"
@@ -70,9 +70,9 @@ const WelcomePage: React.FC = () => {
               x2="100%"
               y2="100%"
             >
-              <stop offset="0%" stopColor="#FFB800" stopOpacity="0.3" />
-              <stop offset="50%" stopColor="#00A86B" stopOpacity="0.2" />
-              <stop offset="100%" stopColor="#FFB800" stopOpacity="0.3" />
+              <stop offset="0%" stopColor="#FFD700" stopOpacity="0.3" />
+              <stop offset="50%" stopColor="#555555" stopOpacity="0.2" />
+              <stop offset="100%" stopColor="#FFD700" stopOpacity="0.3" />
             </linearGradient>
             <linearGradient
               id="neuralGlow3"
@@ -81,8 +81,8 @@ const WelcomePage: React.FC = () => {
               x2="100%"
               y2="100%"
             >
-              <stop offset="0%" stopColor="#00A86B" stopOpacity="0.2" />
-              <stop offset="100%" stopColor="#00A86B" stopOpacity="0.4" />
+              <stop offset="0%" stopColor="#555555" stopOpacity="0.2" />
+              <stop offset="100%" stopColor="#555555" stopOpacity="0.3" />
             </linearGradient>
           </defs>
 
@@ -139,7 +139,7 @@ const WelcomePage: React.FC = () => {
               cx={100 + i * 100}
               cy={250 + Math.sin(i * 0.8) * 150}
               r={3 + (i % 3)}
-              fill={i % 2 === 0 ? "#00A86B" : "#FFB800"}
+              fill={i % 2 === 0 ? "#555555" : "#FFD700"}
               initial={{ scale: 0, opacity: 0 }}
               animate={{
                 scale: [1, 1.5, 1],
@@ -162,7 +162,7 @@ const WelcomePage: React.FC = () => {
               y1={200 + Math.sin(i) * 100}
               x2={250 + i * 180}
               y2={400 + Math.cos(i) * 100}
-              stroke={i % 2 === 0 ? "#00A86B" : "#FFB800"}
+              stroke={i % 2 === 0 ? "#555555" : "#FFD700"}
               strokeWidth="1"
               opacity="0.3"
               initial={{ pathLength: 0 }}

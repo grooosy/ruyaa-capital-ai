@@ -10,13 +10,15 @@ import { Agent } from "@/types/agent";
 
 export const AGENTS: Agent[] = [
   {
+    id: "broker",
     icon: BrainCog,
     label: "Verified Broker",
     desc: "Institutional-grade security and compliance.",
     angle: 0,
-    color: "#00A86B",
+    color: "#FFD700",
   },
   {
+    id: "chat",
     icon: Bot,
     label: "Live AI Chat",
     desc: "24/7 intelligent trading assistance.",
@@ -24,6 +26,7 @@ export const AGENTS: Agent[] = [
     color: "#FFD700",
   },
   {
+    id: "insights",
     icon: Cpu,
     label: "Portfolio Insights",
     desc: "Real-time analytics and performance tracking.",
@@ -31,6 +34,7 @@ export const AGENTS: Agent[] = [
     color: "#FFD700",
   },
   {
+    id: "academy",
     icon: BrainCircuit,
     label: "Trading Academy",
     desc: "AI-powered learning and strategy optimization.",
@@ -38,13 +42,15 @@ export const AGENTS: Agent[] = [
     color: "#FFD700",
   },
   {
+    id: "arbitrage",
     icon: Bot,
     label: "Crypto Arbitrage",
     desc: "Automated opportunity detection and execution.",
     angle: 240,
-    color: "#00A86B",
+    color: "#FFD700",
   },
   {
+    id: "ticker",
     icon: Activity,
     label: "Live Market Ticker",
     desc: "Real-time market data and price feeds.",
