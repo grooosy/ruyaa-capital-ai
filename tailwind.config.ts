@@ -25,20 +25,20 @@ export default {
     extend: {
       colors: {
         // Futuristic AI Color Palette
-        bg: "#0B0B0F",
-        primary: "#FFB800", // Golden future
-        secondary: "#00C896", // AI emerald
+        bg: "#0D0D0D",
+        primary: "#7FFF00", // Neon green accent
+        secondary: "#7FFF00", // Unified accent
         surface: "#161618",
         "surface-light": "#1F1F23",
         
         // Legacy aliases for compatibility
-        green: "#00C896",
-        gold: "#FFB800",
-        "dark-charcoal": "#0B0B0F",
-        background: "#0B0B0F",
+        green: "#7FFF00",
+        gold: "#7FFF00",
+        "dark-charcoal": "#0D0D0D",
+        background: "#0D0D0D",
         card: "#161618",
-        "primary-accent": "#FFB800",
-        "secondary-accent": "#00C896",
+        "primary-accent": "#7FFF00",
+        "secondary-accent": "#7FFF00",
         
         // Shadcn base
         border: "hsl(var(--border))",
@@ -51,14 +51,14 @@ export default {
         "2xl": "1.5rem", // modals
       },
       boxShadow: {
-        "ai-glow": "0 4px 24px rgba(255, 184, 0, 0.25), 0 8px 48px rgba(255, 184, 0, 0.1)",
-        "emerald-glow": "0 4px 24px rgba(0, 200, 150, 0.25), 0 8px 48px rgba(0, 200, 150, 0.1)",
-        "future-card": "0 8px 32px rgba(255, 184, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.4)",
-        "neural": "0 0 40px rgba(255, 184, 0, 0.15), inset 0 1px 0 rgba(255, 184, 0, 0.1)",
-        
+        "ai-glow": "0 4px 24px rgba(127, 255, 0, 0.25), 0 8px 48px rgba(127, 255, 0, 0.1)",
+        "emerald-glow": "0 4px 24px rgba(127, 255, 0, 0.25), 0 8px 48px rgba(127, 255, 0, 0.1)",
+        "future-card": "0 8px 32px rgba(127, 255, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.4)",
+        "neural": "0 0 40px rgba(127, 255, 0, 0.15), inset 0 1px 0 rgba(127, 255, 0, 0.1)",
+
         // Legacy support
-        "green-glow": "0 4px 24px rgba(0, 200, 150, 0.25)",
-        "gold-glow": "0 4px 24px rgba(255, 184, 0, 0.25)",
+        "green-glow": "0 4px 24px rgba(127, 255, 0, 0.25)",
+        "gold-glow": "0 4px 24px rgba(127, 255, 0, 0.25)",
         "red-glow": "0 4px 24px rgba(239, 68, 68, 0.25)",
       },
       keyframes: {

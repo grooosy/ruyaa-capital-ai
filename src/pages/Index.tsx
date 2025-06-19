@@ -13,7 +13,7 @@ import HeroDashboard from "@/components/HeroDashboard";
 import Footer from "@/components/Footer";
 import { ArrowRight, Brain, Zap, Bot, BarChart2, Wallet } from "lucide-react";
 import ChatWidget from "@/components/chat/ChatWidget";
-import ParticleBackground from "@/components/ParticleBackground";
+import VantaBackground from "@/components/VantaBackground";
 import LiveMarketTicker from "@/components/LiveMarketTicker";
 import { useChatContext } from "@/context/ChatContext";
 import { useTranslation } from "react-i18next";
@@ -52,7 +52,7 @@ const Index = () => {
       className="relative min-h-screen bg-bg"
       dir={i18n.language === "ar" ? "rtl" : "ltr"}
     >
-      <ParticleBackground />
+      <VantaBackground />
       <Navbar />
       <LiveMarketTicker />
 
@@ -80,9 +80,9 @@ const Index = () => {
                   x2="100%"
                   y2="100%"
                 >
-                  <stop offset="0%" stopColor="#00C896" stopOpacity="0.4" />
-                  <stop offset="50%" stopColor="#FFB800" stopOpacity="0.3" />
-                  <stop offset="100%" stopColor="#00C896" stopOpacity="0.4" />
+                  <stop offset="0%" stopColor="#7FFF00" stopOpacity="0.4" />
+                  <stop offset="50%" stopColor="#7FFF00" stopOpacity="0.3" />
+                  <stop offset="100%" stopColor="#7FFF00" stopOpacity="0.4" />
                 </linearGradient>
                 <linearGradient
                   id="heroAiGlow2"
@@ -91,9 +91,9 @@ const Index = () => {
                   x2="100%"
                   y2="100%"
                 >
-                  <stop offset="0%" stopColor="#FFB800" stopOpacity="0.3" />
-                  <stop offset="50%" stopColor="#00C896" stopOpacity="0.2" />
-                  <stop offset="100%" stopColor="#FFB800" stopOpacity="0.3" />
+                  <stop offset="0%" stopColor="#7FFF00" stopOpacity="0.3" />
+                  <stop offset="50%" stopColor="#7FFF00" stopOpacity="0.2" />
+                  <stop offset="100%" stopColor="#7FFF00" stopOpacity="0.3" />
                 </linearGradient>
               </defs>
 
@@ -135,7 +135,7 @@ const Index = () => {
                 cx="200"
                 cy="200"
                 r="4"
-                fill="#00C896"
+                fill="#7FFF00"
                 opacity="0.6"
                 animate={{ scale: [1, 1.5, 1], opacity: [0.6, 1, 0.6] }}
                 transition={{
@@ -148,7 +148,7 @@ const Index = () => {
                 cx="600"
                 cy="250"
                 r="3"
-                fill="#FFB800"
+                fill="#7FFF00"
                 opacity="0.5"
                 animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0.9, 0.5] }}
                 transition={{
@@ -162,7 +162,7 @@ const Index = () => {
                 cx="400"
                 cy="400"
                 r="2"
-                fill="#00C896"
+                fill="#7FFF00"
                 opacity="0.4"
                 animate={{ scale: [1, 1.8, 1], opacity: [0.4, 0.8, 0.4] }}
                 transition={{
@@ -210,14 +210,11 @@ const Index = () => {
           <div className="lg:w-1/2 text-center lg:text-start">
             <h1 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
               {t("hero_title_1")}{" "}
-              <span className="text-emerald-700">{t("hero_title_2")}</span>
+              <span className="text-[#7FFF00]">{t("hero_title_2")}</span>
             </h1>
 
             <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-              <span className="text-yellow-600 font-semibold">
-                It works while you sleep.
-              </span>{" "}
-              We make it do things for you, not only reply to you.
+              {t("hero_description")}
             </p>
 
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 justify-center lg:justify-start">
@@ -227,7 +224,7 @@ const Index = () => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Open Account • Start Now
+                {t("hero_button")}
                 <ArrowRight className="w-5 h-5 rtl:rotate-180" />
               </motion.button>
 
@@ -244,6 +241,15 @@ const Index = () => {
                   animate={{ scale: [1, 1.2, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
+              </motion.button>
+
+              <motion.button
+                onClick={() => handleStartNowClick()}
+                className="btn-ai-secondary inline-flex items-center gap-2"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {t("see_how")}
               </motion.button>
             </div>
           </div>

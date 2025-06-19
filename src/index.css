@@ -59,8 +59,8 @@
   }
 
   ::selection {
-    background: rgba(255, 184, 0, 0.2);
-    color: #ffb800;
+    background: rgba(127, 255, 0, 0.2);
+    color: #7fff00;
   }
 
   ::-webkit-scrollbar {
@@ -68,7 +68,7 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: #0b0b0f;
+    background: #0d0d0d;
   }
 
   ::-webkit-scrollbar-thumb {
@@ -108,7 +108,7 @@
   }
 
   .neural-border {
-    background: linear-gradient(135deg, #ffb800 0%, #00c896 100%);
+    background: linear-gradient(135deg, #7fff00 0%, #7fff00 100%);
     padding: 1px;
     border-radius: 12px;
   }
@@ -118,21 +118,21 @@
   }
 
   .text-gradient-ai {
-    background: linear-gradient(135deg, #ffb800 0%, #00c896 100%);
+    background: linear-gradient(135deg, #7fff00 0%, #7fff00 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .text-ai-glow {
-    color: #ffb800;
-    text-shadow: 0 0 8px rgba(255, 184, 0, 0.4);
+    color: #7fff00;
+    text-shadow: 0 0 8px rgba(127, 255, 0, 0.4);
   }
 
   .bg-neural-grid {
     background-image:
-      linear-gradient(rgba(255, 184, 0, 0.03) 1px, transparent 1px),
-      linear-gradient(to right, rgba(255, 184, 0, 0.03) 1px, transparent 1px);
+      linear-gradient(rgba(127, 255, 0, 0.03) 1px, transparent 1px),
+      linear-gradient(to right, rgba(127, 255, 0, 0.03) 1px, transparent 1px);
     background-size: 2rem 2rem;
   }
 }
@@ -161,7 +161,7 @@
 }
 
 .shadow-gold-glow {
-  box-shadow: 0 0 30px rgba(255, 215, 0, 0.25);
+  box-shadow: 0 0 30px rgba(127, 255, 0, 0.25);
 }
 
 .glassmorphism {
@@ -197,21 +197,21 @@
 }
 
 .text-gradient-primary {
-  background: linear-gradient(135deg, #ffb800 0%, #ffa000 100%);
+  background: linear-gradient(135deg, #7fff00 0%, #7fff00 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .text-gradient-secondary {
-  background: linear-gradient(135deg, #00c896 0%, #00b085 100%);
+  background: linear-gradient(135deg, #7fff00 0%, #7fff00 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .text-gradient-ai {
-  background: linear-gradient(135deg, #ffb800 0%, #00c896 100%);
+  background: linear-gradient(135deg, #7fff00 0%, #7fff00 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -219,8 +219,8 @@
 
 .bg-grid-pattern {
   background-image:
-    linear-gradient(rgba(255, 184, 0, 0.05) 1px, transparent 1px),
-    linear-gradient(to right, rgba(255, 184, 0, 0.05) 1px, transparent 1px);
+    linear-gradient(rgba(127, 255, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(to right, rgba(127, 255, 0, 0.05) 1px, transparent 1px);
   background-size: 1.5rem 1.5rem;
 }
 
