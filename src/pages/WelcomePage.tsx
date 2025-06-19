@@ -1,3 +1,5 @@
+// WelcomePage presents a brief animated introduction in both English and Arabic
+// using modern motion effects and dark, AI-themed visuals.
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Brain, Sparkles, Zap } from "lucide-react";
@@ -180,7 +182,7 @@ const WelcomePage: React.FC = () => {
           {[...Array(15)].map((_, i) => (
             <motion.div
               key={`particle-${i}`}
-              className={`absolute w-1 h-1 rounded-full ${i % 3 === 0 ? "bg-green/40" : i % 3 === 1 ? "bg-gold/40" : "bg-green/30"}`}
+              className={`absolute w-1 h-1 rounded-full ${i % 3 === 0 ? "bg-emerald-500/40" : i % 3 === 1 ? "bg-gold/40" : "bg-emerald-500/30"}`}
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
@@ -223,7 +225,7 @@ const WelcomePage: React.FC = () => {
               >
                 <div className="relative">
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-green/80 to-green/60 rounded-full blur-xl"
+                  className="absolute inset-0 bg-gradient-to-r from-emerald-500/70 to-emerald-700/50 rounded-full blur-xl"
                     animate={{ scale: [1, 1.3, 1], opacity: [0.4, 0.7, 0.4] }}
                     transition={{
                       duration: 3,
@@ -232,7 +234,7 @@ const WelcomePage: React.FC = () => {
                     }}
                   />
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-gold/40 to-green/40 rounded-full blur-2xl"
+                    className="absolute inset-0 bg-gradient-to-r from-gold/40 to-emerald-600/40 rounded-full blur-2xl"
                     animate={{
                       scale: [1.2, 1.5, 1.2],
                       opacity: [0.2, 0.4, 0.2],
@@ -244,7 +246,7 @@ const WelcomePage: React.FC = () => {
                       delay: 1,
                     }}
                   />
-                  <div className="relative w-24 h-24 mx-auto bg-gradient-to-r from-green/90 to-green/70 rounded-full flex items-center justify-center shadow-2xl">
+                  <div className="relative w-24 h-24 mx-auto bg-gradient-to-r from-emerald-500 to-emerald-700 rounded-full flex items-center justify-center shadow-2xl">
                     <Brain className="w-12 h-12 text-[#0D0D0D]" />
                   </div>
                 </div>
@@ -252,14 +254,14 @@ const WelcomePage: React.FC = () => {
 
               {/* Hello Text with Language Animation */}
               <motion.div
-                className="mb-6"
+                className="mb-6 perspective-1000"
                 key={currentLanguage}
-                initial={{ opacity: 0, x: currentLanguage === "ar" ? 50 : -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: currentLanguage === "ar" ? -50 : 50 }}
-                transition={{ duration: 0.5 }}
+                initial={{ opacity: 0, rotateX: -45, x: currentLanguage === "ar" ? 50 : -50 }}
+                animate={{ opacity: 1, rotateX: 0, x: 0 }}
+                exit={{ opacity: 0, rotateX: 45, x: currentLanguage === "ar" ? -50 : 50 }}
+                transition={{ duration: 0.6 }}
               >
-                <h1 className="text-6xl lg:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green to-green mb-4">
+                <h1 className="text-6xl lg:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-600 mb-4 drop-shadow-lg">
                   {currentText.hello}
                 </h1>
               </motion.div>
@@ -308,7 +310,7 @@ const WelcomePage: React.FC = () => {
                     transition={{ duration: 0.5, delay: 1.2 + index * 0.2 }}
                   >
                     <motion.div
-                      className="w-16 h-16 bg-gradient-to-r from-green/20 to-green/20 rounded-full flex items-center justify-center border border-green/30 relative overflow-hidden"
+                      className="w-16 h-16 bg-gradient-to-r from-emerald-600/20 to-emerald-600/20 rounded-full flex items-center justify-center border border-emerald-600/30 relative overflow-hidden"
                       whileHover={{ scale: 1.1 }}
                       animate={{
                         boxShadow: [
@@ -324,7 +326,7 @@ const WelcomePage: React.FC = () => {
                       }}
                     >
                       <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-transparent via-green/10 to-transparent"
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-emerald-600/10 to-transparent"
                         animate={{ x: ["-100%", "100%"] }}
                         transition={{
                           duration: 2,
@@ -333,7 +335,7 @@ const WelcomePage: React.FC = () => {
                           delay: index * 0.3,
                         }}
                       />
-                      <feature.icon className="w-8 h-8 text-green relative z-10" />
+                      <feature.icon className="w-8 h-8 text-emerald-500 relative z-10" />
                     </motion.div>
                     <span className="text-sm text-gray-400 font-medium">
                       {feature.label}
@@ -350,7 +352,7 @@ const WelcomePage: React.FC = () => {
               >
                 <Button
                   onClick={handleContinue}
-                  className="group relative px-12 py-6 text-xl font-bold bg-green hover:bg-green/90 text-[#0D0D0D] rounded-2xl shadow-2xl transition-all duration-300 hover:scale-105"
+                  className="group relative px-12 py-6 text-xl font-bold bg-emerald-600 hover:bg-emerald-700 text-[#0D0D0D] rounded-2xl shadow-2xl transition-all duration-300 hover:scale-105"
                 >
                   <span className="relative z-10 flex items-center gap-3">
                     {currentText.continue}
@@ -361,7 +363,7 @@ const WelcomePage: React.FC = () => {
 
                   {/* Button glow effect */}
                   <motion.div
-                    className="absolute inset-0 bg-green rounded-2xl blur-xl opacity-50"
+                    className="absolute inset-0 bg-emerald-600 rounded-2xl blur-xl opacity-50"
                     animate={{ scale: [1, 1.05, 1] }}
                     transition={{
                       duration: 2,
@@ -377,7 +379,7 @@ const WelcomePage: React.FC = () => {
                 {[...Array(6)].map((_, i) => (
                   <motion.div
                     key={i}
-                    className="absolute w-2 h-2 bg-green/40 rounded-full"
+                    className="absolute w-2 h-2 bg-emerald-500/40 rounded-full"
                     style={{
                       left: `${20 + i * 15}%`,
                       top: `${30 + (i % 2) * 40}%`,

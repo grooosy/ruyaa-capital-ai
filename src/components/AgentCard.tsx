@@ -1,4 +1,5 @@
 
+// AgentCard displays agent info with a modern animated card used on the agents page.
 import React from "react";
 import { motion } from "framer-motion";
 import { Agent } from "@/types/agent";
@@ -44,7 +45,7 @@ const AgentCard: React.FC<AgentCardProps> = ({ agent, index, orbitRadius }) => {
       style={{
         left: "50%",
         top: "50%",
-        backgroundColor: "#1a1915",
+        backgroundColor: "#131313",
         borderColor: `${agent.color}40`,
         boxShadow: `0 4px 20px ${agent.color}20`,
       }}
@@ -53,10 +54,12 @@ const AgentCard: React.FC<AgentCardProps> = ({ agent, index, orbitRadius }) => {
       animate="visible"
       exit="exit"
       custom={{ x, y, i: index }}
-      whileHover={{ 
+      whileHover={{
         scale: 1.05,
+        rotateX: 6,
+        rotateY: -6,
         boxShadow: `0 8px 30px ${agent.color}30`,
-        borderColor: `${agent.color}60`
+        borderColor: `${agent.color}60`,
       }}
       transition={{ type: "spring", stiffness: 200, damping: 15 }}
     >
