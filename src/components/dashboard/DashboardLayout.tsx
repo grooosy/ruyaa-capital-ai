@@ -6,7 +6,7 @@ const NeuralNetworkOverlay = () => (
     viewBox="0 0 800 800"
     width="100%"
     height="100%"
-    className="absolute inset-0 pointer-events-none z-0"
+    className="absolute inset-0 pointer-events-none -z-10"
     style={{
       opacity: 0.5,
       filter: "blur(0.5px)",
