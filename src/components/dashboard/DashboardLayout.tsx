@@ -1,5 +1,6 @@
 import React from "react";
 import ParticleBackground from "@/components/ParticleBackground";
+import FuturisticBackground from "@/components/FuturisticBackground";
 
 const NeuralNetworkOverlay = () => (
   <svg
@@ -28,7 +29,10 @@ const NeuralNetworkOverlay = () => (
 );
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => (
-  <div className="relative min-h-screen w-full font-spacegrotesk overflow-x-hidden z-0 flex items-start justify-center py-24">
+  <div className="relative min-h-screen w-full font-spacegrotesk overflow-x-hidden z-0 flex items-start justify-center pt-32 pb-20">
+    <FuturisticBackground />
+    <ParticleBackground />
+    <NeuralNetworkOverlay />
     <div className="relative z-10 w-full max-w-7xl mx-auto px-4">
       {children}
     </div>

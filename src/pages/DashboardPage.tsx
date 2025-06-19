@@ -4,6 +4,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
+import FuturisticBackground from "@/components/FuturisticBackground";
+import ParticleBackground from "@/components/ParticleBackground";
 import ProfileCard from "@/components/dashboard/ProfileCard";
 import FeatureCTA from "@/components/dashboard/FeatureCTA";
 import SessionsCard from "@/components/dashboard/SessionsCard";
@@ -100,7 +102,9 @@ const DashboardPage = () => {
   const featuresActive = dashboardData?.features && dashboardData.features.length > 0;
 
   return (
-    <div className="relative min-h-screen bg-[#0D0D0D] font-spacegrotesk">
+    <div className="relative min-h-screen bg-[#0D0D0D] font-spacegrotesk overflow-hidden">
+      <FuturisticBackground />
+      <ParticleBackground />
       <Navbar />
       <DashboardLayout>
         <motion.div

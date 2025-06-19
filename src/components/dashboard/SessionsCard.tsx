@@ -30,15 +30,15 @@ const SessionsCard: React.FC<SessionsCardProps> = ({ sessions, onStartNow }) => 
     <motion.div
       initial={{ opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -8, boxShadow: "0 0 28px #00FF9D88" }}
+      whileHover={{ y: -6, boxShadow: "0 0 20px rgba(255,255,255,0.15)" }}
       transition={{ type: "spring", stiffness: 50 }}
       className="relative bg-[#1A1A1A] backdrop-blur-sm rounded-xl p-6 overflow-hidden focus-within:ring-2 focus-within:ring-green-400 outline-none group"
       tabIndex={0}
       aria-label="Arbitrage sessions"
     >
-      <div className="absolute inset-0 bg-green-500/10 blur-2xl -z-10" aria-hidden />
+      <div className="absolute inset-0 bg-black/40 blur-xl -z-10" aria-hidden />
       <div className="flex items-center mb-4 gap-2">
-        <ArrowUp className="w-6 h-6 text-green-400 drop-shadow-[0_0_8px_#00FF9D]" strokeWidth={2.2} />
+        <ArrowUp className="w-6 h-6 text-green-400" strokeWidth={2.2} />
         <h3 className="text-xl font-bold text-white tracking-tight">Arbitrage Sessions</h3>
       </div>
       {sessions && sessions.length > 0 ? (

@@ -200,7 +200,7 @@ const Index = () => {
             >
               <motion.button
                 onClick={handleStartNowClick}
-                className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-black px-8 py-4 rounded-xl font-bold shadow-lg hover:shadow-xl hover:scale-102 transition-all duration-300 inline-flex items-center gap-2"
+                className="px-8 py-4 rounded-xl font-bold bg-[#1f1b18] text-white border border-[#3f352e] hover:bg-[#2a2623] hover:border-[#57493e] transition-all duration-300 inline-flex items-center gap-2"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
