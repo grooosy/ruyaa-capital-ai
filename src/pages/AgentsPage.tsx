@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '@/components/Navbar';
 import AgentSelectionCard from '@/components/AgentSelectionCard';
 import ParticleBackground from '@/components/ParticleBackground';
+import FuturisticBackground from '@/components/FuturisticBackground';
 import { useChatContext, AgentId } from '@/context/ChatContext';
 import { useTranslation } from 'react-i18next';
 
@@ -35,6 +36,7 @@ const AgentsPage: React.FC = () => {
 
   return (
     <div className="relative min-h-screen">
+      <FuturisticBackground />
       <ParticleBackground />
       <Navbar />
       <main className="pt-32 pb-20 w-full">

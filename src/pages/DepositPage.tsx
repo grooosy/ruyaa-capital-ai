@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import ParticleBackground from "@/components/ParticleBackground";
+import FuturisticBackground from "@/components/FuturisticBackground";
 import {
   Wallet,
   Bitcoin,
@@ -19,43 +20,31 @@ const DepositPage: React.FC = () => {
       icon: Building2,
       title: "Deposit in Forex Account",
       description: "Add funds directly to your MT4/MT5 trading account",
-      color: "from-green/20 to-green/10",
-      borderColor: "border-green/30",
     },
     {
       icon: Bitcoin,
       title: "Crypto Exchange Account",
       description: "Deposit to your cryptocurrency exchange wallet",
-      color: "from-gold/20 to-gold/10",
-      borderColor: "border-gold/30",
     },
     {
       icon: Wallet,
       title: "Crypto Wallet",
       description: "Transfer to your personal crypto wallet",
-      color: "from-blue-500/20 to-blue-500/10",
-      borderColor: "border-blue-500/30",
     },
     {
       icon: Gift,
       title: "Gift a Friend",
       description: "Send funds as a gift to someone special",
-      color: "from-purple-500/20 to-purple-500/10",
-      borderColor: "border-purple-500/30",
     },
     {
       icon: HeadphonesIcon,
       title: "Support",
       description: "Get help with your deposit process",
-      color: "from-gray-500/20 to-gray-500/10",
-      borderColor: "border-gray-500/30",
     },
     {
       icon: MessageCircle,
       title: "Talk to Human",
       description: "Speak with our customer service team",
-      color: "from-green/20 to-green/10",
-      borderColor: "border-green/30",
     },
   ];
 
@@ -65,6 +54,7 @@ const DepositPage: React.FC = () => {
 
   return (
     <div className="relative min-h-screen bg-[#0D0D0D]">
+      <FuturisticBackground />
       <ParticleBackground />
       <Navbar />
       <main className="pt-32 pb-20 w-full max-w-6xl mx-auto px-6">

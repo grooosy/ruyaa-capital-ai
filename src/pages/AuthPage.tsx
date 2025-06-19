@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import ParticleBackground from "@/components/ParticleBackground";
+import FuturisticBackground from "@/components/FuturisticBackground";
 import Navbar from "@/components/Navbar";
 import AuthCard from "@/components/AuthCard";
 import { Brain, Sparkles, Shield, Zap } from "lucide-react";
@@ -10,6 +11,7 @@ const AuthPage = () => {
 
   return (
     <div className="relative min-h-screen bg-[#0D0D0D] font-spacegrotesk">
+      <FuturisticBackground />
       <ParticleBackground />
       <Navbar />
 

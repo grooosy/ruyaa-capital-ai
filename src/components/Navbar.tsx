@@ -134,13 +134,13 @@ const Navbar: React.FC = () => {
             </button>
             <div className="absolute mt-2 right-0 bg-black/90 border border-primary/20 rounded-lg shadow-ai-glow py-2 w-48 z-50 backdrop-blur-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
               <Link
-                to="/deposit?tab=deposit"
+                to="/deposit"
                 className="block px-4 py-2 hover:bg-primary/10 hover:text-primary transition-colors text-white"
               >
                 Deposit
               </Link>
               <Link
-                to="/deposit?tab=withdraw"
+                to="/withdraw"
                 className="block px-4 py-2 hover:bg-primary/10 hover:text-primary transition-colors text-white"
               >
                 Withdraw

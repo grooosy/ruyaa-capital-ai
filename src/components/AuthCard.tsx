@@ -20,8 +20,8 @@ const AuthCard: React.FC = () => {
   }, [navigate]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen w-full bg-[#0A0A0A] font-spacegrotesk">
-      <div className="w-full max-w-md mx-auto bg-[#1A1A1A]/60 backdrop-blur-md rounded-2xl shadow-lg p-8 relative z-10 animate-fade-in">
+    <div className="flex flex-col items-center justify-center min-h-screen w-full bg-gray-950 font-spacegrotesk">
+      <div className="w-full max-w-md mx-auto bg-gray-900/80 backdrop-blur-md rounded-2xl shadow-xl p-8 relative z-10 animate-fade-in">
         {/* Tabs */}
         <div className="flex justify-center mb-8">
           <button
