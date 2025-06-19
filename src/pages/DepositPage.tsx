@@ -24,8 +24,12 @@ interface DepositPageProps {
 }
 
 const DepositPage: React.FC<DepositPageProps> = ({ initialTab = "deposit" }) => {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const tab = searchParams.get("tab") || initialTab;
+
+  const handleTabChange = (value: "deposit" | "withdraw") => {
+    setSearchParams({ tab: value });
+  };
 
   const depositOptions = [
     {
@@ -136,6 +140,20 @@ const DepositPage: React.FC<DepositPageProps> = ({ initialTab = "deposit" }) => 
     <div className="relative min-h-screen bg-[#0D0D0D]">
       <ParticleBackground />
       <Navbar />
+      <div className="flex justify-center gap-4 pt-8">
+        <Button
+          onClick={() => handleTabChange("deposit")}
+          className={`px-6 ${tab === "deposit" ? "bg-gold text-black" : "bg-transparent border border-white/20 text-white"}`}
+        >
+          Deposit
+        </Button>
+        <Button
+          onClick={() => handleTabChange("withdraw")}
+          className={`px-6 ${tab === "withdraw" ? "bg-gold text-black" : "bg-transparent border border-white/20 text-white"}`}
+        >
+          Withdraw
+        </Button>
+      </div>
       <main className="pt-32 pb-20 w-full max-w-6xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

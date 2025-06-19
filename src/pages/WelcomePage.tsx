@@ -182,7 +182,7 @@ const WelcomePage: React.FC = () => {
           {[...Array(15)].map((_, i) => (
             <motion.div
               key={`particle-${i}`}
-              className={`absolute w-1 h-1 rounded-full ${i % 3 === 0 ? "bg-emerald-500/40" : i % 3 === 1 ? "bg-gold/40" : "bg-emerald-500/30"}`}
+              className={`absolute w-1 h-1 rounded-full ${i % 3 === 0 ? "bg-gold/30" : "bg-white/20"}`}
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
@@ -225,7 +225,7 @@ const WelcomePage: React.FC = () => {
               >
                 <div className="relative">
                   <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-emerald-500/70 to-emerald-700/50 rounded-full blur-xl"
+                  className="absolute inset-0 bg-gradient-to-r from-gold/60 to-gold/30 rounded-full blur-xl"
                     animate={{ scale: [1, 1.3, 1], opacity: [0.4, 0.7, 0.4] }}
                     transition={{
                       duration: 3,
@@ -234,7 +234,7 @@ const WelcomePage: React.FC = () => {
                     }}
                   />
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-gold/40 to-emerald-600/40 rounded-full blur-2xl"
+                    className="absolute inset-0 bg-gradient-to-r from-gold/30 to-white/20 rounded-full blur-2xl"
                     animate={{
                       scale: [1.2, 1.5, 1.2],
                       opacity: [0.2, 0.4, 0.2],
@@ -246,7 +246,7 @@ const WelcomePage: React.FC = () => {
                       delay: 1,
                     }}
                   />
-                  <div className="relative w-24 h-24 mx-auto bg-gradient-to-r from-emerald-500 to-emerald-700 rounded-full flex items-center justify-center shadow-2xl">
+                  <div className="relative w-24 h-24 mx-auto bg-gradient-to-r from-gold to-gold/80 rounded-full flex items-center justify-center shadow-2xl">
                     <Brain className="w-12 h-12 text-[#0D0D0D]" />
                   </div>
                 </div>
@@ -261,7 +261,7 @@ const WelcomePage: React.FC = () => {
                 exit={{ opacity: 0, rotateX: 45, x: currentLanguage === "ar" ? -50 : 50 }}
                 transition={{ duration: 0.6 }}
               >
-                <h1 className="text-6xl lg:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-600 mb-4 drop-shadow-lg">
+                <h1 className="text-6xl lg:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gold to-white mb-4 drop-shadow-lg">
                   {currentText.hello}
                 </h1>
               </motion.div>
@@ -310,13 +310,13 @@ const WelcomePage: React.FC = () => {
                     transition={{ duration: 0.5, delay: 1.2 + index * 0.2 }}
                   >
                     <motion.div
-                      className="w-16 h-16 bg-gradient-to-r from-emerald-600/20 to-emerald-600/20 rounded-full flex items-center justify-center border border-emerald-600/30 relative overflow-hidden"
+                      className="w-16 h-16 bg-gradient-to-r from-gold/20 to-gold/10 rounded-full flex items-center justify-center border border-gold/40 relative overflow-hidden"
                       whileHover={{ scale: 1.1 }}
                       animate={{
                         boxShadow: [
-                          "0 0 0 0 rgba(0, 168, 107, 0.2)",
-                          "0 0 0 10px rgba(0, 168, 107, 0)",
-                          "0 0 0 0 rgba(0, 168, 107, 0.2)",
+                          "0 0 0 0 rgba(255, 215, 0, 0.2)",
+                          "0 0 0 10px rgba(255, 215, 0, 0)",
+                          "0 0 0 0 rgba(255, 215, 0, 0.2)",
                         ],
                       }}
                       transition={{
@@ -326,7 +326,7 @@ const WelcomePage: React.FC = () => {
                       }}
                     >
                       <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-transparent via-emerald-600/10 to-transparent"
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-gold/10 to-transparent"
                         animate={{ x: ["-100%", "100%"] }}
                         transition={{
                           duration: 2,
@@ -335,7 +335,7 @@ const WelcomePage: React.FC = () => {
                           delay: index * 0.3,
                         }}
                       />
-                      <feature.icon className="w-8 h-8 text-emerald-500 relative z-10" />
+                      <feature.icon className="w-8 h-8 text-gold relative z-10" />
                     </motion.div>
                     <span className="text-sm text-gray-400 font-medium">
                       {feature.label}
@@ -352,7 +352,7 @@ const WelcomePage: React.FC = () => {
               >
                 <Button
                   onClick={handleContinue}
-                  className="group relative px-12 py-6 text-xl font-bold bg-emerald-600 hover:bg-emerald-700 text-[#0D0D0D] rounded-2xl shadow-2xl transition-all duration-300 hover:scale-105"
+                  className="group relative px-12 py-6 text-xl font-bold bg-gold hover:bg-gold/90 text-[#0D0D0D] rounded-2xl shadow-2xl transition-all duration-300 hover:scale-105"
                 >
                   <span className="relative z-10 flex items-center gap-3">
                     {currentText.continue}
@@ -363,7 +363,7 @@ const WelcomePage: React.FC = () => {
 
                   {/* Button glow effect */}
                   <motion.div
-                    className="absolute inset-0 bg-emerald-600 rounded-2xl blur-xl opacity-50"
+                    className="absolute inset-0 bg-gold rounded-2xl blur-xl opacity-50"
                     animate={{ scale: [1, 1.05, 1] }}
                     transition={{
                       duration: 2,
@@ -379,7 +379,7 @@ const WelcomePage: React.FC = () => {
                 {[...Array(6)].map((_, i) => (
                   <motion.div
                     key={i}
-                    className="absolute w-2 h-2 bg-emerald-500/40 rounded-full"
+                    className="absolute w-2 h-2 bg-gold/30 rounded-full"
                     style={{
                       left: `${20 + i * 15}%`,
                       top: `${30 + (i % 2) * 40}%`,

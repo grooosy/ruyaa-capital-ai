@@ -95,7 +95,7 @@ const AgentChat = ({ agentName, agentType }: AgentChatProps) => {
         <CardTitle className="flex items-center gap-2 text-white">
           <Bot className="w-5 h-5 text-green" />
           {agentName}
-          <div className="w-2 h-2 bg-green rounded-full animate-pulse ml-auto"></div>
+          <div className="w-2 h-2 bg-gold rounded-full animate-pulse ml-auto"></div>
         </CardTitle>
       </CardHeader>
 
@@ -111,14 +111,14 @@ const AgentChat = ({ agentName, agentType }: AgentChatProps) => {
                 className={`flex gap-3 ${message.sender === "user" ? "justify-end" : "justify-start"}`}
               >
                 {message.sender === "agent" && (
-                  <div className="w-8 h-8 bg-green/10 border border-green/20 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Bot className="w-4 h-4 text-green" />
+                  <div className="w-8 h-8 bg-gold/10 border border-gold/20 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Bot className="w-4 h-4 text-gold" />
                   </div>
                 )}
 
                 <div
                   className={`max-w-[80%] p-3 rounded-lg ${
-                    message.sender === "user" ? "bg-green text-black" : "bg-gray-800 text-white border border-gray-700"
+                    message.sender === "user" ? "bg-gold text-black" : "bg-gray-800 text-white border border-gray-700"
                   }`}
                 >
                   <p className="text-sm">{message.content}</p>
@@ -136,8 +136,8 @@ const AgentChat = ({ agentName, agentType }: AgentChatProps) => {
 
           {isTyping && (
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="flex gap-3">
-              <div className="w-8 h-8 bg-green/10 border border-green/20 rounded-full flex items-center justify-center">
-                <Bot className="w-4 h-4 text-green" />
+              <div className="w-8 h-8 bg-gold/10 border border-gold/20 rounded-full flex items-center justify-center">
+                <Bot className="w-4 h-4 text-gold" />
               </div>
               <div className="bg-gray-800 border border-gray-700 rounded-lg p-3">
                 <div className="flex gap-1">
@@ -166,12 +166,12 @@ const AgentChat = ({ agentName, agentType }: AgentChatProps) => {
               onChange={(e) => setInputValue(e.target.value)}
               onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
               placeholder="Type your message..."
-              className="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white placeholder-gray-400 focus:outline-none focus:border-green"
+              className="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white placeholder-gray-400 focus:outline-none focus:border-gold"
             />
             <Button
               onClick={handleSendMessage}
               disabled={!inputValue.trim() || isTyping}
-              className="bg-green hover:bg-green/90"
+              className="bg-gold hover:bg-gold/90"
             >
               <Send className="w-4 h-4" />
             </Button>

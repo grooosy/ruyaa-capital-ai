@@ -74,8 +74,8 @@ const App = () => {
               <div className="absolute inset-0 bg-futuristic-grid opacity-[0.015]" />
 
               {/* Animated gradient orbs */}
-              <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-r from-gold/20 to-green/20 rounded-full blur-3xl animate-float-slow" />
-              <div className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-r from-green/10 to-gold/10 rounded-full blur-3xl animate-float-reverse" />
+              <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-r from-gold/30 to-white/10 rounded-full blur-3xl animate-float-slow" />
+              <div className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-r from-white/5 to-gold/20 rounded-full blur-3xl animate-float-reverse" />
 
               {/* Subtle particle system */}
               <ParticleBackground />

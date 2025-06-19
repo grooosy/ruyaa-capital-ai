@@ -20,12 +20,12 @@ const AgentSelectionCard = ({ title, description, icon, onSelect, isSelected = f
     <motion.div
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
-      className={`cursor-pointer transition-all duration-300 ${isSelected ? "ring-2 ring-green" : ""}`}
+      className={`cursor-pointer transition-all duration-300 ${isSelected ? "ring-2 ring-gold" : ""}`}
       onClick={onSelect}
     >
-      <Card className={`h-full ${isSelected ? "border-green bg-green/5" : "border-gray-700 hover:border-green/50"}`}>
+      <Card className={`h-full ${isSelected ? "border-gold bg-gold/5" : "border-gray-700 hover:border-gold/50"}`}>
         <CardContent className="p-6 text-center space-y-4">
-          <div className="w-16 h-16 mx-auto bg-green/10 border border-green/20 rounded-full flex items-center justify-center">
+          <div className="w-16 h-16 mx-auto bg-gold/10 border border-gold/20 rounded-full flex items-center justify-center">
             {icon}
           </div>
 
@@ -35,7 +35,7 @@ const AgentSelectionCard = ({ title, description, icon, onSelect, isSelected = f
           </div>
 
           <Button
-            className={`w-full ${isSelected ? "bg-green" : "bg-gray-700 hover:bg-green"}`}
+            className={`w-full ${isSelected ? "bg-gold" : "bg-gray-700 hover:bg-gold"}`}
             onClick={(e) => {
               e.stopPropagation()
               onSelect()

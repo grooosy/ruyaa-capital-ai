@@ -5,7 +5,8 @@ import type React from "react"
 import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Mail, Lock, User, Eye, EyeOff } from "lucide-react"
+import { Mail, Lock, User, Eye, EyeOff, LogIn } from "lucide-react"
+import { supabase } from "@/integrations/supabase/client"
 import { motion } from "framer-motion"
 
 interface AuthCardProps {
@@ -20,6 +21,10 @@ const AuthCard = ({ mode, onModeChange, onSubmit, loading = false }: AuthCardPro
   const [password, setPassword] = useState("")
   const [name, setName] = useState("")
   const [showPassword, setShowPassword] = useState(false)
+
+  const handleGoogleLogin = async () => {
+    await supabase.auth.signInWithOAuth({ provider: "google" })
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -39,6 +44,13 @@ const AuthCard = ({ mode, onModeChange, onSubmit, loading = false }: AuthCardPro
         </CardHeader>
 
         <CardContent>
+          <Button
+            type="button"
+            onClick={handleGoogleLogin}
+            className="w-full mb-4 flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white"
+          >
+            <LogIn className="w-4 h-4" /> Continue with Google
+          </Button>
           <form onSubmit={handleSubmit} className="space-y-4">
             {mode === "signup" && (
               <div className="space-y-2">

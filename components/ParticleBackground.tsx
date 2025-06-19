@@ -36,7 +36,7 @@ export default function ParticleBackground() {
       vx: (Math.random() - 0.5) * 0.5,
       vy: (Math.random() - 0.5) * 0.5,
       size: Math.random() * 2 + 1,
-      color: ["#FFD700", "#00A86B", "#FFFFFF"][Math.floor(Math.random() * 3)],
+      color: ["#FFD700", "#FFFFFF", "#005a43"][Math.floor(Math.random() * 3)],
       opacity: Math.random() * 0.5 + 0.2,
     })
 
