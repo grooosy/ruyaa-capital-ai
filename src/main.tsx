@@ -1,9 +1,12 @@
-import { TempoDevtools } from "tempo-devtools";
-TempoDevtools.init();
 
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
+import ErrorBoundary from "@/components/ErrorBoundary";
 import "./index.css";
 import "./i18n.ts";
 
-createRoot(document.getElementById("root")!).render(<App />);
+createRoot(document.getElementById("root")!).render(
+  <ErrorBoundary>
+    <App />
+  </ErrorBoundary>
+);
