@@ -1,6 +1,6 @@
 {
-  "buildCommand": "npm run build",
+  "buildCommand": "rm -rf node_modules package-lock.json pnpm-lock.yaml yarn.lock && npm install && npm run build",
   "outputDirectory": ".next",
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
-  "alias": ["ruyaacapital.com"]
+  "installCommand": "npm install --force",
+  "framework": "nextjs"
 }
