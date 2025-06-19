@@ -3,6 +3,7 @@ export const getYouTubeVideoId = (url: string): string | null => {
   const patterns = [
     /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^#&?]*)/,
     /youtube\.com\/v\/([^#&?]*)/,
+    // eslint-disable-next-line no-useless-escape
     /youtube\.com\/user\/[^\/]*#p\/a\/u\/\d*\/([^&?]*)/,
   ];
   

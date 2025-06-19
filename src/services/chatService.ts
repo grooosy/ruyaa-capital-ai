@@ -10,7 +10,7 @@ export const getOrCreateThread = async (userId: string, agentId: AgentId) => {
     if (!agentId || !userId) return null;
 
     // Try to fetch
-    let { data, error } = await supabase
+    const { data, error } = await supabase
         .from('chat_threads')
         .select('*')
         .eq('user_id', userId)

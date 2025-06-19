@@ -90,5 +90,6 @@ body {
   }
   body {
     @apply bg-background text-foreground;
+    background-image: radial-gradient(at top left, hsl(var(--primary)/0.2), hsl(var(--background)));
   }
 }
