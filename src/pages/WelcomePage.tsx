@@ -6,6 +6,7 @@ import { ArrowRight, Brain, Sparkles, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import ParticleBackground from "@/components/ParticleBackground";
+import FuturisticBackground from "@/components/FuturisticBackground";
 
 const WelcomePage: React.FC = () => {
   const [currentLanguage, setCurrentLanguage] = useState<"en" | "ar">("en");
@@ -52,6 +53,7 @@ const WelcomePage: React.FC = () => {
       className="relative min-h-screen bg-[#0D0D0D] font-spacegrotesk overflow-hidden"
       dir={currentLanguage === "ar" ? "rtl" : "ltr"}
     >
+      <FuturisticBackground />
       <ParticleBackground />
 
       {/* Enhanced AI Neural Network Background */}

@@ -32,9 +32,9 @@ const queryClient = new QueryClient();
 
 const AppRoutes = () => {
   // Tempo routes - must be called inside Router context
-  const tempoRoutes = import.meta.env.VITE_TEMPO ? useRoutes(routes) : null;
+  const tempoRoutes = useRoutes(routes);
 
-  if (tempoRoutes) {
+  if (import.meta.env.VITE_TEMPO) {
     return tempoRoutes;
   }
 
