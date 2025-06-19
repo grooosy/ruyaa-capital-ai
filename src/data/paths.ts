@@ -22,7 +22,7 @@ export const PATHS: PathData[] = [
     icons: [
       {
         type: "img",
-        src: "/lovable-uploads/9dd041af-f3e5-4ac9-b4d8-a8fd480ba5cd.png",
+        src: "/uploads/9dd041af-f3e5-4ac9-b4d8-a8fd480ba5cd.png",
       },
     ],
     color: "#16C784",
