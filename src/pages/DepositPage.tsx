@@ -18,9 +18,13 @@ import {
   Coins,
 } from "lucide-react";
 
-const DepositPage: React.FC = () => {
+interface DepositPageProps {
+  initialTab?: "deposit" | "withdraw";
+}
+
+const DepositPage: React.FC<DepositPageProps> = ({ initialTab = "deposit" }) => {
   const tab =
-    new URLSearchParams(window.location.search).get("tab") || "deposit";
+    new URLSearchParams(window.location.search).get("tab") || initialTab;
 
   const depositOptions = [
     {

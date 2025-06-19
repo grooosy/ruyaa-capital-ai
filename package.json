@@ -3,14 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "next build",
-    "dev": "next dev",
-    "lint": "next lint",
-    "start": "next start"
+    "build": "vite build",
+    "dev": "vite dev",
+    "lint": "eslint .",
+    "start": "vite preview"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "latest",
     "@eslint/js": "latest",
+    "@fontsource/space-grotesk": "^5.2.8",
     "@radix-ui/react-accordion": "latest",
     "@radix-ui/react-alert-dialog": "latest",
     "@radix-ui/react-aspect-ratio": "latest",
@@ -88,8 +89,6 @@
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "tailwindcss-rtl": "latest",
-    "tempo-devtools": "latest",
-    "tempo-routes": "latest",
     "terser": "latest",
     "tsx": "latest",
     "typescript-eslint": "latest",

@@ -1,5 +1,3 @@
-import { TempoDevtools } from "tempo-devtools";
-TempoDevtools.init();
 
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
