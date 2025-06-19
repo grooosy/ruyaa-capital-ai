@@ -14,6 +14,7 @@ import Footer from "@/components/Footer";
 import { ArrowRight, Brain, Zap, Bot, BarChart2, Wallet } from "lucide-react";
 import ChatWidget from "@/components/chat/ChatWidget";
 import ParticleBackground from "@/components/ParticleBackground";
+import FuturisticBackground from "@/components/FuturisticBackground";
 import LiveMarketTicker from "@/components/LiveMarketTicker";
 import { useChatContext } from "@/context/ChatContext";
 import { useTranslation } from "react-i18next";
@@ -52,6 +53,7 @@ const Index = () => {
       className="relative min-h-screen bg-gray-900"
       dir={i18n.language === "ar" ? "rtl" : "ltr"}
     >
+      <FuturisticBackground />
       <ParticleBackground />
       <Navbar />
       <LiveMarketTicker />
@@ -62,10 +64,10 @@ const Index = () => {
           {/* Enhanced Modern Dark Background */}
           <div className="absolute inset-0 -z-10 overflow-hidden rounded-3xl">
             {/* Base gradient background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900" />
+            <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-gray-900 to-black" />
 
             {/* Animated grid pattern */}
-            <div className="absolute inset-0 bg-grid-pattern opacity-20 animate-pulse-slow" />
+            <div className="absolute inset-0 bg-grid-pattern opacity-10 animate-pulse-slow" />
 
             {/* Moving geometric lines */}
             <svg
