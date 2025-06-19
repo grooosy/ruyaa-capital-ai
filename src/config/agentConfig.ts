@@ -144,10 +144,11 @@ export const systemPrompts: Record<string, string> = {
   general: generalSystemPrompt,
 };
 
+// Use Google's Gemini Pro model which is currently free on OpenRouter
 export const modelMap: Record<string, string> = {
-  mt4mt5: "openai/gpt-4o",
-  crypto: "openai/gpt-4o",
-  arbitrage: "openai/gpt-4o",
-  support: "openai/gpt-4o",
-  general: "openai/gpt-4o",
+  mt4mt5: "google/gemini-pro",
+  crypto: "google/gemini-pro",
+  arbitrage: "google/gemini-pro",
+  support: "google/gemini-pro",
+  general: "google/gemini-pro",
 };

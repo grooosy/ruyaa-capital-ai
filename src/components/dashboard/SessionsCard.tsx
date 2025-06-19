@@ -17,7 +17,7 @@ const getStatusClass = (status: string | null) => {
     case "active":
       return "bg-green-500/15 text-green-300 border border-green-400";
     case "pending":
-      return "bg-gray-700/20 text-gray-100 border border-gray-500";
+      return "bg-black/40 text-white border border-gray-600";
     case "closed":
       return "bg-red-500/10 text-red-300 border border-red-400";
     default:
