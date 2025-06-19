@@ -2,248 +2,242 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { CheckCircle, Clock, Play, Lock } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { CheckCircle, Clock, Play, Lock, BookOpen, Users, Award } from "lucide-react"
 
 interface Module {
   id: string
   title: string
-  lessons: Lesson[]
-  completed: boolean
-}
-
-interface Lesson {
-  id: string
-  title: string
+  description: string
   duration: string
-  type: "video" | "quiz" | "exercise"
+  lessons: number
   completed: boolean
   locked: boolean
+  difficulty: "Beginner" | "Intermediate" | "Advanced"
 }
 
-const curriculum: Module[] = [
+const modules: Module[] = [
   {
     id: "1",
     title: "Trading Fundamentals",
+    description: "Learn the basics of financial markets, trading terminology, and market analysis",
+    duration: "2h 30m",
+    lessons: 8,
     completed: true,
-    lessons: [
-      {
-        id: "1-1",
-        title: "Introduction to Financial Markets",
-        duration: "12:30",
-        type: "video",
-        completed: true,
-        locked: false,
-      },
-      {
-        id: "1-2",
-        title: "Understanding Market Orders",
-        duration: "15:45",
-        type: "video",
-        completed: true,
-        locked: false,
-      },
-      { id: "1-3", title: "Basic Trading Quiz", duration: "10:00", type: "quiz", completed: true, locked: false },
-    ],
+    locked: false,
+    difficulty: "Beginner",
   },
   {
     id: "2",
-    title: "AI Trading Concepts",
-    completed: false,
-    lessons: [
-      {
-        id: "2-1",
-        title: "Introduction to AI in Trading",
-        duration: "18:20",
-        type: "video",
-        completed: true,
-        locked: false,
-      },
-      {
-        id: "2-2",
-        title: "Machine Learning Basics",
-        duration: "22:15",
-        type: "video",
-        completed: false,
-        locked: false,
-      },
-      { id: "2-3", title: "AI Trading Strategies", duration: "25:30", type: "video", completed: false, locked: false },
-      { id: "2-4", title: "Hands-on Exercise", duration: "30:00", type: "exercise", completed: false, locked: false },
-    ],
+    title: "Technical Analysis",
+    description: "Master chart patterns, indicators, and technical analysis tools",
+    duration: "3h 45m",
+    lessons: 12,
+    completed: true,
+    locked: false,
+    difficulty: "Beginner",
   },
   {
     id: "3",
-    title: "Advanced Arbitrage",
+    title: "AI Trading Strategies",
+    description: "Understand how AI algorithms analyze markets and execute trades",
+    duration: "4h 20m",
+    lessons: 15,
     completed: false,
-    lessons: [
-      { id: "3-1", title: "Arbitrage Fundamentals", duration: "20:45", type: "video", completed: false, locked: true },
-      {
-        id: "3-2",
-        title: "Cross-Exchange Arbitrage",
-        duration: "28:10",
-        type: "video",
-        completed: false,
-        locked: true,
-      },
-      { id: "3-3", title: "Risk Management", duration: "24:30", type: "video", completed: false, locked: true },
-      { id: "3-4", title: "Final Assessment", duration: "45:00", type: "quiz", completed: false, locked: true },
-    ],
+    locked: false,
+    difficulty: "Intermediate",
+  },
+  {
+    id: "4",
+    title: "Arbitrage Opportunities",
+    description: "Identify and capitalize on price differences across exchanges",
+    duration: "3h 15m",
+    lessons: 10,
+    completed: false,
+    locked: false,
+    difficulty: "Intermediate",
+  },
+  {
+    id: "5",
+    title: "Risk Management",
+    description: "Advanced risk assessment and portfolio protection strategies",
+    duration: "2h 50m",
+    lessons: 9,
+    completed: false,
+    locked: false,
+    difficulty: "Advanced",
+  },
+  {
+    id: "6",
+    title: "Advanced Algorithms",
+    description: "Deep dive into machine learning models for trading",
+    duration: "5h 10m",
+    lessons: 18,
+    completed: false,
+    locked: true,
+    difficulty: "Advanced",
   },
 ]
 
+const getDifficultyColor = (difficulty: string) => {
+  switch (difficulty) {
+    case "Beginner":
+      return "bg-green-600/20 text-green-400 border-green-500/30"
+    case "Intermediate":
+      return "bg-yellow-600/20 text-yellow-400 border-yellow-500/30"
+    case "Advanced":
+      return "bg-red-600/20 text-red-400 border-red-500/30"
+    default:
+      return "bg-gray-600/20 text-gray-400 border-gray-500/30"
+  }
+}
+
 export default function CourseCurriculum() {
-  const getTypeIcon = (type: string) => {
-    switch (type) {
-      case "video":
-        return <Play className="h-4 w-4" />
-      case "quiz":
-        return <CheckCircle className="h-4 w-4" />
-      case "exercise":
-        return <Clock className="h-4 w-4" />
-      default:
-        return <Play className="h-4 w-4" />
-    }
-  }
-
-  const getTypeColor = (type: string) => {
-    switch (type) {
-      case "video":
-        return "bg-blue-600/20 text-blue-400 border-blue-500/30"
-      case "quiz":
-        return "bg-green-600/20 text-green-400 border-green-500/30"
-      case "exercise":
-        return "bg-purple-600/20 text-purple-400 border-purple-500/30"
-      default:
-        return "bg-gray-600/20 text-gray-400 border-gray-500/30"
-    }
-  }
-
   return (
-    <div className="space-y-6">
-      <div className="text-center space-y-4 mb-8">
+    <div className="space-y-8">
+      {/* Header */}
+      <div className="text-center space-y-4">
         <h2 className="text-3xl font-bold text-white">Course Curriculum</h2>
         <p className="text-gray-400 max-w-2xl mx-auto">
-          Comprehensive learning path designed to take you from beginner to advanced AI trader
+          Comprehensive learning path designed to take you from beginner to expert in AI-powered trading
         </p>
       </div>
 
-      {curriculum.map((module, moduleIndex) => (
-        <Card key={module.id} className="bg-black/40 backdrop-blur-xl border border-gray-800/50">
-          <CardHeader>
-            <CardTitle className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-                    module.completed
-                      ? "bg-green-600 text-white"
-                      : "bg-gradient-to-r from-blue-600 to-cyan-600 text-white"
-                  }`}
-                >
-                  {module.completed ? <CheckCircle className="h-4 w-4" /> : moduleIndex + 1}
-                </div>
-                <span className="text-white">{module.title}</span>
-              </div>
-              <Badge
-                className={
-                  module.completed
-                    ? "bg-green-600/20 text-green-400 border-green-500/30"
-                    : "bg-gray-600/20 text-gray-400 border-gray-500/30"
-                }
-              >
-                {module.completed ? "Completed" : "In Progress"}
-              </Badge>
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              {module.lessons.map((lesson, lessonIndex) => (
-                <div
-                  key={lesson.id}
-                  className={`flex items-center justify-between p-4 rounded-lg transition-all duration-200 ${
-                    lesson.locked
-                      ? "bg-gray-900/50 opacity-50"
-                      : lesson.completed
-                        ? "bg-green-600/10 border border-green-500/20"
-                        : "bg-gray-800/30 hover:bg-gray-800/50 cursor-pointer"
-                  }`}
-                >
-                  <div className="flex items-center gap-4">
-                    <div
-                      className={`w-6 h-6 rounded-full flex items-center justify-center text-xs ${
-                        lesson.locked
-                          ? "bg-gray-700 text-gray-500"
-                          : lesson.completed
-                            ? "bg-green-600 text-white"
-                            : "bg-blue-600 text-white"
-                      }`}
-                    >
-                      {lesson.locked ? (
-                        <Lock className="h-3 w-3" />
-                      ) : lesson.completed ? (
-                        <CheckCircle className="h-3 w-3" />
-                      ) : (
-                        lessonIndex + 1
-                      )}
+      {/* Progress Overview */}
+      <Card className="bg-black/40 backdrop-blur-xl border border-gray-800/50">
+        <CardContent className="p-6">
+          <div className="grid md:grid-cols-4 gap-6">
+            <div className="text-center">
+              <div className="text-2xl font-bold text-white">6</div>
+              <div className="text-sm text-gray-400">Total Modules</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-white">72</div>
+              <div className="text-sm text-gray-400">Total Lessons</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-white">21h 50m</div>
+              <div className="text-sm text-gray-400">Total Duration</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-white">33%</div>
+              <div className="text-sm text-gray-400">Completed</div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Modules List */}
+      <div className="space-y-4">
+        {modules.map((module, index) => (
+          <Card
+            key={module.id}
+            className={`bg-black/40 backdrop-blur-xl border transition-all duration-300 ${
+              module.completed
+                ? "border-green-500/30 bg-green-500/5"
+                : module.locked
+                  ? "border-gray-800/50 opacity-60"
+                  : "border-gray-800/50 hover:border-blue-500/30"
+            }`}
+          >
+            <CardHeader className="pb-4">
+              <div className="flex items-start justify-between">
+                <div className="flex items-start gap-4">
+                  <div
+                    className={`w-12 h-12 rounded-lg flex items-center justify-center ${
+                      module.completed
+                        ? "bg-green-600 text-white"
+                        : module.locked
+                          ? "bg-gray-700 text-gray-400"
+                          : "bg-blue-600 text-white"
+                    }`}
+                  >
+                    {module.completed ? (
+                      <CheckCircle className="h-6 w-6" />
+                    ) : module.locked ? (
+                      <Lock className="h-6 w-6" />
+                    ) : (
+                      <BookOpen className="h-6 w-6" />
+                    )}
+                  </div>
+
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-2">
+                      <CardTitle className="text-white text-lg">
+                        Module {index + 1}: {module.title}
+                      </CardTitle>
+                      <Badge className={getDifficultyColor(module.difficulty)}>{module.difficulty}</Badge>
                     </div>
 
-                    <div>
-                      <div className={`font-medium ${lesson.locked ? "text-gray-500" : "text-white"}`}>
-                        {lesson.title}
+                    <p className="text-gray-400 text-sm mb-3">{module.description}</p>
+
+                    <div className="flex items-center gap-6 text-sm text-gray-500">
+                      <div className="flex items-center gap-1">
+                        <Clock className="h-4 w-4" />
+                        <span>{module.duration}</span>
                       </div>
-                      <div className="flex items-center gap-2 mt-1">
-                        <Badge className={getTypeColor(lesson.type)}>
-                          {getTypeIcon(lesson.type)}
-                          <span className="ml-1 capitalize">{lesson.type}</span>
-                        </Badge>
-                        <span className={`text-sm ${lesson.locked ? "text-gray-600" : "text-gray-400"}`}>
-                          {lesson.duration}
-                        </span>
+                      <div className="flex items-center gap-1">
+                        <Users className="h-4 w-4" />
+                        <span>{module.lessons} lessons</span>
                       </div>
                     </div>
                   </div>
-
-                  {!lesson.locked && (
-                    <div className="text-right">
-                      {lesson.completed ? (
-                        <CheckCircle className="h-5 w-5 text-green-500" />
-                      ) : (
-                        <Play className="h-5 w-5 text-blue-400" />
-                      )}
-                    </div>
-                  )}
                 </div>
-              ))}
-            </div>
 
-            {/* Module Summary */}
-            <div className="mt-6 pt-4 border-t border-gray-800/50">
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-gray-400">
-                  {module.lessons.filter((l) => l.completed).length} of {module.lessons.length} lessons completed
-                </span>
-                <span className="text-gray-400">
-                  Total:{" "}
-                  {module.lessons
-                    .reduce((acc, lesson) => {
-                      const [minutes, seconds] = lesson.duration.split(":").map(Number)
-                      return acc + minutes + seconds / 60
-                    }, 0)
-                    .toFixed(0)}{" "}
-                  minutes
-                </span>
-              </div>
+                <div className="flex items-center gap-2">
+                  {module.completed && (
+                    <Badge className="bg-green-600/20 text-green-400 border-green-500/30">
+                      <Award className="mr-1 h-3 w-3" />
+                      Completed
+                    </Badge>
+                  )}
 
-              <div className="w-full bg-gray-700 rounded-full h-2 mt-2">
-                <div
-                  className="bg-gradient-to-r from-blue-500 to-cyan-500 h-2 rounded-full transition-all duration-300"
-                  style={{
-                    width: `${(module.lessons.filter((l) => l.completed).length / module.lessons.length) * 100}%`,
-                  }}
-                ></div>
+                  <Button
+                    size="sm"
+                    disabled={module.locked}
+                    className={
+                      module.completed
+                        ? "bg-green-600 hover:bg-green-700"
+                        : module.locked
+                          ? "bg-gray-700 cursor-not-allowed"
+                          : "bg-blue-600 hover:bg-blue-700"
+                    }
+                  >
+                    {module.completed ? (
+                      "Review"
+                    ) : module.locked ? (
+                      <Lock className="h-4 w-4" />
+                    ) : (
+                      <>
+                        <Play className="mr-2 h-4 w-4" />
+                        Start
+                      </>
+                    )}
+                  </Button>
+                </div>
               </div>
-            </div>
-          </CardContent>
-        </Card>
-      ))}
+            </CardHeader>
+          </Card>
+        ))}
+      </div>
+
+      {/* Certificate Info */}
+      <Card className="bg-gradient-to-r from-blue-600/10 to-cyan-600/10 border border-blue-500/30">
+        <CardContent className="p-6 text-center">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <Award className="h-8 w-8 text-blue-400" />
+            <h3 className="text-xl font-bold text-white">Earn Your Certificate</h3>
+          </div>
+          <p className="text-gray-300 mb-4">Complete all modules to earn your AI Trading Specialist Certificate</p>
+          <div className="w-full bg-gray-700 rounded-full h-2">
+            <div
+              className="bg-gradient-to-r from-blue-500 to-cyan-500 h-2 rounded-full transition-all duration-500"
+              style={{ width: "33%" }}
+            ></div>
+          </div>
+          <p className="text-sm text-gray-400 mt-2">2 of 6 modules completed</p>
+        </CardContent>
+      </Card>
     </div>
   )
 }

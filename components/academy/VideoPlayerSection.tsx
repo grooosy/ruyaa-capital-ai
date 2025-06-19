@@ -34,7 +34,7 @@ export default function VideoPlayerSection() {
             {/* Video Container */}
             <div className="relative aspect-video bg-gradient-to-br from-gray-900 to-black flex items-center justify-center">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.1),transparent_70%)]" />
-
+              
               {/* Play Button */}
               <Button
                 onClick={() => setIsPlaying(!isPlaying)}
@@ -59,13 +59,10 @@ export default function VideoPlayerSection() {
                     <Maximize className="h-4 w-4" />
                   </Button>
                 </div>
-
+                
                 {/* Progress Bar */}
                 <div className="w-full bg-gray-700 rounded-full h-1 mt-4">
-                  <div
-                    className="bg-gradient-to-r from-blue-500 to-cyan-500 h-1 rounded-full"
-                    style={{ width: "24%" }}
-                  ></div>
+                  <div className="bg-gradient-to-r from-blue-500 to-cyan-500 h-1 rounded-full" style={{ width: '24%' }}></div>
                 </div>
               </div>
             </div>
@@ -83,15 +80,19 @@ export default function VideoPlayerSection() {
                     <Clock className="h-4 w-4" />
                     <span>{currentLesson.duration}</span>
                   </div>
-                  <Badge className="bg-blue-600/20 text-blue-400 border-blue-500/30">Lesson 3 of 5</Badge>
+                  <Badge className="bg-blue-600/20 text-blue-400 border-blue-500/30">
+                    Lesson 3 of 5
+                  </Badge>
                 </div>
               </div>
-              {currentLesson.completed && <CheckCircle className="h-6 w-6 text-green-500" />}
+              {currentLesson.completed && (
+                <CheckCircle className="h-6 w-6 text-green-500" />
+              )}
             </div>
-
+            
             <p className="text-gray-300 leading-relaxed">
-              Learn how to identify and capitalize on arbitrage opportunities across different exchanges. This lesson
-              covers real-time market analysis, price discrepancies, and automated trading strategies.
+              Learn how to identify and capitalize on arbitrage opportunities across different exchanges. 
+              This lesson covers real-time market analysis, price discrepancies, and automated trading strategies.
             </p>
           </CardContent>
         </Card>
@@ -108,66 +109,5 @@ export default function VideoPlayerSection() {
                   key={lesson.id}
                   onClick={() => setCurrentLesson(lesson)}
                   className={`p-3 rounded-lg cursor-pointer transition-all duration-200 ${
-                    currentLesson.id === lesson.id
-                      ? "bg-gradient-to-r from-blue-600/20 to-cyan-600/20 border border-blue-500/30"
-                      : "hover:bg-gray-800/50"
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <div
-                      className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
-                        lesson.completed
-                          ? "bg-green-600 text-white"
-                          : currentLesson.id === lesson.id
-                            ? "bg-blue-600 text-white"
-                            : "bg-gray-700 text-gray-300"
-                      }`}
-                    >
-                      {lesson.completed ? <CheckCircle className="h-4 w-4" /> : index + 1}
-                    </div>
-                    <div className="flex-1">
-                      <div className="text-white text-sm font-medium">{lesson.title}</div>
-                      <div className="text-gray-400 text-xs">{lesson.duration}</div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Course Progress */}
-        <Card className="bg-black/40 backdrop-blur-xl border border-gray-800/50">
-          <CardContent className="p-6">
-            <h3 className="text-lg font-semibold text-white mb-4">Your Progress</h3>
-            <div className="space-y-4">
-              <div>
-                <div className="flex justify-between text-sm mb-2">
-                  <span className="text-gray-400">Course Completion</span>
-                  <span className="text-white">40%</span>
-                </div>
-                <div className="w-full bg-gray-700 rounded-full h-2">
-                  <div
-                    className="bg-gradient-to-r from-blue-500 to-cyan-500 h-2 rounded-full"
-                    style={{ width: "40%" }}
-                  ></div>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4 pt-4">
-                <div className="text-center">
-                  <div className="text-lg font-bold text-white">2</div>
-                  <div className="text-xs text-gray-400">Completed</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-lg font-bold text-white">3</div>
-                  <div className="text-xs text-gray-400">Remaining</div>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    </div>
-  )
-}
+                    currentLesson.id === lesson.id\
+                      ? 'bg-gradient-to-r
