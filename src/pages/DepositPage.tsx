@@ -1,4 +1,5 @@
 import React from "react";
+import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import ParticleBackground from "@/components/ParticleBackground";
@@ -23,8 +24,8 @@ interface DepositPageProps {
 }
 
 const DepositPage: React.FC<DepositPageProps> = ({ initialTab = "deposit" }) => {
-  const tab =
-    new URLSearchParams(window.location.search).get("tab") || initialTab;
+  const [searchParams] = useSearchParams();
+  const tab = searchParams.get("tab") || initialTab;
 
   const depositOptions = [
     {

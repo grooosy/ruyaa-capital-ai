@@ -15,7 +15,7 @@
   }
 
   body {
-    @apply text-white font-inter;
+    @apply text-white font-spacegrotesk;
     background: #000000;
     background-attachment: fixed;
     min-height: 100vh;
