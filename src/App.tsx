@@ -1,7 +1,6 @@
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 import { BrowserRouter, Routes, Route, useRoutes } from "react-router-dom";
 import Index from "./pages/Index";
 import AgentsPage from "./pages/AgentsPage";
@@ -16,22 +15,20 @@ import MarketPage from "./pages/MarketPage";
 import NotFound from "./pages/NotFound";
 import WelcomePage from "./pages/WelcomePage";
 import HowItWorksPage from "./pages/HowItWorksPage";
-import { ChatProvider } from "./context/ChatContext";
+
 import AuthPage from "./pages/AuthPage";
 import DashboardPage from "./pages/DashboardPage";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
-import { WalletProvider } from "./context/WalletProvider";
+
 import ParticleBackground from "@/components/ParticleBackground";
 import NeuralNetworkOverlay from "@/components/NeuralNetworkOverlay";
 import routes from "tempo-routes";
+import AppProviders from "./app/AppProviders";
 
 import "@solana/wallet-adapter-react-ui/styles.css";
 
-const queryClient = new QueryClient();
-
 const AppRoutes = () => {
-  // Tempo routes - must be called inside Router context
   const tempoRoutes = import.meta.env.VITE_TEMPO ? useRoutes(routes) : null;
 
   if (tempoRoutes) {
@@ -54,9 +51,7 @@ const AppRoutes = () => {
       <Route path="/profile" element={<ProfilePage />} />
       <Route path="/market" element={<MarketPage />} />
       <Route path="/how-it-works" element={<HowItWorksPage />} />
-      {/* Add this before the catchall route */}
       {import.meta.env.VITE_TEMPO && <Route path="/tempobook/*" />}
-      {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
@@ -71,29 +66,22 @@ const App = () => {
   }, [i18n.language]);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <ChatProvider>
-          <WalletProvider>
-            <Toaster />
-            <Sonner />
-            {/* Modern AI-styled background */}
-            <div className="relative min-h-screen w-full bg-gradient-to-br from-black via-gray-950 to-black font-spacegrotesk overflow-x-hidden z-0">
-              <div className="absolute inset-0 bg-grid-pattern opacity-[0.02]" />
-              <div className="absolute inset-0 bg-gradient-to-t from-green/5 via-transparent to-transparent" />
-              <ParticleBackground />
-              <NeuralNetworkOverlay />
-              {/* Content sits above the backgrounds */}
-              <div className="relative z-10">
-                <BrowserRouter>
-                  <AppRoutes />
-                </BrowserRouter>
-              </div>
-            </div>
-          </WalletProvider>
-        </ChatProvider>
-      </TooltipProvider>
-    </QueryClientProvider>
+    <AppProviders>
+      <Toaster />
+      <Sonner />
+      <div className="relative min-h-screen w-full bg-gradient-to-br from-black via-gray-950 to-black font-spacegrotesk overflow-x-hidden z-0">
+        <div className="absolute inset-0 bg-grid-pattern opacity-[0.02]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-green/5 via-transparent to-transparent" />
+        <ParticleBackground />
+        <NeuralNetworkOverlay />
+        <div className="relative z-10">
+          <BrowserRouter>
+            <AppRoutes />
+          </BrowserRouter>
+        </div>
+      </div>
+    </AppProviders>
+
   );
 };
 
