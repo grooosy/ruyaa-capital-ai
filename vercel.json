@@ -1,6 +1,10 @@
 {
-  "buildCommand": "rm -rf node_modules package-lock.json pnpm-lock.yaml yarn.lock && npm install && npm run build",
-  "outputDirectory": ".next",
-  "installCommand": "npm install --force",
-  "framework": "nextjs"
+  "framework": "nextjs",
+  "buildCommand": "rm -rf node_modules package-lock.json && npm install && npm run build",
+  "installCommand": "npm install",
+  "functions": {
+    "app/**/*.{js,ts,jsx,tsx}": {
+      "runtime": "nodejs18.x"
+    }
+  }
 }
