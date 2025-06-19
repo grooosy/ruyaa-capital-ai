@@ -1,10 +1,11 @@
 {
   "framework": "nextjs",
-  "buildCommand": "rm -rf node_modules package-lock.json && npm install && npm run build",
+  "buildCommand": "npm run build",
   "installCommand": "npm install",
   "functions": {
     "app/**/*.{js,ts,jsx,tsx}": {
-      "runtime": "nodejs18.x"
+      "runtime": "nodejs20.x"
     }
-  }
+  },
+  "regions": ["iad1"]
 }
