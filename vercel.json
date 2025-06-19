@@ -1,5 +1,3 @@
 {
-  "framework": "nextjs",
-  "buildCommand": "rm -rf node_modules package-lock.json yarn.lock pnpm-lock.yaml .next && npm cache clean --force && npm install && npm run build",
-  "installCommand": "npm cache clean --force && npm install --no-package-lock --no-save"
+  "framework": "nextjs"
 }
