@@ -145,9 +145,9 @@ export const systemPrompts: Record<string, string> = {
 };
 
 export const modelMap: Record<string, string> = {
-  mt4mt5: "openai/gpt-4o-mini",
-  crypto: "openai/gpt-4o-mini",
-  arbitrage: "openai/gpt-4o-mini",
-  support: "openai/gpt-4o-mini",
-  general: "openai/gpt-4o-mini",
+  mt4mt5: "openai/gpt-4o",
+  crypto: "openai/gpt-4o",
+  arbitrage: "openai/gpt-4o",
+  support: "openai/gpt-4o",
+  general: "openai/gpt-4o",
 };

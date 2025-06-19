@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-gradient-to-r from-yellow-600 to-yellow-500 text-black hover:from-yellow-500 hover:to-yellow-400 shadow-lg font-semibold transition-all duration-300 hover:scale-102 hover:shadow-xl",
+          "bg-gradient-to-br from-[#6b4e2e] to-[#2f241b] text-white border border-[#876246] hover:from-[#7f5c3a] hover:to-[#3b2d22] shadow-lg font-semibold transition-all duration-300 hover:scale-102 hover:shadow-xl",
         destructive:
           "bg-gradient-to-r from-red-600 to-red-500 text-white hover:from-red-500 hover:to-red-400 shadow-lg transition-all duration-300 hover:scale-102",
         outline:
@@ -19,7 +19,7 @@ const buttonVariants = cva(
           "bg-gradient-to-r from-gray-800 to-gray-700 text-white hover:from-gray-700 hover:to-gray-600 shadow-lg font-semibold transition-all duration-300 hover:scale-102 border border-gray-600",
         ghost:
           "hover:bg-gray-800 hover:text-white transition-all duration-300 backdrop-blur-sm hover:scale-102",
-        link: "text-yellow-500 underline-offset-4 hover:underline hover:text-yellow-400 transition-colors duration-300",
+        link: "text-[#d6bfa3] underline-offset-4 hover:underline hover:text-[#e6d2bd] transition-colors duration-300",
       },
       size: {
         default: "h-10 px-4 py-2",

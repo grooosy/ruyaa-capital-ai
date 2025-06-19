@@ -17,7 +17,7 @@ const getStatusClass = (status: string | null) => {
     case "active":
       return "bg-green-500/15 text-green-300 border border-green-400";
     case "pending":
-      return "bg-yellow-400/10 text-yellow-200 border border-yellow-300";
+      return "bg-[#3d2b1f]/30 text-white border border-[#5a4533]";
     case "closed":
       return "bg-red-500/10 text-red-300 border border-red-400";
     default:
@@ -32,7 +32,7 @@ const SessionsCard: React.FC<SessionsCardProps> = ({ sessions, onStartNow }) => 
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ y: -6, boxShadow: "0 0 20px rgba(255,255,255,0.15)" }}
       transition={{ type: "spring", stiffness: 50 }}
-      className="relative bg-[#1A1A1A] backdrop-blur-sm rounded-xl p-6 overflow-hidden focus-within:ring-2 focus-within:ring-green-400 outline-none group"
+      className="relative bg-[#1A1A1A] backdrop-blur-sm rounded-xl p-6 overflow-hidden focus-within:ring-2 focus-within:ring-green-400 outline-none group before:absolute before:inset-0 before:rounded-xl before:pointer-events-none before:bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.1),transparent)]"
       tabIndex={0}
       aria-label="Arbitrage sessions"
     >

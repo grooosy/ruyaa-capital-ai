@@ -24,7 +24,8 @@ This project is ready for deployment on [Vercel](https://vercel.com/). Configure
 
 ## Environment Variables
 See `.env.example` for the full list:
-- `VITE_OPENROUTER_API_KEY` – OpenRouter API key
+- `VITE_OPENROUTER_API_KEY` – OpenRouter API key (client side)
+- `OPENROUTER_API_KEY` – Optional fallback key name
 - `VITE_TWELVEDATA_API_KEY` – TwelveData API key
 - `VITE_SUPABASE_URL` – Supabase project URL
 - `VITE_SUPABASE_ANON_KEY` – Supabase anon key
