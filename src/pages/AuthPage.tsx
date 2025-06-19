@@ -27,7 +27,7 @@ const AuthPage = () => {
               y2="100%"
             >
               <stop offset="0%" stopColor="#00A86B" stopOpacity="0.5" />
-              <stop offset="50%" stopColor="#FFB800" stopOpacity="0.3" />
+              <stop offset="50%" stopColor="#B8860B" stopOpacity="0.3" />
               <stop offset="100%" stopColor="#00A86B" stopOpacity="0.5" />
             </linearGradient>
             <linearGradient
@@ -37,7 +37,7 @@ const AuthPage = () => {
               x2="100%"
               y2="100%"
             >
-              <stop offset="0%" stopColor="#FFB800" stopOpacity="0.4" />
+              <stop offset="0%" stopColor="#B8860B" stopOpacity="0.4" />
               <stop offset="100%" stopColor="#00A86B" stopOpacity="0.3" />
             </linearGradient>
           </defs>
@@ -95,7 +95,7 @@ const AuthPage = () => {
               cx={120 + i * 120}
               cy={300 + Math.sin(i * 0.7) * 200}
               r={2 + (i % 3)}
-              fill={i % 2 === 0 ? "#00A86B" : "#FFB800"}
+              fill={i % 2 === 0 ? "#00A86B" : "#B8860B"}
               initial={{ scale: 0, opacity: 0 }}
               animate={{
                 scale: [1, 1.8, 1],

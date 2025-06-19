@@ -26,18 +26,18 @@ export default {
       colors: {
         // Modern Dark Theme Palette
         bg: "#121212",
-        primary: "#FFD700", // Gold accent
+        primary: "#B8860B", // Darker gold accent
         secondary: "#1E1E1E", // Dark gray
         surface: "#1E1E1E",
         "surface-light": "#2A2A2A",
         
         // Legacy aliases for compatibility
-        green: "#FFD700", // Changed to gold
-        gold: "#FFD700",
+        green: "#B8860B", // Changed to darker gold
+        gold: "#B8860B",
         "dark-charcoal": "#121212",
         background: "#121212",
         card: "#1E1E1E",
-        "primary-accent": "#FFD700",
+        "primary-accent": "#B8860B",
         "secondary-accent": "#2A2A2A",
         
         // Shadcn base
