@@ -25,20 +25,20 @@ export default {
     extend: {
       colors: {
         // Futuristic AI Color Palette
-        bg: "#0B0B0F",
-        primary: "#FFB800", // Golden future
-        secondary: "#00C896", // AI emerald
+        bg: "#0D0D0D",
+        primary: "#7FFF00", // Unified accent
+        secondary: "#7FFF00",
         surface: "#161618",
         "surface-light": "#1F1F23",
         
         // Legacy aliases for compatibility
-        green: "#00C896",
-        gold: "#FFB800",
-        "dark-charcoal": "#0B0B0F",
-        background: "#0B0B0F",
+        green: "#7FFF00",
+        gold: "#7FFF00",
+        "dark-charcoal": "#0D0D0D",
+        background: "#0D0D0D",
         card: "#161618",
-        "primary-accent": "#FFB800",
-        "secondary-accent": "#00C896",
+        "primary-accent": "#7FFF00",
+        "secondary-accent": "#7FFF00",
         
         // Shadcn base
         border: "hsl(var(--border))",

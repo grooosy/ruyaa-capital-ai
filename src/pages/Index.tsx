@@ -59,6 +59,11 @@ const Index = () => {
       <main className="pt-32 pb-20 w-full">
         {/* Hero Section */}
         <section className="relative w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between px-6 gap-12">
+          <img
+            src="/lovable-uploads/4fc94ce9-7009-46fc-ad4b-ed3edffc3240.png"
+            alt="RuyaaCapital.AI logo"
+            className="absolute top-0 left-0 w-32 m-4 pointer-events-none"
+          />
           {/* Enhanced Modern AI Background */}
           <div className="absolute inset-0 -z-10 overflow-hidden rounded-3xl">
             {/* Base gradient background */}
@@ -66,6 +71,13 @@ const Index = () => {
 
             {/* Animated grid pattern */}
             <div className="absolute inset-0 bg-grid-pattern opacity-[0.04] animate-pulse-slow" />
+
+            {/* Subtle candlestick wallpaper */}
+            <img
+              src="/candles.svg"
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover opacity-20"
+            />
 
             {/* Moving neural network lines */}
             <svg
@@ -80,9 +92,9 @@ const Index = () => {
                   x2="100%"
                   y2="100%"
                 >
-                  <stop offset="0%" stopColor="#00C896" stopOpacity="0.4" />
-                  <stop offset="50%" stopColor="#FFB800" stopOpacity="0.3" />
-                  <stop offset="100%" stopColor="#00C896" stopOpacity="0.4" />
+                  <stop offset="0%" stopColor="#7FFF00" stopOpacity="0.4" />
+                  <stop offset="50%" stopColor="#7FFF00" stopOpacity="0.3" />
+                  <stop offset="100%" stopColor="#7FFF00" stopOpacity="0.4" />
                 </linearGradient>
                 <linearGradient
                   id="heroAiGlow2"
@@ -91,9 +103,9 @@ const Index = () => {
                   x2="100%"
                   y2="100%"
                 >
-                  <stop offset="0%" stopColor="#FFB800" stopOpacity="0.3" />
-                  <stop offset="50%" stopColor="#00C896" stopOpacity="0.2" />
-                  <stop offset="100%" stopColor="#FFB800" stopOpacity="0.3" />
+                  <stop offset="0%" stopColor="#7FFF00" stopOpacity="0.3" />
+                  <stop offset="50%" stopColor="#7FFF00" stopOpacity="0.2" />
+                  <stop offset="100%" stopColor="#7FFF00" stopOpacity="0.3" />
                 </linearGradient>
               </defs>
 
@@ -135,7 +147,7 @@ const Index = () => {
                 cx="200"
                 cy="200"
                 r="4"
-                fill="#00C896"
+                fill="#7FFF00"
                 opacity="0.6"
                 animate={{ scale: [1, 1.5, 1], opacity: [0.6, 1, 0.6] }}
                 transition={{
@@ -148,7 +160,7 @@ const Index = () => {
                 cx="600"
                 cy="250"
                 r="3"
-                fill="#FFB800"
+                fill="#7FFF00"
                 opacity="0.5"
                 animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0.9, 0.5] }}
                 transition={{
@@ -162,7 +174,7 @@ const Index = () => {
                 cx="400"
                 cy="400"
                 r="2"
-                fill="#00C896"
+                fill="#7FFF00"
                 opacity="0.4"
                 animate={{ scale: [1, 1.8, 1], opacity: [0.4, 0.8, 0.4] }}
                 transition={{
@@ -209,15 +221,11 @@ const Index = () => {
           {/* Left Side: Text content */}
           <div className="lg:w-1/2 text-center lg:text-start">
             <h1 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-              {t("hero_title_1")}{" "}
-              <span className="text-emerald-700">{t("hero_title_2")}</span>
+              Trade Like a Professional — With <span className="text-primary">AI</span>. Not Alone.
             </h1>
 
             <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-              <span className="text-yellow-600 font-semibold">
-                It works while you sleep.
-              </span>{" "}
-              We make it do things for you, not only reply to you.
+              Connected to Liraa | MT4 / MT5 | Withdraw Anytime
             </p>
 
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 justify-center lg:justify-start">
@@ -227,7 +235,7 @@ const Index = () => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Open Account • Start Now
+                Start Trading
                 <ArrowRight className="w-5 h-5 rtl:rotate-180" />
               </motion.button>
 
@@ -244,6 +252,15 @@ const Index = () => {
                   animate={{ scale: [1, 1.2, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
+              </motion.button>
+
+              <motion.button
+                onClick={handleStartNowClick}
+                className="btn-ai-secondary inline-flex items-center gap-2"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                See How It Works
               </motion.button>
             </div>
           </div>
