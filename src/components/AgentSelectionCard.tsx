@@ -1,4 +1,3 @@
-
 // AgentSelectionCard is used on the landing page to showcase available agent types.
 import React from 'react';
 import { motion } from 'framer-motion';

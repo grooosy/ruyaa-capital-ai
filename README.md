@@ -11,13 +11,13 @@ Ruyaa-AI is an AI-powered trading and assistant engine built with Vite, React an
 ## Getting Started
 1. Copy `.env.example` to `.env` and provide your API keys.
 2. Install dependencies:
-   ```sh
+   \`\`\`sh
    npm install
-   ```
+   \`\`\`
 3. Run the development server:
-   ```sh
+   \`\`\`sh
    npm run dev
-   ```
+   \`\`\`
 
 ## Deployment
 This project is ready for deployment on [Vercel](https://vercel.com/). Configure the included `vercel.json` and set your environment variables in the Vercel dashboard. Point the domain **ruyaacapital.com** to your Vercel project for production.

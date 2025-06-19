@@ -1,4 +1,3 @@
-
 import { PriceAnalysis } from '@/types/market';
 
 export const generateAIAnalysis = (price: number, change: number): PriceAnalysis => {

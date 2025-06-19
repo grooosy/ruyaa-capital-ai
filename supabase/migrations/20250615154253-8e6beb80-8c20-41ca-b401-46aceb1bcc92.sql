@@ -1,4 +1,3 @@
-
 -- Drop old tables and related types to avoid conflicts
 DROP TABLE IF EXISTS public.messages;
 DROP TABLE IF EXISTS public.conversations;

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useMarketData } from '@/hooks/useMarketData';
 import AssetRow from './market/AssetRow';

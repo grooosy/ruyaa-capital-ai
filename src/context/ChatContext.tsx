@@ -1,4 +1,3 @@
-
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 
 export type AgentId = 'mt4mt5' | 'crypto' | 'arbitrage' | null;

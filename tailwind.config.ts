@@ -1,4 +1,4 @@
-import type { Config } from "tailwindcss";
+import type { Config } from "tailwindcss"
 
 export default {
   darkMode: ["class"],
@@ -7,6 +7,7 @@ export default {
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
+    "*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     container: {
@@ -24,22 +25,23 @@ export default {
     },
     extend: {
       colors: {
-        // Futuristic AI Color Palette
-        bg: "#0B0B0F",
-        primary: "#FFB800", // Golden future
-        secondary: "#00C896", // AI emerald
-        surface: "#161618",
-        "surface-light": "#1F1F23",
-        
-        // Legacy aliases for compatibility
-        green: "#00C896",
-        gold: "#FFB800",
-        "dark-charcoal": "#0B0B0F",
-        background: "#0B0B0F",
-        card: "#161618",
-        "primary-accent": "#FFB800",
-        "secondary-accent": "#00C896",
-        
+        // Pure futuristic palette
+        bg: "#000000",
+        primary: "#3b82f6", // Electric blue
+        secondary: "#06b6d4", // Cyan
+        accent: "#8b5cf6", // Purple
+        surface: "#0a0a0a",
+        "surface-light": "#1a1a1a",
+
+        // Legacy compatibility
+        green: "#06b6d4",
+        gold: "#3b82f6",
+        "dark-charcoal": "#000000",
+        background: "#000000",
+        card: "#0a0a0a",
+        "primary-accent": "#3b82f6",
+        "secondary-accent": "#06b6d4",
+
         // Shadcn base
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -51,15 +53,15 @@ export default {
         "2xl": "1.5rem", // modals
       },
       boxShadow: {
-        "ai-glow": "0 4px 24px rgba(255, 184, 0, 0.25), 0 8px 48px rgba(255, 184, 0, 0.1)",
-        "emerald-glow": "0 4px 24px rgba(0, 200, 150, 0.25), 0 8px 48px rgba(0, 200, 150, 0.1)",
-        "future-card": "0 8px 32px rgba(255, 184, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.4)",
-        "neural": "0 0 40px rgba(255, 184, 0, 0.15), inset 0 1px 0 rgba(255, 184, 0, 0.1)",
-        
+        futuristic: "0 4px 24px rgba(59, 130, 246, 0.15), 0 8px 48px rgba(59, 130, 246, 0.05)",
+        "cyber-glow": "0 0 20px rgba(6, 182, 212, 0.3), 0 0 40px rgba(6, 182, 212, 0.1)",
+        neural: "0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
+        "3d-card": "0 20px 40px rgba(0, 0, 0, 0.3), 0 5px 15px rgba(59, 130, 246, 0.1)",
+
         // Legacy support
-        "green-glow": "0 4px 24px rgba(0, 200, 150, 0.25)",
-        "gold-glow": "0 4px 24px rgba(255, 184, 0, 0.25)",
-        "red-glow": "0 4px 24px rgba(239, 68, 68, 0.25)",
+        "green-glow": "0 4px 24px rgba(6, 182, 212, 0.25)",
+        "gold-glow": "0 4px 24px rgba(59, 130, 246, 0.25)",
+        "ai-glow": "0 4px 24px rgba(59, 130, 246, 0.25)",
       },
       keyframes: {
         floating: {
@@ -89,9 +91,5 @@ export default {
       },
     },
   },
-  plugins: [
-    require("tailwindcss-animate"),
-    require("tailwindcss-rtl"),
-    require("@tailwindcss/typography"),
-  ],
-} satisfies Config;
+  plugins: [require("tailwindcss-animate"), require("tailwindcss-rtl"), require("@tailwindcss/typography")],
+} satisfies Config

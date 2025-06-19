@@ -1,4 +1,3 @@
-
 export interface PriceAnalysis {
   trend: 'bullish' | 'bearish' | 'neutral';
   signal: 'buy' | 'sell' | 'hold';

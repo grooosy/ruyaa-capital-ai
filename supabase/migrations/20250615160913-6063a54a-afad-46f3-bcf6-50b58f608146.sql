@@ -1,4 +1,3 @@
-
 -- Create a table to store user wallets
 CREATE TABLE public.wallets (
   id uuid NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,

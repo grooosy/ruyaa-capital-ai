@@ -1,4 +1,3 @@
-
 -- 1. PROFILES TABLE
 -- Create a table for public user profiles.
 CREATE TABLE public.profiles (

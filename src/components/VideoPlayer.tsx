@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { getYouTubeVideoId } from '@/utils/videoUtils';
 import YouTubePlayer from './video/YouTubePlayer';

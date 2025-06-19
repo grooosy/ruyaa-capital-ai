@@ -1,4 +1,3 @@
-
 import React, { useRef } from 'react';
 import { Send, Mic, Paperclip } from 'lucide-react';
 import { Input } from "@/components/ui/input";

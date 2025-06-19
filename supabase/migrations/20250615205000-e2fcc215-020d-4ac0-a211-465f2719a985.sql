@@ -1,4 +1,3 @@
-
 -- Create a table for video courses and lessons
 CREATE TABLE public.video_courses (
   id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,

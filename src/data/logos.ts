@@ -1,4 +1,3 @@
-
 export const mt4mt5Logo = {
   src: "/uploads/9dd041af-f3e5-4ac9-b4d8-a8fd480ba5cd.png",
   alt: "MT4/MT5 Logo",

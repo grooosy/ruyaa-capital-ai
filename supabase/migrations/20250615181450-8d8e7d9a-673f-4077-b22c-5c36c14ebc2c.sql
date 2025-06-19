@@ -1,4 +1,3 @@
-
 -- 1. For chat_threads: Prevent duplicate (user_id, agent) combinations (one thread per user per agent)
 ALTER TABLE public.chat_threads
   ADD CONSTRAINT unique_user_agent_thread UNIQUE (user_id, agent);

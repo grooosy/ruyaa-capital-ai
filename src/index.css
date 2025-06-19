@@ -16,17 +16,8 @@
 
   body {
     @apply text-white font-inter;
-    background: linear-gradient(
-      135deg,
-      #0b0b0f 0%,
-      #0f0f15 25%,
-      #161618 50%,
-      #0f0f15 75%,
-      #0b0b0f 100%
-    );
+    background: #000000;
     background-attachment: fixed;
-    background-size: 400% 400%;
-    animation: gradientShift 25s ease infinite;
     min-height: 100vh;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
@@ -46,15 +37,12 @@
   }
 
   html {
-    font-family:
-      "Inter", "Plus Jakarta Sans", "Manrope", "Playfair Display",
-      "Space Grotesk", sans-serif;
+    font-family: "Inter", "Plus Jakarta Sans", "Manrope", "Playfair Display", "Space Grotesk", sans-serif;
     scroll-behavior: smooth;
   }
 
   .font-spacegrotesk {
-    font-family:
-      "Space Grotesk", "Manrope", "Inter", "Plus Jakarta Sans", sans-serif !important;
+    font-family: "Space Grotesk", "Manrope", "Inter", "Plus Jakarta Sans", sans-serif !important;
     letter-spacing: 0.01em;
   }
 
@@ -130,11 +118,80 @@
   }
 
   .bg-neural-grid {
-    background-image:
-      linear-gradient(rgba(255, 184, 0, 0.03) 1px, transparent 1px),
+    background-image: linear-gradient(rgba(255, 184, 0, 0.03) 1px, transparent 1px),
       linear-gradient(to right, rgba(255, 184, 0, 0.03) 1px, transparent 1px);
     background-size: 2rem 2rem;
   }
+
+  /* Add new futuristic utilities */
+  .bg-futuristic-grid {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(rgba(59, 130, 246, 0.01) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59, 130, 246, 0.01) 1px, transparent 1px);
+    background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+  }
+
+  .animate-float-slow {
+    animation: floatSlow 20s ease-in-out infinite;
+  }
+
+  .animate-float-reverse {
+    animation: floatReverse 25s ease-in-out infinite;
+  }
+}
+
+@keyframes floatSlow {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translate(30px, -20px) rotate(90deg);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(-20px, -40px) rotate(180deg);
+    opacity: 0.4;
+  }
+  75% {
+    transform: translate(-40px, 20px) rotate(270deg);
+    opacity: 0.6;
+  }
+}
+
+@keyframes floatReverse {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(360deg);
+    opacity: 0.2;
+  }
+  33% {
+    transform: translate(-25px, 30px) rotate(240deg);
+    opacity: 0.4;
+  }
+  66% {
+    transform: translate(40px, -15px) rotate(120deg);
+    opacity: 0.3;
+  }
+}
+
+/* Enhanced 3D card effects */
+.card-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.card-3d:hover {
+  transform: rotateX(5deg) rotateY(5deg) translateZ(20px);
+}
+
+.glass-morphism {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 @keyframes pulse-glow {
@@ -218,8 +275,7 @@
 }
 
 .bg-grid-pattern {
-  background-image:
-    linear-gradient(rgba(255, 184, 0, 0.05) 1px, transparent 1px),
+  background-image: linear-gradient(rgba(255, 184, 0, 0.05) 1px, transparent 1px),
     linear-gradient(to right, rgba(255, 184, 0, 0.05) 1px, transparent 1px);
   background-size: 1.5rem 1.5rem;
 }
@@ -302,4 +358,24 @@
 
 .animate-pulse-slow {
   animation: pulse-slow 4s ease-in-out infinite;
+}
+
+.neon-glow {
+  box-shadow: 0 0 5px rgba(59, 130, 246, 0.3), 0 0 10px rgba(59, 130, 246, 0.2), 0 0 15px rgba(59, 130, 246, 0.1);
+}
+
+.subtle-pulse {
+  animation: subtlePulse 4s ease-in-out infinite;
+}
+
+@keyframes subtlePulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
 }

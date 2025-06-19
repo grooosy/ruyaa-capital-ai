@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect } from 'react';
 import { Bot, User } from 'lucide-react';
 import { useChat } from '@/hooks/useChat';

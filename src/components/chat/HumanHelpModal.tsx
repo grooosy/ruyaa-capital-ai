@@ -117,4 +117,3 @@ const HumanHelpModal: React.FC<HumanHelpModalProps> = ({ open, onOpenChange }) =
 };
 
 export default HumanHelpModal;
-

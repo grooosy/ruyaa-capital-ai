@@ -1,4 +1,3 @@
-
 export const formatPrice = (price: number, symbol: string): string => {
   // Validate the price is a valid number
   if (!isFinite(price) || isNaN(price)) {

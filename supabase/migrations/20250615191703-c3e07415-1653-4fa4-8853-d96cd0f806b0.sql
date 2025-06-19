@@ -1,4 +1,3 @@
-
 -- Update the profiles table to include email and wallet_address columns if they don't exist
 ALTER TABLE public.profiles 
 ADD COLUMN IF NOT EXISTS email text,

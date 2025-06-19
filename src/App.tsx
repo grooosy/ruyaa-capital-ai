@@ -1,39 +1,38 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useRoutes } from "react-router-dom";
-import Index from "./pages/Index";
-import AgentsPage from "./pages/AgentsPage";
-import MT4Page from "./pages/MT4Page";
-import CryptoPage from "./pages/CryptoPage";
-import ArbitragePage from "./pages/ArbitragePage";
-import AcademyPage from "./pages/AcademyPage";
-import DepositPage from "./pages/DepositPage";
-import NotFound from "./pages/NotFound";
-import WelcomePage from "./pages/WelcomePage";
-import HowItWorksPage from "./pages/HowItWorksPage";
-import { ChatProvider } from "./context/ChatContext";
-import AuthPage from "./pages/AuthPage";
-import DashboardPage from "./pages/DashboardPage";
-import { useTranslation } from "react-i18next";
-import { useEffect } from "react";
-import { WalletProvider } from "./context/WalletProvider";
-import ParticleBackground from "@/components/ParticleBackground";
-import NeuralNetworkOverlay from "@/components/NeuralNetworkOverlay";
-import routes from "tempo-routes";
+"use client"
 
-import "@solana/wallet-adapter-react-ui/styles.css";
+import { Toaster } from "@/components/ui/toaster"
+import { Toaster as Sonner } from "@/components/ui/sonner"
+import { TooltipProvider } from "@/components/ui/tooltip"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Index from "./pages/Index"
+import AgentsPage from "./pages/AgentsPage"
+import MT4Page from "./pages/MT4Page"
+import CryptoPage from "./pages/CryptoPage"
+import ArbitragePage from "./pages/ArbitragePage"
+import AcademyPage from "./pages/AcademyPage"
+import DepositPage from "./pages/DepositPage"
+import NotFound from "./pages/NotFound"
+import WelcomePage from "./pages/WelcomePage"
+import HowItWorksPage from "./pages/HowItWorksPage"
+import { ChatProvider } from "./context/ChatContext"
+import AuthPage from "./pages/AuthPage"
+import DashboardPage from "./pages/DashboardPage"
+import { useTranslation } from "react-i18next"
+import { useEffect } from "react"
+import { WalletProvider } from "./context/WalletProvider"
+import ParticleBackground from "@/components/ParticleBackground"
+import NeuralNetworkOverlay from "@/components/NeuralNetworkOverlay"
+import routes from "tempo-routes"
+import { useRoutes } from "react-router-dom"
 
-const queryClient = new QueryClient();
+import "@solana/wallet-adapter-react-ui/styles.css"
+
+const queryClient = new QueryClient()
 
 const AppRoutes = () => {
   // Tempo routes - must be called inside Router context
-  const tempoRoutes = import.meta.env.VITE_TEMPO ? useRoutes(routes) : null;
-
-  if (tempoRoutes) {
-    return tempoRoutes;
-  }
+  const tempoRoutes = import.meta.env.VITE_TEMPO ? useRoutes(routes) : null
 
   return (
     <Routes>
@@ -53,16 +52,17 @@ const AppRoutes = () => {
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
       <Route path="*" element={<NotFound />} />
     </Routes>
-  );
-};
+  )
+}
 
 const App = () => {
-  const { i18n } = useTranslation();
+  const { i18n } = useTranslation()
+  const tempoRoutes = import.meta.env.VITE_TEMPO ? useRoutes(routes) : null
 
   useEffect(() => {
-    document.documentElement.dir = i18n.language === "ar" ? "rtl" : "ltr";
-    document.documentElement.lang = i18n.language;
-  }, [i18n.language]);
+    document.documentElement.dir = i18n.language === "ar" ? "rtl" : "ltr"
+    document.documentElement.lang = i18n.language
+  }, [i18n.language])
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -71,13 +71,22 @@ const App = () => {
           <WalletProvider>
             <Toaster />
             <Sonner />
-            {/* Modern AI-styled background */}
-            <div className="relative min-h-screen w-full bg-gradient-to-br from-black via-gray-950 to-black font-spacegrotesk overflow-x-hidden z-0">
-              <div className="absolute inset-0 bg-grid-pattern opacity-[0.02]" />
-              <div className="absolute inset-0 bg-gradient-to-t from-green/5 via-transparent to-transparent" />
+            {/* Modern Futuristic Background */}
+            <div className="relative min-h-screen w-full bg-black font-spacegrotesk overflow-x-hidden">
+              {/* Subtle geometric grid overlay */}
+              <div className="absolute inset-0 bg-futuristic-grid opacity-[0.015]" />
+
+              {/* Animated gradient orbs */}
+              <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full blur-3xl animate-float-slow" />
+              <div className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-r from-cyan-500/8 to-teal-500/8 rounded-full blur-3xl animate-float-reverse" />
+
+              {/* Subtle particle system */}
               <ParticleBackground />
+
+              {/* Enhanced neural network overlay */}
               <NeuralNetworkOverlay />
-              {/* Content sits above the backgrounds */}
+
+              {/* Content layer */}
               <div className="relative z-10">
                 <BrowserRouter>
                   <AppRoutes />
@@ -88,7 +97,7 @@ const App = () => {
         </ChatProvider>
       </TooltipProvider>
     </QueryClientProvider>
-  );
-};
+  )
+}
 
-export default App;
+export default App

@@ -1,4 +1,3 @@
-
 // AgentCard displays agent info with a modern animated card used on the agents page.
 import React from "react";
 import { motion } from "framer-motion";

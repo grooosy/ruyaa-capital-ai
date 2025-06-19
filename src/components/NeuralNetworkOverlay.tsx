@@ -1,31 +1,66 @@
-
-import React from "react";
-
 const NeuralNetworkOverlay = () => (
   <svg
-    viewBox="0 0 800 800"
+    viewBox="0 0 1200 800"
     width="100%"
     height="100%"
     className="absolute inset-0 pointer-events-none z-0"
     style={{
-      opacity: 0.5,
+      opacity: 0.08,
       filter: "blur(0.5px)",
     }}
     aria-hidden="true"
     focusable="false"
   >
     <defs>
-      <linearGradient id="neonStroke" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stopColor="#00FF9D" />
-        <stop offset="100%" stopColor="#D4AF37" />
+      <linearGradient id="neuralGradient" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stopColor="#3b82f6" />
+        <stop offset="50%" stopColor="#06b6d4" />
+        <stop offset="100%" stopColor="#8b5cf6" />
       </linearGradient>
+      <filter id="glow">
+        <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+        <feMerge>
+          <feMergeNode in="coloredBlur" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
     </defs>
-    <path d="M50 50 Q200 400 500 300 Q650 200 750 750" stroke="url(#neonStroke)" strokeWidth="1.5" fill="none" />
-    <path d="M0 400 Q250 200 600 400 Q700 600 800 200" stroke="#00FF9D" strokeWidth="1" fill="none" opacity="0.6"/>
-    <circle cx="250" cy="400" r="6" fill="#00FF9D" opacity="0.4" />
-    <circle cx="600" cy="400" r="4" fill="#D4AF37" opacity="0.25" />
-    <circle cx="520" cy="310" r="4" fill="#00FF9D" opacity="0.3" />
-  </svg>
-);
 
-export default NeuralNetworkOverlay;
+    {/* Main neural pathways */}
+    <path
+      d="M100 100 Q300 200 500 150 Q700 100 900 200 Q1000 300 1100 250"
+      stroke="url(#neuralGradient)"
+      strokeWidth="1"
+      fill="none"
+      filter="url(#glow)"
+    />
+    <path
+      d="M50 400 Q250 300 450 350 Q650 400 850 300 Q1050 200 1150 350"
+      stroke="url(#neuralGradient)"
+      strokeWidth="0.8"
+      fill="none"
+      opacity="0.6"
+    />
+    <path
+      d="M200 600 Q400 500 600 550 Q800 600 1000 500"
+      stroke="url(#neuralGradient)"
+      strokeWidth="0.6"
+      fill="none"
+      opacity="0.4"
+    />
+
+    {/* Neural nodes */}
+    <circle cx="300" cy="200" r="3" fill="#3b82f6" opacity="0.4" className="subtle-pulse" />
+    <circle cx="500" cy="150" r="2" fill="#06b6d4" opacity="0.3" />
+    <circle cx="700" cy="100" r="2.5" fill="#8b5cf6" opacity="0.5" className="subtle-pulse" />
+    <circle cx="450" cy="350" r="2" fill="#3b82f6" opacity="0.3" />
+    <circle cx="650" cy="400" r="3" fill="#06b6d4" opacity="0.4" className="subtle-pulse" />
+    <circle cx="600" cy="550" r="2" fill="#8b5cf6" opacity="0.3" />
+
+    {/* Geometric elements */}
+    <polygon points="150,50 170,80 130,80" fill="#3b82f6" opacity="0.1" className="subtle-pulse" />
+    <rect x="950" y="150" width="15" height="15" fill="#06b6d4" opacity="0.1" transform="rotate(45 957.5 157.5)" />
+  </svg>
+)
+
+export default NeuralNetworkOverlay

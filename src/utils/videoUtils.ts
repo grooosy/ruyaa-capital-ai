@@ -1,4 +1,3 @@
-
 export const getYouTubeVideoId = (url: string): string | null => {
   // Handle various YouTube URL formats
   const patterns = [

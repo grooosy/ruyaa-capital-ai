@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Brain, Zap } from 'lucide-react';
 
