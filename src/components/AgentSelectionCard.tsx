@@ -1,5 +1,7 @@
 
+// AgentSelectionCard is used on the landing page to showcase available agent types.
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 
@@ -14,14 +16,14 @@ interface AgentSelectionCardProps {
 
 const AgentSelectionCard: React.FC<AgentSelectionCardProps> = ({ id, title, description, logoSrc, href, onClick }) => {
   const cardContent = (
-    <div
+    <motion.div
       className={cn(
         "relative group h-full p-8 flex flex-col items-center justify-center text-center overflow-hidden",
         "rounded-2xl shadow-xl transition-all duration-300 cursor-pointer",
-        "bg-gradient-to-br from-[#1c1c1f]/60 to-[#111114]/60 backdrop-blur-lg",
-        "border-2 border-[#d4af37]/40",
-        "hover:scale-[1.04] hover:-translate-y-1 hover:border-[#d4af37]/80 hover:shadow-gold-glow"
+        "bg-gradient-to-br from-[#1a1a1c]/70 to-[#111114]/60 backdrop-blur-lg",
+        "border-2 border-[#d4af37]/40"
       )}
+      whileHover={{ rotateX: 8, rotateY: -8 }}
     >
       {/* Background decorations */}
       {id === 'crypto' && (
@@ -45,7 +47,7 @@ const AgentSelectionCard: React.FC<AgentSelectionCardProps> = ({ id, title, desc
         <h3 className="text-xl font-bold text-white mb-2 transition-colors">{title}</h3>
         <p className="text-neutral-400 text-sm">{description}</p>
       </div>
-    </div>
+    </motion.div>
   );
 
   const cardContainerClasses = "block h-full";

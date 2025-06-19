@@ -1,6 +1,9 @@
 
 "use client";
 
+// ParticleBackground renders a subtle animated particle effect used on all pages
+// to provide an AI-inspired atmosphere without distracting from content.
+
 import { useEffect, useMemo, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { type Container, type ISourceOptions } from "@tsparticles/engine";
@@ -48,13 +51,13 @@ const ParticleBackground = () => {
       },
       particles: {
         color: {
-          value: ["#00ff9d", "#d4af37", "#ffffff"],
+          value: ["#00d48b", "#b7902b", "#ffffff"],
         },
         links: {
-          color: "#00ff9d",
+          color: "#00d48b",
           distance: 120,
           enable: true,
-          opacity: 0.08,
+          opacity: 0.05,
           width: 0.8,
         },
         move: {
