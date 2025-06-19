@@ -16,19 +16,14 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body>
-        {/* Futuristic background layers */}
-        <div className="futuristic-bg" />
-        <div className="grid-pattern" />
-        <div className="particles">
-          <div className="particle" />
-          <div className="particle" />
-          <div className="particle" />
-          <div className="particle" />
-          <div className="particle" />
-        </div>
+        {/* Background elements */}
+        <div className="grid-background" />
+        <div className="gradient-orb gradient-orb-1" />
+        <div className="gradient-orb gradient-orb-2" />
+        <div className="gradient-orb gradient-orb-3" />
 
-        {/* Main content */}
-        <div className="relative z-10">{children}</div>
+        {/* Main content wrapper */}
+        <div className="content-wrapper">{children}</div>
       </body>
     </html>
   )
