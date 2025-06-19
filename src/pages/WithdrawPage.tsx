@@ -4,49 +4,57 @@ import Navbar from "@/components/Navbar";
 import ParticleBackground from "@/components/ParticleBackground";
 import {
   Wallet,
-  Bitcoin,
-  Gift,
+  Banknote,
+  Building2,
+  PiggyBank,
+  Coins,
   HeadphonesIcon,
   MessageCircle,
-  Building2,
 } from "lucide-react";
 import OptionCard from "@/components/OptionCard";
 
-const DepositPage: React.FC = () => {
-
-  const depositOptions = [
+const WithdrawPage: React.FC = () => {
+  const options = [
     {
       icon: Building2,
-      title: "Deposit in Forex Account",
-      description: "Add funds directly to your MT4/MT5 trading account",
+      title: "Withdraw to Bank",
+      description: "Transfer funds directly to your bank account",
       color: "from-green/20 to-green/10",
       borderColor: "border-green/30",
     },
     {
-      icon: Bitcoin,
-      title: "Crypto Exchange Account",
-      description: "Deposit to your cryptocurrency exchange wallet",
+      icon: Banknote,
+      title: "Withdraw by Cash",
+      description: "Cash withdrawal (subject to availability)",
       color: "from-gold/20 to-gold/10",
       borderColor: "border-gold/30",
     },
     {
       icon: Wallet,
-      title: "Crypto Wallet",
-      description: "Transfer to your personal crypto wallet",
+      title: "Withdraw to Crypto Wallet",
+      description: "Transfer to your cryptocurrency wallet",
       color: "from-blue-500/20 to-blue-500/10",
       borderColor: "border-blue-500/30",
     },
     {
-      icon: Gift,
-      title: "Gift a Friend",
-      description: "Send funds as a gift to someone special",
+      icon: PiggyBank,
+      title: "Withdraw to Saving Account",
+      description: "Move funds to your savings account",
       color: "from-purple-500/20 to-purple-500/10",
       borderColor: "border-purple-500/30",
     },
     {
+      icon: Coins,
+      title: "Ruyaa Invest Box",
+      description: "Coming soon - Investment portfolio option",
+      color: "from-gray-500/20 to-gray-500/10",
+      borderColor: "border-gray-500/30",
+      comingSoon: true,
+    },
+    {
       icon: HeadphonesIcon,
       title: "Support",
-      description: "Get help with your deposit process",
+      description: "Get help with your withdrawal process",
       color: "from-gray-500/20 to-gray-500/10",
       borderColor: "border-gray-500/30",
     },
@@ -58,10 +66,6 @@ const DepositPage: React.FC = () => {
       borderColor: "border-green/30",
     },
   ];
-
-  const options = depositOptions;
-  const title = "Deposit Options";
-  const subtitle = "Choose how you want to add funds to your account";
 
   return (
     <div className="relative min-h-screen bg-[#0D0D0D]">
@@ -75,9 +79,11 @@ const DepositPage: React.FC = () => {
           className="text-center mb-12"
         >
           <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4">
-            {title}
+            Withdrawal Options
           </h1>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">{subtitle}</p>
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+            Choose how you want to withdraw your funds
+          </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -90,4 +96,4 @@ const DepositPage: React.FC = () => {
   );
 };
 
-export default DepositPage;
+export default WithdrawPage;

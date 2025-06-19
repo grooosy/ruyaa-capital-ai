@@ -10,6 +10,9 @@ import CryptoPage from "./pages/CryptoPage";
 import ArbitragePage from "./pages/ArbitragePage";
 import AcademyPage from "./pages/AcademyPage";
 import DepositPage from "./pages/DepositPage";
+import WithdrawPage from "./pages/WithdrawPage";
+import ProfilePage from "./pages/ProfilePage";
+import MarketPage from "./pages/MarketPage";
 import NotFound from "./pages/NotFound";
 import WelcomePage from "./pages/WelcomePage";
 import HowItWorksPage from "./pages/HowItWorksPage";
@@ -47,6 +50,9 @@ const AppRoutes = () => {
       <Route path="/agents/arbitrage" element={<ArbitragePage />} />
       <Route path="/academy" element={<AcademyPage />} />
       <Route path="/deposit" element={<DepositPage />} />
+      <Route path="/withdraw" element={<WithdrawPage />} />
+      <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/market" element={<MarketPage />} />
       <Route path="/how-it-works" element={<HowItWorksPage />} />
       {/* Add this before the catchall route */}
       {import.meta.env.VITE_TEMPO && <Route path="/tempobook/*" />}
