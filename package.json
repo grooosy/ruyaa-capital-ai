@@ -11,8 +11,8 @@
   "dependencies": {
     "@emotion/is-prop-valid": "latest",
     "@eslint/js": "latest",
-    "@fontsource/space-grotesk": "^5.2.8",
-    "@hookform/resolvers": "^3.9.0",
+    "@fontsource/space-grotesk": "5.2.8",
+    "@hookform/resolvers": "3.9.0",
     "@radix-ui/react-accordion": "latest",
     "@radix-ui/react-alert-dialog": "latest",
     "@radix-ui/react-aspect-ratio": "latest",
@@ -68,8 +68,8 @@
     "jiti": "latest",
     "less": "latest",
     "lightningcss": "latest",
-    "linkify-react": "^4.3.1",
-    "linkifyjs": "^4.3.1",
+    "linkify-react": "4.3.1",
+    "linkifyjs": "4.3.1",
     "lucide-react": "^0.454.0",
     "next": "15.2.4",
     "next-themes": "latest",
@@ -101,17 +101,17 @@
     "vite": "latest",
     "ws": "latest",
     "yaml": "latest",
-    "zod": "^3.23.8"
+    "zod": "3.23.8"
   },
   "devDependencies": {
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "autoprefixer": "^10.4.20",
-    "eslint": "^8",
+    "autoprefixer": "10.4.20",
+    "eslint": "8.57.1",
     "eslint-config-next": "15.2.4",
     "postcss": "^8.5",
-    "tailwindcss": "^3.4.11",
+    "tailwindcss": "3.4.11",
     "typescript": "^5"
   }
 }
