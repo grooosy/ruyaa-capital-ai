@@ -92,7 +92,7 @@ This project is built with:
    ```
 
    - `VITE_OPENROUTER_API_KEY` / `OPENROUTER_API_KEY` – OpenRouter API key
-   - `VITE_TWELVEDATA_API_KEY` / `TWELVEDATA_API_KEY` – TwelveData API key
+   - `VITE_TWELVEDATA_API_KEY` / `TWELVEDATA_API_KEY` – TwelveData API key (defaults to `demo` for limited public access)
    - `VITE_SUPABASE_URL` / `SUPABASE_URL` – URL of your Supabase project
    - `VITE_SUPABASE_ANON_KEY` / `SUPABASE_ANON_KEY` – Supabase anon/public key
 

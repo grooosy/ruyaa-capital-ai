@@ -17,6 +17,7 @@ const marketSymbols = [
   { symbol: "EUR/USD", label: "EURUSD" },
   { symbol: "NDX", label: "NASDAQ" },
   { symbol: "DXY", label: "DXY" },
+  { symbol: "DJI", label: "DOW" },
 ];
 
 const fallbackPrices: Record<string, number> = {
@@ -26,16 +27,19 @@ const fallbackPrices: Record<string, number> = {
   eurusd: 1.07,
   nasdaq: 17000,
   dxy: 103,
+  dow: 39000,
 };
 
 interface ExtendedTickerData extends TickerData {
   change?: number;
   changePercent?: number;
+  signal?: "bullish" | "bearish" | "neutral";
 }
 
 const LiveMarketTicker: React.FC = () => {
   const [data, setData] = useState<ExtendedTickerData[]>([]);
   const [prevPrices, setPrevPrices] = useState<Record<string, number>>({});
+  const [priceHistory, setPriceHistory] = useState<Record<string, number[]>>({});
 
   const fetchPrices = async () => {
     try {
@@ -88,27 +92,55 @@ const LiveMarketTicker: React.FC = () => {
 
       const newData = [...cryptoData, ...otherData];
 
-      // Update previous prices for next comparison
       const newPrevPrices: Record<string, number> = {};
-      newData.forEach((item) => {
-        newPrevPrices[item.label] = item.price;
-      });
-      setPrevPrices(newPrevPrices);
+      const newHistory: Record<string, number[]> = { ...priceHistory };
 
-      setData(newData);
-    } catch (e) {
-      const newData = [
-        ...cryptoSymbols.map((s) => ({
-          label: s.label,
-          price: fallbackPrices[s.id],
-        })),
-        ...marketSymbols.map((s) => ({
-          label: s.label,
-          price: fallbackPrices[s.label.toLowerCase()],
-        })),
-      ];
-      setData(newData);
-    }
+      const enriched = newData.map((item) => {
+        newPrevPrices[item.label] = item.price;
+        const history = newHistory[item.label] || [];
+        const updatedHistory = [...history.slice(-4), item.price];
+        newHistory[item.label] = updatedHistory;
+        let signal: "bullish" | "bearish" | "neutral" | undefined;
+        if (updatedHistory.length >= 3) {
+          const trend = updatedHistory
+            .slice(1)
+            .map((p, idx) => p - updatedHistory[idx])
+            .reduce((a, b) => a + b, 0);
+          if (trend > 0) signal = "bullish";
+          else if (trend < 0) signal = "bearish";
+          else signal = "neutral";
+        }
+        return { ...item, signal } as ExtendedTickerData;
+      });
+
+      setPrevPrices(newPrevPrices);
+      setPriceHistory(newHistory);
+      setData(enriched);
+      } catch (e) {
+        const fallbackData = [
+          ...cryptoSymbols.map((s) => ({
+            label: s.label,
+            price: fallbackPrices[s.id],
+          })),
+          ...marketSymbols.map((s) => ({
+            label: s.label,
+            price: fallbackPrices[s.label.toLowerCase()],
+          })),
+        ];
+
+        const newPrevPrices: Record<string, number> = {};
+        const newHistory: Record<string, number[]> = { ...priceHistory };
+        const enriched = fallbackData.map((item) => {
+          newPrevPrices[item.label] = item.price;
+          const history = newHistory[item.label] || [];
+          const updatedHistory = [...history.slice(-4), item.price];
+          newHistory[item.label] = updatedHistory;
+          return { ...item, signal: undefined } as ExtendedTickerData;
+        });
+        setPrevPrices(newPrevPrices);
+        setPriceHistory(newHistory);
+        setData(enriched);
+      }
   };
 
   useEffect(() => {
@@ -168,6 +200,20 @@ const LiveMarketTicker: React.FC = () => {
               >
                 ${item.price.toLocaleString()}
               </span>
+              {item.signal && (
+                <span
+                  className={`text-xs font-medium ${
+                    item.signal === "bullish"
+                      ? "text-green"
+                      : item.signal === "bearish"
+                        ? "text-red-400"
+                        : "text-gray-400"
+                  }`}
+                >
+                  {item.signal === "bullish" && "▲"}
+                  {item.signal === "bearish" && "▼"}
+                </span>
+              )}
               {item.changePercent !== undefined && (
                 <div
                   className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${
