@@ -89,7 +89,7 @@ VALUES (
   'beginner',
   5,
   20,
-  '/lovable-uploads/4fc94ce9-7009-46fc-ad4b-ed3edffc3240.png'
+  '/uploads/4fc94ce9-7009-46fc-ad4b-ed3edffc3240.png'
 );
 
 -- Get the course ID for inserting lessons
@@ -104,7 +104,7 @@ SELECT
   'تعرف على واجهة منصة التداول والمخططات والتنقل الأساسي.',
   'https://www.youtube.com/embed/dQw4w9WgXcQ',
   2700,
-  '/lovable-uploads/4fc94ce9-7009-46fc-ad4b-ed3edffc3240.png',
+  '/uploads/4fc94ce9-7009-46fc-ad4b-ed3edffc3240.png',
   ARRAY['Interface Navigation', 'Chart Types', 'Market Watch'],
   ARRAY['التنقل في الواجهة', 'أنواع المخططات', 'مراقبة السوق']
 FROM public.video_courses c WHERE c.title = 'Complete MT4/MT5 Trading Mastery';
@@ -119,7 +119,7 @@ SELECT
   'تعلم كيفية تنفيذ أوامر الشراء/البيع وتحديد مستويات وقف الخسارة وجني الأرباح.',
   'https://www.youtube.com/embed/dQw4w9WgXcQ',
   2400,
-  '/lovable-uploads/4fc94ce9-7009-46fc-ad4b-ed3edffc3240.png',
+  '/uploads/4fc94ce9-7009-46fc-ad4b-ed3edffc3240.png',
   ARRAY['Order Types', 'Risk Management', 'Trade Execution'],
   ARRAY['أنواع الأوامر', 'إدارة المخاطر', 'تنفيذ الصفقات']
 FROM public.video_courses c WHERE c.title = 'Complete MT4/MT5 Trading Mastery';
@@ -134,7 +134,7 @@ SELECT
   'أتقن تحديد حجم المراكز والتحكم في الرافعة المالية وحماية رأس مالك.',
   'https://www.youtube.com/embed/dQw4w9WgXcQ',
   2100,
-  '/lovable-uploads/4fc94ce9-7009-46fc-ad4b-ed3edffc3240.png',
+  '/uploads/4fc94ce9-7009-46fc-ad4b-ed3edffc3240.png',
   ARRAY['Position Sizing', 'Leverage', 'Capital Protection'],
   ARRAY['حجم المراكز', 'الرافعة المالية', 'حماية رأس المال']
 FROM public.video_courses c WHERE c.title = 'Complete MT4/MT5 Trading Mastery';
@@ -149,7 +149,7 @@ SELECT
   'افهم أنماط المخططات والمؤشرات وتحليل معنويات السوق.',
   'https://www.youtube.com/embed/dQw4w9WgXcQ',
   2520,
-  '/lovable-uploads/4fc94ce9-7009-46fc-ad4b-ed3edffc3240.png',
+  '/uploads/4fc94ce9-7009-46fc-ad4b-ed3edffc3240.png',
   ARRAY['Chart Patterns', 'Technical Indicators', 'Market Analysis'],
   ARRAY['أنماط المخططات', 'المؤشرات الفنية', 'تحليل السوق']
 FROM public.video_courses c WHERE c.title = 'Complete MT4/MT5 Trading Mastery';
@@ -164,7 +164,7 @@ SELECT
   'استكشف المضاربة السريعة والتداول المتأرجح والتداول الآلي مع رؤيا AI.',
   'https://www.youtube.com/embed/dQw4w9WgXcQ',
   2280,
-  '/lovable-uploads/4fc94ce9-7009-46fc-ad4b-ed3edffc3240.png',
+  '/uploads/4fc94ce9-7009-46fc-ad4b-ed3edffc3240.png',
   ARRAY['Scalping', 'Swing Trading', 'AI Integration'],
   ARRAY['المضاربة السريعة', 'التداول المتأرجح', 'تكامل الذكاء الاصطناعي']
 FROM public.video_courses c WHERE c.title = 'Complete MT4/MT5 Trading Mastery';

@@ -14,7 +14,7 @@ const LogoCloud: React.FC = () => {
           draggable={false}
         />
         <img
-          src="/lovable-uploads/b7abfcef-a13f-43b2-a67d-cf8cc6474048.png"
+          src="/uploads/b7abfcef-a13f-43b2-a67d-cf8cc6474048.png"
           alt="Tether Exchange Logo"
           className="float-y w-28 h-auto opacity-90 drop-shadow-lg transition-transform duration-300 hover:scale-110"
           draggable={false}

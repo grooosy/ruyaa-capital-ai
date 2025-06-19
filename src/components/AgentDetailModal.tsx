@@ -50,7 +50,7 @@ const AgentDetailModal: React.FC<AgentDetailModalProps> = ({ type, onClose }) =>
     if (type === 'mt') {
         logosToDisplay = data.logos.filter(logo => !['Visa', 'Mastercard', 'Phantom'].includes(logo.alt));
         logosToDisplay.push(
-            { src: '/lovable-uploads/2793e622-138a-4554-833b-e21e68dd92cf.png', alt: 'Visa & Mastercard' },
+            { src: '/uploads/2793e622-138a-4554-833b-e21e68dd92cf.png', alt: 'Visa & Mastercard' },
             { src: '/logos/usdt-official.svg', alt: 'USDT' }
         );
     }
