@@ -39,7 +39,7 @@ const AgentDetailModal: React.FC<AgentDetailModalProps> = ({ type, onClose }) =>
 
     const handleStart = () => {
         if (type === 'mt') {
-            navigate('/agents/mt4');
+            navigate('/agents/mt4mt5');
         } else if (type === 'crypto') {
             navigate('/agents/crypto');
         }

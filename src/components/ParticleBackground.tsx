@@ -50,13 +50,13 @@ const ParticleBackground = () => {
       },
       particles: {
         color: {
-          value: ["#FFD700", "#FFA500", "#ffffff"],
+          value: ["#ffffff", "#aaaaaa"],
         },
         links: {
-          color: "#FFD700",
+          color: "#ffffff",
           distance: 120,
           enable: true,
-          opacity: 0.03,
+          opacity: 0.05,
           width: 0.5,
         },
         move: {

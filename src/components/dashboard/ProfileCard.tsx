@@ -29,19 +29,18 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile, email }) => {
     <motion.div
       initial={{ opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -8, boxShadow: "0 0 28px #00FF9D99" }}
       transition={{ type: "spring", stiffness: 50, damping: 16 }}
-      className="relative bg-[#1A1A1A] backdrop-blur-sm rounded-xl p-6 overflow-hidden focus-within:ring-2 focus-within:ring-green-400 outline-none group"
+      className="relative bg-[#1A1A1A] backdrop-blur-sm rounded-xl p-6 overflow-hidden focus-within:ring-2 focus-within:ring-green-400 outline-none"
       tabIndex={0}
       aria-label="Profile information"
     >
-      <div className="absolute inset-0 bg-green-500/10 blur-2xl -z-10 transition-all duration-300 group-hover:blur-xl" aria-hidden />
-      <div className="absolute top-4 left-4 text-green-400 drop-shadow-[0_0_10px_#00FF9D]">
+      <div className="absolute inset-0 bg-black/40 blur-xl -z-10" aria-hidden />
+      <div className="absolute top-4 left-4 text-green-400">
         <User strokeWidth={2.2} className="w-6 h-6" />
       </div>
       <div className="flex items-center gap-5 mt-2 mb-6">
         <div className="flex-shrink-0">
-          <Avatar className="h-16 w-16 ring-2 ring-green-400 shadow-green-glow transition-shadow animate-pulse-slow">
+          <Avatar className="h-16 w-16 ring-2 ring-green-400">
             <AvatarImage src={profile?.avatar_url ?? undefined} alt={profile?.full_name ?? "User"} />
             <AvatarFallback className="bg-gray-800 text-white font-bold">{getInitials(profile?.full_name)}</AvatarFallback>
           </Avatar>
@@ -54,7 +53,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile, email }) => {
       <Button
         variant="ghost"
         onClick={() => setModalOpen(true)}
-        className="px-6 py-2 rounded-full border border-green-400 text-green-300 hover:bg-green-500/10 hover:text-white focus-visible:ring-2 focus-visible:ring-green-400 transition-all font-semibold text-base shadow-green-glow"
+        className="px-6 py-2 rounded-full border border-green-400 text-green-300 hover:bg-green-600/20 hover:text-white focus-visible:ring-2 focus-visible:ring-green-400 transition-all font-semibold text-base"
         tabIndex={0}
       >
         Edit Profile
