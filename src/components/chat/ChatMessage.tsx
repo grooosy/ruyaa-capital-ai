@@ -19,10 +19,10 @@ const ChatMessage = ({ message }: { message: Message }) => {
             )}
             <div
                 className={cn(
-                    'max-w-xs md:max-w-md p-3 rounded-xl text-white shadow-md',
+                    'max-w-xs md:max-w-md p-3 rounded-xl shadow-md',
                     isUser
-                        ? 'bg-primary-accent text-white rounded-br-none'
-                        : 'bg-white/10 rounded-bl-none'
+                        ? 'bg-card text-gold border border-gold/40 rounded-br-none'
+                        : 'bg-white/10 text-white rounded-bl-none'
                 )}
             >
                 <p className="text-sm leading-relaxed">{message.content}</p>

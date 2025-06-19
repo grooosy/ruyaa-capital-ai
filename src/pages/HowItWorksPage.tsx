@@ -48,7 +48,10 @@ const HowItWorksPage: React.FC = () => {
             How Ruyaa AI Works
           </h1>
 
-          <div className="bg-gradient-to-r from-primary/10 to-secondary/10 border border-primary/20 rounded-2xl p-12 mb-8 backdrop-blur-sm">
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            className="bg-[#1A1A1A] border border-gray-600 rounded-2xl p-12 mb-8 backdrop-blur-sm shadow-future-card"
+          >
             <motion.div
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 3, repeat: Infinity }}
@@ -83,7 +86,7 @@ const HowItWorksPage: React.FC = () => {
                 <span className="font-medium">Live Demonstrations</span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button

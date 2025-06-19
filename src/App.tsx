@@ -16,6 +16,7 @@ import MarketPage from "./pages/MarketPage";
 import NotFound from "./pages/NotFound";
 import WelcomePage from "./pages/WelcomePage";
 import HowItWorksPage from "./pages/HowItWorksPage";
+import BrokerRegistrationPage from "./pages/BrokerRegistrationPage";
 import { ChatProvider } from "./context/ChatContext";
 import AuthPage from "./pages/AuthPage";
 import DashboardPage from "./pages/DashboardPage";
@@ -54,6 +55,7 @@ const AppRoutes = () => {
       <Route path="/profile" element={<ProfilePage />} />
       <Route path="/market" element={<MarketPage />} />
       <Route path="/how-it-works" element={<HowItWorksPage />} />
+      <Route path="/register/broker" element={<BrokerRegistrationPage />} />
       {/* Add this before the catchall route */}
       {import.meta.env.VITE_TEMPO && <Route path="/tempobook/*" />}
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

@@ -39,7 +39,7 @@ export const mt4SystemPrompt = `You are Ruyaa's MT4/MT5 Agent - a professional a
 • GREETING: Always greet users warmly. If you know their name, use it naturally in conversation.
 • EXPERTISE: Focus on Forex pairs, Gold trading, MT4/MT5 platform guidance.
 • LANGUAGE: Detect user language; after 4 switches ask which language to keep.
-• REGISTRATION FLOW: Guide one field at a time: name → country → email → platform (MT4/MT5) → account type (Standard/Pro) → deposit (min $100) → payment method.
+• REGISTRATION FLOW: Guide one field at a time: name → country → email → platform (MT4/MT5) → account type (Standard/Pro) → deposit (min $100) → payment method. If the user prefers a form, direct them to https://your-site.com/register/broker where they can optionally upload KYC docs for faster verification.
 • CASH PATH: For cash deposits, ask phone → country; if UAE/Syria ask city; if Aleppo show office address.
 • ACCOUNT TYPES: Standard vs Pro - emphasize AI extras for Pro (advanced signals, risk management).
 • COMPLETION: When complete, call register_user() and send confirmation.
@@ -97,7 +97,7 @@ Start with a clear example:
 4. **Ask mode** (Automatic AI or manual trades?)
 5. **Remind limits** (Daily arbitrage requires $5,000+)
 6. **Payment** ("Pay in crypto (USDT/SOL). Here's the wallet link:" \`<WALLET_LINK>\`)
-7. **Confirm & activate** ("Funds received—your arbitrage bot is now live! 🚀")
+7. **Confirm & activate** ("Funds received—your arbitrage bot is now live!")
 
 🔹 **RULES**
 • Never discuss topics outside arbitrage—redirect to Ruyaa Support.
@@ -140,6 +140,7 @@ export const systemPrompts: Record<string, string> = {
   mt4mt5: mt4SystemPrompt,
   crypto: cryptoSystemPrompt,
   arbitrage: arbitrageSystemPrompt,
+  support: generalSystemPrompt,
   general: generalSystemPrompt,
 };
 
@@ -147,5 +148,6 @@ export const modelMap: Record<string, string> = {
   mt4mt5: "openai/gpt-4o-mini",
   crypto: "openai/gpt-4o-mini",
   arbitrage: "openai/gpt-4o-mini",
+  support: "openai/gpt-4o-mini",
   general: "openai/gpt-4o-mini",
 };

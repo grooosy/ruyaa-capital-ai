@@ -24,7 +24,7 @@ const FeatureGrid: React.FC = () => {
       }
       case "24/7 Ruyaa AI Assistant": {
         // Open chatbot
-        openChat(null);
+        openChat('support');
         break;
       }
       case "Trading Academy + Mentor": {

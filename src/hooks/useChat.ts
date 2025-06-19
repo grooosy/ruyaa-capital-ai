@@ -8,7 +8,7 @@ import { useMessageSubmission } from './chat/useMessageSubmission';
 
 export const useChat = (agentIdOverride?: AgentId) => {
   const { selectedAgent: agentFromContext } = useChatContext();
-  const selectedAgent = agentIdOverride !== undefined ? agentIdOverride : agentFromContext;
+  const selectedAgent: AgentId = agentIdOverride !== undefined ? agentIdOverride : agentFromContext ?? 'support';
 
   // Use the smaller hooks
   const { session, userId, userProfile, authRequired, setAuthRequired, clearAuthRequired } = useAuthState();
@@ -34,7 +34,7 @@ export const useChat = (agentIdOverride?: AgentId) => {
     handleFileUpload,
     isRecording,
     isUploading,
-  } = useChatInput(submitMessage);
+  } = useChatInput(submitMessage, userId, threadId);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -98,6 +98,45 @@ export type Database = {
           },
         ]
       }
+      chat_recordings: {
+        Row: {
+          id: string
+          user_id: string | null
+          thread_id: string | null
+          file_url: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id?: string | null
+          thread_id?: string | null
+          file_url: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string | null
+          thread_id?: string | null
+          file_url?: string
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chat_recordings_thread_id_fkey",
+            columns: ["thread_id"],
+            isOneToOne: false,
+            referencedRelation: "chat_threads",
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "chat_recordings_user_id_fkey",
+            columns: ["user_id"],
+            isOneToOne: false,
+            referencedRelation: "users",
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       chat_threads: {
         Row: {
           agent: string
@@ -365,6 +404,56 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      },
+      broker_registrations: {
+        Row: {
+          id: string
+          user_id: string | null
+          full_name: string
+          email: string
+          phone: string | null
+          country: string | null
+          platform: string | null
+          account_type: string | null
+          deposit: number | null
+          kyc_url: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id?: string | null
+          full_name: string
+          email: string
+          phone?: string | null
+          country?: string | null
+          platform?: string | null
+          account_type?: string | null
+          deposit?: number | null
+          kyc_url?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string | null
+          full_name?: string
+          email?: string
+          phone?: string | null
+          country?: string | null
+          platform?: string | null
+          account_type?: string | null
+          deposit?: number | null
+          kyc_url?: string | null
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "broker_registrations_user_id_fkey",
+            columns: ["user_id"],
+            isOneToOne: false,
+            referencedRelation: "users",
+            referencedColumns: ["id"]
+          }
+        ]
       }
     }
     Views: {

@@ -8,16 +8,16 @@ interface TickerItem {
   change: number;
 }
 
-const DUMMY_DATA: TickerItem[] = [
-  { pair: 'BTC/ETH', price: 16.12, change: 0.05 },
-  { pair: 'ETH/USDT', price: 2680.45, change: -1.66 },
-  { pair: 'SOL/USDT', price: 135.80, change: 2.13 },
-  { pair: 'XRP/BTC', price: 0.0000121, change: -0.54 },
-  { pair: 'ADA/ETH', price: 0.00017, change: 1.25 },
-  { pair: 'LINK/USDT', price: 18.50, change: 3.01 },
-  { pair: 'DOGE/USDT', price: 0.158, change: -0.89 },
-  { pair: 'MATIC/BTC', price: 0.000025, change: 0.98 },
-  { pair: 'BNB/USDT', price: 589.4, change: -0.21 },
+const PAIRS = [
+  { pair: 'BTC/ETH', symbol: 'BTCETH' },
+  { pair: 'ETH/USDT', symbol: 'ETHUSDT' },
+  { pair: 'SOL/USDT', symbol: 'SOLUSDT' },
+  { pair: 'XRP/BTC', symbol: 'XRPBTC' },
+  { pair: 'ADA/ETH', symbol: 'ADAETH' },
+  { pair: 'LINK/USDT', symbol: 'LINKUSDT' },
+  { pair: 'DOGE/USDT', symbol: 'DOGEUSDT' },
+  { pair: 'MATIC/BTC', symbol: 'MATICBTC' },
+  { pair: 'BNB/USDT', symbol: 'BNBUSDT' },
 ];
 
 const TickerItemComponent: React.FC<{ item: TickerItem }> = ({ item }) => {
@@ -35,19 +35,38 @@ const TickerItemComponent: React.FC<{ item: TickerItem }> = ({ item }) => {
 };
 
 const ArbitrageTicker: React.FC = () => {
-    const [data, setData] = React.useState(DUMMY_DATA);
-    
-    React.useEffect(() => {
-        const interval = setInterval(() => {
-            setData(prevData => prevData.map(item => ({
-                ...item,
-                price: item.price * (1 + (Math.random() - 0.5) * 0.005),
-                change: item.change + (Math.random() - 0.5) * 0.1,
-            })));
-        }, 1500);
+  const [data, setData] = React.useState<TickerItem[]>([]);
+  const [prev, setPrev] = React.useState<Record<string, number>>({});
 
-        return () => clearInterval(interval);
-    }, []);
+  const fetchPrices = async () => {
+    const results = await Promise.all(
+      PAIRS.map(async ({ pair, symbol }) => {
+        try {
+          const res = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${symbol}`);
+          const json = await res.json();
+          const price = parseFloat(json.price);
+          const p = prev[symbol] ?? price;
+          const change = ((price - p) / p) * 100;
+          return { pair, price, change } as TickerItem;
+        } catch {
+          const fallback = prev[symbol] ?? 0;
+          return { pair, price: fallback, change: 0 } as TickerItem;
+        }
+      })
+    );
+    const newPrev: Record<string, number> = {};
+    results.forEach((r, idx) => {
+      newPrev[PAIRS[idx].symbol] = r.price;
+    });
+    setPrev(newPrev);
+    setData(results);
+  };
+
+  React.useEffect(() => {
+    fetchPrices();
+    const id = setInterval(fetchPrices, 15000);
+    return () => clearInterval(id);
+  }, []);
 
   const duplicatedData = [...data, ...data, ...data, ...data]; // Duplicate for seamless animation
 

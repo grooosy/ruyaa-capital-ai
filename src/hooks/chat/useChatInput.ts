@@ -3,7 +3,11 @@ import { useState, useRef } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 
 export type SubmitFn = (content: string) => Promise<boolean>;
-export const useChatInput = (submitMessage: SubmitFn) => {
+export const useChatInput = (
+  submitMessage: SubmitFn,
+  userId?: string,
+  threadId?: string
+) => {
   const [input, setInput] = useState('');
   const [isRecording, setIsRecording] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
@@ -45,6 +49,13 @@ export const useChatInput = (submitMessage: SubmitFn) => {
           const { data } = supabase.storage
             .from('chat-uploads')
             .getPublicUrl(filePath);
+          if (userId && threadId) {
+            await supabase.from('chat_recordings').insert({
+              user_id: userId,
+              thread_id: threadId,
+              file_url: data.publicUrl,
+            });
+          }
           await submitMessage(data.publicUrl);
         } else {
           console.error('Audio upload error', error);
@@ -72,6 +83,13 @@ export const useChatInput = (submitMessage: SubmitFn) => {
         const { data } = supabase.storage
           .from('chat-uploads')
           .getPublicUrl(filePath);
+        if (userId && threadId) {
+          await supabase.from('chat_recordings').insert({
+            user_id: userId,
+            thread_id: threadId,
+            file_url: data.publicUrl,
+          });
+        }
         await submitMessage(data.publicUrl);
       } else {
         console.error('File upload error', error);

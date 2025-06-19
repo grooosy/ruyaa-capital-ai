@@ -34,22 +34,22 @@ export const getModernLessonContent = (lessonIndex: number) => {
     // Lesson 1: AI-Powered Account Setup
     {
       type: 'interactive',
-      title: '🤖 AI-Powered MT4/MT5 Setup',
-      titleAr: '🤖 إعداد MT4/MT5 بالذكاء الاصطناعي',
+      title: ' AI-Powered MT4/MT5 Setup',
+      titleAr: ' إعا MT4/MT5 بالكا الاصطناع',
       description: 'Let Ruyaa AI guide you through setting up your first trading account',
-      descriptionAr: 'دع ذكاء رؤيا الاصطناعي يوجهك لإعداد حساب التداول الأول',
+      descriptionAr: 'ع كا ا الاصطناع جهك لإعا حساب التال الأل',
       content: {
         steps: [
-          '🔗 Download MT4/MT5 from your broker',
-          '🎯 AI analyzes your trading goals',
-          '⚙️ Smart account configuration',
-          '✅ Ruyaa AI validates your setup'
+          ' Download MT4/MT5 from your broker',
+          ' AI analyzes your trading goals',
+          '️ Smart account configuration',
+          ' Ruyaa AI validates your setup'
         ],
         stepsAr: [
-          '🔗 تحميل MT4/MT5 من الوسيط الخاص بك',
-          '🎯 الذكاء الاصطناعي يحلل أهداف التداول',
-          '⚙️ تكوين الحساب الذكي',
-          '✅ ذكاء رؤيا يتحقق من الإعداد'
+          ' تحل MT4/MT5 ن السط الخاص بك',
+          ' الكا الاصطناع حلل أهاف التال',
+          '️ تكن الحساب الك',
+          ' كا ا تحقق ن الإعا'
         ],
         aiTips: [
           'Ruyaa AI recommends starting with demo accounts',
@@ -57,31 +57,31 @@ export const getModernLessonContent = (lessonIndex: number) => {
           'Get personalized trading insights powered by AI'
         ],
         aiTipsAr: [
-          'ذكاء رؤيا ينصح بالبدء بالحسابات التجريبية',
-          'ذكاؤنا الاصطناعي يراقب تقدمك ويقترح التحسينات',
-          'احصل على رؤى تداول شخصية مدعومة بالذكاء الاصطناعي'
+          'كا ا نصح بالب بالحسابات التجبة',
+          'كانا الاصطناع اقب تقك قتح التحسنات',
+          'احصل على ى تال شخصة عة بالكا الاصطناع'
         ]
       }
     },
     // Lesson 2: Understanding Market Interface
     {
       type: 'interactive',
-      title: '📊 AI Market Analysis Dashboard',
-      titleAr: '📊 لوحة تحليل السوق بالذكاء الاصطناعي',
+      title: ' AI Market Analysis Dashboard',
+      titleAr: ' لحة تحلل السق بالكا الاصطناع',
       description: 'Master MT4/MT5 interface with AI-powered insights',
-      descriptionAr: 'إتقان واجهة MT4/MT5 مع رؤى الذكاء الاصطناعي',
+      descriptionAr: 'إتقان اجهة MT4/MT5 ع ى الكا الاصطناع',
       content: {
         concepts: [
-          '📈 Charts: Your window to market movements',
-          '🎯 Order Types: Market, Limit, Stop orders explained',
-          '💰 Account Info: Balance, Equity, Margin tracking',
-          '🤖 AI Signals: Real-time trading recommendations'
+          ' Charts: Your window to market movements',
+          ' Order Types: Market, Limit, Stop orders explained',
+          ' Account Info: Balance, Equity, Margin tracking',
+          ' AI Signals: Real-time trading recommendations'
         ],
         conceptsAr: [
-          '📈 الرسوم البيانية: نافذتك على حركات السوق',
-          '🎯 أنواع الأوامر: أوامر السوق والحد والإيقاف',
-          '💰 معلومات الحساب: تتبع الرصيد والحقوق والهامش',
-          '🤖 إشارات الذكاء الاصطناعي: توصيات التداول الفورية'
+          ' الس البانة: نافتك على حكات السق',
+          ' أناع الأا: أا السق الح الإقاف',
+          ' علات الحساب: تتبع الص الحقق الهاش',
+          ' إشاات الكا الاصطناع: تصات التال الفة'
         ],
         examples: [
           'Example: EUR/USD chart showing AI-detected support at 1.0500',
@@ -93,22 +93,22 @@ export const getModernLessonContent = (lessonIndex: number) => {
     // Lesson 3: First Trade with AI
     {
       type: 'interactive',
-      title: '🚀 Your First AI-Guided Trade',
-      titleAr: '🚀 صفقتك الأولى بإرشاد الذكاء الاصطناعي',
+      title: ' Your First AI-Guided Trade',
+      titleAr: ' صفقتك الألى بإشا الكا الاصطناع',
       description: 'Execute your first trade with Ruyaa AI assistance',
-      descriptionAr: 'نفذ صفقتك الأولى بمساعدة ذكاء رؤيا',
+      descriptionAr: 'نف صفقتك الألى بساعة كا ا',
       content: {
         steps: [
-          '🎯 AI identifies high-probability trade setup',
-          '📊 Smart position sizing based on your risk profile',
-          '⚡ Execute trade with AI-calculated stop loss',
-          '📱 Monitor with real-time AI updates'
+          ' AI identifies high-probability trade setup',
+          ' Smart position sizing based on your risk profile',
+          ' Execute trade with AI-calculated stop loss',
+          ' Monitor with real-time AI updates'
         ],
         stepsAr: [
-          '🎯 الذكاء الاصطناعي يحدد إعداد التداول عالي الاحتمال',
-          '📊 تحديد حجم المركز الذكي بناءً على ملف المخاطر',
-          '⚡ تنفيذ الصفقة مع وقف الخسارة المحسوب بالذكاء الاصطناعي',
-          '📱 المراقبة مع التحديثات الفورية للذكاء الاصطناعي'
+          ' الكا الاصطناع ح إعا التال عال الاحتال',
+          ' تح حج الكز الك بناً على لف الخاط',
+          ' تنف الصفقة ع قف الخساة الحسب بالكا الاصطناع',
+          ' الاقبة ع التحثات الفة للكا الاصطناع'
         ],
         realExample: {
           pair: 'EUR/USD',
@@ -123,49 +123,49 @@ export const getModernLessonContent = (lessonIndex: number) => {
     // Lesson 4: Risk Management with AI
     {
       type: 'interactive',
-      title: '🛡️ AI-Powered Risk Management',
-      titleAr: '🛡️ إدارة المخاطر بالذكاء الاصطناعي',
+      title: '️ AI-Powered Risk Management',
+      titleAr: '️ إاة الخاط بالكا الاصطناع',
       description: 'Protect your capital with intelligent risk management',
-      descriptionAr: 'احم رأس مالك بإدارة المخاطر الذكية',
+      descriptionAr: 'اح أس الك بإاة الخاط الكة',
       content: {
         concepts: [
-          '💡 2% Rule: Never risk more than 2% per trade',
-          '🎯 AI calculates optimal position sizes automatically',
-          '📊 Dynamic stop-loss adjustment based on volatility',
-          '🤖 Ruyaa AI monitors correlation risk across trades'
+          ' 2% Rule: Never risk more than 2% per trade',
+          ' AI calculates optimal position sizes automatically',
+          ' Dynamic stop-loss adjustment based on volatility',
+          ' Ruyaa AI monitors correlation risk across trades'
         ],
         conceptsAr: [
-          '💡 قاعدة 2%: لا تخاطر بأكثر من 2% لكل صفقة',
-          '🎯 الذكاء الاصطناعي يحسب أحجام المراكز المثلى تلقائياً',
-          '📊 تعديل وقف الخسارة الديناميكي بناءً على التقلبات',
-          '🤖 ذكاء رؤيا يراقب مخاطر الارتباط عبر الصفقات'
+          ' قاعة 2%: لا تخاط بأكث ن 2% لكل صفقة',
+          ' الكا الاصطناع حسب أحجا الاكز الثلى تلقائاً',
+          ' تعل قف الخساة الناك بناً على التقلبات',
+          ' كا ا اقب خاط الاتباط عب الصفقات'
         ],
         scenarios: [
-          'Scenario 1: $1000 account → Max risk $20 per trade',
-          'Scenario 2: AI detects high volatility → Reduces position size',
-          'Scenario 3: Multiple correlated trades → AI warning system'
+          'Scenario 1: $1000 account  Max risk $20 per trade',
+          'Scenario 2: AI detects high volatility  Reduces position size',
+          'Scenario 3: Multiple correlated trades  AI warning system'
         ]
       }
     },
     // Lesson 5: Advanced AI Strategies
     {
       type: 'interactive',
-      title: '🧠 Advanced AI Trading Strategies',
-      titleAr: '🧠 استراتيجيات التداول المتقدمة بالذكاء الاصطناعي',
+      title: ' Advanced AI Trading Strategies',
+      titleAr: ' استاتجات التال التقة بالكا الاصطناع',
       description: 'Unlock professional trading with Ruyaa AI algorithms',
-      descriptionAr: 'افتح التداول المحترف بخوارزميات ذكاء رؤيا',
+      descriptionAr: 'افتح التال الحتف بخازات كا ا',
       content: {
         strategies: [
-          '🔄 AI Scalping: 1-5 minute AI-detected opportunities',
-          '📈 Trend Following: AI identifies major trend shifts',
-          '💎 Swing Trading: AI spots 3-7 day profit opportunities',
-          '🌊 Mean Reversion: AI catches oversold/overbought levels'
+          ' AI Scalping: 1-5 minute AI-detected opportunities',
+          ' Trend Following: AI identifies major trend shifts',
+          ' Swing Trading: AI spots 3-7 day profit opportunities',
+          ' Mean Reversion: AI catches oversold/overbought levels'
         ],
         strategiesAr: [
-          '🔄 المضاربة بالذكاء الاصطناعي: فرص 1-5 دقائق',
-          '📈 متابعة الاتجاه: الذكاء الاصطناعي يحدد تحولات الاتجاه الرئيسية',
-          '💎 التداول المتأرجح: الذكاء الاصطناعي يرصد فرص الربح 3-7 أيام',
-          '🌊 العودة للمتوسط: الذكاء الاصطناعي يلتقط مستويات الإفراط'
+          ' الضابة بالكا الاصطناع: فص 1-5 قائق',
+          ' تابعة الاتجاه: الكا الاصطناع ح تحلات الاتجاه الئسة',
+          ' التال التأجح: الكا الاصطناع ص فص البح 3-7 أا',
+          ' العة للتسط: الكا الاصطناع لتقط ستات الإفاط'
         ],
         aiFeatures: [
           'Smart entry/exit signals with 85%+ accuracy',
@@ -184,28 +184,28 @@ export const getModernLessonContent = (lessonIndex: number) => {
 export const getQuizData = (quizNumber: number) => {
   const quizzes = [
     {
-      title: '🤖 AI Trading Mastery Quiz',
-      titleAr: '🤖 اختبار إتقان التداول بالذكاء الاصطناعي',
+      title: ' AI Trading Mastery Quiz',
+      titleAr: ' اختبا إتقان التال بالكا الاصطناع',
       questions: [
         {
           question: 'What is the main advantage of AI-powered trading with Ruyaa?',
-          questionAr: 'ما هي الميزة الرئيسية للتداول بالذكاء الاصطناعي مع رؤيا؟',
+          questionAr: 'ا ه الزة الئسة للتال بالكا الاصطناع ع ا',
           options: ['Faster execution', '85%+ signal accuracy', 'Lower fees', 'Bigger profits'],
-          optionsAr: ['تنفيذ أسرع', 'دقة الإشارات 85%+', 'رسوم أقل', 'أرباح أكبر'],
+          optionsAr: ['تنف أسع', 'قة الإشاات 85%+', 'س أقل', 'أباح أكب'],
           correct: 1
         },
         {
           question: 'How does Ruyaa AI help with risk management?',
-          questionAr: 'كيف يساعد ذكاء رؤيا في إدارة المخاطر؟',
+          questionAr: 'كف ساع كا ا ف إاة الخاط',
           options: ['Eliminates all risk', 'Calculates optimal position sizes', 'Guarantees profits', 'Predicts the future'],
-          optionsAr: ['يلغي جميع المخاطر', 'يحسب أحجام المراكز المثلى', 'يضمن الأرباح', 'يتنبأ بالمستقبل'],
+          optionsAr: ['لغ جع الخاط', 'حسب أحجا الاكز الثلى', 'ضن الأباح', 'تنبأ بالستقبل'],
           correct: 1
         },
         {
           question: 'What should you do after completing this AI academy?',
-          questionAr: 'ماذا يجب أن تفعل بعد إكمال أكاديمية الذكاء الاصطناعي؟',
+          questionAr: 'اا جب أن تفعل بع إكال أكاة الكا الاصطناع',
           options: ['Start live trading immediately', 'Practice with demo + AI signals', 'Invest all savings', 'Ignore AI recommendations'],
-          optionsAr: ['ابدأ التداول المباشر فوراً', 'تدرب مع التجريبي + إشارات الذكاء الاصطناعي', 'استثمر جميع المدخرات', 'تجاهل توصيات الذكاء الاصطناعي'],
+          optionsAr: ['ابأ التال الباش فاً', 'تب ع التجب + إشاات الكا الاصطناع', 'استث جع الخات', 'تجاهل تصات الكا الاصطناع'],
           correct: 1
         }
       ]
