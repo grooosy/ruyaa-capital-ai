@@ -30,15 +30,15 @@ const SessionsCard: React.FC<SessionsCardProps> = ({ sessions, onStartNow }) => 
     <motion.div
       initial={{ opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -8, boxShadow: "0 0 28px #00FF9D88" }}
+      whileHover={{ y: -6, boxShadow: "0 0 20px rgba(255,255,255,0.15)" }}
       transition={{ type: "spring", stiffness: 50 }}
       className="relative bg-[#1A1A1A] backdrop-blur-sm rounded-xl p-6 overflow-hidden focus-within:ring-2 focus-within:ring-green-400 outline-none group"
       tabIndex={0}
       aria-label="Arbitrage sessions"
     >
-      <div className="absolute inset-0 bg-green-500/10 blur-2xl -z-10" aria-hidden />
+      <div className="absolute inset-0 bg-black/40 blur-xl -z-10" aria-hidden />
       <div className="flex items-center mb-4 gap-2">
-        <ArrowUp className="w-6 h-6 text-green-400 drop-shadow-[0_0_8px_#00FF9D]" strokeWidth={2.2} />
+        <ArrowUp className="w-6 h-6 text-green-400" strokeWidth={2.2} />
         <h3 className="text-xl font-bold text-white tracking-tight">Arbitrage Sessions</h3>
       </div>
       {sessions && sessions.length > 0 ? (
@@ -68,7 +68,7 @@ const SessionsCard: React.FC<SessionsCardProps> = ({ sessions, onStartNow }) => 
           <p className="text-green-100 text-base">No active arbitrage.</p>
           <Button
             onClick={onStartNow}
-            className="rounded-full px-7 py-3 border-2 border-green-400 bg-green-600/20 text-green-200 shadow-green-glow hover:bg-green-400 hover:text-black focus-visible:ring-green-400 focus-visible:outline-none font-semibold text-base transition-all group animate-pulse-glow"
+            className="rounded-full px-7 py-3 border-2 border-green-400 bg-green-800/20 text-green-200 hover:bg-green-600/30 focus-visible:ring-green-400 focus-visible:outline-none font-semibold text-base transition-all"
             tabIndex={0}
           >
             Start Now<span className="ml-2"><ArrowUp className="w-4 h-4" /></span>

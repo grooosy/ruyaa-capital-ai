@@ -133,23 +133,23 @@ const WalletsCard: React.FC<WalletsCardProps> = ({ wallets, onAddWallet }) => {
     <motion.div
       initial={{ opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -8, boxShadow: "0 0 28px #00FF9D99" }}
+      whileHover={{ y: -6, boxShadow: "0 0 20px rgba(255,255,255,0.15)" }}
       transition={{ type: "spring", stiffness: 50 }}
       className="relative bg-[#1A1A1A] backdrop-blur-sm rounded-xl p-6 overflow-hidden focus-within:ring-2 focus-within:ring-green-400 outline-none group"
       tabIndex={0}
       aria-label="Wallet manager"
     >
-      <div className="absolute inset-0 bg-green-500/10 blur-2xl -z-10" aria-hidden />
+      <div className="absolute inset-0 bg-black/40 blur-xl -z-10" aria-hidden />
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <span className="rounded-full bg-green-500/10 w-7 h-7 flex items-center justify-center shadow-green-glow">
-            <Plus className="w-5 h-5 text-green-400 drop-shadow-[0_0_7px_#00FF9D]" strokeWidth={2.3} />
+          <span className="rounded-full bg-green-800/20 w-7 h-7 flex items-center justify-center">
+            <Plus className="w-5 h-5 text-green-400" strokeWidth={2.3} />
           </span>
           <h3 className="text-xl font-bold text-white tracking-tight">My Wallets</h3>
         </div>
         <Button
           onClick={handleConnectWallet}
-          className="rounded-full border-2 border-green-400 bg-green-600/20 text-green-200 shadow-green-glow px-5 py-2 hover:bg-green-400 hover:text-black transition-all focus-visible:ring-2 focus-visible:ring-green-400 font-semibold text-base inline-flex items-center gap-2"
+          className="rounded-full border-2 border-green-400 bg-green-800/20 text-green-200 hover:bg-green-600/30 transition-all focus-visible:ring-2 focus-visible:ring-green-400 font-semibold text-base inline-flex items-center gap-2"
           tabIndex={0}
           aria-label="Add wallet"
         >
