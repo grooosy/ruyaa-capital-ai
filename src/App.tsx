@@ -79,8 +79,8 @@ const App = () => {
             <Sonner />
             {/* Modern AI-styled background */}
             <div className="relative min-h-screen w-full bg-gradient-to-br from-black via-gray-950 to-black font-spacegrotesk overflow-x-hidden z-0">
-              <div className="absolute inset-0 bg-grid-pattern opacity-[0.02]" />
-              <div className="absolute inset-0 bg-gradient-to-t from-green/5 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-grid-pattern opacity-[0.02] -z-20" />
+              <div className="absolute inset-0 bg-gradient-to-t from-green/5 via-transparent to-transparent -z-10" />
               <ParticleBackground />
               <NeuralNetworkOverlay />
               {/* Content sits above the backgrounds */}

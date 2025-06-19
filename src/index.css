@@ -16,7 +16,8 @@
 
   body {
     @apply text-white font-inter;
-    background: #121212;
+    /* Futuristic dark gradient */
+    background: radial-gradient(at top left, #1a1a1a, #0a0a0a);
     background-attachment: fixed;
     min-height: 100vh;
     line-height: 1.6;
