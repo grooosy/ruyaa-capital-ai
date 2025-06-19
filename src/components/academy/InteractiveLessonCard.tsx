@@ -35,9 +35,9 @@ const InteractiveLessonCard: React.FC<InteractiveLessonProps> = ({
   };
 
   const getGradient = () => {
-    if (content.steps) return 'from-blue/20 to-green/20';
+    if (content.steps) return 'from-green/20 to-gold/20';
     if (content.concepts) return 'from-purple/20 to-gold/20';
-    if (content.strategies) return 'from-green/20 to-blue/20';
+    if (content.strategies) return 'from-gold/20 to-green/20';
     return 'from-gold/20 to-green/20';
   };
 
@@ -86,8 +86,8 @@ const InteractiveLessonCard: React.FC<InteractiveLessonProps> = ({
                 </div>
               </div>
             </div>
-            <div className="mt-3 p-2 bg-blue/10 rounded border border-blue/20">
-              <p className="text-blue-300 text-xs">{content.realExample.reasoning}</p>
+            <div className="mt-3 p-2 bg-green/10 rounded border border-green/20">
+              <p className="text-green text-xs">{content.realExample.reasoning}</p>
             </div>
           </div>
           <p className="text-gray-300">
@@ -158,7 +158,7 @@ const InteractiveLessonCard: React.FC<InteractiveLessonProps> = ({
                 
                 {/* AI-powered badge */}
                 <div className="mt-2">
-                  <Badge className="bg-gradient-to-r from-blue/20 to-purple/20 text-blue-300 border-blue/30">
+                  <Badge className="bg-gradient-to-r from-gold/20 to-green/20 text-gold border-gold/30">
                     <Brain className="w-3 h-3 mr-1" />
                     {isArabic ? 'مدعوم بالذكاء الاصطناعي' : 'AI-Powered'}
                   </Badge>
@@ -233,16 +233,16 @@ const InteractiveLessonCard: React.FC<InteractiveLessonProps> = ({
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="bg-gradient-to-r from-blue/10 to-purple/10 p-4 rounded-lg border border-blue/20"
+                      className="bg-gradient-to-r from-gold/10 to-green/10 p-4 rounded-lg border border-gold/20"
                     >
-                      <h4 className="text-blue-300 font-semibold mb-2 flex items-center gap-2">
+                      <h4 className="text-gold font-semibold mb-2 flex items-center gap-2">
                         <Sparkles className="w-4 h-4" />
                         {isArabic ? 'نصائح الذكاء الاصطناعي' : 'AI Tips'}
                       </h4>
                       <ul className="space-y-1 text-sm text-gray-300">
                         {(isArabic ? content.aiTipsAr : content.aiTips).map((tip: string, index: number) => (
                           <li key={index} className="flex items-start gap-2">
-                            <span className="text-blue-400 mt-1">•</span>
+                            <span className="text-gold mt-1">•</span>
                             {tip}
                           </li>
                         ))}
@@ -264,7 +264,7 @@ const InteractiveLessonCard: React.FC<InteractiveLessonProps> = ({
                     
                     <Button
                       onClick={handleNext}
-                      className="flex-1 bg-gradient-to-r from-green to-blue hover:from-green/90 hover:to-blue/90"
+                      className="flex-1 bg-gradient-to-r from-green to-gold hover:from-green/90 hover:to-gold/90"
                     >
                       {currentStep === steps.length - 1 ? 
                         (isArabic ? '✓ إكمال الدرس' : '✓ Complete Lesson') :

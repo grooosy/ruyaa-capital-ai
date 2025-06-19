@@ -68,7 +68,7 @@ const WalletsCard = () => {
   const getWalletTypeColor = (type: string) => {
     switch (type) {
       case "primary":
-        return "bg-blue-500/20 text-blue-400 border-blue-500/30"
+        return "bg-green/20 text-green border-green/30"
       case "crypto":
         return "bg-purple-500/20 text-purple-400 border-purple-500/30"
       case "savings":
@@ -87,7 +87,7 @@ const WalletsCard = () => {
       <Card className="bg-black/40 backdrop-blur-xl border-gray-800/50">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="text-white flex items-center gap-2">
-            <Wallet className="w-5 h-5 text-blue-400" />
+            <Wallet className="w-5 h-5 text-green" />
             Wallets & Balances
           </CardTitle>
           <div className="flex items-center gap-2">
@@ -99,7 +99,7 @@ const WalletsCard = () => {
             >
               {showBalances ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             </Button>
-            <Button variant="outline" size="sm" className="border-blue-500/30 text-blue-400">
+            <Button variant="outline" size="sm" className="border-green/30 text-green">
               <Plus className="w-4 h-4 mr-2" />
               Add Wallet
             </Button>
@@ -117,7 +117,7 @@ const WalletsCard = () => {
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-r from-gold to-green flex items-center justify-center">
                     <Wallet className="w-5 h-5 text-white" />
                   </div>
                   <div>

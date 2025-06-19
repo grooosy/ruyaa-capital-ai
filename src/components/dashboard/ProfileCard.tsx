@@ -71,7 +71,7 @@ const ProfileCard = ({ user, onEdit }: ProfileCardProps) => {
                 <div className="text-xs text-gray-400">Total Profit</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-blue-400">87%</div>
+                <div className="text-2xl font-bold text-green">87%</div>
                 <div className="text-xs text-gray-400">Success Rate</div>
               </div>
             </div>

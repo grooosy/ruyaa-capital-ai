@@ -36,7 +36,7 @@ export default function ParticleBackground() {
       vx: (Math.random() - 0.5) * 0.5,
       vy: (Math.random() - 0.5) * 0.5,
       size: Math.random() * 2 + 1,
-      color: ["#3b82f6", "#06b6d4", "#8b5cf6"][Math.floor(Math.random() * 3)],
+      color: ["#FFD700", "#00A86B", "#FFFFFF"][Math.floor(Math.random() * 3)],
       opacity: Math.random() * 0.5 + 0.2,
     })
 
@@ -79,7 +79,7 @@ export default function ParticleBackground() {
             ctx.beginPath()
             ctx.moveTo(particle.x, particle.y)
             ctx.lineTo(otherParticle.x, otherParticle.y)
-            ctx.strokeStyle = "#3b82f6"
+            ctx.strokeStyle = "#FFD700"
             ctx.globalAlpha = ((100 - distance) / 100) * 0.2
             ctx.lineWidth = 0.5
             ctx.stroke()

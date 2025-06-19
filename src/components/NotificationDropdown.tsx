@@ -73,7 +73,7 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOpen, onC
       case 'success': return <Check className="w-4 h-4 text-green" />;
       case 'warning': return <AlertCircle className="w-4 h-4 text-yellow-500" />;
       case 'ai': return <Bot className="w-4 h-4 text-primary" />;
-      default: return <TrendingUp className="w-4 h-4 text-blue-400" />;
+      default: return <TrendingUp className="w-4 h-4 text-gold" />;
     }
   };
 

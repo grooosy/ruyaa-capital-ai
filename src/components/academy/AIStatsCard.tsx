@@ -32,7 +32,7 @@ const AIStatsCard = () => {
       label: "Avg. Study Time",
       value: "2.3h",
       change: "-15min",
-      color: "text-blue-400",
+      color: "text-green",
     },
   ]
 

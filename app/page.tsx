@@ -11,7 +11,7 @@ export default function HomePage() {
       <section className="pt-32 pb-20 px-4">
         <div className="max-w-7xl mx-auto text-center">
           <div className="mb-8">
-            <GlowText className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent">
+            <GlowText className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-gold via-green to-gold bg-clip-text text-transparent">
               RUYAA AI
             </GlowText>
             <h2 className="text-2xl md:text-4xl font-light text-gray-300 mb-8">Advanced Capital Flow Intelligence</h2>
@@ -26,7 +26,7 @@ export default function HomePage() {
               <Sparkles className="w-5 h-5 mr-2" />
               Start Trading
             </FuturisticButton>
-            <button className="px-8 py-4 rounded-lg border border-gray-600 text-gray-300 hover:border-blue-500 hover:text-white transition-all duration-300">
+            <button className="px-8 py-4 rounded-lg border border-gray-600 text-gray-300 hover:border-gold hover:text-white transition-all duration-300">
               Watch Demo
             </button>
           </div>
@@ -61,7 +61,7 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <FuturisticWrapper className="group hover:scale-105 transition-transform duration-300">
-              <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-lg flex items-center justify-center mb-4 group-hover:animate-pulse-glow">
+              <div className="w-12 h-12 bg-gradient-to-r from-green to-gold rounded-lg flex items-center justify-center mb-4 group-hover:animate-pulse-glow">
                 <Brain className="w-6 h-6 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-3 text-glow">Neural Analysis</h3>
@@ -72,7 +72,7 @@ export default function HomePage() {
             </FuturisticWrapper>
 
             <FuturisticWrapper className="group hover:scale-105 transition-transform duration-300">
-              <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-blue-400 rounded-lg flex items-center justify-center mb-4 group-hover:animate-pulse-glow">
+              <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-gold rounded-lg flex items-center justify-center mb-4 group-hover:animate-pulse-glow">
                 <TrendingUp className="w-6 h-6 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-3 text-glow">Real-time Insights</h3>
@@ -82,7 +82,7 @@ export default function HomePage() {
             </FuturisticWrapper>
 
             <FuturisticWrapper className="group hover:scale-105 transition-transform duration-300">
-              <div className="w-12 h-12 bg-gradient-to-r from-cyan-500 to-purple-400 rounded-lg flex items-center justify-center mb-4 group-hover:animate-pulse-glow">
+              <div className="w-12 h-12 bg-gradient-to-r from-gold to-green rounded-lg flex items-center justify-center mb-4 group-hover:animate-pulse-glow">
                 <Shield className="w-6 h-6 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-3 text-glow">Risk Management</h3>
@@ -92,7 +92,7 @@ export default function HomePage() {
             </FuturisticWrapper>
 
             <FuturisticWrapper className="group hover:scale-105 transition-transform duration-300">
-              <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-400 rounded-lg flex items-center justify-center mb-4 group-hover:animate-pulse-glow">
+              <div className="w-12 h-12 bg-gradient-to-r from-green to-gold rounded-lg flex items-center justify-center mb-4 group-hover:animate-pulse-glow">
                 <Bot className="w-6 h-6 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-3 text-glow">AI Agents</h3>
@@ -102,7 +102,7 @@ export default function HomePage() {
             </FuturisticWrapper>
 
             <FuturisticWrapper className="group hover:scale-105 transition-transform duration-300">
-              <div className="w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-400 rounded-lg flex items-center justify-center mb-4 group-hover:animate-pulse-glow">
+              <div className="w-12 h-12 bg-gradient-to-r from-gold to-green rounded-lg flex items-center justify-center mb-4 group-hover:animate-pulse-glow">
                 <Zap className="w-6 h-6 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-3 text-glow">Lightning Fast</h3>
@@ -112,7 +112,7 @@ export default function HomePage() {
             </FuturisticWrapper>
 
             <FuturisticWrapper className="group hover:scale-105 transition-transform duration-300">
-              <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-cyan-400 rounded-lg flex items-center justify-center mb-4 group-hover:animate-pulse-glow">
+              <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-gold rounded-lg flex items-center justify-center mb-4 group-hover:animate-pulse-glow">
                 <BarChart3 className="w-6 h-6 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-3 text-glow">Advanced Analytics</h3>

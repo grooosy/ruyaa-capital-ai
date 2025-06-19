@@ -51,7 +51,7 @@ const FeatureGrid = () => {
       icon: <AiBrainIcon />,
       title: "24/7 Ruyaa AI Assistant",
       subtitle: "Always available to help",
-      color: "from-blue-500/20 to-cyan-500/20",
+      color: "from-green/20 to-gold/20",
     },
     {
       icon: <GraduationCap className="w-8 h-8" />,

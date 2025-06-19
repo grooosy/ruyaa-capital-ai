@@ -107,8 +107,8 @@ export function useDashboardData() {
           {
             label: "Portfolio Value",
             data: [85000, 92000, 88000, 105000, 118000, 125420],
-            borderColor: "#3b82f6",
-            backgroundColor: "rgba(59, 130, 246, 0.1)",
+            borderColor: "#FFD700",
+            backgroundColor: "rgba(255, 215, 0, 0.1)",
           },
           {
             label: "Profit",

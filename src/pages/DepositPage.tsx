@@ -45,8 +45,8 @@ const DepositPage: React.FC<DepositPageProps> = ({ initialTab = "deposit" }) => 
       icon: Wallet,
       title: "Crypto Wallet",
       description: "Transfer to your personal crypto wallet",
-      color: "from-blue-500/20 to-blue-500/10",
-      borderColor: "border-blue-500/30",
+      color: "from-green/20 to-green/10",
+      borderColor: "border-green/30",
     },
     {
       icon: Gift,
@@ -90,8 +90,8 @@ const DepositPage: React.FC<DepositPageProps> = ({ initialTab = "deposit" }) => 
       icon: Wallet,
       title: "Withdraw to Crypto Wallet",
       description: "Transfer to your cryptocurrency wallet",
-      color: "from-blue-500/20 to-blue-500/10",
-      borderColor: "border-blue-500/30",
+      color: "from-green/20 to-green/10",
+      borderColor: "border-green/30",
     },
     {
       icon: PiggyBank,

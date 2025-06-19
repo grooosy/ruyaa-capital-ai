@@ -13,9 +13,9 @@ const NeuralNetworkOverlay = () => (
   >
     <defs>
       <linearGradient id="neuralGradient" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stopColor="#3b82f6" />
-        <stop offset="50%" stopColor="#06b6d4" />
-        <stop offset="100%" stopColor="#8b5cf6" />
+        <stop offset="0%" stopColor="#00A86B" />
+        <stop offset="50%" stopColor="#FFD700" />
+        <stop offset="100%" stopColor="#00A86B" />
       </linearGradient>
       <filter id="glow">
         <feGaussianBlur stdDeviation="2" result="coloredBlur" />
@@ -50,16 +50,16 @@ const NeuralNetworkOverlay = () => (
     />
 
     {/* Neural nodes */}
-    <circle cx="300" cy="200" r="3" fill="#3b82f6" opacity="0.4" className="subtle-pulse" />
-    <circle cx="500" cy="150" r="2" fill="#06b6d4" opacity="0.3" />
-    <circle cx="700" cy="100" r="2.5" fill="#8b5cf6" opacity="0.5" className="subtle-pulse" />
-    <circle cx="450" cy="350" r="2" fill="#3b82f6" opacity="0.3" />
-    <circle cx="650" cy="400" r="3" fill="#06b6d4" opacity="0.4" className="subtle-pulse" />
-    <circle cx="600" cy="550" r="2" fill="#8b5cf6" opacity="0.3" />
+    <circle cx="300" cy="200" r="3" fill="#FFD700" opacity="0.4" className="subtle-pulse" />
+    <circle cx="500" cy="150" r="2" fill="#00A86B" opacity="0.3" />
+    <circle cx="700" cy="100" r="2.5" fill="#FFD700" opacity="0.5" className="subtle-pulse" />
+    <circle cx="450" cy="350" r="2" fill="#FFD700" opacity="0.3" />
+    <circle cx="650" cy="400" r="3" fill="#00A86B" opacity="0.4" className="subtle-pulse" />
+    <circle cx="600" cy="550" r="2" fill="#FFD700" opacity="0.3" />
 
     {/* Geometric elements */}
-    <polygon points="150,50 170,80 130,80" fill="#3b82f6" opacity="0.1" className="subtle-pulse" />
-    <rect x="950" y="150" width="15" height="15" fill="#06b6d4" opacity="0.1" transform="rotate(45 957.5 157.5)" />
+    <polygon points="150,50 170,80 130,80" fill="#FFD700" opacity="0.1" className="subtle-pulse" />
+    <rect x="950" y="150" width="15" height="15" fill="#00A86B" opacity="0.1" transform="rotate(45 957.5 157.5)" />
   </svg>
 )
 
