@@ -141,18 +141,6 @@ const LiveMarketTicker: React.FC = () => {
       <div className="absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-black via-black/90 to-transparent z-10" />
       <div className="absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-black via-black/90 to-transparent z-10" />
       
-      {/* Central "It works while you sleep" text */}
-      <div className="absolute inset-0 flex items-center justify-center z-10">
-        <div className="flex items-center gap-3 px-6 py-2 bg-black/40 backdrop-blur-md border border-primary/20 rounded-full">
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full animate-pulse shadow-lg shadow-primary/50" />
-            <span className="text-white font-medium text-sm tracking-wide bg-gradient-to-r from-white via-primary/80 to-secondary/80 bg-clip-text text-transparent animate-shimmer">
-              It works while you sleep.
-            </span>
-            <div className="w-2 h-2 bg-secondary rounded-full animate-pulse shadow-lg shadow-secondary/50" style={{animationDelay: '0.5s'}} />
-          </div>
-        </div>
-      </div>
       
       <div className="flex animate-marquee whitespace-nowrap py-4 opacity-60">
         {data.map((item) => (
