@@ -78,8 +78,9 @@ const DashboardPage = () => {
 
   const handleWalletConnect = () => {
     // Call Solana wallet connect if available, otherwise toast
-    if ((window as any).solana?.connect) {
-      (window as any).solana.connect();
+    const w = window as unknown as { solana?: { connect: () => void } };
+    if (w.solana?.connect) {
+      w.solana.connect();
     } else {
       toast({
         title: "Connect Wallet",

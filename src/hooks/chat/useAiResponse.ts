@@ -17,7 +17,9 @@ export const useAiResponse = () => {
     selectedAgent: AgentId,
     userId: string,
     userMessage: string,
-    addMessageMutation: any,
+    addMessageMutation: {
+      mutate: (msg: Message & { thread_id: string }) => void;
+    },
     logUsage: (userId: string, agent: AgentId, role: 'user' | 'assistant', content: string) => void
   ) => {
     if (!openRouterApiKey) {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import type { Lesson } from "@/components/academy/InteractiveLessonCard";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AcademyHero from "@/components/academy/AcademyHero";
@@ -32,7 +33,7 @@ const AcademyPage = () => {
     currentCourse?.id || "",
   );
 
-  const [selectedLesson, setSelectedLesson] = useState<any>(null);
+  const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null);
   const [completedLessons, setCompletedLessons] = useState<string[]>([]);
   const [videoKey, setVideoKey] = useState(0);
   const [showQuiz, setShowQuiz] = useState(false);
@@ -48,7 +49,7 @@ const AcademyPage = () => {
     }
   }, [lessons, progress, selectedLesson]);
 
-  const handleLessonSelect = (lesson: any) => {
+  const handleLessonSelect = (lesson: Lesson) => {
     console.log("Selecting lesson:", lesson.title);
     setSelectedLesson(lesson);
     setVideoKey((prev) => prev + 1);

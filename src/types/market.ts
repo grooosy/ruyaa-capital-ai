@@ -13,7 +13,7 @@ export interface AssetData {
 export interface MarketAsset {
   data?: AssetData;
   isLoading: boolean;
-  error: any;
+  error: unknown;
 }
 
 export interface AssetRowProps {

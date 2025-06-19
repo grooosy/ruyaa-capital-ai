@@ -53,8 +53,9 @@ const EmailAuthForm: React.FC<EmailAuthFormProps> = ({ activeTab, setActiveTab }
         });
         if (error) setErr(error.message);
       }
-    } catch (err: any) {
-      setErr(err?.message || "Unknown error");
+    } catch (err: unknown) {
+      const e = err as { message?: string } | undefined;
+      setErr(e?.message || "Unknown error");
     } finally {
       setLoading(false);
     }
@@ -68,8 +69,9 @@ const EmailAuthForm: React.FC<EmailAuthFormProps> = ({ activeTab, setActiveTab }
         provider: "google",
         options: { redirectTo: `${window.location.origin}/dashboard` },
       });
-    } catch (err: any) {
-      setErr(err?.message || "OAuth failed");
+    } catch (err: unknown) {
+      const e = err as { message?: string } | undefined;
+      setErr(e?.message || "OAuth failed");
       setLoading(false);
     }
   }

@@ -2,13 +2,26 @@
 import { useCallback } from 'react';
 import { useAiResponse } from './useAiResponse';
 
+import { AgentId } from '@/context/ChatContext';
+import type { UseMutationResult } from '@tanstack/react-query';
+import type { Message } from '@/types/chat';
+
 interface UseMessageSubmissionProps {
   threadId: string | undefined;
-  selectedAgent: any;
+  selectedAgent: AgentId | undefined;
   userId: string | undefined;
-  session: any;
-  addMessageMutation: any;
-  logUsage: (userId: string, agent: any, role: 'user' | 'assistant', content: string) => void;
+  session: unknown;
+  addMessageMutation: UseMutationResult<
+    Message,
+    unknown,
+    { thread_id: string; role: 'user' | 'assistant'; content: string }
+  >;
+  logUsage: (
+    userId: string,
+    agent: AgentId | undefined,
+    role: 'user' | 'assistant',
+    content: string
+  ) => void;
   setAuthRequired: (required: boolean) => void;
 }
 

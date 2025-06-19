@@ -4,8 +4,10 @@ import { Play } from 'lucide-react';
 import InteractiveLessonCard from './InteractiveLessonCard';
 import { useTranslation } from 'react-i18next';
 
+import type { Lesson } from './InteractiveLessonCard';
+
 interface VideoPlayerSectionProps {
-  selectedLesson: any;
+  selectedLesson: Lesson | null;
   completedLessons: string[];
   videoKey: number;
   onVideoEnd: () => void;

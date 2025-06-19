@@ -69,11 +69,12 @@ const WalletConnectButton: React.FC = () => {
         // New user or existing user without proper email, create/update account
         await createWalletUser(walletAddress);
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Wallet auth error:", error);
+      const err = error as { message?: string } | undefined;
       toast({
         title: "Connection failed",
-        description: error.message || "Failed to connect wallet. Please try again.",
+        description: err?.message || "Failed to connect wallet. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -141,7 +142,7 @@ const WalletConnectButton: React.FC = () => {
         
         navigate("/dashboard");
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Create wallet user error:", error);
       throw error;
     }
