@@ -26,15 +26,15 @@ const performanceData = [
 ];
 
 const PerformanceChart = () => (
-  <Card className="glassmorphism shadow-green-glow/20 w-full card-hover">
+  <Card className="w-full">
     <CardHeader>
       <div className="flex justify-between items-center">
         <CardTitle className="text-sm font-medium text-white font-spacegrotesk">
           AI Portfolio Performance
         </CardTitle>
         <div className="flex items-center gap-2">
-          <div className="w-2 h-2 bg-green rounded-full animate-pulse"></div>
-          <span className="text-xs text-green font-mono">LIVE</span>
+          <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
+          <span className="text-xs text-yellow-500 font-mono">LIVE</span>
         </div>
       </div>
     </CardHeader>
@@ -60,14 +60,14 @@ const PerformanceChart = () => (
             width={40}
           />
           <Tooltip
-            cursor={{ fill: "rgba(0, 255, 157, 0.1)" }}
+            cursor={{ fill: "rgba(255, 215, 0, 0.1)" }}
             contentStyle={{
-              backgroundColor: "#1A1A1A",
-              border: "1px solid rgba(0, 255, 157, 0.2)",
+              backgroundColor: "#1E1E1E",
+              border: "1px solid rgba(255, 215, 0, 0.2)",
               borderRadius: "0.75rem",
               boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
             }}
-            labelStyle={{ color: "#00FF9D" }}
+            labelStyle={{ color: "#FFD700" }}
             itemStyle={{ color: "#fff" }}
           />
           <Bar
@@ -78,8 +78,8 @@ const PerformanceChart = () => (
           />
           <defs>
             <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#00FF9D" />
-              <stop offset="100%" stopColor="#00CC7A" />
+              <stop offset="0%" stopColor="#FFD700" />
+              <stop offset="100%" stopColor="#FFA500" />
             </linearGradient>
           </defs>
         </RechartsBarChart>
@@ -90,23 +90,28 @@ const PerformanceChart = () => (
 
 const HeroDashboard: React.FC = () => {
   return (
-    <div className="flex flex-col gap-6 p-8 rounded-3xl bg-gradient-to-br from-black/90 via-gray-900/50 to-black/90 backdrop-blur-xl border border-green/20 shadow-2xl hover:shadow-green/20 transition-all duration-500 hover:border-green/30">
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-3">
-          <div className="w-3 h-3 bg-green rounded-full animate-pulse shadow-green-glow"></div>
-          <h3 className="text-xl font-bold text-white font-spacegrotesk tracking-wide">
-            AI Trading Dashboard
-          </h3>
+    <div className="flex flex-col gap-6 p-8 rounded-3xl bg-gray-900 backdrop-blur-xl border border-gray-700 shadow-xl hover:shadow-2xl transition-all duration-500 hover:border-gray-600 hover:scale-102 relative overflow-hidden">
+      {/* Geometric pattern overlay */}
+      <div className="absolute inset-0 bg-geometric-pattern opacity-30" />
+      
+      <div className="relative z-10">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-3">
+            <div className="w-3 h-3 bg-yellow-500 rounded-full animate-pulse shadow-glow"></div>
+            <h3 className="text-xl font-bold text-white font-spacegrotesk tracking-wide">
+              AI Trading Dashboard
+            </h3>
+          </div>
+          <div className="flex items-center gap-2 px-3 py-1 bg-yellow-500/10 border border-yellow-500/30 rounded-full">
+            <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
+            <span className="text-xs text-yellow-500 font-mono font-semibold">
+              LIVE
+            </span>
+          </div>
         </div>
-        <div className="flex items-center gap-2 px-3 py-1 bg-gold/10 border border-gold/30 rounded-full">
-          <div className="w-2 h-2 bg-gold rounded-full animate-pulse"></div>
-          <span className="text-xs text-gold font-mono font-semibold">
-            LIVE
-          </span>
-        </div>
+        <AIMarketTable />
+        <PerformanceChart />
       </div>
-      <AIMarketTable />
-      <PerformanceChart />
     </div>
   );
 };

@@ -50,31 +50,31 @@ const FeatureGrid: React.FC = () => {
       icon: <VerifiedShieldIcon />,
       title: "Verified Broker",
       subtitle: "1-Click Withdraw",
-      color: "from-green/20 to-emerald-500/20",
+      color: "from-gray-800/20 to-gray-700/20",
     },
     {
       icon: <AiBrainIcon />,
       title: "24/7 Ruyaa AI Assistant",
       subtitle: "Always available to help",
-      color: "from-blue-500/20 to-cyan-500/20",
+      color: "from-gray-800/20 to-gray-700/20",
     },
     {
       icon: <GraduationCap className="w-8 h-8" />,
       title: "Trading Academy + Mentor",
       subtitle: "Learn with guidance",
-      color: "from-gold/20 to-yellow-500/20",
+      color: "from-yellow-600/20 to-yellow-500/20",
     },
     {
       icon: <LineChart className="w-8 h-8" />,
       title: "Live Ticker + Signal Feed",
       subtitle: "Real-time trading data",
-      color: "from-green/20 to-emerald-500/20",
+      color: "from-gray-800/20 to-gray-700/20",
     },
     {
       icon: <ConvergingArrowsIcon />,
       title: "Crypto Arbitrage System",
       subtitle: "Auto profit scan",
-      color: "from-purple-500/20 to-violet-500/20",
+      color: "from-gray-700/20 to-gray-600/20",
     },
   ];
 
@@ -83,38 +83,35 @@ const FeatureGrid: React.FC = () => {
       <div className="w-full max-w-5xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 justify-items-center">
           {features.map((feature, index) => (
-            <div
+            <motion.div
               key={index}
               onClick={() => handleFeatureClick(feature.title)}
-              className="group relative flex flex-col items-center justify-center text-center w-44 h-44 bg-gradient-to-br from-black/90 via-gray-900/50 to-black/90 backdrop-blur-xl border border-white/10 rounded-3xl p-6 transition-all duration-500 hover:border-green/40 hover:shadow-green/30 hover:shadow-2xl cursor-pointer hover:scale-105"
+              className="group relative flex flex-col items-center justify-center text-center w-44 h-44 bg-gray-900 backdrop-blur-xl border border-gray-700 rounded-3xl p-6 transition-all duration-500 hover:border-gray-600 hover:shadow-xl cursor-pointer hover:scale-102 overflow-hidden"
+              whileHover={{ y: -5 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              {/* Dynamic AI Background Gradient */}
+              {/* Geometric background pattern */}
+              <div className="absolute inset-0 bg-geometric-pattern opacity-20" />
+              
+              {/* Dynamic gradient overlay */}
               <div
                 className={`absolute inset-0 bg-gradient-to-br ${feature.color} rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
               />
 
-              {/* Neural Network Pattern */}
-              <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] rounded-2xl" />
-
-              {/* Animated Border */}
-              <div
-                className="absolute inset-0 rounded-2xl bg-gradient-to-r from-green/0 via-green/50 to-green/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-beam-flow"
-                style={{
-                  background:
-                    "linear-gradient(90deg, transparent, rgba(16, 161, 105, 0.3), transparent)",
-                  backgroundSize: "200% 100%",
-                }}
-              />
+              {/* Animated border effect */}
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-transparent via-yellow-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-beam-flow" />
 
               <div className="relative z-10 flex flex-col items-center">
-                <div className="mb-4 p-4 rounded-2xl bg-gradient-to-br from-green/10 to-green/5 border border-green/20 transition-all duration-500 group-hover:scale-110 group-hover:border-green/60 group-hover:bg-green/20 group-hover:shadow-green/30">
+                <div className="mb-4 p-4 rounded-2xl bg-gray-800 border border-gray-600 transition-all duration-500 group-hover:scale-110 group-hover:border-yellow-500/60 group-hover:bg-gray-700 group-hover:shadow-glow">
                   {React.cloneElement(feature.icon, {
                     className:
-                      "w-8 h-8 text-green group-hover:text-white transition-all duration-500 group-hover:drop-shadow-lg",
+                      "w-8 h-8 text-yellow-500 group-hover:text-white transition-all duration-500 group-hover:drop-shadow-lg",
                   })}
                 </div>
 
-                <h3 className="text-sm font-bold text-white mb-2 transition-all duration-500 group-hover:text-green font-spacegrotesk text-center leading-tight">
+                <h3 className="text-sm font-bold text-white mb-2 transition-all duration-500 group-hover:text-yellow-500 font-spacegrotesk text-center leading-tight">
                   {feature.title}
                 </h3>
                 <p className="text-xs text-gray-400 group-hover:text-gray-200 transition-colors duration-500 text-center leading-relaxed">
@@ -122,9 +119,9 @@ const FeatureGrid: React.FC = () => {
                 </p>
               </div>
 
-              {/* AI Pulse Effect */}
-              <div className="absolute inset-0 rounded-2xl border border-green/0 group-hover:border-green/30 group-hover:animate-pulse-subtle transition-all duration-500" />
-            </div>
+              {/* Subtle glow effect */}
+              <div className="absolute inset-0 rounded-2xl border border-transparent group-hover:border-yellow-500/30 group-hover:animate-pulse-subtle transition-all duration-500" />
+            </motion.div>
           ))}
         </div>
       </div>
@@ -144,7 +141,7 @@ const FeatureGrid: React.FC = () => {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-gradient-to-br from-black/95 via-gray-900/90 to-black/95 backdrop-blur-xl border border-green/20 rounded-2xl p-8 max-w-md w-full relative"
+              className="bg-gray-900 backdrop-blur-xl border border-gray-700 rounded-2xl p-8 max-w-md w-full relative"
             >
               <button
                 onClick={() => setShowSignalModal(false)}
@@ -154,8 +151,8 @@ const FeatureGrid: React.FC = () => {
               </button>
 
               <div className="text-center">
-                <div className="w-16 h-16 bg-green/10 border border-green/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <LineChart className="w-8 h-8 text-green" />
+                <div className="w-16 h-16 bg-gray-800 border border-gray-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <LineChart className="w-8 h-8 text-yellow-500" />
                 </div>
 
                 <h3 className="text-xl font-bold text-white mb-4 font-spacegrotesk">
@@ -168,15 +165,15 @@ const FeatureGrid: React.FC = () => {
                 </p>
 
                 <div className="flex items-center gap-2 justify-center mb-4">
-                  <div className="w-2 h-2 bg-green rounded-full animate-pulse"></div>
-                  <span className="text-green text-sm font-medium">
+                  <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
+                  <span className="text-yellow-500 text-sm font-medium">
                     AI Engine Active
                   </span>
                 </div>
 
                 <button
                   onClick={() => setShowSignalModal(false)}
-                  className="w-full bg-green text-black py-3 rounded-xl font-semibold hover:bg-green/90 transition-colors"
+                  className="w-full bg-yellow-500 text-black py-3 rounded-xl font-semibold hover:bg-yellow-400 transition-colors hover:scale-102 duration-300"
                 >
                   Join Waitlist
                 </button>

@@ -1,8 +1,7 @@
-
 "use client";
 
 // ParticleBackground renders a subtle animated particle effect used on all pages
-// to provide an AI-inspired atmosphere without distracting from content.
+// to provide a modern dark atmosphere without distracting from content.
 
 import { useEffect, useMemo, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
@@ -51,14 +50,14 @@ const ParticleBackground = () => {
       },
       particles: {
         color: {
-          value: ["#00d48b", "#b7902b", "#ffffff"],
+          value: ["#FFD700", "#FFA500", "#ffffff"],
         },
         links: {
-          color: "#00d48b",
+          color: "#FFD700",
           distance: 120,
           enable: true,
-          opacity: 0.05,
-          width: 0.8,
+          opacity: 0.03,
+          width: 0.5,
         },
         move: {
           direction: "none",
@@ -67,22 +66,22 @@ const ParticleBackground = () => {
             default: "bounce",
           },
           random: false,
-          speed: 0.3,
+          speed: 0.2,
           straight: false,
         },
         number: {
           density: {
             enable: true,
-            area: 1200,
+            area: 1500,
           },
-          value: 80,
+          value: 60,
         },
         opacity: {
-          value: { min: 0.05, max: 0.2 },
+          value: { min: 0.02, max: 0.1 },
           animation: {
             enable: true,
-            speed: 0.8,
-            minimumValue: 0.05,
+            speed: 0.5,
+            minimumValue: 0.02,
             sync: false
           }
         },
@@ -90,11 +89,11 @@ const ParticleBackground = () => {
           type: ["circle", "triangle"],
         },
         size: {
-          value: { min: 0.5, max: 1.5 },
+          value: { min: 0.3, max: 1 },
           animation: {
             enable: true,
-            speed: 1,
-            minimumValue: 0.5,
+            speed: 0.8,
+            minimumValue: 0.3,
             sync: false
           }
         },

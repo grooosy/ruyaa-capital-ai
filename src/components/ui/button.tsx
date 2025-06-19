@@ -10,16 +10,16 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-gradient-to-r from-green to-green/90 text-black hover:from-green/90 hover:to-green/80 shadow-green-glow/60 font-semibold transition-all duration-300 hover:scale-105",
+          "bg-gradient-to-r from-yellow-600 to-yellow-500 text-black hover:from-yellow-500 hover:to-yellow-400 shadow-lg font-semibold transition-all duration-300 hover:scale-102 hover:shadow-xl",
         destructive:
-          "bg-gradient-to-r from-red-500 to-red-600 text-white hover:from-red-600 hover:to-red-700 shadow-red-glow/50 transition-all duration-300",
+          "bg-gradient-to-r from-red-600 to-red-500 text-white hover:from-red-500 hover:to-red-400 shadow-lg transition-all duration-300 hover:scale-102",
         outline:
-          "border border-green/50 bg-transparent hover:bg-green/10 hover:border-green text-green backdrop-blur-sm transition-all duration-300 hover:shadow-green/20",
+          "border border-gray-600 bg-transparent hover:bg-gray-800 hover:border-gray-500 text-white backdrop-blur-sm transition-all duration-300 hover:scale-102",
         secondary:
-          "bg-gradient-to-r from-gold to-gold/90 text-black hover:from-gold/90 hover:to-gold/80 shadow-gold-glow/60 font-semibold transition-all duration-300 hover:scale-105",
+          "bg-gradient-to-r from-gray-800 to-gray-700 text-white hover:from-gray-700 hover:to-gray-600 shadow-lg font-semibold transition-all duration-300 hover:scale-102 border border-gray-600",
         ghost:
-          "hover:bg-white/10 hover:text-green transition-all duration-300 backdrop-blur-sm",
-        link: "text-green underline-offset-4 hover:underline hover:text-green/80 transition-colors duration-300",
+          "hover:bg-gray-800 hover:text-white transition-all duration-300 backdrop-blur-sm hover:scale-102",
+        link: "text-yellow-500 underline-offset-4 hover:underline hover:text-yellow-400 transition-colors duration-300",
       },
       size: {
         default: "h-10 px-4 py-2",

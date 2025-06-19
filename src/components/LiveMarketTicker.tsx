@@ -153,7 +153,7 @@ const LiveMarketTicker: React.FC = () => {
 
   const getPriceColor = (changePercent?: number) => {
     if (!changePercent) return "text-gray-400";
-    if (changePercent > 0) return "text-green";
+    if (changePercent > 0) return "text-yellow-500";
     if (changePercent < 0) return "text-red-400";
     return "text-gray-400";
   };
@@ -166,25 +166,25 @@ const LiveMarketTicker: React.FC = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 z-20 w-full overflow-hidden border-b border-green/10 bg-gradient-to-r from-black via-gray-900/95 to-black backdrop-blur-xl">
-      {/* Modern "It works while you sleep" banner */}
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-secondary/5 to-primary/5 animate-pulse-slow" />
+    <div className="fixed top-0 left-0 z-20 w-full overflow-hidden border-b border-gray-700 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 backdrop-blur-xl">
+      {/* Modern dark banner */}
+      <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 via-gray-800/90 to-gray-900/90 animate-pulse-slow" />
       
-      <div className="absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-black via-black/90 to-transparent z-10" />
-      <div className="absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-black via-black/90 to-transparent z-10" />
+      <div className="absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-gray-900 via-gray-900/90 to-transparent z-10" />
+      <div className="absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-gray-900 via-gray-900/90 to-transparent z-10" />
       
       
-      <div className="flex animate-marquee whitespace-nowrap py-4 opacity-60">
+      <div className="flex animate-marquee whitespace-nowrap py-4 opacity-80">
         {data.map((item) => (
           <div
             key={item.label}
-            className="flex items-center gap-4 px-10 border-r border-white/5 last:border-r-0"
+            className="flex items-center gap-4 px-10 border-r border-gray-700 last:border-r-0"
           >
             <div className="flex items-center gap-2">
               <div
                 className={`w-2 h-2 rounded-full animate-pulse ${
                   item.changePercent && item.changePercent > 0
-                    ? "bg-green shadow-green-glow"
+                    ? "bg-yellow-500 shadow-glow"
                     : item.changePercent && item.changePercent < 0
                       ? "bg-red-400 shadow-red-400/50"
                       : "bg-gray-400"
@@ -204,7 +204,7 @@ const LiveMarketTicker: React.FC = () => {
                 <span
                   className={`text-xs font-medium ${
                     item.signal === "bullish"
-                      ? "text-green"
+                      ? "text-yellow-500"
                       : item.signal === "bearish"
                         ? "text-red-400"
                         : "text-gray-400"
@@ -218,7 +218,7 @@ const LiveMarketTicker: React.FC = () => {
                 <div
                   className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${
                     item.changePercent > 0
-                      ? "bg-green/10 text-green border border-green/20"
+                      ? "bg-yellow-500/10 text-yellow-500 border border-yellow-500/20"
                       : item.changePercent < 0
                         ? "bg-red-400/10 text-red-400 border border-red-400/20"
                         : "bg-gray-400/10 text-gray-400 border border-gray-400/20"
