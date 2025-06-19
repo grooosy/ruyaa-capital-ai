@@ -25,9 +25,9 @@ export default {
     extend: {
       colors: {
         // Futuristic AI Color Palette
-        bg: "#0B0B0F",
-        primary: "#FFB800", // Golden future
-        secondary: "#00C896", // AI emerald
+        bg: "#0D0D0D",
+        primary: "#7FFF00", // Neon green accent
+        secondary: "#00C896", // Secondary teal
         surface: "#161618",
         "surface-light": "#1F1F23",
         

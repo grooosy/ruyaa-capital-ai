@@ -16,6 +16,12 @@ OPENROUTER_API_KEY=<your_api_key>
 
 The app will throw an error on startup if neither variable is defined. See `.env.example` for all available options.
 
+## Deployment
+
+For a quick review before merging to `main`, deploy the `staging` branch to Vercel.
+When you're ready for production, deploy `main` to your production domain first,
+then update the official domain's DNS.
+
 ## How can I edit this code?
 
 There are several ways of editing your application.

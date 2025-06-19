@@ -34,7 +34,7 @@ const Index = () => {
     }
   }, [navigate]);
 
-  const handleStartNowClick = () => {
+  const handleSeeHowClick = () => {
     const aiSection = document.getElementById("ai");
     if (aiSection) {
       aiSection.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -47,18 +47,33 @@ const Index = () => {
     }
   };
 
+  const handleStartTrading = () => {
+    navigate("/deposit?tab=deposit");
+  };
+
   return (
     <div
       className="relative min-h-screen bg-bg"
       dir={i18n.language === "ar" ? "rtl" : "ltr"}
     >
       <ParticleBackground />
+      {/* Soft candlestick wallpaper */}
+      <img
+        src="/candles.svg"
+        alt="candlestick background"
+        className="pointer-events-none absolute inset-0 -z-20 w-full h-full object-cover opacity-10"
+      />
       <Navbar />
       <LiveMarketTicker />
 
       <main className="pt-32 pb-20 w-full">
         {/* Hero Section */}
         <section className="relative w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between px-6 gap-12">
+          <img
+            src="/lovable-uploads/4fc94ce9-7009-46fc-ad4b-ed3edffc3240.png"
+            alt="RuyaaCapital.AI logo"
+            className="absolute top-0 left-0 w-32 md:w-40 opacity-80"
+          />
           {/* Enhanced Modern AI Background */}
           <div className="absolute inset-0 -z-10 overflow-hidden rounded-3xl">
             {/* Base gradient background */}
@@ -81,7 +96,7 @@ const Index = () => {
                   y2="100%"
                 >
                   <stop offset="0%" stopColor="#00C896" stopOpacity="0.4" />
-                  <stop offset="50%" stopColor="#FFB800" stopOpacity="0.3" />
+                  <stop offset="50%" stopColor="#7FFF00" stopOpacity="0.3" />
                   <stop offset="100%" stopColor="#00C896" stopOpacity="0.4" />
                 </linearGradient>
                 <linearGradient
@@ -91,9 +106,9 @@ const Index = () => {
                   x2="100%"
                   y2="100%"
                 >
-                  <stop offset="0%" stopColor="#FFB800" stopOpacity="0.3" />
+                  <stop offset="0%" stopColor="#7FFF00" stopOpacity="0.3" />
                   <stop offset="50%" stopColor="#00C896" stopOpacity="0.2" />
-                  <stop offset="100%" stopColor="#FFB800" stopOpacity="0.3" />
+                  <stop offset="100%" stopColor="#7FFF00" stopOpacity="0.3" />
                 </linearGradient>
               </defs>
 
@@ -210,24 +225,21 @@ const Index = () => {
           <div className="lg:w-1/2 text-center lg:text-start">
             <h1 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
               {t("hero_title_1")}{" "}
-              <span className="text-emerald-700">{t("hero_title_2")}</span>
+              <span className="text-primary">{t("hero_title_2")}</span>
             </h1>
 
             <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-              <span className="text-yellow-600 font-semibold">
-                It works while you sleep.
-              </span>{" "}
-              We make it do things for you, not only reply to you.
+              {t("hero_description")}
             </p>
 
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 justify-center lg:justify-start">
               <motion.button
-                onClick={handleStartNowClick}
+                onClick={handleStartTrading}
                 className="btn-ai-primary inline-flex items-center gap-2"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Open Account • Start Now
+                {t("hero_button")}
                 <ArrowRight className="w-5 h-5 rtl:rotate-180" />
               </motion.button>
 
@@ -244,6 +256,15 @@ const Index = () => {
                   animate={{ scale: [1, 1.2, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
+              </motion.button>
+
+              <motion.button
+                onClick={handleSeeHowClick}
+                className="btn-ai-secondary inline-flex items-center gap-2"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                See How It Works
               </motion.button>
             </div>
           </div>

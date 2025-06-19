@@ -9,8 +9,11 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
-    // @ts-ignore
-    allowedHosts: process.env.TEMPO === "true" ? true : undefined,
+    // Allow configurable hosts via env, fallback to TEMPO flag for development
+    // @ts-expect-error -- allowedHosts expects string[] | string
+    allowedHosts:
+      process.env.ALLOWED_HOSTS?.split(',').map((h) => h.trim()).filter(Boolean) ||
+      (process.env.TEMPO === "true" ? "all" : undefined),
   },
   plugins: [
     react(),
