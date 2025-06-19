@@ -354,7 +354,7 @@ const WelcomePage: React.FC = () => {
               >
                 <Button
                   onClick={handleContinue}
-                  className="group relative px-12 py-6 text-xl font-bold bg-gold hover:bg-gold/90 text-[#0D0D0D] rounded-2xl shadow-gold-glow transition-all duration-300 hover:scale-105"
+                  className="group relative px-12 py-6 text-xl font-bold bg-gold hover:bg-gold/90 text-[#0D0D0D] rounded-2xl transition-all duration-300 hover:scale-105"
                 >
                   <span className="relative z-10 flex items-center gap-3">
                     {currentText.continue}
@@ -363,16 +363,6 @@ const WelcomePage: React.FC = () => {
                     />
                   </span>
 
-                  {/* Button glow effect */}
-                  <motion.div
-                    className="absolute inset-0 bg-gold rounded-2xl blur-xl opacity-50"
-                    animate={{ scale: [1, 1.05, 1] }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  />
                 </Button>
               </motion.div>
 

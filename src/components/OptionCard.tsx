@@ -47,14 +47,14 @@ const OptionCard: React.FC<OptionCardProps> = ({
         {href ? (
           <a
             href={href}
-            className={`inline-flex items-center justify-center w-full py-2 rounded-md bg-gold hover:bg-gold/90 text-[#0D0D0D] font-semibold border border-gold/80 shadow-gold-glow transition-all duration-300 ${comingSoon ? "cursor-not-allowed opacity-50" : ""}`}
+            className={`inline-flex items-center justify-center w-full py-2 rounded-md bg-secondary text-gold font-semibold border border-gold/50 hover:bg-secondary/80 transition-colors duration-200 ${comingSoon ? "cursor-not-allowed opacity-50" : ""}`}
           >
             {comingSoon ? "Coming Soon" : "Select"}
             {!comingSoon && <ArrowRight className="w-4 h-4 ml-2" />}
           </a>
         ) : (
           <Button
-            className={`w-full bg-gold hover:bg-gold/90 text-[#0D0D0D] font-semibold border border-gold/80 shadow-gold-glow transition-all duration-300 ${comingSoon ? "cursor-not-allowed opacity-50" : ""}`}
+            className={`w-full bg-secondary text-gold font-semibold border border-gold/50 hover:bg-secondary/80 transition-colors duration-200 ${comingSoon ? "cursor-not-allowed opacity-50" : ""}`}
             disabled={comingSoon}
           >
             {comingSoon ? "Coming Soon" : "Select"}
@@ -64,7 +64,7 @@ const OptionCard: React.FC<OptionCardProps> = ({
       </CardContent>
     </Card>
     <div
-      className="absolute inset-0 bg-gold/20 rounded-lg blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10"
+      className="absolute inset-0 bg-gold/10 rounded-lg blur-xl opacity-0 group-hover:opacity-10 transition-opacity duration-300 -z-10"
     />
   </motion.div>
 );

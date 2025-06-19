@@ -29,7 +29,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile, email }) => {
     <motion.div
       initial={{ opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -8, boxShadow: "0 0 28px #00FF9D99" }}
+      whileHover={{ y: -4, scale: 1.02 }}
       transition={{ type: "spring", stiffness: 50, damping: 16 }}
       className="relative bg-[#1A1A1A] backdrop-blur-sm rounded-xl p-6 overflow-hidden focus-within:ring-2 focus-within:ring-green-400 outline-none group"
       tabIndex={0}
