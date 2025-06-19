@@ -149,9 +149,9 @@ const Navbar: React.FC = () => {
           </div>
           <Link
             to="/#footer"
-            className="hover:text-primary transition-colors font-semibold"
+            className="px-3 py-1.5 rounded-md text-gray-200 hover:bg-gray-800 transition-colors"
           >
-            {t("contact")}
+            {t("home")}
           </Link>
           {/* Notification Button */}
           <div className="relative">
