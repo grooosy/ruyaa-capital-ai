@@ -24,7 +24,7 @@ const HumanHelpModal: React.FC<HumanHelpModalProps> = ({ open, onOpenChange }) =
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const openrouterApiKey = import.meta.env.VITE_OPENROUTER_API_KEY;
+  const openrouterApiKey = process.env.NEXT_PUBLIC_OPENROUTER_API_KEY;
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {

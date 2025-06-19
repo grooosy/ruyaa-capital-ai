@@ -1,5 +1,5 @@
-import { EnhancedNavbar } from "@/components/enhanced-navbar"
-import { FuturisticWrapper, FuturisticButton, GlowText } from "@/components/futuristic-wrapper"
+import { EnhancedNavbar } from "../components/enhanced-navbar"
+import { FuturisticWrapper, FuturisticButton, GlowText } from "../components/futuristic-wrapper"
 import { Brain, TrendingUp, Shield, Zap, ArrowRight, Bot, BarChart3, Sparkles } from "lucide-react"
 
 export default function HomePage() {

@@ -4,9 +4,9 @@ import { AgentId } from "@/context/ChatContext";
 import { systemPrompts, modelMap } from "@/config/agentConfig";
 
 const openRouterApiKey =
-  import.meta.env.VITE_OPENROUTER_API_KEY || "placeholder-api-key";
+  process.env.NEXT_PUBLIC_OPENROUTER_API_KEY || "placeholder-api-key";
 
-if (!import.meta.env.VITE_OPENROUTER_API_KEY) {
+if (!process.env.NEXT_PUBLIC_OPENROUTER_API_KEY) {
   console.warn(
     "OpenRouter API key not configured. Please define VITE_OPENROUTER_API_KEY in your environment for full AI functionality.",
   );
