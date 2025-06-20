@@ -149,7 +149,7 @@ const WalletsCard: React.FC<WalletsCardProps> = ({ wallets, onAddWallet }) => {
         </div>
         <Button
           onClick={handleConnectWallet}
-          className="rounded-full border-2 border-green-400 bg-green-800/20 text-green-200 hover:bg-green-600/30 transition-all focus-visible:ring-2 focus-visible:ring-green-400 font-semibold text-base inline-flex items-center gap-2"
+          className="rounded-full px-4 py-2 font-semibold text-base inline-flex items-center gap-2"
           tabIndex={0}
           aria-label="Add wallet"
         >

@@ -68,7 +68,7 @@ const SessionsCard: React.FC<SessionsCardProps> = ({ sessions, onStartNow }) => 
           <p className="text-green-100 text-base">No active arbitrage.</p>
           <Button
             onClick={onStartNow}
-            className="rounded-full px-7 py-3 border-2 border-green-400 bg-green-800/20 text-green-200 hover:bg-green-600/30 focus-visible:ring-green-400 focus-visible:outline-none font-semibold text-base transition-all"
+            className="rounded-full px-7 py-3 font-semibold text-base"
             tabIndex={0}
           >
             Start Now<span className="ml-2"><ArrowUp className="w-4 h-4" /></span>
