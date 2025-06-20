@@ -18,7 +18,7 @@ export default function LangToggle() {
       className="hover:bg-transparent hover:text-gold transition-colors font-semibold p-0"
       onClick={switchLang}
     >
-      {i18n.language === "ar" ? "EN" : "ع"}
+      {i18n.language === "ar" ? "EN" : "العربية"}
     </Button>
   );
 }
