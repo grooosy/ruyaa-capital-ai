@@ -79,8 +79,13 @@ const ChatWidget = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed bottom-24 right-6 z-[99] w-[400px] h-[600px]"
-            style={{ originY: "bottom", originX: "right" }}
+            className="fixed bottom-24 right-6 z-[99] md:w-[400px] md:h-[600px]"
+            style={{
+              width: "min(400px, calc(100vw - 2rem))",
+              height: "80vh",
+              originY: "bottom",
+              originX: "right",
+            }}
           >
             <div className="relative h-full">
               {/* Modern dark themed container */}

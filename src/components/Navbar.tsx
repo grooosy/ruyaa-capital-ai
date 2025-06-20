@@ -30,6 +30,11 @@ const Navbar: React.FC = () => {
   const { data: profile } = useProfile(session);
   const navigate = useNavigate();
 
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setMobileOpen(false);
+  };
+
   React.useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
@@ -165,7 +170,7 @@ const Navbar: React.FC = () => {
             </div>
           </div>
           <Link
-            to="/#footer"
+            to="/"
             className="px-3 py-1.5 rounded-md text-gray-200 hover:bg-gray-800 transition-colors"
           >
             {t("home")}
@@ -201,8 +206,15 @@ const Navbar: React.FC = () => {
           <LangToggle />
         </div>
         {mobileOpen && (
-          <div className="md:hidden absolute top-full left-0 w-full bg-black/90 border-t border-primary/20 shadow-ai-glow backdrop-blur-xl">
+          <div className="md:hidden fixed top-16 left-0 w-full bg-black/90 border-t border-primary/20 shadow-ai-glow backdrop-blur-xl z-40">
             <div className="flex flex-col items-center py-4 space-y-4">
+              <Link
+                to="/"
+                onClick={() => setMobileOpen(false)}
+                className="font-semibold text-gray-200 hover:text-primary"
+              >
+                {t("home")}
+              </Link>
               <Link
                 to="/how-it-works"
                 onClick={() => setMobileOpen(false)}
@@ -239,13 +251,21 @@ const Navbar: React.FC = () => {
                 Withdraw
               </Link>
               {session ? (
-                <Link
-                  to="/profile"
-                  onClick={() => setMobileOpen(false)}
-                  className="font-semibold text-gray-200 hover:text-primary"
-                >
-                  Profile
-                </Link>
+                <>
+                  <Link
+                    to="/profile"
+                    onClick={() => setMobileOpen(false)}
+                    className="font-semibold text-gray-200 hover:text-primary"
+                  >
+                    Profile
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="font-semibold text-gray-200 hover:text-secondary"
+                  >
+                    {t("logout")}
+                  </button>
+                </>
               ) : (
                 <Link
                   to="/auth"
