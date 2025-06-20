@@ -23,8 +23,8 @@ Ruyaa-AI is an AI-powered trading and assistant engine built with Vite, React an
 This project is ready for deployment on [Vercel](https://vercel.com/). Configure the included `vercel.json` and set your environment variables in the Vercel dashboard. Point the domain **ruyaacapital.com** to your Vercel project for production.
 
 ## Environment Variables
-See `.env.example` for the full list:
-- `VITE_OPENROUTER_API_KEY` – OpenRouter API key (client side)
+-See `.env.example` for the full list:
+- `VITE_OPENROUTER_API_KEY` – OpenRouter API key (client side, e.g. `sk-or-...`)
 - `OPENROUTER_API_KEY` – Optional fallback key name
 - The agents default to the free `google/gemini-pro` model via OpenRouter
 - `VITE_TWELVEDATA_API_KEY` – TwelveData API key

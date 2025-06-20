@@ -9,13 +9,21 @@ import { Session } from "@supabase/supabase-js";
 import LangToggle from "./LangToggle";
 import { useProfile } from "@/hooks/useProfile";
 import UserMenu from "./UserMenu";
-import { Bell, Users, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  Bell,
+  Users,
+  ChevronLeft,
+  ChevronRight,
+  Menu,
+  X,
+} from "lucide-react";
 import NotificationDropdown from "./NotificationDropdown";
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = React.useState(false);
   const [depositMenu, setDepositMenu] = React.useState(false);
   const [notificationOpen, setNotificationOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = React.useState(false);
   const { t, i18n } = useTranslation();
   const isArabic = i18n.language === "ar";
   const [session, setSession] = React.useState<Session | null>(null);
@@ -44,7 +52,7 @@ const Navbar: React.FC = () => {
 
   return (
     <header
-      className={`fixed z-30 top-12 left-0 w-full transition-all duration-500 ${
+      className={`fixed z-30 top-0 md:top-12 left-0 w-full transition-all duration-500 ${
         scrolled
           ? "backdrop-blur-xl bg-black/80 border-b border-primary/20 shadow-ai-glow"
           : "bg-transparent"
@@ -77,6 +85,15 @@ const Navbar: React.FC = () => {
           >
             <Users className="w-4 h-4" />
             Who We Are
+          </button>
+
+          {/* Mobile Menu Toggle */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="md:hidden p-2 rounded-lg hover:bg-white/5 transition-colors"
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
 
           <div className="flex items-center gap-4">
@@ -183,6 +200,65 @@ const Navbar: React.FC = () => {
           )}
           <LangToggle />
         </div>
+        {mobileOpen && (
+          <div className="md:hidden absolute top-full left-0 w-full bg-black/90 border-t border-primary/20 shadow-ai-glow backdrop-blur-xl">
+            <div className="flex flex-col items-center py-4 space-y-4">
+              <Link
+                to="/how-it-works"
+                onClick={() => setMobileOpen(false)}
+                className="font-semibold text-gray-200 hover:text-primary"
+              >
+                {t("how_it_works")}
+              </Link>
+              <Link
+                to="/agents"
+                onClick={() => setMobileOpen(false)}
+                className="font-semibold text-gray-200 hover:text-secondary"
+              >
+                {t("ai_agents")}
+              </Link>
+              <Link
+                to="/academy"
+                onClick={() => setMobileOpen(false)}
+                className="font-semibold text-gray-200 hover:text-primary"
+              >
+                {isArabic ? "أكاديمية" : "Academy"}
+              </Link>
+              <Link
+                to="/deposit"
+                onClick={() => setMobileOpen(false)}
+                className="font-semibold text-gray-200 hover:text-secondary"
+              >
+                Deposit
+              </Link>
+              <Link
+                to="/withdraw"
+                onClick={() => setMobileOpen(false)}
+                className="font-semibold text-gray-200 hover:text-secondary"
+              >
+                Withdraw
+              </Link>
+              {session ? (
+                <Link
+                  to="/profile"
+                  onClick={() => setMobileOpen(false)}
+                  className="font-semibold text-gray-200 hover:text-primary"
+                >
+                  Profile
+                </Link>
+              ) : (
+                <Link
+                  to="/auth"
+                  onClick={() => setMobileOpen(false)}
+                  className="font-semibold text-gray-200 hover:text-primary"
+                >
+                  {t("login")}
+                </Link>
+              )}
+              <LangToggle />
+            </div>
+          </div>
+        )}
       </nav>
     </header>
   );
