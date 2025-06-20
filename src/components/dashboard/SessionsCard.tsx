@@ -17,7 +17,7 @@ const getStatusClass = (status: string | null) => {
     case "active":
       return "bg-green-500/15 text-green-300 border border-green-400";
     case "pending":
-      return "bg-yellow-400/10 text-yellow-200 border border-yellow-300";
+      return "bg-black/40 text-white border border-gray-600";
     case "closed":
       return "bg-red-500/10 text-red-300 border border-red-400";
     default:
@@ -32,7 +32,7 @@ const SessionsCard: React.FC<SessionsCardProps> = ({ sessions, onStartNow }) => 
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ y: -6, boxShadow: "0 0 20px rgba(255,255,255,0.15)" }}
       transition={{ type: "spring", stiffness: 50 }}
-      className="relative bg-[#1A1A1A] backdrop-blur-sm rounded-xl p-6 overflow-hidden focus-within:ring-2 focus-within:ring-green-400 outline-none group"
+      className="relative bg-[#1A1A1A] backdrop-blur-sm rounded-xl p-6 overflow-hidden focus-within:ring-2 focus-within:ring-green-400 outline-none group before:absolute before:inset-0 before:rounded-xl before:pointer-events-none before:bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.1),transparent)]"
       tabIndex={0}
       aria-label="Arbitrage sessions"
     >
@@ -68,7 +68,7 @@ const SessionsCard: React.FC<SessionsCardProps> = ({ sessions, onStartNow }) => 
           <p className="text-green-100 text-base">No active arbitrage.</p>
           <Button
             onClick={onStartNow}
-            className="rounded-full px-7 py-3 border-2 border-green-400 bg-green-800/20 text-green-200 hover:bg-green-600/30 focus-visible:ring-green-400 focus-visible:outline-none font-semibold text-base transition-all"
+            className="rounded-full px-7 py-3 font-semibold text-base"
             tabIndex={0}
           >
             Start Now<span className="ml-2"><ArrowUp className="w-4 h-4" /></span>

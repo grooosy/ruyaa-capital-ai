@@ -6,7 +6,8 @@ import { Message } from '@/types/chat';
 import { AgentId } from '@/context/ChatContext';
 import { fetchAiResponse, getFallbackResponse } from '@/services/aiService';
 
-const openRouterApiKey = import.meta.env.VITE_OPENROUTER_API_KEY;
+const openRouterApiKey =
+  import.meta.env.VITE_OPENROUTER_API_KEY || import.meta.env.OPENROUTER_API_KEY;
 
 export const useAiResponse = () => {
   const [isAiLoading, setIsAiLoading] = useState(false);

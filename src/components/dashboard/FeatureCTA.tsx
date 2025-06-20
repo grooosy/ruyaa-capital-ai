@@ -24,7 +24,7 @@ const FeatureCTA: React.FC<FeatureCTAProps> = ({ onActivate }) => {
       <h3 className="text-xl font-bold text-white mb-3 tracking-tight">Unlock &amp; Start Profiting</h3>
       <Button
         onClick={onActivate}
-        className="px-8 py-3 rounded-full border-2 border-green-400 text-green-200 bg-green-800/20 hover:bg-green-600/30 focus-visible:ring-2 focus-visible:ring-green-400 font-semibold text-base transition-all"
+        className="px-8 py-3 rounded-full font-semibold text-base"
         tabIndex={0}
       >
         Activate Features

@@ -1,6 +1,6 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Bot, X } from "lucide-react";
+import { X } from "lucide-react";
 import ChatPane from "./ChatPane";
 import { useChatContext } from "@/context/ChatContext";
 import { useLocation } from "react-router-dom";
@@ -26,15 +26,15 @@ const ChatWidget = () => {
       <div className="fixed bottom-6 right-6 z-[100]">
         <motion.button
           onClick={toggleChat}
-          className="relative bg-gradient-to-r from-gray-900/95 to-black/95 border border-green/30 text-white p-4 rounded-2xl shadow-2xl hover:shadow-green/20 transition-all duration-300 flex items-center justify-center backdrop-blur-sm"
+          className="relative bg-gradient-to-r from-gray-900/95 to-black/95 border border-gray-700 text-white p-4 rounded-2xl shadow-[0_0_10px_rgba(255,255,255,0.2)] hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] transition-all duration-300 flex items-center justify-center backdrop-blur-sm"
           whileHover={{ scale: 1.05, borderColor: "rgba(0, 200, 150, 0.5)" }}
           whileTap={{ scale: 0.95 }}
           aria-label="Toggle AI Chat"
         >
           {/* Subtle glow effect */}
           <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-green/10 to-secondary/10 rounded-2xl blur-xl"
-            animate={{ opacity: [0.3, 0.6, 0.3] }}
+            className="absolute inset-0 bg-white/10 rounded-2xl blur-xl"
+            animate={{ opacity: [0.2, 0.6, 0.2], scale: [1, 1.05, 1] }}
             transition={{ duration: 3, repeat: Infinity }}
           />
 
@@ -50,7 +50,13 @@ const ChatWidget = () => {
               {isChatOpen ? (
                 <X className="w-6 h-6" />
               ) : (
-                <Bot className="w-6 h-6 text-green" />
+                <motion.span
+                  className="block font-black text-lg"
+                  animate={{ rotate: [0, 360] }}
+                  transition={{ repeat: Infinity, duration: 4, ease: "linear" }}
+                >
+                  R
+                </motion.span>
               )}
             </motion.div>
           </AnimatePresence>

@@ -3,20 +3,21 @@ import { Message } from "@/types/chat";
 import { AgentId } from "@/context/ChatContext";
 import { systemPrompts, modelMap } from "@/config/agentConfig";
 
-const openRouterApiKey =
-  import.meta.env.VITE_OPENROUTER_API_KEY || "placeholder-api-key";
-
-if (!import.meta.env.VITE_OPENROUTER_API_KEY) {
-  console.warn(
-    "OpenRouter API key not configured. Please define VITE_OPENROUTER_API_KEY in your environment for full AI functionality.",
-  );
-}
-
-const openrouter = new OpenAI({
-  apiKey: openRouterApiKey,
-  baseURL: "https://openrouter.ai/api/v1",
-  dangerouslyAllowBrowser: true,
-});
+const getOpenrouter = () => {
+  const apiKey =
+    import.meta.env.VITE_OPENROUTER_API_KEY || import.meta.env.OPENROUTER_API_KEY;
+  if (!apiKey) {
+    console.warn(
+      "OpenRouter API key not configured. Please define VITE_OPENROUTER_API_KEY in your environment for full AI functionality.",
+    );
+    return null;
+  }
+  return new OpenAI({
+    apiKey,
+    baseURL: "https://openrouter.ai/api/v1",
+    dangerouslyAllowBrowser: true,
+  });
+};
 
 export const fetchAiResponse = async (
   newMessages: Message[],
@@ -32,14 +33,19 @@ export const fetchAiResponse = async (
     // OpenAI API expects messages without the 'id' field
     const apiMessages = newMessages.map(({ id, ...rest }) => rest);
 
+    const openrouter = getOpenrouter();
+    if (!openrouter) {
+      return "I'm having service maintenance - please wait while I prepare myself and come back soon. 🔧✨";
+    }
+
     console.log(`Making AI request for agent: ${selectedAgent || "general"}`);
     console.log(
-      `Using model: ${modelMap[selectedAgent] || modelMap.general || "openai/gpt-4o-mini"}`,
+      `Using model: ${modelMap[selectedAgent] || modelMap.general || "openai/gpt-4o"}`,
     );
 
     const completion = await openrouter.chat.completions.create({
       model:
-        modelMap[selectedAgent] || modelMap.general || "openai/gpt-4o-mini",
+        modelMap[selectedAgent] || modelMap.general || "openai/gpt-4o",
       messages: [
         { role: "system", content: systemPrompt || fallbackPrompt },
         ...apiMessages,
