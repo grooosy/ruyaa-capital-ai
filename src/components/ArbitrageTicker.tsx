@@ -8,17 +8,18 @@ interface TickerItem {
   change: number;
 }
 
+// Mapping of crypto pairs using CoinGecko coin IDs
 const PAIRS = [
-  { pair: 'BTC/ETH', symbol: 'BTCETH' },
-  { pair: 'ETH/USDT', symbol: 'ETHUSDT' },
-  { pair: 'SOL/USDT', symbol: 'SOLUSDT' },
-  { pair: 'XRP/BTC', symbol: 'XRPBTC' },
-  { pair: 'ADA/ETH', symbol: 'ADAETH' },
-  { pair: 'LINK/USDT', symbol: 'LINKUSDT' },
-  { pair: 'DOGE/USDT', symbol: 'DOGEUSDT' },
-  { pair: 'MATIC/BTC', symbol: 'MATICBTC' },
-  { pair: 'BNB/USDT', symbol: 'BNBUSDT' },
-];
+  { pair: 'BTC/ETH', base: 'bitcoin', quote: 'eth' },
+  { pair: 'ETH/USDT', base: 'ethereum', quote: 'usd' },
+  { pair: 'SOL/USDT', base: 'solana', quote: 'usd' },
+  { pair: 'XRP/BTC', base: 'ripple', quote: 'btc' },
+  { pair: 'ADA/ETH', base: 'cardano', quote: 'eth' },
+  { pair: 'LINK/USDT', base: 'chainlink', quote: 'usd' },
+  { pair: 'DOGE/USDT', base: 'dogecoin', quote: 'usd' },
+  { pair: 'MATIC/BTC', base: 'matic-network', quote: 'btc' },
+  { pair: 'BNB/USDT', base: 'binancecoin', quote: 'usd' },
+] as const;
 
 const TickerItemComponent: React.FC<{ item: TickerItem }> = ({ item }) => {
   const isPositive = item.change >= 0;
@@ -39,27 +40,35 @@ const ArbitrageTicker: React.FC = () => {
   const [prev, setPrev] = React.useState<Record<string, number>>({});
 
   const fetchPrices = async () => {
-    const results = await Promise.all(
-      PAIRS.map(async ({ pair, symbol }) => {
-        try {
-          const res = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${symbol}`);
-          const json = await res.json();
-          const price = parseFloat(json.price);
-          const p = prev[symbol] ?? price;
-          const change = ((price - p) / p) * 100;
-          return { pair, price, change } as TickerItem;
-        } catch {
-          const fallback = prev[symbol] ?? 0;
-          return { pair, price: fallback, change: 0 } as TickerItem;
-        }
-      })
-    );
-    const newPrev: Record<string, number> = {};
-    results.forEach((r, idx) => {
-      newPrev[PAIRS[idx].symbol] = r.price;
-    });
-    setPrev(newPrev);
-    setData(results);
+    try {
+      const ids = Array.from(new Set(PAIRS.map((p) => p.base))).join(',');
+      const res = await fetch(
+        `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd,btc,eth`
+      );
+      const json = (await res.json()) as Record<string, { usd: number; btc: number; eth: number }>;
+
+      const results = PAIRS.map(({ pair, base, quote }) => {
+        const price = json[base]?.[quote as 'usd' | 'btc' | 'eth'] ?? 0;
+        const p = prev[pair] ?? price;
+        const change = p ? ((price - p) / p) * 100 : 0;
+        return { pair, price, change } as TickerItem;
+      });
+
+      const newPrev: Record<string, number> = {};
+      results.forEach((r) => {
+        newPrev[r.pair] = r.price;
+      });
+
+      setPrev(newPrev);
+      setData(results);
+    } catch {
+      const fallback = PAIRS.map(({ pair }) => ({
+        pair,
+        price: prev[pair] ?? 0,
+        change: 0,
+      }));
+      setData(fallback);
+    }
   };
 
   React.useEffect(() => {
