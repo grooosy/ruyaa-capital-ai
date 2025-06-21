@@ -1,7 +1,9 @@
+import React from 'react';
 import WelcomePage from "./pages/Welcome";
-import { Route } from react-router-dom;
+import { Routes, Router } from 'react-router-dom';
 
-// Other imports here ...
+const App = () => {
+  return (\n    <Router>\n      <Routes as="appRoutes">\n        <route path="/welcome" element={ <WelcomePage /> } />\n      </Routes>\n    </Router>\n  );
+};
 
-// Within Routes component:
-    <Route path="/welcome" element={<WelcomePage } /> // TN:
+export default App;
