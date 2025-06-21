@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -25,15 +25,6 @@ const Index = () => {
   const { openChat } = useChatContext();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
-
-  // Check if user is visiting for the first time
-  useEffect(() => {
-    const hasVisited = localStorage.getItem("ruyaa-has-visited");
-    if (!hasVisited) {
-      localStorage.setItem("ruyaa-has-visited", "true");
-      navigate("/welcome");
-    }
-  }, [navigate]);
 
   const handleStartNowClick = () => {
     const aiSection = document.getElementById("ai");

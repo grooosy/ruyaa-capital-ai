@@ -14,11 +14,9 @@ import WithdrawPage from "./pages/WithdrawPage";
 import ProfilePage from "./pages/ProfilePage";
 import MarketPage from "./pages/MarketPage";
 import NotFound from "./pages/NotFound";
-import WelcomePage from "./pages/WelcomePage";
 import HowItWorksPage from "./pages/HowItWorksPage";
 import BrokerRegistrationPage from "./pages/BrokerRegistrationPage";
 import { ChatProvider } from "./context/ChatContext";
-import AuthPage from "./pages/AuthPage";
 import DashboardPage from "./pages/DashboardPage";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
@@ -41,9 +39,7 @@ const AppRoutes = () => {
 
   return (
     <Routes>
-      <Route path="/welcome" element={<WelcomePage />} />
       <Route path="/" element={<Index />} />
-      <Route path="/auth" element={<AuthPage />} />
       <Route path="/dashboard" element={<DashboardPage />} />
       <Route path="/agents" element={<AgentsPage />} />
       <Route path="/agents/mt4mt5" element={<MT4Page />} />

@@ -18,12 +18,14 @@ import {
   X,
 } from "lucide-react";
 import NotificationDropdown from "./NotificationDropdown";
+import AuthCard from "./AuthCard";
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = React.useState(false);
   const [depositMenu, setDepositMenu] = React.useState(false);
   const [notificationOpen, setNotificationOpen] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [authModalOpen, setAuthModalOpen] = React.useState(false);
   const { t, i18n } = useTranslation();
   const isArabic = i18n.language === "ar";
   const [session, setSession] = React.useState<Session | null>(null);
@@ -44,6 +46,9 @@ const Navbar: React.FC = () => {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
+      if (session) {
+        setAuthModalOpen(false); // Close auth modal when user signs in
+      }
     });
 
     return () => subscription.unsubscribe();
@@ -196,12 +201,16 @@ const Navbar: React.FC = () => {
               avatarUrl={profile?.avatar_url}
             />
           ) : (
-            <Link
-              to="/auth"
-              className="hover:text-secondary transition-colors font-semibold"
-            >
-              {t("login")}
-            </Link>
+            <Dialog open={authModalOpen} onOpenChange={setAuthModalOpen}>
+              <DialogTrigger asChild>
+                <button className="hover:text-secondary transition-colors font-semibold">
+                  {t("login")}
+                </button>
+              </DialogTrigger>
+              <DialogContent className="max-w-md bg-gray-900/95 backdrop-blur-xl border border-gray-700 rounded-2xl shadow-2xl">
+                <AuthCard />
+              </DialogContent>
+            </Dialog>
           )}
           <LangToggle />
         </div>
@@ -267,13 +276,15 @@ const Navbar: React.FC = () => {
                   </button>
                 </>
               ) : (
-                <Link
-                  to="/auth"
-                  onClick={() => setMobileOpen(false)}
+                <button
+                  onClick={() => {
+                    setMobileOpen(false);
+                    setAuthModalOpen(true);
+                  }}
                   className="font-semibold text-gray-200 hover:text-primary"
                 >
                   {t("login")}
-                </Link>
+                </button>
               )}
               <LangToggle />
             </div>
