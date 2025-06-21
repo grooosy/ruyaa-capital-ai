@@ -11,10 +11,13 @@ export default defineConfig(({ mode }) => ({
     // @ts-expect-error -- allowedHosts is not typed in vite types
     allowedHosts: process.env.TEMPO === "true" ? true : undefined,
   },
-  plugins: [react(), tempo()].filter(Boolean),
+  plugins: [react(), process.env.VITE_TEMPO === "true" ? tempo() : undefined].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      ...(process.env.VITE_TEMPO === "true"
+        ? {}
+        : { "tempo-routes": path.resolve(__dirname, "./src/empty-tempo-routes.ts") }),
     },
   },
 }));
