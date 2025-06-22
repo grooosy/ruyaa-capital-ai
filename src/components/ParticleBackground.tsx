@@ -1,8 +1,5 @@
 "use client";
 
-// ParticleBackground renders a subtle animated particle effect used on all pages
-// to provide a modern dark atmosphere without distracting from content.
-
 import { useEffect, useMemo, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { type Container, type ISourceOptions } from "@tsparticles/engine";
@@ -20,7 +17,7 @@ const ParticleBackground = () => {
   }, []);
 
   const particlesLoaded = async (container?: Container): Promise<void> => {
-    // You can add any logic here for when particles are loaded.
+    // Particle system loaded callback
   };
 
   const options: ISourceOptions = useMemo(
@@ -34,30 +31,38 @@ const ParticleBackground = () => {
       interactivity: {
         events: {
           onClick: {
-            enable: false,
+            enable: true,
+            mode: "push",
           },
           onHover: {
             enable: true,
-            mode: "repulse",
+            mode: "connect",
           },
         },
         modes: {
-          repulse: {
-            distance: 100,
+          push: {
+            distance: 200,
             duration: 0.4,
+          },
+          connect: {
+            distance: 150,
+            links: {
+              opacity: 0.3,
+            },
+            radius: 60,
           },
         },
       },
       particles: {
         color: {
-          value: ["#FFD700", "#FFA500", "#ffffff"],
+          value: ["#00b4d8", "#bf00ff", "#e6e6e6"],
         },
         links: {
-          color: "#FFD700",
+          color: "#00b4d8",
           distance: 120,
           enable: true,
-          opacity: 0.03,
-          width: 0.5,
+          opacity: 0.1,
+          width: 1,
         },
         move: {
           direction: "none",
@@ -65,23 +70,23 @@ const ParticleBackground = () => {
           outModes: {
             default: "bounce",
           },
-          random: false,
-          speed: 0.2,
+          random: true,
+          speed: 0.5,
           straight: false,
         },
         number: {
           density: {
             enable: true,
-            area: 1500,
+            area: 2000,
           },
-          value: 60,
+          value: 50,
         },
         opacity: {
-          value: { min: 0.02, max: 0.1 },
+          value: { min: 0.1, max: 0.4 },
           animation: {
             enable: true,
-            speed: 0.5,
-            minimumValue: 0.02,
+            speed: 1,
+            minimumValue: 0.1,
             sync: false
           }
         },
@@ -89,11 +94,11 @@ const ParticleBackground = () => {
           type: ["circle", "triangle"],
         },
         size: {
-          value: { min: 0.3, max: 1 },
+          value: { min: 1, max: 3 },
           animation: {
             enable: true,
-            speed: 0.8,
-            minimumValue: 0.3,
+            speed: 2,
+            minimumValue: 0.5,
             sync: false
           }
         },
@@ -106,15 +111,15 @@ const ParticleBackground = () => {
   if (init) {
     return (
       <Particles
-        id="tsparticles"
+        id="ai-particles"
         particlesLoaded={particlesLoaded}
         options={options}
-        className="absolute inset-0 -z-10"
+        className="fixed inset-0 -z-20 pointer-events-none"
       />
     );
   }
 
-  return <></>;
+  return null;
 };
 
 export default ParticleBackground;
