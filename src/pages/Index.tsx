@@ -10,6 +10,7 @@ import CryptoArbitrageSection from "@/components/CryptoArbitrageSection";
 import HeroDashboard from "@/components/HeroDashboard";
 import LogoCloud from "@/components/LogoCloud";
 import PathModal from "@/components/PathModal";
+import BackgroundCanvas from "@/components/BackgroundCanvas";
 import { useChatContext } from "@/context/ChatContext";
 import { useTranslation } from "react-i18next";
 
@@ -53,85 +54,89 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460] text-white" dir={isArabic ? "rtl" : "ltr"}>
-      <Navbar />
-      
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0 circuit-pattern opacity-10" />
-        <div className="absolute top-20 left-20 w-4 h-4 bg-[#00b4d8] rounded-full animate-pulse opacity-60" />
-        <div className="absolute top-40 right-32 w-3 h-3 bg-[#bf00ff] rounded-full animate-pulse opacity-40" style={{ animationDelay: '1s' }} />
-        <div className="absolute bottom-32 left-1/4 w-3.5 h-3.5 bg-[#00b4d8] rounded-full animate-pulse opacity-50" style={{ animationDelay: '2s' }} />
-        
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          {/* AI Badge */}
-          <motion.div
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#00b4d8]/20 to-[#bf00ff]/20 border border-[#00b4d8]/30 rounded-full mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <Brain className="w-5 h-5 text-[#00b4d8]" />
-            <span className="text-lg font-medium text-[#e6e6e6]">AI-POWERED TRADING PLATFORM</span>
-          </motion.div>
-
-          {/* Main Heading */}
-          <motion.h1 
-            className="text-6xl lg:text-8xl font-bold font-space-grotesk leading-tight mb-8"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <span className="text-white">{t('hero_title_1')}</span>
-            <br />
-            <span className="text-gradient-ai">{t('hero_title_2')}</span>
-          </motion.h1>
-
-          {/* Subtitle */}
-          <motion.p 
-            className="text-2xl lg:text-3xl text-[#e6e6e6] mb-12 max-w-4xl mx-auto leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            {t('hero_description')}
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div 
-            className="flex flex-col sm:flex-row gap-6 justify-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-            <button 
-              onClick={() => setShowPathModal(true)}
-              className="btn-ai-primary group text-xl px-8 py-4"
+    <div className="relative min-h-screen bg-black">
+      <BackgroundCanvas />
+      <div className="relative z-10 min-h-screen bg-gradient-to-br from-gray-900/95 via-gray-900/95 to-gray-950/95 text-gray-100" dir={isArabic ? "rtl" : "ltr"}>
+        <div className="relative">
+          <Navbar />
+          <div className="absolute top-20 left-20 w-3 h-3 bg-white/80 rounded-full animate-pulse" />
+          <div className="absolute top-40 right-32 w-2 h-2 bg-white/60 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute bottom-32 left-1/4 w-2.5 h-2.5 bg-white/40 rounded-full animate-pulse" style={{ animationDelay: '1.5s' }} />
+          
+          <div className="max-w-7xl mx-auto px-6 text-center">
+            {/* AI Badge */}
+            <motion.div
+              className="inline-flex items-center gap-3 px-6 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full mb-8 group"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
             >
-              <span>{t('hero_button')}</span>
-              <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-1 transition-transform" />
-            </button>
-            
-            <button 
-              onClick={() => openChat('support')}
-              className="btn-ai-secondary group text-xl px-8 py-4"
-            >
-              <span>Talk to AI Assistant</span>
-              <Brain className="w-6 h-6 ml-3 group-hover:scale-110 transition-transform" />
-            </button>
-          </motion.div>
+              <Brain className="w-5 h-5 text-white/80 group-hover:text-white transition-colors" />
+              <span className="text-lg font-medium text-white/90 group-hover:text-white transition-colors">AI-POWERED TRADING PLATFORM</span>
+            </motion.div>
 
-          {/* Logo Cloud */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-          >
-            <LogoCloud />
-          </motion.div>
+            {/* Main Heading */}
+            <motion.h1 
+              className="text-6xl lg:text-8xl font-bold font-space-grotesk leading-tight mb-8"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <span className="text-white">{t('hero_title_1')}</span>
+              <br />
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">{t('hero_title_2')}</span>
+            </motion.h1>
+
+            {/* Subtitle */}
+            <motion.p 
+              className="text-2xl lg:text-3xl text-[#e6e6e6] mb-12 max-w-4xl mx-auto leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              {t('hero_description')}
+            </motion.p>
+
+            {/* CTA Buttons */}
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-6 justify-center mb-16"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              <button 
+                onClick={() => setShowPathModal(true)}
+                className="group relative overflow-hidden rounded-full bg-white/10 backdrop-blur-sm px-8 py-4 text-lg font-medium text-white transition-all hover:bg-white/20 hover:shadow-lg hover:shadow-white/5"
+              >
+                <span className="relative z-10 flex items-center">
+                  {t('hero_button')}
+                  <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-1" />
+                </span>
+                <span className="absolute inset-0 -z-10 bg-gradient-to-r from-white/20 to-white/10 opacity-0 transition-opacity group-hover:opacity-100" />
+              </button>
+              
+              <button 
+                onClick={() => openChat('support')}
+                className="group relative overflow-hidden rounded-full border border-white/20 bg-transparent px-8 py-4 text-lg font-medium text-white transition-all hover:bg-white/5 hover:shadow-lg hover:shadow-white/5"
+              >
+                <span className="relative z-10 flex items-center">
+                  Talk to AI Assistant
+                  <Brain className="ml-3 h-6 w-6 transition-transform group-hover:scale-110" />
+                </span>
+              </button>
+            </motion.div>
+
+            {/* Logo Cloud */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+            >
+              <LogoCloud />
+            </motion.div>
+          </div>
         </div>
-      </section>
+      </div>
 
       {/* Features Section */}
       <section className="py-20 relative">
@@ -142,11 +147,11 @@ const Index = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl lg:text-5xl font-bold font-space-grotesk mb-6">
+            <h2 className="mb-6 text-4xl font-bold lg:text-5xl font-space-grotesk">
               <span className="text-white">Powered by </span>
-              <span className="text-gradient-ai">Advanced AI</span>
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">Advanced AI</span>
             </h2>
-            <p className="text-xl text-[#e6e6e6] max-w-3xl mx-auto">
+            <p className="mx-auto max-w-3xl text-xl text-gray-300">
               Our cutting-edge artificial intelligence analyzes markets, executes trades, and manages risk with superhuman precision.
             </p>
           </motion.div>
@@ -155,20 +160,19 @@ const Index = () => {
             {features.map((feature, index) => (
               <motion.div
                 key={index}
-                className="ai-card ai-card-hover text-center group"
+                className="group relative overflow-hidden rounded-2xl bg-white/5 p-8 text-center backdrop-blur-sm transition-all hover:bg-white/10 hover:shadow-xl hover:shadow-white/5"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
-                <div 
-                  className="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
-                  style={{ backgroundColor: `${feature.color}20`, border: `1px solid ${feature.color}30` }}
-                >
-                  <feature.icon className="w-8 h-8" style={{ color: feature.color }} />
+                <div className="relative z-10">
+                  <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-white/5 transition-transform duration-300 group-hover:scale-110">
+                    <feature.icon className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="mb-4 text-xl font-bold text-white">{feature.title}</h3>
+                  <p className="text-gray-300">{feature.description}</p>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-4">{feature.title}</h3>
-                <p className="text-[#e6e6e6]">{feature.description}</p>
               </motion.div>
             ))}
           </div>
@@ -207,7 +211,7 @@ const Index = () => {
               <span className="text-white">Real-Time </span>
               <span className="text-gradient-ai">AI Dashboard</span>
             </h2>
-            <p className="text-xl text-[#e6e6e6] max-w-3xl mx-auto">
+            <p className="mx-auto max-w-3xl text-xl text-gray-300">
               Monitor your AI-powered trading performance with live market data and intelligent insights.
             </p>
           </motion.div>
@@ -216,7 +220,9 @@ const Index = () => {
       </section>
 
       {/* Crypto Arbitrage Section */}
-      <CryptoArbitrageSection />
+      <section className="py-20">
+        <CryptoArbitrageSection />
+      </section>
 
       <Footer />
       

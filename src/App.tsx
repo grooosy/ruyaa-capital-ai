@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { ChatProvider } from '@/context/ChatContext';
 import { WalletProvider } from '@/context/WalletProvider';
+import { useTheme } from '@/context/ThemeContext';
 import { Toaster } from '@/components/ui/sonner';
 import LiveMarketTicker from '@/components/LiveMarketTicker';
 import Navbar from '@/components/Navbar';
 import ChatWidget from '@/components/chat/ChatWidget';
-import ParticleBackground from '@/components/ParticleBackground';
-import FuturisticBackground from '@/components/FuturisticBackground';
-
+import ThemeToggle from '@/components/ThemeToggle';
+// Test components
+import TailwindTest from './components/TailwindTest';
+import TailwindTest2 from './components/TailwindTest2';
 // Pages
 import WelcomePage from './pages/Welcome';
 import Index from './pages/Index';
@@ -38,6 +40,26 @@ const queryClient = new QueryClient({
   },
 });
 
+// Theme wrapper to apply theme classes to the app
+const ThemeWrapper = ({ children }: { children: React.ReactNode }) => {
+  const { theme } = useTheme();
+  
+  useEffect(() => {
+    // Apply theme class to body for global styles
+    document.body.className = theme === 'dark' ? 'bg-background-dark' : 'bg-background-light';
+  }, [theme]);
+  
+  return (
+    <div className={`min-h-screen transition-colors duration-300 ${
+      theme === 'dark' 
+        ? 'bg-background-dark text-text-primary-dark' 
+        : 'bg-background-light text-text-primary-light'
+    }`}>
+      {children}
+    </div>
+  );
+};
+
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
@@ -45,10 +67,11 @@ const App = () => {
         <ChatProvider>
           <TooltipProvider>
             <BrowserRouter>
-              <div className="relative min-h-screen bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460] text-white overflow-x-hidden">
-                {/* Global Background Elements */}
-                <FuturisticBackground />
-                <ParticleBackground />
+              <ThemeWrapper>
+                {/* Theme Toggle Button */}
+                <div className="fixed bottom-6 right-6 z-50">
+                  <ThemeToggle />
+                </div>
                 
                 {/* Live Market Ticker */}
                 <LiveMarketTicker />
@@ -58,6 +81,12 @@ const App = () => {
                 
                 {/* Main Content */}
                 <main className="relative z-10">
+                  {/* Tailwind Test Components */}
+                  <div className="container mx-auto p-4 space-y-8">
+                    <TailwindTest />
+                    <TailwindTest2 />
+                  </div>
+                  
                   <Routes>
                     <Route path="/" element={<Index />} />
                     <Route path="/welcome" element={<WelcomePage />} />
@@ -78,12 +107,12 @@ const App = () => {
                   </Routes>
                 </main>
                 
+                {/* Global Toast Notifications */}
+                <Toaster position="top-center" richColors />
+                
                 {/* Chat Widget */}
                 <ChatWidget />
-                
-                {/* Global Toast Notifications */}
-                <Toaster />
-              </div>
+              </ThemeWrapper>
             </BrowserRouter>
           </TooltipProvider>
         </ChatProvider>

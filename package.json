@@ -81,7 +81,11 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
+    "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
     "@eslint/js": "^9.9.0",
+    "@react-three/drei": "^9.77.4",
+    "@react-three/fiber": "^8.13.6",
     "@tailwindcss/typography": "^0.5.15",
     "@types/node": "^22.5.5",
     "@types/react": "^18.3.3",
@@ -94,11 +98,15 @@
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
+    "maath": "^0.10.8",
     "postcss": "^8.4.47",
+    "rollup-plugin-polyfill-node": "^0.13.0",
     "tailwindcss": "^3.4.11",
     "tempo-devtools": "^2.0.108",
+    "three": "^0.152.2",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
-    "vite": "^6.3.5"
+    "vite": "^6.3.5",
+    "vite-plugin-node-polyfills": "^0.23.0"
   }
 }

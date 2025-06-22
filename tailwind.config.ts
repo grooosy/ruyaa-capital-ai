@@ -2,6 +2,7 @@ import type { Config } from "tailwindcss";
 import tailwindcssAnimate from "tailwindcss-animate";
 import tailwindcssRtl from "tailwindcss-rtl";
 import typography from "@tailwindcss/typography";
+import tailwindPlugins from "./src/plugins/tailwind-plugins";
 
 export default {
   darkMode: ["class"],
@@ -28,50 +29,58 @@ export default {
     },
     extend: {
       colors: {
-        // AI Theme Color Palette
-        primary: {
-          DEFAULT: "#00b4d8",
-          50: "#e6f7ff",
-          100: "#b3e9ff",
-          200: "#80dbff",
-          300: "#4dcdff",
-          400: "#1abfff",
-          500: "#00b4d8",
-          600: "#0090a6",
-          700: "#006c74",
-          800: "#004842",
-          900: "#002410",
-        },
-        secondary: {
-          DEFAULT: "#bf00ff",
-          50: "#f5e6ff",
-          100: "#e6b3ff",
-          200: "#d680ff",
-          300: "#c74dff",
-          400: "#b81aff",
-          500: "#bf00ff",
-          600: "#9900cc",
-          700: "#730099",
-          800: "#4d0066",
-          900: "#260033",
-        },
+        // Modern Monochrome Theme
         background: {
-          DEFAULT: "#1a1a2e",
-          secondary: "#16213e",
-          tertiary: "#0f3460",
+          light: '#ffffff',
+          dark: '#0a0a0a',
         },
         surface: {
-          DEFAULT: "#16213e",
-          light: "#1e2a4a",
-          dark: "#0f1a2e",
+          light: '#f8f8f8',
+          dark: '#1a1a1a',
+        },
+        muted: {
+          light: '#f1f1f1',
+          dark: '#2a2a2a',
+        },
+        // Border colors with theme support and shadcn compatibility
+        border: {
+          light: '#e0e0e0',
+          dark: '#333333',
+          DEFAULT: 'hsl(var(--border))',
         },
         text: {
-          primary: "#ffffff",
-          secondary: "#e6e6e6",
-          muted: "#b3b3b3",
-          accent: "#00b4d8",
+          primary: {
+            light: '#0a0a0a',
+            dark: '#f8f8f8',
+          },
+          secondary: {
+            light: '#4a4a4a',
+            dark: '#b3b3b3',
+          },
+          muted: {
+            light: '#757575',
+            dark: '#8a8a8a',
+          },
+        },
+        accent: {
+          light: '#000000',
+          dark: '#ffffff',
         },
         
+        // Shadcn compatibility - border is now defined above with theme support
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        foreground: "hsl(var(--foreground))",
+        destructive: {
+          light: "#ff4d4f",
+          dark: "#ff4d4f",
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
         // Legacy compatibility
         green: "#00b4d8",
         gold: "#bf00ff",
@@ -79,28 +88,6 @@ export default {
         card: "#16213e",
         "primary-accent": "#00b4d8",
         "secondary-accent": "#bf00ff",
-        
-        // Shadcn base colors
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        foreground: "hsl(var(--foreground))",
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
       },
       borderRadius: {
         xl: "1.25rem",
@@ -198,5 +185,10 @@ export default {
       },
     },
   },
-  plugins: [tailwindcssAnimate, tailwindcssRtl, typography],
+  plugins: [
+    tailwindcssAnimate,
+    tailwindcssRtl,
+    typography,
+    tailwindPlugins,
+  ],
 } satisfies Config;
