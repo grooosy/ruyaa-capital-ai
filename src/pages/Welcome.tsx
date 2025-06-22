@@ -1,5 +1,5 @@
 import React from 'react';
-import imageUrl from '../../public/hero_ai_chart.png';
+import imageUrl from '../../public/assets/hero_ai_chart.png';
 
 const WelcomePage: React.FC = () => {
   return (
