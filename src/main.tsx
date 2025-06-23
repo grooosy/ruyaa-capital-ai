@@ -5,7 +5,7 @@ if (import.meta.env.VITE_TEMPO) {
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import { ThemeProvider } from "./context/ThemeContext";
-import "./index.css";
+// import "./index.css"; // Removed App.css, index.css handles Tailwind base styles
 import "./i18n.ts";
 
 // Add theme class to html element for initial load
