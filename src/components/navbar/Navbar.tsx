@@ -15,7 +15,7 @@ function Navbar() {
         <AuthMenu />
         <NotificationDropdown />
       </div>
-    </div>
+    </nav>
   );
 }
 

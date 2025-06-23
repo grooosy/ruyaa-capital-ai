@@ -136,9 +136,9 @@ const Index = () => {
             >
               <LogoCloud />
             </motion.div>
-          </div>
-        </div>
-      </div>
+          </div> {/* Closes "max-w-7xl mx-auto..." hero content container */}
+      {/* All sections below are siblings to the hero content container,
+          and children of the main "relative z-10..." div */}
 
       {/* Features Section */}
       <section className="py-20 relative">
