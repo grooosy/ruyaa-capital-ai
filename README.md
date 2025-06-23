@@ -1,3 +1,3 @@
-# RuyaaCapital Staging
+# RuyaaCapital Stagin
 
-This commit is to trigger staging deployment to the new valid domain config.
+Deploy trigger for staging balanced deployment.
