@@ -84,7 +84,7 @@ const Index = () => {
             >
               <span className="text-white">{t('hero_title_1')}</span>
               <br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">{t('hero_title_2')}</span>
+              <span className="text-gold">{t('hero_title_2')}</span>
             </motion.h1>
 
             {/* Subtitle */}
@@ -112,7 +112,7 @@ const Index = () => {
                   {t('hero_button')}
                   <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-1" />
                 </span>
-                <span className="absolute inset-0 -z-10 bg-gradient-to-r from-white/20 to-white/10 opacity-0 transition-opacity group-hover:opacity-100" />
+                <span className="absolute inset-0 -z-10 bg-white/15 opacity-0 transition-opacity group-hover:opacity-100" />
               </button>
               
               <button 
@@ -149,7 +149,7 @@ const Index = () => {
           >
             <h2 className="mb-6 text-4xl font-bold lg:text-5xl font-space-grotesk">
               <span className="text-white">Powered by </span>
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">Advanced AI</span>
+              <span className="text-gold">Advanced AI</span>
             </h2>
             <p className="mx-auto max-w-3xl text-xl text-gray-300">
               Our cutting-edge artificial intelligence analyzes markets, executes trades, and manages risk with superhuman precision.
