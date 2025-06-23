@@ -1,135 +1,6 @@
-/* Import Inter font first */
+/* Import Inter font */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* Use @tailwind directives */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  :root {
-    /* Light theme */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 10%;
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
-    --border: 0 0% 88%;
-    --input: 0 0% 88%;
-    --ring: 0 0% 0%;
-    --primary: 48 96% 53%;
-    --primary-foreground: 0 0% 10%;
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 10%;
-    --accent: 48 96% 53%;
-    --accent-foreground: 0 0% 10%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-    --radius: 0.5rem;
-  }
-
-  .dark {
-    /* Dark theme */
-    --background: 0 0% 0%;
-    --foreground: 0 0% 100%;
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 70%;
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 48 96% 53%;
-    --primary: 48 96% 53%;
-    --primary-foreground: 0 0% 0%;
-    --secondary: 0 0% 10%;
-    --secondary-foreground: 0 0% 100%;
-    --accent: 48 96% 53%;
-    --accent-foreground: 0 0% 0%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-  }
-
-  * {
-    @apply border-border;
-    box-sizing: border-box;
-  }
-
-  body {
-    @apply bg-background text-foreground font-inter antialiased;
-    min-height: 100vh;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  html {
-    font-family: "Inter", system-ui, -apple-system, sans-serif;
-    scroll-behavior: smooth;
-    color-scheme: light dark;
-  }
-
-  ::selection {
-    @apply bg-primary/20 text-foreground;
-  }
-
-  /* Custom scrollbar */
-  ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-
-  ::-webkit-scrollbar-track {
-    @apply bg-muted/50;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    @apply bg-border rounded-full hover:bg-muted-foreground/50;
-    transition: background-color 0.2s ease;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: #f5c518;
-    opacity: 0.8;
-  }
-} 
-@layer components {
-  /* AI-themed buttons */
-  .btn-ai-primary {
-    @apply bg-gold text-dark-charcoal font-semibold px-6 py-3 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 border border-gold/40;
-    box-shadow: 0 0 20px rgba(245, 197, 24, 0.3);
-  }
-
-  .btn-ai-secondary {
-    @apply bg-transparent border border-gold/60 text-gold font-semibold px-6 py-3 rounded-lg hover:bg-gold/10 hover:scale-105 transition-all duration-300;
-    box-shadow: 0 0 15px rgba(245, 197, 24, 0.2);
-  }
-
-  .btn-ai-ghost {
-    @apply bg-transparent border border-gold/40 text-white font-medium px-6 py-3 rounded-lg hover:bg-gold/10 hover:scale-105 transition-all duration-300;
-  }
-}
-
-/* AI-themed utilities */
-@layer utilities {
-  .ai-card {
-    @apply bg-[#111111] backdrop-blur-xl rounded-xl p-6 border border-gold/20 shadow-lg relative overflow-hidden;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(245, 197, 24, 0.1);
-  }
-
-  .ai-card-hover {
-    @apply hover:border-gold/40 hover:shadow-xl hover:scale-102 transition-all duration-300;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .ai-card-hover:hover {
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(245, 197, 24, 0.2);
-  }
-
-  .neural-border {
-    background: linear-gradient(135deg, #f5c518 0%, #f5c518 100%);
-    padding: 1px;
-    border-radius: 12px;
-  }
-
-  .neural-border-inner {
-    @apply bg-[#111111] rounded-xl;
   }
 
   .text-gradient-ai {
@@ -168,7 +39,11 @@
   }
 
   .hover-scale {
-    @apply hover:scale-105 transition-transform duration-300;
+    transition: transform 300ms ease;
+  }
+  
+  .hover-scale:hover {
+    transform: scale(1.05);
   }
 
   .fade-in-ai {
@@ -266,13 +141,15 @@
 /* Responsive design utilities */
 @media (max-width: 768px) {
   .ai-card {
-    @apply p-4;
+    padding: 1rem;
   }
   
   .btn-ai-primary,
   .btn-ai-secondary,
   .btn-ai-ghost {
-    @apply px-4 py-2 text-sm;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 }
 
