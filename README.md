@@ -1,4 +1,3 @@
 # RuyaaCapital Staging
 
-This is a manual trigger commit to push staging for Vercel Preview deployment.
-We are forcing this via github.com/api.
+This commit is to trigger staging deployment to the new valid domain config.
