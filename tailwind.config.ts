@@ -10,10 +10,12 @@ export default {
     './app/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: { // Added extend to ensure default themes are not overridden unless intended
+    extend: {
       fontFamily: {
         inter: ['Inter', 'sans-serif'],
         space: ['Space Grotesk', 'Inter', 'sans-serif'],
       },
-    }
-
+    },
+  },
+  plugins: [],
+} satisfies Config;
