@@ -33,7 +33,6 @@ import MarketPage from './pages/MarketPage';
 import BrokerRegistrationPage from './pages/BrokerRegistrationPage';
 import AuthCard from './components/AuthCard';
 import NotFound from './pages/NotFound';
-import AuthPage from "./pages/AuthPage";
 
 // Tempo routes
 import routes from "tempo-routes";
