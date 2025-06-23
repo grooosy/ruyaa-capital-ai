@@ -65,7 +65,7 @@ const Index = () => {
       <div className="absolute bottom-32 left-1/4 w-2.5 h-2.5 bg-white/40 rounded-full animate-pulse" style={{ animationDelay: '1.5s' }} />
 
       {/* Increased padding-top to ensure no overlap with Navbar */}
-      <div className="max-w-7xl mx-auto px-6 text-center pt-24 sm:pt-32">
+      <div className="max-w-7xl mx-auto px-6 text-center pt-32 sm:pt-40">
             {/* AI Badge */}
             <motion.div
               className="inline-flex items-center gap-3 px-6 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full mb-8 group"
