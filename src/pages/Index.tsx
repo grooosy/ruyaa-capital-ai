@@ -137,8 +137,6 @@ const Index = () => {
               <LogoCloud />
             </motion.div>
           </div>
-        </div>
-      </div>
 
       {/* Features Section */}
       <section className="py-20 relative">

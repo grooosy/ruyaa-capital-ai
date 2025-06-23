@@ -21,7 +21,7 @@ const Layout: React.FC<{children: ReactNode}> = ({ children }) => {
         {children}
       </main>
       {/* Consider adding Footer here if it's meant to be on all pages */}
-    </>
+    </div>
   );
 };
 
