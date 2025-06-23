@@ -1,3 +1,4 @@
 # RuyaaCapital Staging
 
-This commit is used to trigger a fresh deployment on Vercel from the staging branch.
+This is a manual trigger commit to push staging for Vercel Preview deployment.
+We are forcing this via github.com/api.
