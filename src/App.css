@@ -40,3 +40,16 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Add this to your global CSS (e.g., src/index.css or App.css) */
+.perspective {
+  perspective: 1200px;
+}
+.feature-3d-card .relative {
+  will-change: transform;
+  transition: transform 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.feature-3d-card:hover .relative {
+  box-shadow: 0 16px 40px rgba(0,0,0,0.18), 0 1.5px 4px rgba(0,0,0,0.12);
+  transform: rotateY(6deg) rotateX(-3deg) scale(1.05);
+}

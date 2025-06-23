@@ -15,6 +15,7 @@ import ChatWidget from '@/components/chat/ChatWidget';
 import ThemeToggle from '@/components/ThemeToggle';
 import ParticleBackground from "@/components/ParticleBackground";
 import NeuralNetworkOverlay from "@/components/NeuralNetworkOverlay";
+import Feature3DCardGrid from './app/components/Feature3DCardGrid';
 
 // Pages
 import WelcomePage from './pages/Welcome';
@@ -134,6 +135,9 @@ const App = () => {
                   {/* Main Content */}
                   <main className="relative z-10">
                     <AppRoutes />
+                    
+                    {/* 3D Feature Cards Grid */}
+                    <Feature3DCardGrid />
                   </main>
                   
                   {/* Chat Widget */}
