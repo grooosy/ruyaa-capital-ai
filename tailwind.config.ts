@@ -80,8 +80,6 @@ export default {
         },
         
         // Shadcn compatibility - border is now defined above with theme support
-        background: "hsl(var(--background))",
-        muted: "hsl(var(--muted))",
         "muted-foreground": "hsl(var(--muted-foreground))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
