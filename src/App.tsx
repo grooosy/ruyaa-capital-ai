@@ -13,8 +13,6 @@ import LiveMarketTicker from '@/components/LiveMarketTicker';
 import Navbar from '@/components/Navbar';
 import ChatWidget from '@/components/chat/ChatWidget';
 import ThemeToggle from '@/components/ThemeToggle';
-import ParticleBackground from "@/components/ParticleBackground";
-import NeuralNetworkOverlay from "@/components/NeuralNetworkOverlay";
 // Pages
 import WelcomePage from './pages/Welcome';
 import Index from './pages/Index';
@@ -109,13 +107,9 @@ const App = () => {
           <TooltipProvider>
             <Toaster position="top-center" richColors />
             <Sonner />
-            
-            <div className="relative min-h-screen w-full bg-gradient-to-br from-black via-gray-950 to-black font-spacegrotesk overflow-x-hidden z-0">
+                        <div className="relative min-h-screen w-full bg-gradient-to-br from-black via-gray-950 to-black font-spacegrotesk overflow-x-hidden z-0">
               <div className="absolute inset-0 bg-grid-pattern opacity-[0.02]" />
               <div className="absolute inset-0 bg-gradient-to-t from-green/5 via-transparent to-transparent" />
-              
-              <ParticleBackground />
-              <NeuralNetworkOverlay />
               
               <BrowserRouter>
                 <ThemeWrapper>
