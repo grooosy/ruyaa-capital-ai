@@ -1,18 +1,21 @@
 import React, { useEffect } from 'react';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useRoutes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { ChatProvider } from '@/context/ChatContext';
 import { WalletProvider } from '@/context/WalletProvider';
 import { useTheme } from '@/context/ThemeContext';
 import { Toaster } from '@/components/ui/sonner';
+import { Toaster as Sonner } from "@/components/ui/toaster";
+
+// Components
 import LiveMarketTicker from '@/components/LiveMarketTicker';
 import Navbar from '@/components/Navbar';
 import ChatWidget from '@/components/chat/ChatWidget';
 import ThemeToggle from '@/components/ThemeToggle';
-// Test components
-import TailwindTest from './components/TailwindTest';
-import TailwindTest2 from './components/TailwindTest2';
+import ParticleBackground from "@/components/ParticleBackground";
+import NeuralNetworkOverlay from "@/components/NeuralNetworkOverlay";
+
 // Pages
 import WelcomePage from './pages/Welcome';
 import Index from './pages/Index';
@@ -30,6 +33,12 @@ import MarketPage from './pages/MarketPage';
 import BrokerRegistrationPage from './pages/BrokerRegistrationPage';
 import AuthCard from './components/AuthCard';
 import NotFound from './pages/NotFound';
+
+// Tempo routes
+import routes from "tempo-routes";
+
+// Styles
+import "@solana/wallet-adapter-react-ui/styles.css";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -60,60 +69,78 @@ const ThemeWrapper = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
+// App Routes Component
+const AppRoutes = () => {
+  // Use useRoutes at the top level of the component
+  const tempoRoutes = useRoutes(
+    import.meta.env.VITE_TEMPO 
+      ? [
+          ...routes,
+          { path: "*", element: <NotFound /> }
+        ]
+      : [
+          { path: "/", element: <Index /> },
+          { path: "/welcome", element: <WelcomePage /> },
+          { path: "/auth", element: <AuthCard /> }, // Using AuthCard instead of AuthPage
+          { path: "/dashboard", element: <DashboardPage /> },
+          { path: "/agents", element: <AgentsPage /> },
+          { path: "/agents/mt4mt5", element: <MT4Page /> },
+          { path: "/agents/crypto", element: <CryptoPage /> },
+          { path: "/agents/arbitrage", element: <ArbitragePage /> },
+          { path: "/academy", element: <AcademyPage /> },
+          { path: "/deposit", element: <DepositPage /> },
+          { path: "/withdraw", element: <WithdrawPage /> },
+          { path: "/profile", element: <ProfilePage /> },
+          { path: "/market", element: <MarketPage /> },
+          { path: "/how-it-works", element: <HowItWorksPage /> },
+          { path: "/register/broker", element: <BrokerRegistrationPage /> },
+          { path: "*", element: <NotFound /> }
+        ]
+  );
+
+  return tempoRoutes;
+};
+
+// Main App Component
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <WalletProvider>
         <ChatProvider>
           <TooltipProvider>
-            <BrowserRouter>
-              <ThemeWrapper>
-                {/* Theme Toggle Button */}
-                <div className="fixed bottom-6 right-6 z-50">
-                  <ThemeToggle />
-                </div>
-                
-                {/* Live Market Ticker */}
-                <LiveMarketTicker />
-                
-                {/* Main Navigation */}
-                <Navbar />
-                
-                {/* Main Content */}
-                <main className="relative z-10">
-                  {/* Tailwind Test Components */}
-                  <div className="container mx-auto p-4 space-y-8">
-                    <TailwindTest />
-                    <TailwindTest2 />
+            <Toaster position="top-center" richColors />
+            <Sonner />
+            
+            <div className="relative min-h-screen w-full bg-gradient-to-br from-black via-gray-950 to-black font-spacegrotesk overflow-x-hidden z-0">
+              <div className="absolute inset-0 bg-grid-pattern opacity-[0.02]" />
+              <div className="absolute inset-0 bg-gradient-to-t from-green/5 via-transparent to-transparent" />
+              
+              <ParticleBackground />
+              <NeuralNetworkOverlay />
+              
+              <BrowserRouter>
+                <ThemeWrapper>
+                  {/* Theme Toggle Button */}
+                  <div className="fixed bottom-6 right-6 z-50">
+                    <ThemeToggle />
                   </div>
                   
-                  <Routes>
-                    <Route path="/" element={<Index />} />
-                    <Route path="/welcome" element={<WelcomePage />} />
-                    <Route path="/agents" element={<AgentsPage />} />
-                    <Route path="/agents/mt4mt5" element={<MT4Page />} />
-                    <Route path="/agents/crypto" element={<CryptoPage />} />
-                    <Route path="/agents/arbitrage" element={<ArbitragePage />} />
-                    <Route path="/academy" element={<AcademyPage />} />
-                    <Route path="/dashboard" element={<DashboardPage />} />
-                    <Route path="/profile" element={<ProfilePage />} />
-                    <Route path="/deposit" element={<DepositPage />} />
-                    <Route path="/withdraw" element={<WithdrawPage />} />
-                    <Route path="/how-it-works" element={<HowItWorksPage />} />
-                    <Route path="/market" element={<MarketPage />} />
-                    <Route path="/register/broker" element={<BrokerRegistrationPage />} />
-                    <Route path="/auth" element={<AuthCard />} />
-                    <Route path="*" element={<NotFound />} />
-                  </Routes>
-                </main>
-                
-                {/* Global Toast Notifications */}
-                <Toaster position="top-center" richColors />
-                
-                {/* Chat Widget */}
-                <ChatWidget />
-              </ThemeWrapper>
-            </BrowserRouter>
+                  {/* Live Market Ticker */}
+                  <LiveMarketTicker />
+                  
+                  {/* Main Navigation */}
+                  <Navbar />
+                  
+                  {/* Main Content */}
+                  <main className="relative z-10">
+                    <AppRoutes />
+                  </main>
+                  
+                  {/* Chat Widget */}
+                  <ChatWidget />
+                </ThemeWrapper>
+              </BrowserRouter>
+            </div>
           </TooltipProvider>
         </ChatProvider>
       </WalletProvider>

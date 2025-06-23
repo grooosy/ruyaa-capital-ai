@@ -1,123 +1,94 @@
-/* Import Inter font first */
+/* Import Inter font */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* Use @tailwind directives */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  :root {
-    /* Light theme */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 4%;
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
-    --border: 0 0% 88%;
-    --input: 0 0% 88%;
-    --ring: 0 0% 0%;
-    --primary: 0 0% 4%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 4%;
-    --accent: 0 0% 96%;
-    --accent-foreground: 0 0% 4%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-    --radius: 0.5rem;
-  }
-
-  .dark {
-    /* Dark theme */
-    --background: 0 0% 4%;
-    --foreground: 0 0% 98%;
-    --muted: 0 0% 10%;
-    --muted-foreground: 0 0% 63%;
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 0 0% 100%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 4%;
-    --secondary: 0 0% 10%;
-    --secondary-foreground: 0 0% 98%;
-    --accent: 0 0% 15%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-  }
-
-  * {
-    @apply border-border;
-    box-sizing: border-box;
-  }
-
-  body {
-    @apply bg-background text-foreground font-inter antialiased;
-    min-height: 100vh;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  html {
-    font-family: "Inter", system-ui, -apple-system, sans-serif;
-    scroll-behavior: smooth;
-    color-scheme: light dark;
-  }
-
-  ::selection {
-    @apply bg-primary/20 text-foreground;
-  }
-
-  /* Custom scrollbar */
-  ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-
-  ::-webkit-scrollbar-track {
-    @apply bg-muted/50;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    @apply bg-border rounded-full hover:bg-muted-foreground/50;
-    transition: background-color 0.2s ease;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #00b4d8, #bf00ff);
-    opacity: 0.8;
-  }
+/* Base styles */
+:root {
+  --radius: 0.5rem;
+  /* Light theme */
+  --background: 0 0% 100%;
+  --foreground: 0 0% 4%;
+  --muted: 0 0% 96%;
+  --muted-foreground: 0 0% 45%;
+  --border: 0 0% 88%;
+  --input: 0 0% 88%;
+  --ring: 0 0% 0%;
+  --primary: 0 0% 4%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 96%;
+  --secondary-foreground: 0 0% 4%;
+  --accent: 0 0% 96%;
+  --accent-foreground: 0 0% 4%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
 }
 
-@layer components {
-  /* AI-themed buttons */
-  .btn-ai-primary {
-    @apply bg-gradient-to-r from-[#00b4d8] to-[#bf00ff] text-white font-semibold px-6 py-3 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 border border-[#00b4d8]/30;
-    box-shadow: 0 0 20px rgba(0, 180, 216, 0.3);
-  }
+/* Reset and base styles */
+*, ::before, ::after {
+  box-sizing: border-box;
+  border: 0 solid hsl(var(--border));
+}
 
-  .btn-ai-secondary {
-    @apply bg-[#0f3460] border border-[#00b4d8]/50 text-white font-semibold px-6 py-3 rounded-lg hover:border-[#bf00ff]/50 hover:bg-[#16213e] hover:scale-105 transition-all duration-300;
-    box-shadow: 0 0 15px rgba(191, 0, 255, 0.2);
-  }
+html {
+  -webkit-text-size-adjust: 100%;
+  tab-size: 4;
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-  .btn-ai-ghost {
-    @apply bg-transparent border border-[#00b4d8]/30 text-[#e6e6e6] font-medium px-6 py-3 rounded-lg hover:border-[#bf00ff]/50 hover:bg-[#00b4d8]/10 hover:scale-105 transition-all duration-300;
-  }
+body {
+  margin: 0;
+  line-height: inherit;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  min-height: 100vh;
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Utility classes */
+.bg-background {
+  background-color: hsl(var(--background));
+}
+
+.text-foreground {
+  color: hsl(var(--foreground));
+}
+
+.border-border {
+  border-color: hsl(var(--border));
+}
+
+.ring-offset-background {
+  --tw-ring-offset-color: hsl(var(--background));
+}
+
+.focus-visible {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-opacity: 0.75;
+  --tw-ring-color: hsl(var(--ring) / var(--tw-ring-opacity));
 }
 
 /* AI-themed utilities */
-@layer utilities {
-  .ai-card {
-    @apply bg-gradient-to-br from-[#16213e]/80 to-[#0f3460]/60 backdrop-blur-xl rounded-xl p-6 border border-[#00b4d8]/20 shadow-lg relative overflow-hidden;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 180, 216, 0.1);
-  }
-
-  .ai-card-hover {
-    @apply hover:border-[#bf00ff]/30 hover:shadow-xl hover:scale-102 transition-all duration-300;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
+.ai-card {
+  background: linear-gradient(
+    to bottom right,
+    rgba(22, 33, 62, 0.8),
+    rgba(15, 52, 96, 0.6)
+  );
+  backdrop-filter: blur(16px);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(0, 180, 216, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 180, 216, 0.1);
+  position: relative;
+  overflow: hidden;
 
   .ai-card-hover:hover {
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(191, 0, 255, 0.2);
@@ -130,7 +101,8 @@
   }
 
   .neural-border-inner {
-    @apply bg-gradient-to-br from-[#16213e] to-[#0f3460] rounded-xl;
+    background: linear-gradient(to bottom right, #16213e, #0f3460);
+    border-radius: 0.75rem;
   }
 
   .text-gradient-ai {
@@ -172,7 +144,11 @@
   }
 
   .hover-scale {
-    @apply hover:scale-105 transition-transform duration-300;
+    transition: transform 300ms ease;
+  }
+  
+  .hover-scale:hover {
+    transform: scale(1.05);
   }
 
   .fade-in-ai {
@@ -270,13 +246,15 @@
 /* Responsive design utilities */
 @media (max-width: 768px) {
   .ai-card {
-    @apply p-4;
+    padding: 1rem;
   }
   
   .btn-ai-primary,
   .btn-ai-secondary,
   .btn-ai-ghost {
-    @apply px-4 py-2 text-sm;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 }
 
