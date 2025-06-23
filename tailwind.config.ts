@@ -27,21 +27,21 @@ export default {
       playfair: ['"Playfair Display"', "serif"],
       jakarta: ['"Plus Jakarta Sans"', "sans-serif"],
     },
-    extend: {
-      colors: {
-        // Modern Monochrome Theme
-        background: {
-          light: '#ffffff',
-          dark: '#0a0a0a',
-        },
-        surface: {
-          light: '#f8f8f8',
-          dark: '#1a1a1a',
-        },
-        muted: {
-          light: '#f1f1f1',
-          dark: '#2a2a2a',
-        },
+      extend: {
+        colors: {
+          // Modern Monochrome Theme
+          background: {
+            light: '#ffffff',
+            dark: '#0a0a0a',
+          },
+          surface: {
+            light: '#f8f8f8',
+            dark: '#1a1a1a',
+          },
+          muted: {
+            light: '#f1f1f1',
+            dark: '#2a2a2a',
+          },
         // Border colors with theme support and shadcn compatibility
         border: {
           light: '#e0e0e0',
@@ -65,9 +65,24 @@ export default {
         accent: {
           light: '#000000',
           dark: '#ffffff',
+          DEFAULT: 'hsl(var(--accent))',
+          foreground: 'hsl(var(--accent-foreground))',
+        },
+
+        // Theme colors mapped to CSS variables for Tailwind classes
+        primary: {
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))',
+        },
+        secondary: {
+          DEFAULT: 'hsl(var(--secondary))',
+          foreground: 'hsl(var(--secondary-foreground))',
         },
         
         // Shadcn compatibility - border is now defined above with theme support
+        background: "hsl(var(--background))",
+        muted: "hsl(var(--muted))",
+        "muted-foreground": "hsl(var(--muted-foreground))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         foreground: "hsl(var(--foreground))",
