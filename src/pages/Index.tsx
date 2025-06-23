@@ -31,32 +31,32 @@ const Index = () => {
       icon: Brain,
       title: "AI-Powered Analysis",
       description: "Advanced neural networks analyze market patterns 24/7",
-      color: "#00b4d8"
+      color: "#f5c518"
     },
     {
       icon: Zap,
       title: "Real-Time Execution",
       description: "Lightning-fast trade execution with minimal latency",
-      color: "#bf00ff"
+      color: "#f5c518"
     },
     {
       icon: Shield,
       title: "Risk Management",
       description: "Intelligent risk assessment and portfolio protection",
-      color: "#00b4d8"
+      color: "#f5c518"
     },
     {
       icon: TrendingUp,
       title: "Predictive Insights",
       description: "Machine learning models predict market movements",
-      color: "#bf00ff"
+      color: "#f5c518"
     }
   ];
 
   return (
     <div className="relative min-h-screen bg-black">
       <BackgroundCanvas />
-      <div className="relative z-10 min-h-screen bg-gradient-to-br from-gray-900/95 via-gray-900/95 to-gray-950/95 text-gray-100" dir={isArabic ? "rtl" : "ltr"}>
+      <div className="relative z-10 min-h-screen bg-black text-gray-100" dir={isArabic ? "rtl" : "ltr"}>
         <div className="relative">
           <Navbar />
           <div className="absolute top-20 left-20 w-3 h-3 bg-white/80 rounded-full animate-pulse" />

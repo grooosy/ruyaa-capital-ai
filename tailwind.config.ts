@@ -27,47 +27,62 @@ export default {
       playfair: ['"Playfair Display"', "serif"],
       jakarta: ['"Plus Jakarta Sans"', "sans-serif"],
     },
-    extend: {
-      colors: {
-        // Modern Monochrome Theme
-        background: {
-          light: '#ffffff',
-          dark: '#0a0a0a',
-        },
-        surface: {
-          light: '#f8f8f8',
-          dark: '#1a1a1a',
-        },
-        muted: {
-          light: '#f1f1f1',
-          dark: '#2a2a2a',
-        },
-        // Border colors with theme support and shadcn compatibility
-        border: {
-          light: '#e0e0e0',
-          dark: '#333333',
-          DEFAULT: 'hsl(var(--border))',
-        },
-        text: {
-          primary: {
-            light: '#0a0a0a',
-            dark: '#f8f8f8',
+      extend: {
+        colors: {
+          // Modern dark theme with golden highlight
+          background: {
+            light: '#ffffff',
+            dark: '#000000',
           },
-          secondary: {
-            light: '#4a4a4a',
-            dark: '#b3b3b3',
+          surface: {
+            light: '#f3f3f3',
+            dark: '#111111',
           },
           muted: {
-            light: '#757575',
-            dark: '#8a8a8a',
+            light: '#eeeeee',
+            dark: '#1a1a1a',
           },
+          // Border colors with theme support
+          border: {
+            light: '#d1d5db',
+            dark: '#333333',
+            DEFAULT: 'hsl(var(--border))',
+          },
+          text: {
+            primary: {
+              light: '#0a0a0a',
+              dark: '#ffffff',
+            },
+            secondary: {
+              light: '#555555',
+              dark: '#cbd5e1',
+            },
+            muted: {
+              light: '#757575',
+              dark: '#888888',
+            },
+          },
+          accent: {
+            light: '#f5c518',
+            dark: '#f5c518',
+            DEFAULT: 'hsl(var(--accent))',
+            foreground: 'hsl(var(--accent-foreground))',
+          },
+
+        // Theme colors mapped to CSS variables for Tailwind classes
+        primary: {
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))',
         },
-        accent: {
-          light: '#000000',
-          dark: '#ffffff',
+        secondary: {
+          DEFAULT: 'hsl(var(--secondary))',
+          foreground: 'hsl(var(--secondary-foreground))',
         },
         
         // Shadcn compatibility - border is now defined above with theme support
+        background: "hsl(var(--background))",
+        muted: "hsl(var(--muted))",
+        "muted-foreground": "hsl(var(--muted-foreground))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         foreground: "hsl(var(--foreground))",
@@ -82,26 +97,26 @@ export default {
           foreground: "hsl(var(--popover-foreground))",
         },
         // Legacy compatibility
-        green: "#00b4d8",
-        gold: "#bf00ff",
+        green: "#10A169",
+        gold: "#f5c518",
         "dark-charcoal": "#1a1a2e",
-        card: "#16213e",
-        "primary-accent": "#00b4d8",
-        "secondary-accent": "#bf00ff",
+        card: "#111111",
+        "primary-accent": "#f5c518",
+        "secondary-accent": "#f5c518",
       },
       borderRadius: {
         xl: "1.25rem",
         "2xl": "1.5rem",
       },
       boxShadow: {
-        "ai-glow": "0 0 20px rgba(0, 180, 216, 0.3), 0 0 40px rgba(191, 0, 255, 0.2)",
-        "ai-glow-strong": "0 0 30px rgba(0, 180, 216, 0.5), 0 0 60px rgba(191, 0, 255, 0.3)",
-        "neural": "0 0 40px rgba(0, 180, 216, 0.2), inset 0 1px 0 rgba(0, 180, 216, 0.1)",
-        "circuit": "0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 180, 216, 0.1)",
-        
+        "ai-glow": "0 0 20px rgba(245, 197, 24, 0.3), 0 0 40px rgba(245, 197, 24, 0.2)",
+        "ai-glow-strong": "0 0 30px rgba(245, 197, 24, 0.5), 0 0 60px rgba(245, 197, 24, 0.3)",
+        "neural": "0 0 40px rgba(245, 197, 24, 0.2), inset 0 1px 0 rgba(245, 197, 24, 0.1)",
+        "circuit": "0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(245, 197, 24, 0.1)",
+
         // Legacy support
-        "green-glow": "0 0 20px rgba(0, 180, 216, 0.3)",
-        "gold-glow": "0 0 20px rgba(191, 0, 255, 0.3)",
+        "green-glow": "0 0 20px rgba(16, 161, 105, 0.3)",
+        "gold-glow": "0 0 20px rgba(245, 197, 24, 0.3)",
         "red-glow": "0 4px 24px rgba(239, 68, 68, 0.25)",
       },
       scale: {
@@ -114,12 +129,12 @@ export default {
       keyframes: {
         // AI-themed animations
         "neural-pulse": {
-          "0%, 100%": { 
-            boxShadow: "0 0 20px rgba(0, 180, 216, 0.3)",
+          "0%, 100%": {
+            boxShadow: "0 0 20px rgba(245, 197, 24, 0.3)",
             transform: "scale(1)"
           },
-          "50%": { 
-            boxShadow: "0 0 40px rgba(191, 0, 255, 0.5)",
+          "50%": {
+            boxShadow: "0 0 40px rgba(245, 197, 24, 0.5)",
             transform: "scale(1.02)"
           },
         },
@@ -179,10 +194,7 @@ export default {
         "pulse-slow": "ai-pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
         "float-element": "floatElement 6s ease-in-out infinite",
       },
-      backgroundImage: {
-        'gradient-ai': 'linear-gradient(135deg, #00b4d8 0%, #bf00ff 100%)',
-        'gradient-ai-dark': 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
-      },
+      backgroundImage: {},
     },
   },
   plugins: [

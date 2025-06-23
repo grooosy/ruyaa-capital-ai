@@ -5,15 +5,15 @@ import { Link } from 'react-router-dom';
 
 const WelcomePage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460] text-white relative overflow-hidden">
+    <div className="min-h-screen bg-black text-white relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 circuit-pattern opacity-10" />
       <div className="absolute inset-0 hex-pattern opacity-5" />
       
       {/* Neural Network Nodes */}
-      <div className="absolute top-20 left-20 w-3 h-3 bg-[#00b4d8] rounded-full animate-pulse opacity-60" />
-      <div className="absolute top-40 right-32 w-2 h-2 bg-[#bf00ff] rounded-full animate-pulse opacity-40" style={{ animationDelay: '1s' }} />
-      <div className="absolute bottom-32 left-1/4 w-2.5 h-2.5 bg-[#00b4d8] rounded-full animate-pulse opacity-50" style={{ animationDelay: '2s' }} />
+      <div className="absolute top-20 left-20 w-3 h-3 bg-gold rounded-full animate-pulse opacity-60" />
+      <div className="absolute top-40 right-32 w-2 h-2 bg-gold rounded-full animate-pulse opacity-40" style={{ animationDelay: '1s' }} />
+      <div className="absolute bottom-32 left-1/4 w-2.5 h-2.5 bg-gold rounded-full animate-pulse opacity-50" style={{ animationDelay: '2s' }} />
       
       {/* Main Content */}
       <div className="relative z-10 flex flex-col lg:flex-row items-center justify-center min-h-screen px-6 lg:px-12 gap-12">
@@ -26,12 +26,12 @@ const WelcomePage: React.FC = () => {
         >
           {/* AI Badge */}
           <motion.div
-            className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#00b4d8]/20 to-[#bf00ff]/20 border border-[#00b4d8]/30 rounded-full mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-gold/10 border border-gold/30 rounded-full mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <Brain className="w-4 h-4 text-[#00b4d8]" />
+            <Brain className="w-4 h-4 text-gold" />
             <span className="text-sm font-medium text-[#e6e6e6]">AI-POWERED PLATFORM</span>
           </motion.div>
 
@@ -54,7 +54,7 @@ const WelcomePage: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            Stateful trading with <span className="text-[#00b4d8] font-semibold">Agentic AI</span>
+            Stateful trading with <span className="text-gold font-semibold">Agentic AI</span>
             <br />
             Automated decisions, real-time visualization, and instant feedback
           </motion.p>
@@ -85,15 +85,15 @@ const WelcomePage: React.FC = () => {
             transition={{ delay: 0.6 }}
           >
             <div className="text-center">
-              <div className="text-2xl font-bold text-[#00b4d8]">85%+</div>
+              <div className="text-2xl font-bold text-gold">85%+</div>
               <div className="text-sm text-[#e6e6e6]">AI Accuracy</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-[#bf00ff]">24/7</div>
+              <div className="text-2xl font-bold text-gold">24/7</div>
               <div className="text-sm text-[#e6e6e6]">Active Monitoring</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-[#00b4d8]">10K+</div>
+              <div className="text-2xl font-bold text-gold">10K+</div>
               <div className="text-sm text-[#e6e6e6]">Active Traders</div>
             </div>
           </motion.div>
@@ -112,17 +112,17 @@ const WelcomePage: React.FC = () => {
               {/* Chart Header */}
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
-                  <div className="w-3 h-3 bg-[#00b4d8] rounded-full animate-pulse" />
+                  <div className="w-3 h-3 bg-gold rounded-full animate-pulse" />
                   <span className="text-sm font-medium text-[#e6e6e6]">LIVE TRADING</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Zap className="w-4 h-4 text-[#bf00ff]" />
-                  <span className="text-xs text-[#bf00ff] font-medium">AI ACTIVE</span>
+                  <Zap className="w-4 h-4 text-gold" />
+                  <span className="text-xs text-gold font-medium">AI ACTIVE</span>
                 </div>
               </div>
 
               {/* Chart Image */}
-              <div className="relative rounded-lg overflow-hidden border border-[#00b4d8]/20">
+              <div className="relative rounded-lg overflow-hidden border border-gold/20">
                 <img
                   src="/public/assets/hero_ai_chart.png"
                   alt="AI Trading Chart"
@@ -130,13 +130,13 @@ const WelcomePage: React.FC = () => {
                 />
                 
                 {/* Overlay Elements */}
-                <div className="absolute top-4 left-4 bg-[#00b4d8]/20 backdrop-blur-sm rounded-lg px-3 py-2">
-                  <div className="text-xs text-[#00b4d8] font-medium">EUR/USD</div>
+                <div className="absolute top-4 left-4 bg-gold/20 backdrop-blur-sm rounded-lg px-3 py-2">
+                  <div className="text-xs text-gold font-medium">EUR/USD</div>
                   <div className="text-sm text-white font-bold">1.0847</div>
                 </div>
                 
-                <div className="absolute bottom-4 right-4 bg-[#bf00ff]/20 backdrop-blur-sm rounded-lg px-3 py-2">
-                  <div className="text-xs text-[#bf00ff] font-medium">AI Signal</div>
+                <div className="absolute bottom-4 right-4 bg-gold/20 backdrop-blur-sm rounded-lg px-3 py-2">
+                  <div className="text-xs text-gold font-medium">AI Signal</div>
                   <div className="text-sm text-white font-bold">BUY +2.3%</div>
                 </div>
               </div>
@@ -144,18 +144,18 @@ const WelcomePage: React.FC = () => {
               {/* Chart Footer */}
               <div className="mt-6 flex items-center justify-between text-sm">
                 <span className="text-[#e6e6e6]">Position Opened</span>
-                <span className="text-[#00b4d8] font-medium">+$247.50</span>
+                <span className="text-gold font-medium">+$247.50</span>
               </div>
             </div>
 
             {/* Floating Elements */}
-            <motion.div 
-              className="absolute -top-4 -right-4 w-8 h-8 bg-[#bf00ff]/20 rounded-full border border-[#bf00ff]/30"
+            <motion.div
+              className="absolute -top-4 -right-4 w-8 h-8 bg-gold/20 rounded-full border border-gold/30"
               animate={{ y: [-5, 5, -5] }}
               transition={{ duration: 3, repeat: Infinity }}
             />
-            <motion.div 
-              className="absolute -bottom-4 -left-4 w-6 h-6 bg-[#00b4d8]/20 rounded-full border border-[#00b4d8]/30"
+            <motion.div
+              className="absolute -bottom-4 -left-4 w-6 h-6 bg-gold/20 rounded-full border border-gold/30"
               animate={{ y: [5, -5, 5] }}
               transition={{ duration: 4, repeat: Infinity }}
             />
@@ -164,7 +164,7 @@ const WelcomePage: React.FC = () => {
       </div>
 
       {/* Bottom Gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0f3460] to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-black" />
     </div>
   );
 };
