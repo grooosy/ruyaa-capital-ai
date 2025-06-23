@@ -26,7 +26,7 @@ const ChatWidget = () => {
       <div className="fixed bottom-6 right-6 z-[100]">
         <motion.button
           onClick={toggleChat}
-          className="relative bg-gradient-to-r from-gray-900/95 to-black/95 border border-gray-700 text-white p-4 rounded-2xl shadow-[0_0_10px_rgba(255,255,255,0.2)] hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] transition-all duration-300 flex items-center justify-center backdrop-blur-sm"
+          className="relative bg-black/90 border border-gray-700 text-white p-4 rounded-2xl shadow-[0_0_10px_rgba(255,255,255,0.2)] hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] transition-all duration-300 flex items-center justify-center backdrop-blur-sm"
           whileHover={{ scale: 1.05, borderColor: "rgba(0, 200, 150, 0.5)" }}
           whileTap={{ scale: 0.95 }}
           aria-label="Toggle AI Chat"
@@ -89,10 +89,10 @@ const ChatWidget = () => {
           >
             <div className="relative h-full">
               {/* Modern dark themed container */}
-              <div className="h-full bg-gradient-to-b from-gray-900/95 to-black/95 border border-green/30 rounded-2xl shadow-2xl backdrop-blur-xl overflow-hidden">
+              <div className="h-full bg-black/90 border border-green/30 rounded-2xl shadow-2xl backdrop-blur-xl overflow-hidden">
                 {/* Subtle animated border */}
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-green/20 via-transparent to-green/10 rounded-2xl"
+                  className="absolute inset-0 bg-green/10 rounded-2xl"
                   animate={{ rotate: [0, 360] }}
                   transition={{
                     duration: 20,
@@ -101,7 +101,7 @@ const ChatWidget = () => {
                   }}
                   style={{ padding: "1px" }}
                 />
-                <div className="relative h-full bg-gradient-to-b from-gray-900/95 to-black/95 rounded-2xl">
+                <div className="relative h-full bg-black/90 rounded-2xl">
                   <ChatPane />
                 </div>
               </div>

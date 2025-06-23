@@ -16,7 +16,7 @@ const AIStatsCard: React.FC = () => {
       value: '85%+',
       label: isArabic ? 'دقة الإشارات' : 'Signal Accuracy',
       labelAr: 'دقة الإشارات',
-      color: 'text-blue-400'
+      color: 'text-gold'
     },
     {
       icon: <TrendingUp className="w-5 h-5" />,
@@ -37,7 +37,7 @@ const AIStatsCard: React.FC = () => {
       value: '<1s',
       label: isArabic ? 'سرعة الإشارة' : 'Signal Speed',
       labelAr: 'سرعة الإشارة',
-      color: 'text-purple-400'
+      color: 'text-gold'
     }
   ];
 
@@ -57,14 +57,14 @@ const AIStatsCard: React.FC = () => {
   ];
 
   return (
-    <Card className="bg-gradient-to-br from-card to-blue/5 border-blue/20">
+    <Card className="bg-card border-gold/20">
       <CardHeader>
         <CardTitle className="flex items-center gap-3 text-white">
           <motion.div
-            className="p-2 bg-blue/20 rounded-full"
+            className="p-2 bg-gold/20 rounded-full"
             whileHover={{ scale: 1.1, rotate: 5 }}
           >
-            <Brain className="w-6 h-6 text-blue-400" />
+            <Brain className="w-6 h-6 text-gold" />
           </motion.div>
           {isArabic ? 'قوة الذكاء الاصطناعي في رؤيا' : 'Ruyaa AI Power'}
         </CardTitle>
@@ -78,7 +78,7 @@ const AIStatsCard: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-gradient-to-r from-green/5 to-blue/5 p-3 rounded-lg border border-green/20 text-center"
+              className="bg-[#111111] p-3 rounded-lg border border-gold/20 text-center"
             >
               <div className={`${stat.color} mb-1`}>
                 {stat.icon}
@@ -95,7 +95,7 @@ const AIStatsCard: React.FC = () => {
 
         {/* AI Features */}
         <div className="space-y-3">
-          <h4 className="text-sm font-semibold text-blue-300 flex items-center gap-2">
+          <h4 className="text-sm font-semibold text-gold flex items-center gap-2">
             <Target className="w-4 h-4" />
             {isArabic ? 'المزايا الحصرية' : 'Exclusive Features'}
           </h4>
@@ -105,7 +105,7 @@ const AIStatsCard: React.FC = () => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-gradient-to-r from-blue/10 to-purple/10 p-3 rounded-lg border border-blue/20"
+              className="bg-[#111111] p-3 rounded-lg border border-gold/20"
             >
               <h5 className="text-sm font-medium text-white mb-1">
                 {feature.title}
@@ -119,7 +119,7 @@ const AIStatsCard: React.FC = () => {
 
         {/* Success Badge */}
         <div className="text-center">
-          <Badge className="bg-gradient-to-r from-green/20 to-gold/20 text-green border-green/30">
+          <Badge className="bg-gold/20 text-gold border-gold/30">
             <Users className="w-3 h-3 mr-1" />
             {isArabic ? '10,000+ متداول يثق برؤيا' : '10,000+ Traders Trust Ruyaa'}
           </Badge>

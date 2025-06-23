@@ -27,7 +27,7 @@ const CryptoArbitrageSection = () => {
 
   return (
     <motion.section
-      className="w-full max-w-7xl mx-auto flex flex-col items-center text-center mt-20 p-10 sm:p-16 relative bg-gradient-to-br from-black/90 via-gray-900/50 to-black/90 backdrop-blur-xl border border-green/20 rounded-3xl overflow-hidden shadow-2xl hover:shadow-green/20 transition-all duration-500"
+      className="w-full max-w-7xl mx-auto flex flex-col items-center text-center mt-20 p-10 sm:p-16 relative bg-black/90 backdrop-blur-xl border border-green/20 rounded-3xl overflow-hidden shadow-2xl hover:shadow-green/20 transition-all duration-500"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}

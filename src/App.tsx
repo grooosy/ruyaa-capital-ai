@@ -1,6 +1,4 @@
-import React, { suspense, lazy } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Layout from './layout/Layout';
+
 
 // Pages (lazy-loaded)
 const WelcomePage = lazy(() => import('./pages/Welcome'));
@@ -22,4 +20,3 @@ export default function App() {
       </BrowserRouter>
     </Suspense>
   );
-}

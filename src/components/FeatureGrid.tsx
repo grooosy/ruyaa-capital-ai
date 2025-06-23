@@ -97,16 +97,11 @@ const FeatureGrid: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              {/* Geometric background pattern */}
-              <div className="absolute inset-0 bg-geometric-pattern opacity-20" />
-              
-              {/* Dynamic gradient overlay */}
-              <div
-                className={`absolute inset-0 bg-gradient-to-br ${feature.color} rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
-              />
+              {/* Background pattern */}
+              <div className="absolute inset-0 bg-geometric-pattern opacity-10" />
 
-              {/* Animated border effect */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-transparent via-yellow-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-beam-flow" />
+              {/* Subtle gold border on hover */}
+              <div className="absolute inset-0 rounded-2xl border border-transparent group-hover:border-gold/40 transition-colors duration-500 pointer-events-none" />
 
               <div className="relative z-10 flex flex-col items-center">
                 <div className="mb-4 p-4 rounded-2xl bg-gray-800 border border-gray-600 transition-all duration-500 group-hover:scale-110 group-hover:border-yellow-500/60 group-hover:bg-gray-700 group-hover:shadow-glow">

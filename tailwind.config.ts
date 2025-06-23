@@ -13,9 +13,4 @@ export default {
       inter: ['Inter', 'sans-serif'],
       space: ['Space Grotesk', 'Inter', 'sans-serif'],
     },
-    extend: {
-      colors: {},
-    },
-  },
-  plugins: [],
-} as Config;
+

@@ -31,32 +31,32 @@ const Index = () => {
       icon: Brain,
       title: "AI-Powered Analysis",
       description: "Advanced neural networks analyze market patterns 24/7",
-      color: "#00b4d8"
+      color: "#f5c518"
     },
     {
       icon: Zap,
       title: "Real-Time Execution",
       description: "Lightning-fast trade execution with minimal latency",
-      color: "#bf00ff"
+      color: "#f5c518"
     },
     {
       icon: Shield,
       title: "Risk Management",
       description: "Intelligent risk assessment and portfolio protection",
-      color: "#00b4d8"
+      color: "#f5c518"
     },
     {
       icon: TrendingUp,
       title: "Predictive Insights",
       description: "Machine learning models predict market movements",
-      color: "#bf00ff"
+      color: "#f5c518"
     }
   ];
 
   return (
     <div className="relative min-h-screen bg-black">
       <BackgroundCanvas />
-      <div className="relative z-10 min-h-screen bg-gradient-to-br from-gray-900/95 via-gray-900/95 to-gray-950/95 text-gray-100" dir={isArabic ? "rtl" : "ltr"}>
+      <div className="relative z-10 min-h-screen bg-black text-gray-100" dir={isArabic ? "rtl" : "ltr"}>
         <div className="relative">
           <Navbar />
           <div className="absolute top-20 left-20 w-3 h-3 bg-white/80 rounded-full animate-pulse" />
@@ -84,7 +84,7 @@ const Index = () => {
             >
               <span className="text-white">{t('hero_title_1')}</span>
               <br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">{t('hero_title_2')}</span>
+              <span className="text-gold">{t('hero_title_2')}</span>
             </motion.h1>
 
             {/* Subtitle */}
@@ -112,7 +112,7 @@ const Index = () => {
                   {t('hero_button')}
                   <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-1" />
                 </span>
-                <span className="absolute inset-0 -z-10 bg-gradient-to-r from-white/20 to-white/10 opacity-0 transition-opacity group-hover:opacity-100" />
+                <span className="absolute inset-0 -z-10 bg-white/15 opacity-0 transition-opacity group-hover:opacity-100" />
               </button>
               
               <button 
@@ -149,7 +149,7 @@ const Index = () => {
           >
             <h2 className="mb-6 text-4xl font-bold lg:text-5xl font-space-grotesk">
               <span className="text-white">Powered by </span>
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">Advanced AI</span>
+              <span className="text-gold">Advanced AI</span>
             </h2>
             <p className="mx-auto max-w-3xl text-xl text-gray-300">
               Our cutting-edge artificial intelligence analyzes markets, executes trades, and manages risk with superhuman precision.
