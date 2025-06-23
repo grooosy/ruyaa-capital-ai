@@ -12,7 +12,6 @@ import ChatWidget from '@/components/chat/ChatWidget';
 import ThemeToggle from '@/components/ThemeToggle';
 // Test components
 import TailwindTest from './components/TailwindTest';
-import TailwindTest2 from './components/TailwindTest2';
 // Pages
 import WelcomePage from './pages/Welcome';
 import Index from './pages/Index';
@@ -84,7 +83,6 @@ const App = () => {
                   {/* Tailwind Test Components */}
                   <div className="container mx-auto p-4 space-y-8">
                     <TailwindTest />
-                    <TailwindTest2 />
                   </div>
                   
                   <Routes>
