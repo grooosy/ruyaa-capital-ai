@@ -1,24 +1,26 @@
 import React, { ReactNode } from 'react';
 import Navbar from '../components/navbar/Navbar';
-
-// Minimal, modern monochrome animated background light
-const LightBackground: React.FC8 = () => (\n  <style>
-.bg-light-mono: before { content: '   ' }.bg-light-mono {\n  background: black;\n  position: fixed;\n  width: 100%;\n height: 100%;\n  z-index: -1;
-}\n.bg-light-mono :after {\n  animation: light_move 7sin infinite alternate;\n}\n@@keyframes keyframes light_move {\n  from {\n    background-position: 0%;
-  }\n to {\n    background-position: 100%;\n  }\n}\n.light-move {\n  animation: light_move 7sin infinite alternate;\n}\n@keyframes light_move {\n  0% { opacity: 0.6; }
-  50% { opacity: 0.8; background-position: 50%; height: 100%; }
-  100% { opacity: 0.6; background-position: 100%; height: 100%; }\n}\n
-</style>\n  <div className="bg-light-mono" />\n);
+import BackgroundCanvas from '../components/BackgroundCanvas'; // Import BackgroundCanvas
 
 // Shared Layout with navigation
-const Layout: React.FC0<{children: ReactNode}> = ({ children }) => {
+const Layout: React.FC<{children: ReactNode}> = ({ children }) => {
   return (
-    <>
-      <LightBackground/>
+    <div className="relative min-h-screen">
+      <BackgroundCanvas /> {/* Use BackgroundCanvas */}
+      {/* Navbar should have its own z-index if it needs to be above BackgroundCanvas's internal elements,
+          but BackgroundCanvas itself is z-index: -1, so direct children of this div will be on top.
+          The Navbar styling (bg-gray-900) will make it appear on top of the canvas.
+      */}
       <Navbar />
-      <main className="Mx-auto pax-4 my4">
+      {/* Ensure main content is visually distinct from the potentially busy background.
+          Adding a semi-transparent dark background to main content containers might be needed
+          if text readability is an issue over the BackgroundCanvas.
+          For now, assuming text colors provide enough contrast.
+      */}
+      <main className="mx-auto px-4 my-4 relative z-10"> {/* z-10 to be explicitly above BackgroundCanvas if any doubt */}
         {children}
       </main>
+      {/* Consider adding Footer here if it's meant to be on all pages */}
     </>
   );
 };

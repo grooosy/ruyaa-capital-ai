@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react"; // Added useEffect to React import
 import { motion } from "framer-motion";
 import { ArrowRight, Brain, Zap, Shield, TrendingUp } from "lucide-react";
-import { Link } from "react-router-dom";
-import Navbar from "@/components/Navbar";
+// import { Link } from "react-router-dom"; // Link is not used directly here, NavLinks handles it
+// import Navbar from "@/components/Navbar"; // Navbar is now in Layout
 import Footer from "@/components/Footer";
 import FeatureGrid from "@/components/FeatureGrid";
 import AIGrid from "@/components/AIGrid";
@@ -10,7 +10,7 @@ import CryptoArbitrageSection from "@/components/CryptoArbitrageSection";
 import HeroDashboard from "@/components/HeroDashboard";
 import LogoCloud from "@/components/LogoCloud";
 import PathModal from "@/components/PathModal";
-import BackgroundCanvas from "@/components/BackgroundCanvas";
+// import BackgroundCanvas from "@/components/BackgroundCanvas"; // BackgroundCanvas is now in Layout
 import { useChatContext } from "@/context/ChatContext";
 import { useTranslation } from "react-i18next";
 
@@ -21,7 +21,7 @@ const Index = () => {
   const { t, i18n } = useTranslation();
   const isArabic = i18n.language === "ar";
 
-  React.useEffect(() => {
+  useEffect(() => { // Changed React.useEffect to useEffect
     const timer = setTimeout(() => setStartAnimation(true), 1000);
     return () => clearTimeout(timer);
   }, []);
@@ -31,7 +31,7 @@ const Index = () => {
       icon: Brain,
       title: "AI-Powered Analysis",
       description: "Advanced neural networks analyze market patterns 24/7",
-      color: "#f5c518"
+      color: "#f5c518" // This color isn't used in the current rendering of features
     },
     {
       icon: Zap,
@@ -54,16 +54,18 @@ const Index = () => {
   ];
 
   return (
-    <div className="relative min-h-screen bg-black">
-      <BackgroundCanvas />
-      <div className="relative z-10 min-h-screen bg-black text-gray-100" dir={isArabic ? "rtl" : "ltr"}>
-        <div className="relative">
-          <Navbar />
-          <div className="absolute top-20 left-20 w-3 h-3 bg-white/80 rounded-full animate-pulse" />
-          <div className="absolute top-40 right-32 w-2 h-2 bg-white/60 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
-          <div className="absolute bottom-32 left-1/4 w-2.5 h-2.5 bg-white/40 rounded-full animate-pulse" style={{ animationDelay: '1.5s' }} />
-          
-          <div className="max-w-7xl mx-auto px-6 text-center">
+    // Removed outer div with bg-black and BackgroundCanvas call
+    // The main content div now relies on Layout for background and Navbar
+    // text-gray-100 ensures text is light, dir handles language direction
+    <div className="relative z-10 min-h-screen text-gray-100" dir={isArabic ? "rtl" : "ltr"}>
+      {/* Removed inner relative div and Navbar call */}
+      {/* Decorative pulse elements can remain if desired, they are positioned absolutely */}
+      <div className="absolute top-20 left-20 w-3 h-3 bg-white/80 rounded-full animate-pulse" />
+      <div className="absolute top-40 right-32 w-2 h-2 bg-white/60 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
+      <div className="absolute bottom-32 left-1/4 w-2.5 h-2.5 bg-white/40 rounded-full animate-pulse" style={{ animationDelay: '1.5s' }} />
+
+      {/* Increased padding-top to ensure no overlap with Navbar */}
+      <div className="max-w-7xl mx-auto px-6 text-center pt-24 sm:pt-32">
             {/* AI Badge */}
             <motion.div
               className="inline-flex items-center gap-3 px-6 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full mb-8 group"
