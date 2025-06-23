@@ -15,7 +15,6 @@ import ChatWidget from '@/components/chat/ChatWidget';
 import ThemeToggle from '@/components/ThemeToggle';
 import ParticleBackground from "@/components/ParticleBackground";
 import NeuralNetworkOverlay from "@/components/NeuralNetworkOverlay";
-
 // Pages
 import WelcomePage from './pages/Welcome';
 import Index from './pages/Index';
