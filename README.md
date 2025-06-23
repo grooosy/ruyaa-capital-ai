@@ -1,3 +1,3 @@
 # RuyaaCapital Stagin
 
-Deploy trigger for staging balanced deployment.
+Deploy now represents the monochrome theme and minimal background.
