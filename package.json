@@ -7,8 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "build:dev": "vite build --mode development",
-    "lint": "eslint .",
+    "lint": "eslnt .",
     "preview": "vite preview",
+    "install": "npm install --legacy-peer-deps",
     "install": "npm install --legacy-peer-deps"
   },
   "dependencies": {
@@ -70,4 +71,6 @@
     "vite": "^6.3.5",
     "vite-plugin-node-polyfills": "^0.23.0"
   }
+},
+  "install": "echo 'skipped install'"
 }
