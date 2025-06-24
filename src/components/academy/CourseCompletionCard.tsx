@@ -38,7 +38,7 @@ const CourseCompletionCard: React.FC<CourseCompletionCardProps> = ({ progressPer
             </p>
           </div>
           <Link to="/agents/mt4mt5">
-            <Button className="bg-gold hover:bg-gold/90 text-primary-foreground font-semibold">
+            <Button className="bg-gold hover:bg-gold/90 text-dark-charcoal font-semibold">
               {isArabic ? 'ابدأ التداول مع رؤيا AI' : 'Start Trading with Ruyaa AI'}
               <ArrowRight className={`w-4 h-4 ${isArabic ? 'mr-2' : 'ml-2'}`} />
             </Button>

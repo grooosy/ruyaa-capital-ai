@@ -34,7 +34,7 @@ const contentVariants: Variants = {
 const AgentDetailModal: React.FC<AgentDetailModalProps> = ({ type, onClose }) => {
     const data = agentData[type];
     const buttonBg = type === 'mt' ? 'bg-gold hover:bg-gold/90' : 'bg-green hover:bg-green/90';
-    const buttonTextColor = 'text-primary-foreground';
+    const buttonTextColor = 'text-dark-charcoal';
     const navigate = useNavigate();
 
     const handleStart = () => {

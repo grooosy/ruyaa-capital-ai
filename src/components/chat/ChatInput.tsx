@@ -54,7 +54,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
               className="bg-gold hover:bg-gold/90 shrink-0" 
               disabled={isLoading || !input.trim()}
             >
-              <Send className="w-4 h-4 text-primary-foreground" />
+              <Send className="w-4 h-4 text-dark-charcoal" />
             </Button>
           </TooltipTrigger>
           <TooltipContent><p>Send Message</p></TooltipContent>
