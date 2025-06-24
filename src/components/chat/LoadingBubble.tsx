@@ -6,7 +6,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 const LoadingBubble = () => (
     <div className="flex items-start gap-3 justify-start animate-fade-in">
         <Avatar className="w-8 h-8">
-            <AvatarFallback className="bg-gold text-dark-charcoal">
+            <AvatarFallback className="bg-gold text-primary-foreground">
                 <Bot className="w-4 h-4" />
             </AvatarFallback>
         </Avatar>
