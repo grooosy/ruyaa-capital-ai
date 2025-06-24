@@ -63,7 +63,8 @@ const Index = () => {
           <div className="absolute top-40 right-32 w-2 h-2 bg-white/60 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
           <div className="absolute bottom-32 left-1/4 w-2.5 h-2.5 bg-white/40 rounded-full animate-pulse" style={{ animationDelay: '1.5s' }} />
           
-          <div className="max-w-7xl mx-auto px-6 text-center">
+          {/* Hero Section */}
+          <div className="max-w-7xl mx-auto px-6 text-center pt-32 pb-20">
             {/* AI Badge */}
             <motion.div
               className="inline-flex items-center gap-3 px-6 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full mb-8 group"
@@ -82,19 +83,19 @@ const Index = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <span className="text-white">{t('hero_title_1')}</span>
+              <span className="text-white">Let AI Trade For You</span>
               <br />
-              <span className="text-gold">{t('hero_title_2')}</span>
+              <span className="text-gold">— From Beginner to Pro</span>
             </motion.h1>
 
             {/* Subtitle */}
             <motion.p 
-              className="text-2xl lg:text-3xl text-[#e6e6e6] mb-12 max-w-4xl mx-auto leading-relaxed"
+              className="text-2xl lg:text-3xl text-[#e6e6e6] mb-12 max-w-5xl mx-auto leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              {t('hero_description')}
+              Your personal AI scans markets, sends you signals, and builds strategies on-demand. Just connect, and watch the agent work for you.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -104,22 +105,21 @@ const Index = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-              <button 
-                onClick={() => setShowPathModal(true)}
-                className="group relative overflow-hidden rounded-full bg-white/10 backdrop-blur-sm px-8 py-4 text-lg font-medium text-white transition-all hover:bg-white/20 hover:shadow-lg hover:shadow-white/5"
+              <Link 
+                to="/dashboard"
+                className="group relative overflow-hidden rounded-full bg-gold hover:bg-gold/90 px-8 py-4 text-lg font-semibold text-black transition-all hover:shadow-lg hover:shadow-gold/20 hover:scale-105"
               >
-                <span className="relative z-10 flex items-center">
-                  {t('hero_button')}
+                <span className="relative z-10 flex items-center justify-center">
+                  Get Started
                   <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-1" />
                 </span>
-                <span className="absolute inset-0 -z-10 bg-white/15 opacity-0 transition-opacity group-hover:opacity-100" />
-              </button>
+              </Link>
               
               <button 
                 onClick={() => openChat('support')}
-                className="group relative overflow-hidden rounded-full border border-white/20 bg-transparent px-8 py-4 text-lg font-medium text-white transition-all hover:bg-white/5 hover:shadow-lg hover:shadow-white/5"
+                className="group relative overflow-hidden rounded-full border border-white/20 bg-transparent hover:bg-white/5 px-8 py-4 text-lg font-semibold text-white transition-all hover:shadow-lg hover:shadow-white/5 hover:scale-105"
               >
-                <span className="relative z-10 flex items-center">
+                <span className="relative z-10 flex items-center justify-center">
                   Talk to AI Assistant
                   <Brain className="ml-3 h-6 w-6 transition-transform group-hover:scale-110" />
                 </span>
