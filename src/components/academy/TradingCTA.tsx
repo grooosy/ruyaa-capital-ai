@@ -24,7 +24,7 @@ const TradingCTA: React.FC = () => {
           }
         </p>
         <Link to="/agents/mt4mt5">
-          <Button className="w-full bg-gold hover:bg-gold/90 text-dark-charcoal font-semibold">
+          <Button className="w-full bg-gold hover:bg-gold/90 text-primary-foreground font-semibold">
             {isArabic ? 'افتح حساب تداول' : 'Open Trading Account'}
             <ArrowRight className={`w-4 h-4 ${isArabic ? 'mr-2' : 'ml-2'}`} />
           </Button>

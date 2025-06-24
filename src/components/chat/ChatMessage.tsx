@@ -12,7 +12,7 @@ const ChatMessage = ({ message }: { message: Message }) => {
         <div className={cn('flex items-start gap-3 animate-fade-in', isUser ? 'justify-end' : 'justify-start')}>
             {!isUser && (
                 <Avatar className="w-8 h-8">
-                    <AvatarFallback className="bg-gold text-dark-charcoal">
+                    <AvatarFallback className="bg-gold text-primary-foreground">
                         <Bot className="w-4 h-4" />
                     </AvatarFallback>
                 </Avatar>
