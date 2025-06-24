@@ -19,7 +19,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
     <div className="p-4 border-b border-white/10 flex items-center gap-3 shrink-0">
       <div className="relative">
         <Avatar>
-          <AvatarFallback className="bg-gold text-primary-foreground font-bold">
+          <AvatarFallback className="bg-gold text-dark-charcoal font-bold">
             {avatar}
           </AvatarFallback>
         </Avatar>

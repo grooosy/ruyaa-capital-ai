@@ -271,7 +271,7 @@ const InteractiveLessonCard: React.FC<InteractiveLessonProps> = ({
                     
                     <Button
                       onClick={handleNext}
-                      className="flex-1 bg-gold hover:bg-gold/90 text-primary-foreground"
+                      className="flex-1 bg-gold hover:bg-gold/90 text-dark-charcoal"
                     >
                       {currentStep === steps.length - 1 ? 
                         (isArabic ? '✓ إكمال الدرس' : '✓ Complete Lesson') :

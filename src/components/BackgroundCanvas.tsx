@@ -2,12 +2,12 @@ import React, { Suspense, useMemo, useRef, useEffect, useState } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Points, PointMaterial, Environment, useTexture } from '@react-three/drei';
 import * as random from 'maath/random/dist/maath-random.esm';
-import { BufferAttribute, Points as ThreePoints, PointsMaterial, Color, Vector3 } from 'three';
+import { BufferAttribute, Points as PointsType, Color, Vector3 } from 'three';
 import { useTheme } from '@/context/ThemeContext';
 
 // Particle system with theme-aware colors and 3D effects
 function Particles() {
-  const particlesRef = useRef<ThreePoints>(null);
+  const particlesRef = useRef<PointsType>(null);
   const { theme } = useTheme();
   const { viewport } = useThree();
   
@@ -57,31 +57,26 @@ function Particles() {
   });
 
   return (
-    <points ref={particlesRef}>
+    <Points ref={particlesRef}>
       <bufferGeometry>
-        <bufferAttribute 
-          attach="attributes-position" 
-          array={sphere.array}
-          count={sphere.count}
-          itemSize={3}
-        />
+        <bufferAttribute attach="attributes-position" {...sphere} />
         <bufferAttribute 
           attach="attributes-color" 
-          array={colors.array}
-          count={colors.count}
-          itemSize={3}
+          array={colors.array} 
+          count={colors.array.length / 3} 
+          itemSize={3} 
         />
       </bufferGeometry>
-      <pointsMaterial
+      <PointMaterial
         vertexColors
-        size={theme === 'dark' ? 0.008 : 0.006}
+        size={theme === 'dark' ? 0.008 : 0.006} // Slightly larger in dark mode
         sizeAttenuation={true}
         transparent
         opacity={theme === 'dark' ? 0.5 : 0.4}
         depthWrite={false}
         alphaTest={0.01}
       />
-    </points>
+    </Points>
   );
 }
 
